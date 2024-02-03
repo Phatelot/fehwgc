@@ -8,9 +8,9 @@ export type CharacterStats = {
     totalAmount: number;
 };
 
-export type CharacterViewModel = CharacterStats & {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
+export type CharacterMetadata = {
+    color: 'RED' | 'BLUE' | 'YELLOW' | 'GREY' | 'WHITE';
+    baseWeight: number;
+    heightInMeters: number;
+    pictureLink: string;
 };

@@ -2,6 +2,7 @@
     // import Counter from './lib/Counter.svelte'
     
     import arrosoir from './assets/arrosoir.png'
+    import mapBg from './assets/map.jpeg'
   
     import { parseTsvData } from './lib/data_parser';
       import { toCharacterStats } from './lib/stats';
@@ -49,27 +50,19 @@
             <stop offset="100%" stop-color="#5050ff" />
           </linearGradient>
 
+          <mask id="mask">
+            <polyline points="0,0 {viewModel.viewPortWidth},0 {viewModel.viewPortWidth},{viewModel.viewPortHeight*0.3} 0,{viewModel.viewPortHeight*0.8}" fill="white" />
+          </mask>
 
-          <pattern id="lowerBgPattern" viewBox="0,0,100,100" width="6%" height="{6 * viewModel.viewPortWidth / viewModel.viewPortHeight / 0.8}%">
-            <rect width="100" height="100" class="lower-bg-base" />
 
-            <polyline points="0,0 5,0 100,95 100,100 95,100 0,5" class="lower-bg-line" />
-            <polyline points="100,0 100,5 5,100 0,100 0,95 95,0" class="lower-bg-line" />
-            
-            <polyline points="0,40 0,60 10,50" class="lower-bg-line" />
-            <polyline points="100,40 100,60 90,50" class="lower-bg-line" />
 
-            <line x1="20" y1="0" x2="50" y2="30" stroke="#5d5c5a" stroke-width="2"/>
-            <line x1="50" y1="30" x2="80" y2="0" stroke="#5d5c5a" stroke-width="2"/>
-            <line x1="20" y1="100" x2="50" y2="70" stroke="#5d5c5a" stroke-width="2"/>
-            <line x1="50" y1="70" x2="80" y2="100" stroke="#5d5c5a" stroke-width="2"/>
-          </pattern>
         </defs>
 
+        <image xlink:href="{mapBg}" width=100% mask="url(#mask)"/>
 
-        <polyline points="0,{viewModel.viewPortHeight} 0,{viewModel.viewPortHeight*0.7} {viewModel.viewPortWidth},{viewModel.viewPortHeight*0.2} {viewModel.viewPortWidth},{viewModel.viewPortHeight}" fill="url(#lowerBgPattern)" />
+
   
-        <image xlink:href="{arrosoir}" width="15%" x="8%" y="10%"/>
+        <image xlink:href="{arrosoir}" width="15%" x="8%" y="10%" />
 
         <text x="21%" y="18%" class="small" transform="rotate(-5)">
           <tspan>*Canadian Dollars, so </tspan>
@@ -97,32 +90,21 @@
   </main>
   
   <style>
-  .chart {
-    display: block;
-    background-image: url("assets/map.jpeg");
-    background-size: contain;
-  }
+    .chart {
+      display: block;
+    }
 
-          .small {
-            font: 3px sans-serif;
-            font-weight: 600;
-            fill: black;
-            stroke: white;
-            stroke-width: 0.15;
-          }
+    .small {
+      font: 3px sans-serif;
+      font-weight: 600;
+      fill: black;
+      stroke: white;
+      stroke-width: 0.15;
+    }
 
-          .lower-bg-line {
-            fill: #5d5c5a;
-          }
-
-          .lower-bg-base {
-            fill: #696a65;
-          }
-
-          .link-tree-link {
-            fill: blue;
-            text-decoration: underline;
-          }
-
+    .link-tree-link {
+      fill: blue;
+      text-decoration: underline;
+    }
   </style>
   

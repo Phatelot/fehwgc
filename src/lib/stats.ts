@@ -1,3 +1,4 @@
+import { getCharacterMetadata, getCharacters } from "./character_metadata";
 import type { CharacterStats, RawDonation } from "./model";
 
 export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
@@ -10,13 +11,15 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
         totalAmountsByCharacter[donation.character] += donation.amount;
     }
 
-    const characterStats: CharacterStats[] = [];
-    for (const character in totalAmountsByCharacter) {
-        characterStats.push({
-            name: character,
-            totalAmount: totalAmountsByCharacter[character],
-        })
-    }
+    return getCharacters().map(name => {
+        const totalDonatedAmount = totalAmountsByCharacter[name] || 0;
 
-    return characterStats;
+        const metadata = getCharacterMetadata(name);
+
+        return {
+            name,
+            totalDonatedAmount,
+            weight: metadata.baseWeight + 2 * totalDonatedAmount,
+        };
+    });
 }

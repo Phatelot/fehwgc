@@ -1,7 +1,7 @@
 <script lang="ts">
     // import Counter from './lib/Counter.svelte'
-    import tel from './assets/tel.jpg'
     
+    import arrosoir from './assets/arrosoir.png'
   
     import { parseTsvData } from './lib/data_parser';
       import { toCharacterStats } from './lib/stats';
@@ -50,26 +50,44 @@
           </linearGradient>
 
 
-          <pattern id="lowerBgPattern" viewBox="0,0,100,100" width="10%" height="{10 * viewModel.viewPortWidth / viewModel.viewPortHeight / 0.8}%">
+          <pattern id="lowerBgPattern" viewBox="0,0,100,100" width="6%" height="{6 * viewModel.viewPortWidth / viewModel.viewPortHeight / 0.8}%">
             <rect width="100" height="100" class="lower-bg-base" />
+
             <polyline points="0,0 5,0 100,95 100,100 95,100 0,5" class="lower-bg-line" />
             <polyline points="100,0 100,5 5,100 0,100 0,95 95,0" class="lower-bg-line" />
+            
+            <polyline points="0,40 0,60 10,50" class="lower-bg-line" />
+            <polyline points="100,40 100,60 90,50" class="lower-bg-line" />
+
+            <line x1="20" y1="0" x2="50" y2="30" stroke="#5d5c5a" stroke-width="2"/>
+            <line x1="50" y1="30" x2="80" y2="0" stroke="#5d5c5a" stroke-width="2"/>
+            <line x1="20" y1="100" x2="50" y2="70" stroke="#5d5c5a" stroke-width="2"/>
+            <line x1="50" y1="70" x2="80" y2="100" stroke="#5d5c5a" stroke-width="2"/>
           </pattern>
         </defs>
 
 
-
         <polyline points="0,{viewModel.viewPortHeight} 0,{viewModel.viewPortHeight*0.7} {viewModel.viewPortWidth},{viewModel.viewPortHeight*0.2} {viewModel.viewPortWidth},{viewModel.viewPortHeight}" fill="url(#lowerBgPattern)" />
   
+        <image xlink:href="{arrosoir}" width="15%" x="8%" y="10%"/>
+
+        <text x="21%" y="18%" class="small" transform="rotate(-5)">
+          <tspan>*Canadian Dollars, so </tspan>
+          <tspan dy="4%" x="24%">US Dollars go further</tspan>
+          <tspan dy="4%" x="27%"><a class="link-tree-link" href="https://linktr.ee/ebcart">LinkTree with tip jar here</a></tspan>
+        </text>
+
   
         {#each viewModel.characters as charViewModel}
-          <rect x="{charViewModel.x}%" y="{charViewModel.y}%" width="{charViewModel.width}%" height="{charViewModel.height}%" rx="1px" ry="1px" stroke="white" stroke-width="1" stroke-linecap="round" fill="url(#{charViewModel.barGradient})" on:click={() => selectChar(charViewModel.name)} />
+          <rect x="{charViewModel.x}%" y="{charViewModel.y}%" width="{charViewModel.width}%" height="{charViewModel.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{charViewModel.barGradient})" on:click={() => selectChar(charViewModel.name)} />
             <image
-            class="oooo"
-            xlink:href="{charViewModel.pictureLink}"
-            x="{charViewModel.x}%" y="{charViewModel.y + charViewModel.height - charViewModel.picHeight}%" height="{charViewModel.picHeight}%" preserveAspectRatio="true"
+              xlink:href="{charViewModel.pictureLink}"
+              x="{charViewModel.x}%"
+              y="{charViewModel.y + charViewModel.height - charViewModel.picHeight}%"
+              height="{charViewModel.picHeight}%"
+              preserveAspectRatio="true"
             />
-          <text x="{charViewModel.x}%" y="{charViewModel.y + charViewModel.height}%" class="small" transform="translate(0, 8)">{charViewModel.name + " " + charViewModel.totalAmount}</text>
+          <text x="{charViewModel.x}%" y="{charViewModel.y + charViewModel.height}%" class="small" transform="translate(0, 4)">{charViewModel.weight}lbs</text>
         {/each}
       </svg>
   
@@ -86,10 +104,11 @@
   }
 
           .small {
-            font: 6px sans-serif;
+            font: 3px sans-serif;
+            font-weight: 600;
             fill: black;
             stroke: white;
-            stroke-width: 0.25;
+            stroke-width: 0.15;
           }
 
           .lower-bg-line {
@@ -98,6 +117,11 @@
 
           .lower-bg-base {
             fill: #696a65;
+          }
+
+          .link-tree-link {
+            fill: blue;
+            text-decoration: underline;
           }
 
   </style>

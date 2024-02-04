@@ -22,20 +22,26 @@ export function toViewModel(stats: CharacterStats[]): ViewModel {
     const viewPortHeight = 100;
     const viewPortWidth = 220;
 
+    const highestWeight = Math.max(...stats.map(stat => stat.weight));
 
-    const characters = stats.sort((a, b) => a.totalAmount - b.totalAmount).map((stat, index) => {
+    const maxDisplayableWeight = 3_200;
 
-        const width = 10;
-        const y = 90 - (30 + stat.totalAmount);
+    const margin = 100 / (5 * stats.length + 1);
+
+    const characters = stats.sort((a, b) => a.totalDonatedAmount - b.totalDonatedAmount).map((stat, index) => {
+        
+        const width = 4 * margin;
+        const height = stat.weight / maxDisplayableWeight * 80;
+        const y = 90 - height;
 
         const metadata = getCharacterMetadata(stat.name);
 
         return {
             ...stat,
             ...metadata,
-            height: 30 + stat.totalAmount,
+            height,
             width,
-            x: 10 + 20 * index,
+            x: margin + 5 * margin * index,
             y,
             picHeight: width * viewPortWidth / viewPortHeight * 0.8,
             barGradient: metadata.color.toLowerCase() + "Gradient",

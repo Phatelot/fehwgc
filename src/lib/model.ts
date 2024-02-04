@@ -5,7 +5,8 @@ export type RawDonation = {
 
 export type CharacterStats = {
     name: string;
-    totalAmount: number;
+    totalDonatedAmount: number;
+    weight: number;
 };
 
 export type CharacterMetadata = {

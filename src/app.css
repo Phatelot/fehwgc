@@ -1,28 +1,33 @@
+@font-face {
+  font-family: "Copperplate Gothic";
+  src: url("/src/assets/Copperplate_Gothic_Bold_Regular.ttf");
+  font-display: swap;
+}
+
+
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: "Copperplate Gothic", sans-serif;
     line-height: 1.5;
-    font-weight: 600;
-  
+    font-weight: 550;
+
     color-scheme: light dark;
-    background-color: #696a65;
-    background-image: url("/src/assets/background_pattern.svg");
+    background-color: #f9edd5;
     background-size: cover;
-  
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   body {
     margin: 0;
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
   }
-  
+
   #app {
     margin: 0 auto;
     text-align: center;
   }
-  

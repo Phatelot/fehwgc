@@ -1,5 +1,5 @@
-import { getCharacterMetadata } from "./character_metadata";
-import type { CharacterMetadata, CharacterStats } from "./model";
+import { getCharacterMetadata, getFemaleCharactersNumber} from "./character_metadata";
+import type { CharacterMetadata, CharacterStats, Party } from "./model";
 
 type CharacterViewModel = CharacterStats & CharacterMetadata & {
     x: number;
@@ -12,8 +12,11 @@ type CharacterViewModel = CharacterStats & CharacterMetadata & {
     barGradient: string;
 };
 
+type FemaleCharacterViewModel = CharacterViewModel & {gender: 'WOMAN'};
+
 export type ViewModel = {
     characters: CharacterViewModel[];
+    femaleCharacters: FemaleCharacterViewModel[];
     viewPortHeight: number;
     viewPortWidth: number;
 };
@@ -26,10 +29,10 @@ export function toViewModel(stats: CharacterStats[]): ViewModel {
 
     const maxDisplayableWeight = 3_200;
 
-    const margin = 100 / (5 * stats.length + 1);
+    const margin = 100 / (5 * getFemaleCharactersNumber() + 1);
 
-    const characters = stats.sort((a, b) => a.totalDonatedAmount - b.totalDonatedAmount).map((stat, index) => {
-        
+    const characters = stats.sort((a, b) => a.weight - b.weight).map((stat, index) => {
+
         const width = 4 * margin;
         const height = stat.weight / maxDisplayableWeight * 80;
         const y = 90 - height;
@@ -43,14 +46,30 @@ export function toViewModel(stats: CharacterStats[]): ViewModel {
             width,
             x: margin + 5 * margin * index,
             y,
-            picHeight: width * viewPortWidth / viewPortHeight * 0.8,
-            barGradient: metadata.color.toLowerCase() + "Gradient",
+            picHeight: width * viewPortWidth / viewPortHeight,
+            barGradient: toBarGradient(metadata.party),
         }
     });
 
+    const femaleCharacters = characters.filter(c => c.gender === "WOMAN").map((c, index) => ({...c, x: margin + 5 * margin * index,})) as FemaleCharacterViewModel[];
+
     return {
         characters,
+        femaleCharacters,
         viewPortHeight,
         viewPortWidth,
     }
+}
+
+function toBarGradient(party: Party): string {
+    return {
+        'DUNGEON': 'purple',
+        'FLAMELAS': 'green',
+        'TANSUS': 'darkTeal',
+        'KABRUS': 'blue',
+        'LAIOS': 'orange',
+        'MITHRUNS': 'darkGreen',
+        'SHUROS': 'red',
+        'ELVES': 'pink',
+    }[party] + 'Gradient';
 }

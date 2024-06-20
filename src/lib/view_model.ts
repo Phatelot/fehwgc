@@ -25,7 +25,7 @@ export function toViewModel(stats: CharacterStats[]): ViewModel {
     const viewPortHeight = 100;
     const viewPortWidth = 220;
 
-    const highestWeight = Math.max(...stats.map(stat => stat.weight));
+    const highestWeight = Math.max(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.weight));
 
     const maxDisplayableWeight = 3_200;
 
@@ -34,7 +34,7 @@ export function toViewModel(stats: CharacterStats[]): ViewModel {
     const characters = stats.sort((a, b) => a.weight - b.weight).map((stat, index) => {
 
         const width = 4 * margin;
-        const height = stat.weight / maxDisplayableWeight * 80;
+        const height = stat.weight / Math.min(maxDisplayableWeight, highestWeight) * 80;
         const y = 90 - height;
 
         const metadata = getCharacterMetadata(stat.name);

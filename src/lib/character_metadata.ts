@@ -284,7 +284,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
     },
     "Monster_Falin": {
         heightInMeters: 1, // ignore this
-        gender: 'WOMAN',
+        gender: 'YES',
         baseWeight: 6080,
         party: 'DUNGEON',
         pictureLink: MonsterFalinPic,

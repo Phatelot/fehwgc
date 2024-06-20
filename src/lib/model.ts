@@ -23,4 +23,7 @@ export type CharacterMetadata = {
 } | {
     gender: 'WOMAN';
     pictureLink: string;
+} | {
+    gender: 'YES';
+    pictureLink: string;
 });

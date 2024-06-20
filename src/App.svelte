@@ -99,7 +99,7 @@
     }
 
     .small {
-      font-size: 2px;
+      font-size: 1.8px;
       fill: black;
     }
 

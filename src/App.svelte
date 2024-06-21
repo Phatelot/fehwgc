@@ -5,7 +5,8 @@
 
     import { parseTsvData } from './lib/data_parser';
     import { toCharacterStats } from './lib/stats';
-    import { type ChartViewModel, toViewModel } from './lib/view_model';
+    import { type ChartViewModel, toViewModel, getMonsterFalinViewModel } from './lib/view_model';
+    import { formatWeight } from './lib/weight_utils';
 
     async function fetchData(): Promise<ChartViewModel> {
       let response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vShRwjPHvlfF_8R6YEjJ4LvbvJ8BOCn5r3HikzbXJhrJYklPAr19Ibbpmcb09wCg9Gr5_OhfX_F-1LS/pub?gid=0&single=true&output=tsv");
@@ -65,6 +66,16 @@
           <tspan dy="4%" x="27%"><a class="link-tree-link" href="https://linktr.ee/ebcart">LinkTree with tip jar here</a></tspan>
         </text>
 
+        <image
+            xlink:href="{getMonsterFalinViewModel(viewModel).pictureLink}"
+            x="4%"
+            y="{8 / viewModel.viewPortHeight * viewModel.viewPortWidth}%"
+            height="{getMonsterFalinViewModel(viewModel).picHeight * 1.4}%"
+            preserveAspectRatio="true"
+        />
+        <text x="4.8%" y="{9 / viewModel.viewPortHeight * viewModel.viewPortWidth}%" transform="translate(10, 4)">
+          <tspan class="small">{formatWeight(getMonsterFalinViewModel(viewModel).weight)}lbs</tspan>
+        </text>
 
         {#each viewModel.femaleCharacters as charViewModel}
           <rect x="{charViewModel.x}%" y="{charViewModel.immobilityThresholdY}%" width="{charViewModel.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black" on:click={() => selectChar(charViewModel.name)} />

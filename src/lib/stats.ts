@@ -32,7 +32,7 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
 
         let weight: number = metadata.baseWeight + totalDonatedAmount + totalAmountByParty[metadata.party] / getPartySize(metadata.party);
         if (name === 'Monster_Falin') {
-            weight += totalDonatedAmount;
+            weight += totalAmount;
         }
         if (metadata.numbers && metadata.numbers > 1) {
             weight /= metadata.numbers

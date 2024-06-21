@@ -2,6 +2,8 @@
     import WeightLabel from './lib/weight_label.svelte'
 
     import cornerSvg from '/src/assets/corner.svg';
+    import waterCanPng from '/src/assets/Water_Can_Big_PNG.png';
+    import titleJpg from '/src/assets/title.jpg';
 
     import { parseTsvData } from './lib/data_parser';
     import { toCharacterStats } from './lib/stats';
@@ -60,20 +62,32 @@
 
         </defs>
 
-        <text x="21%" y="18%" class="small" transform="rotate(-5)">
-          <tspan>*Canadian Dollars, so </tspan>
-          <tspan dy="4%" x="24%">US Dollars go further</tspan>
-          <tspan dy="4%" x="27%"><a class="link-tree-link" href="https://linktr.ee/ebcart">LinkTree with tip jar here</a></tspan>
+        <text x="15%" y="25%" class="small">
+          <tspan text-anchor="middle">Every 1$* contributed to the collage adds</tspan>
+          <tspan dy="3%" x="15%" text-anchor="middle">three pounds to the characters!</tspan>
+          <tspan dy="2%" x="15%" text-anchor="middle" class="very-small">*Canadian Dollars, so  US Dollars go further</tspan>
+          <tspan dy="4%" x="15%" text-anchor="middle" class="not-so-small">*</tspan>
+          <tspan dy="1%" x="15%" text-anchor="middle">1lb goes to the character you choose by commenting</tspan>
+          <tspan dy="3%" x="15%" text-anchor="middle">JUST their name with your contribution</tspan>
+          <tspan dy="4%" x="15%" text-anchor="middle" class="not-so-small">*</tspan>
+          <tspan dy="1%" x="15%" text-anchor="middle">1lb is split between them and their group</tspan>
+          <tspan dy="4%" x="15%" text-anchor="middle" class="not-so-small">*</tspan>
+          <tspan dy="1%" x="15%" text-anchor="middle">1lb goes to monster Falin</tspan>
+          <tspan dy="3%" x="15%" text-anchor="middle"><a class="link-tree-link" href="https://linktr.ee/ebcart">Click here to fatten your favorite</a></tspan>
         </text>
+
+        <image x="25%" y="3%" width="50%" xlink:href="{titleJpg}" />
+        <image x="16%" y="9%" height="12%" xlink:href="{waterCanPng}" />
+
 
         <image
             xlink:href="{getMonsterFalinViewModel(viewModel).pictureLink}"
             x="4%"
-            y="{8 / viewModel.viewPortHeight * viewModel.viewPortWidth}%"
+            y="{5 / viewModel.viewPortHeight * viewModel.viewPortWidth}%"
             height="{getMonsterFalinViewModel(viewModel).picHeight * 1.4}%"
             preserveAspectRatio="true"
         />
-        <text x="4.8%" y="{9 / viewModel.viewPortHeight * viewModel.viewPortWidth}%" transform="translate(10, 4)">
+        <text x="4.8%" y="{5 / viewModel.viewPortHeight * viewModel.viewPortWidth}%" transform="translate(10, 4)">
           <tspan class="small">{formatWeight(getMonsterFalinViewModel(viewModel).weight)}lbs</tspan>
         </text>
 
@@ -114,19 +128,29 @@
     {/await}
   </main>
 
-  <style>
-    .chart {
-      display: block;
-      background-color: #f9edd5;
-    }
+<style>
+  .chart {
+    display: block;
+    background-color: #f9edd5;
+  }
 
-    .small {
-      font-size: 1.8px;
-      fill: black;
-    }
+  .not-so-small {
+    font-size: 4px;
+    fill: black;
+  }
 
-    .link-tree-link {
-      fill: blue;
-      text-decoration: underline;
-    }
-  </style>
+  .small {
+    font-size: 1.8px;
+    fill: black;
+  }
+
+  .very-small {
+    font-size: 1.4px;
+    fill: black;
+  }
+
+  .link-tree-link {
+    fill: blue;
+    text-decoration: underline;
+  }
+</style>

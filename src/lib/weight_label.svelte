@@ -12,13 +12,13 @@
 </text>
 
 <style>
-    .small {
-      font-size: 1.9px;
-      fill: black;
-    }
+  .small {
+    font-size: 1.9px;
+    fill: black;
+  }
 
 	.very-small {
-      font-size: 1.4px;
-      fill: black;
-    }
+    font-size: 1.4px;
+    fill: black;
+  }
 </style>

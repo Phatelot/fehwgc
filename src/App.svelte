@@ -88,7 +88,7 @@
         <rect x="{`${8 * viewModel.viewPortHeight / viewModel.viewPortWidth - 0.2}%`}" y="1.7%" height="0.75%" width="{`${100 - 2 * 8 * viewModel.viewPortHeight / viewModel.viewPortWidth + 0.4}%`}" fill="#ae2f29" />
 
         <rect x="0%" y="98.6%" height="1.5%" width="100%" fill="#ae2f29" />
-        <rect x="{`${8 * viewModel.viewPortHeight / viewModel.viewPortWidth - 0.2}%`}" y="97.45%" height="0.75%" width="{`${100 - 2 * 8 * viewModel.viewPortHeight / viewModel.viewPortWidth + 0.4}%`}" fill="#ae2f29" />
+        <rect x="{`${8 * viewModel.viewPortHeight / viewModel.viewPortWidth - 0.2}%`}" y="97.55%" height="0.75%" width="{`${100 - 2 * 8 * viewModel.viewPortHeight / viewModel.viewPortWidth + 0.4}%`}" fill="#ae2f29" />
 
         <rect x="0%" y="7.8%" height="84.4%" width="0.65%" fill="#ae2f29" />
         <rect x="0.8%" y="7.8%" height="84.4%" width="0.4%" fill="#ae2f29" />

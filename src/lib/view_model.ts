@@ -30,15 +30,15 @@ export function toViewModel(stats: CharacterStats[]): ChartViewModel {
 
     const maxDisplayableWeight = 3_200;
 
-    const margin = 100 / (5 * getFemaleCharactersNumber() + 1);
+    const margin = 95 / (5 * getFemaleCharactersNumber() + 1);
 
     const characters = stats.sort((a, b) => a.weight - b.weight).map((stat, index) => {
 
         const width = 4 * margin;
-        const height = stat.weight / Math.min(maxDisplayableWeight, highestWeight) * 80;
-        const immobilityThresholdY = 90 - (stat.immobilityThreshold / Math.min(maxDisplayableWeight, highestWeight) * 80);
+        const height = stat.weight / Math.min(maxDisplayableWeight, highestWeight) * 75;
+        const immobilityThresholdY = 83 - (stat.immobilityThreshold / Math.min(maxDisplayableWeight, highestWeight) * 75);
 
-        const y = 90 - height;
+        const y = 83 - height;
 
         const metadata = getCharacterMetadata(stat.name);
 
@@ -47,7 +47,7 @@ export function toViewModel(stats: CharacterStats[]): ChartViewModel {
             ...metadata,
             height,
             width,
-            x: margin + 5 * margin * index,
+            x: 2.5 + margin + 5 * margin * index,
             y,
             immobilityThresholdY,
             picHeight: width * viewPortWidth / viewPortHeight,
@@ -55,7 +55,7 @@ export function toViewModel(stats: CharacterStats[]): ChartViewModel {
         }
     });
 
-    const femaleCharacters = characters.filter(c => c.gender === "WOMAN").map((c, index) => ({...c, x: margin + 5 * margin * index,})) as FemaleCharacterViewModel[];
+    const femaleCharacters = characters.filter(c => c.gender === "WOMAN").map((c, index) => ({...c, x: 2.5 + margin + 5 * margin * index,})) as FemaleCharacterViewModel[];
 
     return {
         characters,

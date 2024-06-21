@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -13,10 +17,10 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build -- --base=/auto-wg-chart
+          npm run build -- --base=/dmwgc
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: dist

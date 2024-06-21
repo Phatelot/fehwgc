@@ -1,7 +1,7 @@
 import { getCharacterMetadata, getFemaleCharactersNumber} from "./character_metadata";
 import type { CharacterMetadata, CharacterStats, Party } from "./model";
 
-type CharacterViewModel = CharacterStats & CharacterMetadata & {
+export type CharacterViewModel = CharacterStats & CharacterMetadata & {
     x: number;
     y: number;
     width: number;

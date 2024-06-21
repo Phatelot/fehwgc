@@ -1,4 +1,4 @@
-import type { CharacterMetadata } from './model';
+import type { CharacterMetadata, Party } from './model';
 
 import BenchidoriPic from '/src/assets/Benchidori.jpg';
 import CithisPic from '/src/assets/Cithis.jpg';
@@ -240,6 +240,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         numbers: 7,
         pictureLink: UnnamedCanariesPic,
         species: ['ELF'],
+        displayName: 'Unnamed canaries',
     },
     "Queen": {
         heightInMeters: 1.7,
@@ -248,6 +249,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'ELVES',
         pictureLink: Elven_QueenPic,
         species: ['ELF'],
+        displayName: 'Elven Queen'
     },
     "Milsiril": {
         heightInMeters: 1.5,
@@ -264,6 +266,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'ELVES',
         pictureLink: MarcillesMomPic,
         species: ['ELF'],
+        displayName: 'Marcille\'s Mom',
     },
     "Attendants": {
         heightInMeters: 1.50,
@@ -273,6 +276,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         numbers: 4,
         pictureLink: TheQueensAttendantsPic,
         species: ['ELF'],
+        displayName: 'Queen\'s Attendants'
     },
     "Leed": {
         heightInMeters: 1.5,
@@ -289,6 +293,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'DUNGEON',
         pictureLink: MonsterFalinPic,
         species: ['MONSTER'],
+        displayName: 'Monster Falin',
     },
     "Zon": {
         heightInMeters: 1.75,
@@ -318,4 +323,14 @@ export function getFemaleCharactersNumber(): number {
     return Object.values(characterMetadata)
         .filter(c => c.gender === 'WOMAN')
         .length;
+}
+
+export function getParty(characterName: string) : Party {
+    return characterMetadata[characterName].party;
+}
+
+export function getPartySize(party: Party) : number {
+    return Object.values(characterMetadata)
+        .filter(c => c.party === party)
+        .length; // poly characters still count as 1 for bonus weight repartition
 }

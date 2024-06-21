@@ -1,5 +1,5 @@
 <script lang="ts">
-    // import Counter from './lib/Counter.svelte'
+    import WeightLabel from './lib/weight_label.svelte'
 
     import { parseTsvData } from './lib/data_parser';
     import { toCharacterStats } from './lib/stats';
@@ -16,10 +16,6 @@
   </script>
 
   <main>
-    <!-- <div class="card">
-      <Counter />
-    </div> -->
-
     {#await fetchData()}
       <p>loading data...</p>
     {:then viewModel}
@@ -84,7 +80,7 @@
               height="{charViewModel.picHeight}%"
               preserveAspectRatio="true"
             />
-          <text x="{charViewModel.x}%" y="{charViewModel.y + charViewModel.height}%" class="small" transform="translate(0, 10)">{charViewModel.weight}lbs</text>
+          <WeightLabel charViewModel="{charViewModel}" />
         {/each}
       </svg>
 

@@ -3,9 +3,9 @@
 
     import { parseTsvData } from './lib/data_parser';
     import { toCharacterStats } from './lib/stats';
-    import { type ViewModel, toViewModel } from './lib/view_model';
+    import { type ChartViewModel, toViewModel } from './lib/view_model';
 
-    async function fetchData(): Promise<ViewModel> {
+    async function fetchData(): Promise<ChartViewModel> {
       let response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vShRwjPHvlfF_8R6YEjJ4LvbvJ8BOCn5r3HikzbXJhrJYklPAr19Ibbpmcb09wCg9Gr5_OhfX_F-1LS/pub?gid=0&single=true&output=tsv");
       return toViewModel(toCharacterStats(parseTsvData(await response.text())));
     }
@@ -72,14 +72,16 @@
 
 
         {#each viewModel.femaleCharacters as charViewModel}
+          <rect x="{charViewModel.x}%" y="{charViewModel.immobilityThresholdY}%" width="{charViewModel.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black" on:click={() => selectChar(charViewModel.name)} />
+
           <rect x="{charViewModel.x}%" y="{charViewModel.y}%" width="{charViewModel.width}%" height="{charViewModel.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{charViewModel.barGradient})" on:click={() => selectChar(charViewModel.name)} />
-            <image
-              xlink:href="{charViewModel.pictureLink}"
-              x="{charViewModel.x}%"
-              y="{charViewModel.y + charViewModel.height + 1}%"
-              height="{charViewModel.picHeight}%"
-              preserveAspectRatio="true"
-            />
+          <image
+            xlink:href="{charViewModel.pictureLink}"
+            x="{charViewModel.x}%"
+            y="{charViewModel.y + charViewModel.height + 1}%"
+            height="{charViewModel.picHeight}%"
+            preserveAspectRatio="true"
+          />
           <WeightLabel charViewModel="{charViewModel}" />
         {/each}
       </svg>

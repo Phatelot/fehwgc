@@ -7,6 +7,7 @@ export type CharacterStats = {
     name: string;
     totalDonatedAmount: number;
     weight: number;
+    immobilityThreshold: number;
 };
 
 export type Party = 'DUNGEON' | 'FLAMELAS' | 'TANSUS' | 'KABRUS' | 'LAIOS' | 'MITHRUNS' | 'SHUROS' | 'ELVES';

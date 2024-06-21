@@ -1,5 +1,6 @@
 import { getCharacterMetadata, getCharacters, getParty, getPartySize } from "./character_metadata";
 import type { CharacterStats, Party, RawDonation } from "./model";
+import { weightInLbsForBMI } from "./weight_utils";
 
 export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
     const totalAmountsByCharacter: {[name: string]: number} = {};
@@ -33,11 +34,15 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
         if (name === 'Monster_Falin') {
             weight += totalDonatedAmount;
         }
+        if (metadata.numbers && metadata.numbers > 1) {
+            weight /= metadata.numbers
+        }
 
         return {
             name,
             totalDonatedAmount,
             weight,
+            immobilityThreshold: weightInLbsForBMI(metadata.heightInMeters, 70),
         };
     });
 }

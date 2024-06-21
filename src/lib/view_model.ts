@@ -6,6 +6,7 @@ export type CharacterViewModel = CharacterStats & CharacterMetadata & {
     y: number;
     width: number;
     height: number;
+    immobilityThresholdY: number;
 
     picHeight: number;
 
@@ -14,14 +15,14 @@ export type CharacterViewModel = CharacterStats & CharacterMetadata & {
 
 type FemaleCharacterViewModel = CharacterViewModel & {gender: 'WOMAN'};
 
-export type ViewModel = {
+export type ChartViewModel = {
     characters: CharacterViewModel[];
     femaleCharacters: FemaleCharacterViewModel[];
     viewPortHeight: number;
     viewPortWidth: number;
 };
 
-export function toViewModel(stats: CharacterStats[]): ViewModel {
+export function toViewModel(stats: CharacterStats[]): ChartViewModel {
     const viewPortHeight = 100;
     const viewPortWidth = 220;
 
@@ -35,6 +36,8 @@ export function toViewModel(stats: CharacterStats[]): ViewModel {
 
         const width = 4 * margin;
         const height = stat.weight / Math.min(maxDisplayableWeight, highestWeight) * 80;
+        const immobilityThresholdY = 90 - (stat.immobilityThreshold / Math.min(maxDisplayableWeight, highestWeight) * 80);
+
         const y = 90 - height;
 
         const metadata = getCharacterMetadata(stat.name);
@@ -46,6 +49,7 @@ export function toViewModel(stats: CharacterStats[]): ViewModel {
             width,
             x: margin + 5 * margin * index,
             y,
+            immobilityThresholdY,
             picHeight: width * viewPortWidth / viewPortHeight,
             barGradient: toBarGradient(metadata.party),
         }

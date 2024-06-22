@@ -3,8 +3,17 @@
     import WeightLabel from "./weight_label.svelte";
     import { formatWeight } from "./weight_utils";
 	import waterCanPng from '/src/assets/Water_Can_Big_PNG.png';
+	import { createEventDispatcher } from 'svelte';
 
 	export let viewModel: ChartViewModel;
+
+	const dispatch = createEventDispatcher<{
+		selectcharacter: {characterName: string}
+	}>();
+
+	function selectCharacter(characterName: string) {
+		dispatch('selectcharacter', {characterName})
+	}
 </script>
 
 <text x="15%" y="25%" class="small">
@@ -39,15 +48,16 @@
   {#each viewModel.femaleCharacters as charViewModel}
 	<rect x="{charViewModel.x}%" y="{charViewModel.immobilityThresholdY}%" width="{charViewModel.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
 
-	<rect x="{charViewModel.x}%" y="{charViewModel.y}%" width="{charViewModel.width}%" height="{charViewModel.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{charViewModel.barGradient})" />
+	<rect x="{charViewModel.x}%" y="{charViewModel.y}%" width="{charViewModel.width}%" height="{charViewModel.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{charViewModel.barGradient})" on:click={() => selectCharacter(charViewModel.name)} />
 	<image
 	  xlink:href="{charViewModel.pictureLink}"
 	  x="{charViewModel.x}%"
 	  y="{charViewModel.y + charViewModel.height + 1}%"
 	  height="{charViewModel.picHeight}%"
 	  preserveAspectRatio="true"
+	  on:click={() => selectCharacter(charViewModel.name)}
 	/>
-	<WeightLabel charViewModel="{charViewModel}" small/>
+	<WeightLabel charViewModel="{charViewModel}" on:click={() => selectCharacter(charViewModel.name)} small/>
   {/each}
 
 <style>

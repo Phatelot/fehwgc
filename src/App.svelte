@@ -8,6 +8,7 @@
     import { parseTsvData } from './lib/data_parser';
     import { toCharacterStats, toPartyStats } from './lib/stats';
     import { type ChartViewModel, toViewModel } from './lib/view_model';
+    import CharacterPopup from './lib/character_popup.svelte';
 
     async function fetchData(): Promise<ChartViewModel> {
       let response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vShRwjPHvlfF_8R6YEjJ4LvbvJ8BOCn5r3HikzbXJhrJYklPAr19Ibbpmcb09wCg9Gr5_OhfX_F-1LS/pub?gid=0&single=true&output=tsv");
@@ -16,10 +17,16 @@
       return toViewModel(characterStats, partyStats);
     }
 
-    $: page = 'CHARACTER_CHART'; // TODO: set to CHARACTER_CHART
+    $: page = 'CHARACTER_CHART';
+    let selectedCharacterName: string | null;
+    $: selectedCharacterName = 'Marcilles_Mom';
 
     function setPage(newPage: string) {
       page = newPage;
+    }
+
+    function selectCharacter(characterName: string) {
+      selectedCharacterName = characterName;
     }
   </script>
 
@@ -75,7 +82,7 @@
           <text x="20%" y="20%" class="menu" on:click={() => setPage('CHARACTER_CHART')}>-> Character chart</text>
           <text x="20%" y="30%" class="menu" on:click={() => setPage('PARTY_CHART')}>-> Party chart</text>
         {:else if page === 'CHARACTER_CHART'}
-          <CharacterChart viewModel="{viewModel}" />
+          <CharacterChart viewModel="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
         {:else if page === 'PARTY_CHART'}
           <PartyChart viewModel="{viewModel}" />
         {/if}
@@ -96,6 +103,11 @@
 
         <rect x="99.35%" y="7.8%" height="84.4%" width="0.65%" fill="#ae2f29" />
         <rect x="98.8%" y="7.8%" height="84.4%" width="0.4%" fill="#ae2f29" />
+
+        {#if !!selectedCharacterName}
+          <CharacterPopup viewModel="{viewModel}" characterName="{selectedCharacterName}" on:close={() => selectedCharacterName = null}/>
+        {/if}
+
 
       </svg>
 

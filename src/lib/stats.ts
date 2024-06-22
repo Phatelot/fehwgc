@@ -1,7 +1,7 @@
 import { getCharacterMetadata, getCharacters, getParty, getPartySize } from "./character_metadata";
 import type { CharacterStats, Party, PartyStats, RawDonation } from "./model";
 import { getParties } from "./party_metadata";
-import { weightInLbsForBMI } from "./weight_utils";
+import { BMI, weightInLbsForBMI } from "./weight_utils";
 
 export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
     const totalAmountsByCharacter: {[name: string]: number} = {};
@@ -43,6 +43,7 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
             name,
             totalDonatedAmount,
             weight,
+            BMI: BMI(metadata.heightInMeters, weight),
             immobilityThreshold: weightInLbsForBMI(metadata.heightInMeters, metadata.immobilityBMI),
         };
     });

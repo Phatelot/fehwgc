@@ -1,13 +1,16 @@
 import type { CharacterMetadata, Party } from './model';
 
 import BenchidoriPic from '/src/assets/Benchidori.jpg';
+import ChillchucksWifePic from '/src/assets/Chillchucks_Wife.jpg';
 import CithisPic from '/src/assets/Cithis.jpg';
 import DayaPic from '/src/assets/Daya.jpg';
+import DungeonDwellersPic from '/src/assets/Dungeon_Dwellers.jpg';
 import Elven_QueenPic from '/src/assets/Elven_Queen.jpg';
 import EriquePic from '/src/assets/Erique.jpg';
 import FalinPic from '/src/assets/Falin.jpg';
 import FlamelaPic from '/src/assets/Flamela.jpg';
 import FlekiPic from '/src/assets/Fleki.jpg';
+import GoldenKingdomPic from '/src/assets/Golden_Kingdom.jpg';
 import HienPic from '/src/assets/Hien.jpg';
 import KikiPic from '/src/assets/Kiki.jpg';
 import LeedPic from '/src/assets/Leed.jpg';
@@ -23,6 +26,7 @@ import PattadolPic from '/src/assets/Pattadol.jpg';
 import RinPic from '/src/assets/Rin.jpg';
 import TadePic from '/src/assets/Tade.jpg';
 import TheQueensAttendantsPic from '/src/assets/The_Queens_Attendants.jpg';
+import UnnamedAdventurersPic from '/src/assets/Unnamed_Adventurers.jpg';
 import UnnamedCanariesPic from '/src/assets/Unnamed_Canaries.jpg';
 
 const characterMetadata : {[key: string]: CharacterMetadata} = {
@@ -60,7 +64,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         heightInMeters: 1.3,
         gender: 'WOMAN',
         baseWeight: 127,
-        party: 'TANSUS',
+        party: 'ADVENTURERS',
         pictureLink: NamariPic,
         species: ['DWARF'],
     },
@@ -68,7 +72,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         heightInMeters: 1.8,
         gender: 'WOMAN',
         baseWeight: 150,
-        party: 'TANSUS',
+        party: 'ADVENTURERS',
         pictureLink: KikiPic,
         species: ['TALLMAN'],
     },
@@ -76,7 +80,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         heightInMeters: 1.9,
         gender: 'MAN',
         baseWeight: 183,
-        party: 'TANSUS',
+        party: 'ADVENTURERS',
         species: ['TALLMAN'],
     },
     "Benichidori": {
@@ -246,7 +250,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         heightInMeters: 1.7,
         gender: 'WOMAN',
         baseWeight: 115,
-        party: 'ELVES',
+        party: 'OTHERS',
         pictureLink: Elven_QueenPic,
         species: ['ELF'],
         displayName: 'Elven Queen'
@@ -255,7 +259,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         heightInMeters: 1.5,
         gender: 'WOMAN',
         baseWeight: 104,
-        party: 'ELVES',
+        party: 'OTHERS',
         pictureLink: MilsirilPic,
         species: ['ELF'],
     },
@@ -263,7 +267,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         heightInMeters: 1.55,
         gender: 'WOMAN',
         baseWeight: 110,
-        party: 'ELVES',
+        party: 'OTHERS',
         pictureLink: MarcillesMomPic,
         species: ['ELF'],
         displayName: 'Marcille\'s Mom',
@@ -272,7 +276,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         heightInMeters: 1.50,
         gender: 'WOMAN',
         baseWeight: 380,
-        party: 'ELVES',
+        party: 'OTHERS',
         numbers: 4,
         pictureLink: TheQueensAttendantsPic,
         species: ['ELF'],
@@ -300,7 +304,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         gender: 'MAN',
         baseWeight: 265,
         party: 'DUNGEON',
-        species: [],
+        species: ['MONSTER'],
     },
     "Thistle": {
         heightInMeters: 1.3,
@@ -309,6 +313,42 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'DUNGEON',
         species: ['ELF'],
     },
+    "Chillchuck_wife": {
+        heightInMeters: 1.00,
+        baseWeight: 42,
+        displayName: 'Chillchuck\'s wife',
+        gender: 'WOMAN',
+        party: 'OTHERS',
+        pictureLink: ChillchucksWifePic,
+        species: ['HALFFOOT'],
+    },
+    "Dungeon_dwellers": {
+        heightInMeters: 1.55,
+        baseWeight: 555,
+        numbers: 5,
+        gender: 'WOMAN',
+        party: 'OTHERS',
+        pictureLink: DungeonDwellersPic,
+        species: ['TALLMAN'],
+    },
+    "Golden_kingdom": {
+        heightInMeters: 1.50,
+        baseWeight: 475,
+        numbers: 5,
+        gender: 'WOMAN',
+        party: 'DUNGEON',
+        pictureLink: GoldenKingdomPic,
+        species: ['TALLMAN'],
+    },
+    "Unnamed_adventurers": {
+        heightInMeters: 1.65,
+        baseWeight: 650,
+        numbers: 5,
+        gender: 'WOMAN',
+        party: 'ADVENTURERS',
+        pictureLink: UnnamedAdventurersPic,
+        species: ['TALLMAN'],
+    }
 };
 
 export function getCharacterMetadata(characterName: string) : CharacterMetadata {

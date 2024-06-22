@@ -6,13 +6,13 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
     const totalAmountsByCharacter: {[name: string]: number} = {};
     const totalAmountByParty: {[name in Party]: number} = {
         DUNGEON: 0,
-        ELVES: 0,
+        OTHERS: 0,
         FLAMELAS: 0,
         KABRUS: 0,
         LAIOS: 0,
         MITHRUNS: 0,
         SHUROS: 0,
-        TANSUS: 0,
+        ADVENTURERS: 0,
     };
     let totalAmount: number = 0;
 

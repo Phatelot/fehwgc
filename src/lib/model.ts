@@ -10,7 +10,7 @@ export type CharacterStats = {
     immobilityThreshold: number;
 };
 
-export type Party = 'DUNGEON' | 'FLAMELAS' | 'TANSUS' | 'KABRUS' | 'LAIOS' | 'MITHRUNS' | 'SHUROS' | 'ELVES';
+export type Party = 'DUNGEON' | 'FLAMELAS' | 'ADVENTURERS' | 'KABRUS' | 'LAIOS' | 'MITHRUNS' | 'SHUROS' | 'OTHERS';
 
 export type CharacterMetadata = {
     party: Party;

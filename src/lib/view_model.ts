@@ -73,11 +73,11 @@ function toBarGradient(party: Party): string {
     return {
         'DUNGEON': 'purple',
         'FLAMELAS': 'green',
-        'TANSUS': 'darkTeal',
+        'ADVENTURERS': 'darkTeal',
         'KABRUS': 'blue',
         'LAIOS': 'orange',
         'MITHRUNS': 'darkGreen',
         'SHUROS': 'red',
-        'ELVES': 'pink',
+        'OTHERS': 'pink',
     }[party] + 'Gradient';
 }

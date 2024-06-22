@@ -44,8 +44,9 @@
 	  y="{5 / viewModel.viewPortHeight * viewModel.viewPortWidth}%"
 	  height="{getMonsterFalinViewModel(viewModel).picHeight * 1.4}%"
 	  preserveAspectRatio="true"
+	  on:click={() => selectCharacter('Monster_Falin')}
   />
-  <text x="4.8%" y="{5 / viewModel.viewPortHeight * viewModel.viewPortWidth}%" transform="translate(10, 4)">
+  <text x="4.8%" y="{5 / viewModel.viewPortHeight * viewModel.viewPortWidth}%" transform="translate(10, 4)" on:click={() => selectCharacter('Monster_Falin')}>
 	<tspan class="small">{formatWeight(getMonsterFalinViewModel(viewModel).weight)}lbs</tspan>
   </text>
 

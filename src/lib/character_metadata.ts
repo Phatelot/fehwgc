@@ -325,7 +325,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         immobilityBMI: 215,
     },
     "Monster_Falin": {
-        heightInMeters: 1, // ignore this
+        heightInMeters: 1.7,
         gender: 'YES',
         baseWeight: 6080,
         party: 'DUNGEON',

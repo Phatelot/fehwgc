@@ -28,6 +28,7 @@ export type ChartViewModel = {
     parties: PartyViewModel[];
     viewPortHeight: number;
     viewPortWidth: number;
+    totalWeight: number;
 };
 
 export function getMonsterFalinViewModel(viewModel: ChartViewModel): CharacterViewModel & {gender: 'YES'} {
@@ -39,6 +40,7 @@ const viewPortWidth = 220;
 
 export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[]): ChartViewModel {
     const characters = toCharactersViewModel(stats);
+    const totalWeight = characters.map(c => c.groupWeight).reduce((a, b) => a + b, 0);
 
     const femaleCharacters = toFemaleCharactersViewModel(characters);
     const femaleGroupCharacters = toCharacterGroupsViewModel(stats);
@@ -52,6 +54,7 @@ export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[]): 
         parties,
         viewPortHeight,
         viewPortWidth,
+        totalWeight,
     }
 }
 

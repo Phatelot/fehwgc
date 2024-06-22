@@ -39,12 +39,14 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
         const weightDivisor = metadata.numbers || 1;
         const weight = groupWeight / weightDivisor;
 
+        const bmi = BMI(metadata.heightInMeters, weight) / (name === 'Monster_Falin' ? 40 : 1);
+
         return {
             name,
             totalDonatedAmount,
             groupWeight,
             weight,
-            BMI: BMI(metadata.heightInMeters, weight),
+            BMI: bmi,
             immobilityThreshold: weightInLbsForBMI(metadata.heightInMeters, metadata.immobilityBMI),
         };
     });

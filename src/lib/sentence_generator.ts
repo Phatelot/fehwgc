@@ -4,7 +4,10 @@ import { formatWeight, formatBMI, toImperialHeight, toBMICategory } from "./weig
 
 export function generateSentencesFor(characterName: string, viewModel: ChartViewModel) : string[] {
 	const charViewModel = viewModel.characters.find(c => c.name === characterName) as CharacterViewModel;
-	if (charViewModel.numbers && charViewModel.numbers > 1) {
+
+	if (characterName === 'Monster_Falin') {
+		return generateSentencesForMonsterFalin(charViewModel, viewModel);
+	} else if (charViewModel.numbers && charViewModel.numbers > 1) {
 		return generateSentencesForGroupCharacter(charViewModel as CharacterViewModel & {numbers: number}, viewModel);
 	}
 	return generateSentencesForNonGroupCharacter(charViewModel, viewModel);
@@ -12,6 +15,7 @@ export function generateSentencesFor(characterName: string, viewModel: ChartView
 
 function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : string[] {
 	const sentences : string[] = [];
+	const pronoun = charViewModel.gender === 'MAN' ? ['He', 'Him', 'His'] : ['She', 'Her', 'Her'];
 
 	if (charViewModel.weight === charViewModel.baseWeight) {
 		sentences.push(`${charViewModel.displayName || charViewModel.name} still hasn't gained any weight, and weighs ${formatWeight(charViewModel.weight)}lbs.`)
@@ -21,23 +25,48 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		)
 	}
 	sentences.push(
-		`She's ${toImperialHeight(charViewModel.heightInMeters)} tall.`,
-		`That gives her a BMI of ${formatBMI(charViewModel.BMI)}, so she is ${toBMICategory(charViewModel.BMI)}.`,
+		`${pronoun[0]}'s ${toImperialHeight(charViewModel.heightInMeters)} tall.`,
+		`That gives ${pronoun[1].toLowerCase()} a BMI of ${formatBMI(charViewModel.BMI)}, so ${pronoun[0].toLowerCase()} is ${toBMICategory(charViewModel.BMI)}.`,
 	);
 
 	if (isFattestCharacter(charViewModel, viewModel)) {
-		sentences.push("Except for monster Falin, she's the fattest character.")
+		sentences.push(`Except for monster Falin, ${pronoun[0].toLowerCase()}'s the fattest character.`)
 	} else if (isFattestCharacterOfParty(charViewModel, viewModel)) {
 		const partyMetadata = getPartyMetadata(charViewModel.party);
 		if (charViewModel.party === 'DUNGEON') {
-			sentences.push(`Except for monster Falin, she's the fattest among the Dungeon.`)
+			sentences.push(`Except for monster Falin, ${pronoun[0].toLowerCase()}'s the fattest among the Dungeon.`)
 		} else {
-			sentences.push(`She's the fattest among ${partyMetadata.displayName}.`)
+			sentences.push(`${pronoun[0]}'s the fattest among ${partyMetadata.displayName}.`)
 		}
 	}
 
 	if (isImmobile(charViewModel)) {
-		sentences.push("She's immobile.")
+		sentences.push(`${pronoun[0]}'s immobile.`)
+	}
+
+	return sentences;
+}
+
+function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : string[] {
+	const sentences : string[] = [];
+
+	if (charViewModel.weight === charViewModel.baseWeight) {
+		sentences.push(`Monster Falin still hasn't gained any weight, and weighs ${formatWeight(charViewModel.weight)}lbs.`)
+	} else {
+		sentences.push(
+			`She has gained ${formatWeight(charViewModel.weight - charViewModel.baseWeight)}lbs, and now weighs ${formatWeight(charViewModel.weight)}lbs.`,
+		)
+	}
+	sentences.push(
+		`She has a normalized BMI of ${formatBMI(charViewModel.BMI)}, and is ${toBMICategory(charViewModel.BMI)}.`,
+	);
+
+	if (charViewModel.weight > viewModel.totalWeight) {
+		sentences.push(`She's heavier than all the other characters, combined.`);
+	}
+
+	if (isImmobile(charViewModel)) {
+		sentences.push(`She's immobile.`)
 	}
 
 	return sentences;
@@ -67,12 +96,12 @@ function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel &
 }
 
 function isFattestCharacter(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : boolean {
-	const maxWeight = Math.max(...viewModel.femaleCharacters.map(c => c.weight));
+	const maxWeight = Math.max(...viewModel.characters.map(c => c.weight));
 	return charViewModel.weight >= maxWeight;
 }
 
 function isFattestCharacterOfParty(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : boolean {
-	const maxWeight = Math.max(...viewModel.femaleCharacters.filter(c => c.party === charViewModel.party).map(c => c.weight));
+	const maxWeight = Math.max(...viewModel.characters.filter(c => c.party === charViewModel.party).map(c => c.weight));
 	return charViewModel.weight >= maxWeight;
 }
 

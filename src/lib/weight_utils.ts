@@ -1,7 +1,12 @@
 const formatter = new Intl.NumberFormat('en-US', {maximumFractionDigits: 0})
+const bmiFormatter = new Intl.NumberFormat('en-US', {maximumFractionDigits: 1})
 
 export function formatWeight(weight: number) : string {
     return formatter.format(weight).replace(',','')
+}
+
+export function formatBMI(BMI: number) : string {
+    return bmiFormatter.format(BMI).replace(',','')
 }
 
 export function BMI(heightInMeters: number, weightInLbs: number) : number {

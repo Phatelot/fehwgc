@@ -19,6 +19,7 @@ export type CharacterMetadata = {
     species: ('TALLMAN' | 'OGRE' | 'DWARF' | 'MONSTER' | 'ELF' | 'HALFFOOT' | 'GNOME' | 'KOBOLD')[];
     numbers?: number; // null/0/1 if single character, else number of characters
     displayName?: string;
+    immobilityBMI: number;
 } & ({
     gender: 'MAN';
 } | {

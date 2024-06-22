@@ -42,7 +42,7 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
             name,
             totalDonatedAmount,
             weight,
-            immobilityThreshold: weightInLbsForBMI(metadata.heightInMeters, 70),
+            immobilityThreshold: weightInLbsForBMI(metadata.heightInMeters, metadata.immobilityBMI),
         };
     });
 }

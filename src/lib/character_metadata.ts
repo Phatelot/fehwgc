@@ -37,6 +37,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'LAIOS',
         pictureLink: FalinPic,
         species: ['TALLMAN'],
+        immobilityBMI: 130,
     },
     "Marcille": {
         heightInMeters: 1.6,
@@ -45,6 +46,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'LAIOS',
         pictureLink: MarcillePic,
         species: ['ELF', 'TALLMAN'],
+        immobilityBMI: 120,
     },
     "Laios": {
         heightInMeters: 1.85,
@@ -52,6 +54,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 196,
         party: 'LAIOS',
         species: ['TALLMAN'],
+        immobilityBMI: 200,
     },
     "Chillchuck": {
         heightInMeters: 1.1,
@@ -59,6 +62,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 48,
         party: 'LAIOS',
         species: ['HALFFOOT'],
+        immobilityBMI: 110,
     },
     "Namari": {
         heightInMeters: 1.3,
@@ -67,6 +71,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'ADVENTURERS',
         pictureLink: NamariPic,
         species: ['DWARF'],
+        immobilityBMI: 210,
     },
     "Kiki": {
         heightInMeters: 1.8,
@@ -75,6 +80,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'ADVENTURERS',
         pictureLink: KikiPic,
         species: ['TALLMAN'],
+        immobilityBMI: 200,
     },
     "Kaka": {
         heightInMeters: 1.9,
@@ -82,6 +88,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 183,
         party: 'ADVENTURERS',
         species: ['TALLMAN'],
+        immobilityBMI: 210,
     },
     "Benichidori": {
         heightInMeters: 1.6,
@@ -90,6 +97,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'SHUROS',
         pictureLink: BenchidoriPic,
         species: ['TALLMAN'],
+        immobilityBMI: 140,
     },
     "Maizuru": {
         heightInMeters: 1.65,
@@ -98,6 +106,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'SHUROS',
         pictureLink: MaizuruPic,
         species: ['TALLMAN'],
+        immobilityBMI: 120,
     },
     "Hien": {
         heightInMeters: 1.7,
@@ -106,6 +115,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'SHUROS',
         pictureLink: HienPic,
         species: ['TALLMAN'],
+        immobilityBMI: 180,
     },
     "Tade": {
         heightInMeters: 1.95,
@@ -114,6 +124,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'SHUROS',
         pictureLink: TadePic,
         species: ['OGRE'],
+        immobilityBMI: 210,
     },
     "Shuro": {
         heightInMeters: 1.8,
@@ -121,6 +132,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 165,
         party: 'SHUROS',
         species: ['TALLMAN'],
+        immobilityBMI: 210,
     },
     "Rin": {
         heightInMeters: 1.65,
@@ -129,6 +141,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'KABRUS',
         pictureLink: RinPic,
         species: ['TALLMAN'],
+        immobilityBMI: 120,
     },
     "Daya": {
         heightInMeters: 1.3,
@@ -137,6 +150,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'KABRUS',
         pictureLink: DayaPic,
         species: ['DWARF'],
+        immobilityBMI: 190,
     },
     "Kabru": {
         heightInMeters: 1.7,
@@ -144,6 +158,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 134,
         party: 'KABRUS',
         species: ['TALLMAN'],
+        immobilityBMI: 190,
     },
     "Kuro": {
         heightInMeters: 1.45,
@@ -151,6 +166,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 110,
         party: 'KABRUS',
         species: ['KOBOLD'],
+        immobilityBMI: 120,
     },
     "Holm": {
         heightInMeters: 1.4,
@@ -158,6 +174,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 90,
         party: 'KABRUS',
         species: ['GNOME'],
+        immobilityBMI: 120,
     },
     "Mickbell": {
         heightInMeters: 1.05,
@@ -165,6 +182,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 44,
         party: 'KABRUS',
         species: ['HALFFOOT'],
+        immobilityBMI: 110,
     },
     "Pattadol": {
         heightInMeters: 1.7,
@@ -173,6 +191,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'MITHRUNS',
         pictureLink: PattadolPic,
         species: ['ELF'],
+        immobilityBMI: 120,
     },
     "Cithis": {
         heightInMeters: 1.65,
@@ -181,6 +200,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'MITHRUNS',
         pictureLink: CithisPic,
         species: ['ELF'],
+        immobilityBMI: 120,
     },
     "Fleki": {
         heightInMeters: 1.3,
@@ -189,6 +209,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'MITHRUNS',
         pictureLink: FlekiPic,
         species: ['ELF'],
+        immobilityBMI: 110,
     },
     "Otta": {
         heightInMeters: 1.3,
@@ -197,6 +218,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'MITHRUNS',
         pictureLink: OttaPic,
         species: ['ELF'],
+        immobilityBMI: 110,
     },
     "Mithrun": {
         heightInMeters: 1.55,
@@ -204,6 +226,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 111,
         party: 'MITHRUNS',
         species: ['ELF'],
+        immobilityBMI: 120,
     },
     "Lycion": {
         heightInMeters: 1.7,
@@ -211,6 +234,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 154,
         party: 'MITHRUNS',
         species: ['ELF'],
+        immobilityBMI: 140,
     },
     "Flamela": {
         heightInMeters: 1.4,
@@ -219,6 +243,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'FLAMELAS',
         pictureLink: FlamelaPic,
         species: ['ELF'],
+        immobilityBMI: 120,
     },
     "Misyl": {
         heightInMeters: 1.45,
@@ -227,6 +252,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'FLAMELAS',
         pictureLink: MisylPic,
         species: ['ELF'],
+        immobilityBMI: 130,
     },
     "Erique": {
         heightInMeters: 1.5,
@@ -235,6 +261,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'FLAMELAS',
         pictureLink: EriquePic,
         species: ['ELF'],
+        immobilityBMI: 120,
     },
     "Unnamed_Elves": {
         heightInMeters: 1.50,
@@ -245,6 +272,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         pictureLink: UnnamedCanariesPic,
         species: ['ELF'],
         displayName: 'Unnamed canaries',
+        immobilityBMI: 120,
     },
     "Queen": {
         heightInMeters: 1.7,
@@ -253,7 +281,8 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'OTHERS',
         pictureLink: Elven_QueenPic,
         species: ['ELF'],
-        displayName: 'Elven Queen'
+        displayName: 'Elven Queen',
+        immobilityBMI: 140,
     },
     "Milsiril": {
         heightInMeters: 1.5,
@@ -262,6 +291,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'OTHERS',
         pictureLink: MilsirilPic,
         species: ['ELF'],
+        immobilityBMI: 140,
     },
     "Marcilles_Mom": {
         heightInMeters: 1.55,
@@ -271,6 +301,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         pictureLink: MarcillesMomPic,
         species: ['ELF'],
         displayName: 'Marcille\'s Mom',
+        immobilityBMI: 120,
     },
     "Attendants": {
         heightInMeters: 1.50,
@@ -280,7 +311,8 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         numbers: 4,
         pictureLink: TheQueensAttendantsPic,
         species: ['ELF'],
-        displayName: 'Queen\'s Attendants'
+        displayName: 'Queen\'s Attendants',
+        immobilityBMI: 130,
     },
     "Leed": {
         heightInMeters: 1.5,
@@ -289,6 +321,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'DUNGEON',
         pictureLink: LeedPic,
         species: ['MONSTER'],
+        immobilityBMI: 215,
     },
     "Monster_Falin": {
         heightInMeters: 1, // ignore this
@@ -298,6 +331,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         pictureLink: MonsterFalinPic,
         species: ['MONSTER'],
         displayName: 'Monster Falin',
+        immobilityBMI: 220,
     },
     "Zon": {
         heightInMeters: 1.75,
@@ -305,6 +339,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 265,
         party: 'DUNGEON',
         species: ['MONSTER'],
+        immobilityBMI: 225,
     },
     "Thistle": {
         heightInMeters: 1.3,
@@ -312,6 +347,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 63,
         party: 'DUNGEON',
         species: ['ELF'],
+        immobilityBMI: 110,
     },
     "Chillchuck_wife": {
         heightInMeters: 1.00,
@@ -321,6 +357,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'OTHERS',
         pictureLink: ChillchucksWifePic,
         species: ['HALFFOOT'],
+        immobilityBMI: 100,
     },
     "Dungeon_dwellers": {
         heightInMeters: 1.55,
@@ -330,6 +367,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'OTHERS',
         pictureLink: DungeonDwellersPic,
         species: ['TALLMAN'],
+        immobilityBMI: 130,
     },
     "Golden_kingdom": {
         heightInMeters: 1.50,
@@ -339,6 +377,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'DUNGEON',
         pictureLink: GoldenKingdomPic,
         species: ['TALLMAN'],
+        immobilityBMI: 120,
     },
     "Unnamed_adventurers": {
         heightInMeters: 1.65,
@@ -348,7 +387,8 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'ADVENTURERS',
         pictureLink: UnnamedAdventurersPic,
         species: ['TALLMAN'],
-    }
+        immobilityBMI: 150,
+    },
 };
 
 export function getCharacterMetadata(characterName: string) : CharacterMetadata {

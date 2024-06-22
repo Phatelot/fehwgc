@@ -29,3 +29,15 @@ export type CharacterMetadata = {
     gender: 'YES';
     pictureLink: string;
 });
+
+export type PartyMetadata = {
+    displayName: string;
+    color: string;
+    pictureLink: string;
+}
+
+export type PartyStats = {
+    name: Party;
+    totalDonatedAmount: number;
+    weight: number;
+}

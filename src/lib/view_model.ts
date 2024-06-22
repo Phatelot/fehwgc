@@ -1,23 +1,30 @@
 import { getCharacterMetadata, getFemaleCharactersNumber} from "./character_metadata";
-import type { CharacterMetadata, CharacterStats, Party } from "./model";
+import type { CharacterMetadata, CharacterStats, Party, PartyMetadata, PartyStats } from "./model";
+import { getPartyMetadata } from "./party_metadata";
 
-export type CharacterViewModel = CharacterStats & CharacterMetadata & {
+type BarViewModel = {
     x: number;
     y: number;
     width: number;
     height: number;
-    immobilityThresholdY: number;
 
     picHeight: number;
 
     barGradient: string;
 };
 
+export type CharacterViewModel = CharacterStats & CharacterMetadata & BarViewModel & {
+    immobilityThresholdY: number;
+};
+
+export type PartyViewModel = PartyStats & PartyMetadata & BarViewModel;
+
 type FemaleCharacterViewModel = CharacterViewModel & {gender: 'WOMAN'};
 
 export type ChartViewModel = {
     characters: CharacterViewModel[];
     femaleCharacters: FemaleCharacterViewModel[];
+    parties: PartyViewModel[];
     viewPortHeight: number;
     viewPortWidth: number;
 };
@@ -26,18 +33,33 @@ export function getMonsterFalinViewModel(viewModel: ChartViewModel): CharacterVi
     return viewModel.characters.find(c => c.name === 'Monster_Falin') as CharacterViewModel & {gender: 'YES'};
 }
 
-export function toViewModel(stats: CharacterStats[]): ChartViewModel {
-    const viewPortHeight = 100;
-    const viewPortWidth = 220;
+const viewPortHeight = 100;
+const viewPortWidth = 220;
 
+export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[]): ChartViewModel {
+    const characters = toCharactersViewModel(stats);
+
+    const femaleCharacters = toFemaleCharactersViewModel(characters);
+
+    const parties = toPartyViewModel(partyStats);
+
+    return {
+        characters,
+        femaleCharacters,
+        parties,
+        viewPortHeight,
+        viewPortWidth,
+    }
+}
+
+function toCharactersViewModel(stats: CharacterStats[]) : CharacterViewModel[] {
     const highestWeight = Math.max(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.weight));
-
-    const maxDisplayableWeight = 3_200;
+    const lowestWeight = Math.min(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.weight));
+    const maxDisplayableWeight = 50 * lowestWeight;
 
     const margin = 95 / (5 * getFemaleCharactersNumber() + 1);
 
-    const characters = stats.sort((a, b) => a.weight - b.weight).map((stat, index) => {
-
+    return stats.sort((a, b) => a.weight - b.weight).map((stat, index) => {
         const width = 4 * margin;
         const height = stat.weight / Math.min(maxDisplayableWeight, highestWeight) * 75;
         const immobilityThresholdY = 83 - (stat.immobilityThreshold / Math.min(maxDisplayableWeight, highestWeight) * 75);
@@ -58,26 +80,44 @@ export function toViewModel(stats: CharacterStats[]): ChartViewModel {
             barGradient: toBarGradient(metadata.party),
         }
     });
+}
 
-    const femaleCharacters = characters.filter(c => c.gender === "WOMAN").map((c, index) => ({...c, x: 2.5 + margin + 5 * margin * index,})) as FemaleCharacterViewModel[];
+function toFemaleCharactersViewModel(charactersViewModel : CharacterViewModel[]) : FemaleCharacterViewModel[] {
+    const margin = 95 / (5 * getFemaleCharactersNumber() + 1);
 
-    return {
-        characters,
-        femaleCharacters,
-        viewPortHeight,
-        viewPortWidth,
-    }
+    return charactersViewModel.filter(c => c.gender === "WOMAN").map((c, index) => ({...c, x: 2.5 + margin + 5 * margin * index,})) as FemaleCharacterViewModel[];
+}
+
+function toPartyViewModel(stats : PartyStats[]) : PartyViewModel[] {
+    const margin = 95 / (5 * stats.length + 1);
+
+    const highestWeight = Math.max(...stats.map(stat => stat.weight));
+    const lowestWeight = Math.min(...stats.map(stat => stat.weight));
+    const maxDisplayableWeight = 10 * lowestWeight * 10000;
+
+    const width = 4 * margin;
+
+    return stats.sort((a, b) => a.weight - b.weight).map((stat, index) => {
+        const width = 4 * margin;
+        const height = stat.weight / Math.min(maxDisplayableWeight, highestWeight) * 65;
+
+        const y = 70 - height;
+
+        const metadata = getPartyMetadata(stat.name);
+
+        return {
+            ...stat,
+            ...metadata,
+            height,
+            width,
+            x: 2.5 + margin + 5 * margin * index,
+            y,
+            picHeight: width * viewPortWidth / viewPortHeight,
+            barGradient: toBarGradient(stat.name),
+        }
+    });
 }
 
 function toBarGradient(party: Party): string {
-    return {
-        'DUNGEON': 'purple',
-        'FLAMELAS': 'green',
-        'ADVENTURERS': 'darkTeal',
-        'KABRUS': 'blue',
-        'LAIOS': 'orange',
-        'MITHRUNS': 'darkGreen',
-        'SHUROS': 'red',
-        'OTHERS': 'pink',
-    }[party] + 'Gradient';
+    return getPartyMetadata(party).color + 'Gradient';
 }

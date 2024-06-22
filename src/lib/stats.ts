@@ -1,5 +1,6 @@
 import { getCharacterMetadata, getCharacters, getParty, getPartySize } from "./character_metadata";
-import type { CharacterStats, Party, RawDonation } from "./model";
+import type { CharacterStats, Party, PartyStats, RawDonation } from "./model";
+import { getParties } from "./party_metadata";
 import { weightInLbsForBMI } from "./weight_utils";
 
 export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
@@ -45,4 +46,24 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
             immobilityThreshold: weightInLbsForBMI(metadata.heightInMeters, metadata.immobilityBMI),
         };
     });
+}
+
+export function toPartyStats(characterStats: CharacterStats[]) : PartyStats[] {
+    const partyStatsByName : {[key: string]: PartyStats} = {};
+    for (const party of getParties()) {
+        partyStatsByName[party] = {
+            name: party as Party,
+            totalDonatedAmount: 0,
+            weight: 0,
+        }
+    }
+
+    for (const characterStat of characterStats) {
+        const weightMultiplier = getCharacterMetadata(characterStat.name).numbers || 1;
+
+        partyStatsByName[getParty(characterStat.name)].totalDonatedAmount += characterStat.totalDonatedAmount;
+        partyStatsByName[getParty(characterStat.name)].weight += characterStat.weight * weightMultiplier;
+    }
+
+    return Object.values(partyStatsByName);
 }

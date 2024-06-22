@@ -62,6 +62,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         baseWeight: 48,
         party: 'LAIOS',
         species: ['HALFFOOT'],
+        displayName: 'Chilchuck',
         immobilityBMI: 110,
     },
     "Namari": {
@@ -352,7 +353,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
     "Chillchuck_wife": {
         heightInMeters: 1.00,
         baseWeight: 42,
-        displayName: 'Chillchuck\'s wife',
+        displayName: 'Chilchuck\'s wife',
         gender: 'WOMAN',
         party: 'OTHERS',
         pictureLink: ChillchucksWifePic,

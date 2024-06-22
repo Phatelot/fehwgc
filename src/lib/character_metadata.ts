@@ -282,7 +282,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         party: 'OTHERS',
         pictureLink: Elven_QueenPic,
         species: ['ELF'],
-        displayName: 'Elven Queen',
+        displayName: 'The Elven Queen',
         immobilityBMI: 140,
     },
     "Milsiril": {

@@ -3,6 +3,7 @@
 	import { createEventDispatcher } from 'svelte';
     import type { CharacterViewModel, ChartViewModel } from './view_model';
     import { formatWeight, toBMICategory, toImperialHeight } from './weight_utils';
+    import { generateSentencesFor } from './sentence_generator';
 	const dispatch = createEventDispatcher();
 
 	export let characterName: string;
@@ -27,10 +28,10 @@
 	  preserveAspectRatio="true"
 	/>
 
-<text class="big">
-	<tspan x="23%" y="18%">{charViewModel.displayName || charViewModel.name} weighs {formatWeight(charViewModel.weight)}lbs.</tspan>
-	<tspan x="23%" dy="5%">She's {toImperialHeight(charViewModel.heightInMeters)} tall.</tspan>
-	<tspan x="23%" dy="5%">That gives her a BMI of {formatWeight(charViewModel.BMI)}, so she is {toBMICategory(charViewModel.BMI)}.</tspan>
+<text class="big" y="13%">
+	{#each generateSentencesFor(charViewModel.name, viewModel) as sentence, i}
+		<tspan x="{i < 6 ? 23 : 10}%" dy="4.6%">{sentence}</tspan>
+	{/each}
 </text>
 <text x="84%" y="87%" class="close" on:click={() => close()}>close</text>
 

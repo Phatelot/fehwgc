@@ -80,9 +80,12 @@
 
         {#if page === 'MENU'}
           <text x="20%" y="20%" class="menu" on:click={() => setPage('CHARACTER_CHART')}>-> Character chart</text>
-          <text x="20%" y="30%" class="menu" on:click={() => setPage('PARTY_CHART')}>-> Party chart</text>
+          <text x="20%" y="30%" class="menu" on:click={() => setPage('IMMOBILITY_CHART')}>-> Immobility thresholds</text>
+          <text x="20%" y="40%" class="menu" on:click={() => setPage('PARTY_CHART')}>-> Party chart</text>
         {:else if page === 'CHARACTER_CHART'}
-          <CharacterChart viewModel="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
+          <CharacterChart viewModel="{viewModel}" displayPromoText on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
+        {:else if page === 'IMMOBILITY_CHART'}
+          <CharacterChart viewModel="{viewModel}" displayPromoText={false} on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
         {:else if page === 'PARTY_CHART'}
           <PartyChart viewModel="{viewModel}" />
         {/if}

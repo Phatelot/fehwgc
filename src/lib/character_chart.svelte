@@ -7,6 +7,8 @@
 
 	export let viewModel: ChartViewModel;
 
+	export let displayPromoText : boolean;
+
 	const dispatch = createEventDispatcher<{
 		selectcharacter: {characterName: string}
 	}>();
@@ -16,6 +18,7 @@
 	}
 </script>
 
+{#if displayPromoText}
 <text x="15%" y="25%" class="small">
 	<tspan text-anchor="middle">Every 1$* contributed to the collage adds</tspan>
 	<tspan dy="3%" x="15%" text-anchor="middle">three pounds to the characters!</tspan>
@@ -29,9 +32,9 @@
 	<tspan dy="1%" x="15%" text-anchor="middle">1lb goes to monster Falin</tspan>
 	<tspan dy="3%" x="15%" text-anchor="middle"><a class="link-tree-link" href="https://linktr.ee/ebcart">Click here to fatten your favorite</a></tspan>
   </text>
-
-
   <image x="16%" y="9%" height="12%" xlink:href="{waterCanPng}" />
+{/if}
+
 
 
   <image
@@ -46,7 +49,9 @@
   </text>
 
   {#each viewModel.femaleCharacters as charViewModel}
-	<rect x="{charViewModel.x}%" y="{charViewModel.immobilityThresholdY}%" width="{charViewModel.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
+  	{#if !displayPromoText}
+		<rect x="{charViewModel.x}%" y="{charViewModel.immobilityThresholdY}%" width="{charViewModel.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
+	{/if}
 
 	<rect x="{charViewModel.x}%" y="{charViewModel.y}%" width="{charViewModel.width}%" height="{charViewModel.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{charViewModel.barGradient})" on:click={() => selectCharacter(charViewModel.name)} />
 	<image

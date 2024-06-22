@@ -4,7 +4,13 @@ import { formatWeight, formatBMI, toImperialHeight, toBMICategory } from "./weig
 
 export function generateSentencesFor(characterName: string, viewModel: ChartViewModel) : string[] {
 	const charViewModel = viewModel.characters.find(c => c.name === characterName) as CharacterViewModel;
+	if (charViewModel.numbers && charViewModel.numbers > 1) {
+		return generateSentencesForGroupCharacter(charViewModel as CharacterViewModel & {numbers: number}, viewModel);
+	}
+	return generateSentencesForNonGroupCharacter(charViewModel, viewModel);
+}
 
+function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : string[] {
 	const sentences : string[] = [];
 
 	if (charViewModel.weight === charViewModel.baseWeight) {
@@ -32,6 +38,29 @@ export function generateSentencesFor(characterName: string, viewModel: ChartView
 
 	if (isImmobile(charViewModel)) {
 		sentences.push("She's immobile.")
+	}
+
+	return sentences;
+}
+
+function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel & {numbers: number}, viewModel : ChartViewModel) : string[] {
+	const sentences : string[] = [];
+
+	if (charViewModel.weight === charViewModel.baseWeight) {
+		sentences.push(`${charViewModel.displayName || charViewModel.name} still haven't gained any weight, and weigh ${formatWeight(charViewModel.weight)}lbs each.`)
+	} else {
+		sentences.push(
+			`${charViewModel.displayName || charViewModel.name} each weigh ${formatWeight(charViewModel.weight)}lbs, a ${formatWeight(charViewModel.weight - charViewModel.baseWeight/charViewModel.numbers)}lbs gain.`,
+		)
+	}
+	sentences.push(
+		`Their total weight is ${formatWeight(charViewModel.groupWeight)}lbs.`,
+		`They're on average ${toImperialHeight(charViewModel.heightInMeters)} tall.`,
+		`That gives them a BMI of ${formatBMI(charViewModel.BMI)}, so they are ${toBMICategory(charViewModel.BMI)}.`,
+	);
+
+	if (isImmobile(charViewModel)) {
+		sentences.push("They're immobile.")
 	}
 
 	return sentences;

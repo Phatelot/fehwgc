@@ -7,6 +7,7 @@ export type CharacterStats = {
     name: string;
     totalDonatedAmount: number;
     weight: number;
+    groupWeight: number;
     immobilityThreshold: number;
     BMI: number;
 };

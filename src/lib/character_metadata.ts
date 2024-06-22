@@ -369,6 +369,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         pictureLink: DungeonDwellersPic,
         species: ['TALLMAN'],
         immobilityBMI: 130,
+        displayName: 'Dungeon Dwellers',
     },
     "Golden_kingdom": {
         heightInMeters: 1.50,
@@ -379,6 +380,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         pictureLink: GoldenKingdomPic,
         species: ['TALLMAN'],
         immobilityBMI: 120,
+        displayName: 'the Golden Kingdom'
     },
     "Unnamed_adventurers": {
         heightInMeters: 1.65,
@@ -389,6 +391,7 @@ const characterMetadata : {[key: string]: CharacterMetadata} = {
         pictureLink: UnnamedAdventurersPic,
         species: ['TALLMAN'],
         immobilityBMI: 150,
+        displayName: 'the unnamed adventurers',
     },
 };
 

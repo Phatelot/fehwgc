@@ -1,16 +1,17 @@
 <script lang="ts">
-  import type { CharacterViewModel } from "./view_model";
   import { formatWeight } from "./weight_utils";
 
 	export let charViewModel: {
     x: number;
     y: number;
     weight: number;
+    groupWeight: number;
     height: number;
   };
   export let small: boolean;
+  export let groupCharacters: boolean;
 
-	$: formattedWeight = formatWeight(charViewModel.weight);
+	$: formattedWeight = formatWeight(groupCharacters ? charViewModel.groupWeight : charViewModel.weight);
 </script>
 
 {#if small}

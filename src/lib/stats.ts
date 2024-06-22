@@ -31,17 +31,18 @@ export function toCharacterStats(donations: RawDonation[]): CharacterStats[] {
 
         const metadata = getCharacterMetadata(name);
 
-        let weight: number = metadata.baseWeight + totalDonatedAmount + totalAmountByParty[metadata.party] / getPartySize(metadata.party);
+        let groupWeight: number = metadata.baseWeight + totalDonatedAmount + totalAmountByParty[metadata.party] / getPartySize(metadata.party);
         if (name === 'Monster_Falin') {
-            weight += totalAmount;
+            groupWeight += totalAmount;
         }
-        if (metadata.numbers && metadata.numbers > 1) {
-            weight /= metadata.numbers
-        }
+
+        const weightDivisor = metadata.numbers || 1;
+        const weight = groupWeight / weightDivisor;
 
         return {
             name,
             totalDonatedAmount,
+            groupWeight,
             weight,
             BMI: BMI(metadata.heightInMeters, weight),
             immobilityThreshold: weightInLbsForBMI(metadata.heightInMeters, metadata.immobilityBMI),
@@ -60,10 +61,8 @@ export function toPartyStats(characterStats: CharacterStats[]) : PartyStats[] {
     }
 
     for (const characterStat of characterStats) {
-        const weightMultiplier = getCharacterMetadata(characterStat.name).numbers || 1;
-
         partyStatsByName[getParty(characterStat.name)].totalDonatedAmount += characterStat.totalDonatedAmount;
-        partyStatsByName[getParty(characterStat.name)].weight += characterStat.weight * weightMultiplier;
+        partyStatsByName[getParty(characterStat.name)].weight += characterStat.groupWeight;
     }
 
     return Object.values(partyStatsByName);

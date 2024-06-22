@@ -8,6 +8,7 @@
 	export let viewModel: ChartViewModel;
 
 	export let displayPromoText : boolean;
+	export let groupCharacters : boolean;
 
 	const dispatch = createEventDispatcher<{
 		selectcharacter: {characterName: string}
@@ -48,7 +49,7 @@
 	<tspan class="small">{formatWeight(getMonsterFalinViewModel(viewModel).weight)}lbs</tspan>
   </text>
 
-  {#each viewModel.femaleCharacters as charViewModel}
+  {#each (groupCharacters ? viewModel.femaleGroupCharacters : viewModel.femaleCharacters) as charViewModel}
   	{#if !displayPromoText}
 		<rect x="{charViewModel.x}%" y="{charViewModel.immobilityThresholdY}%" width="{charViewModel.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
 	{/if}
@@ -62,7 +63,7 @@
 	  preserveAspectRatio="true"
 	  on:click={() => selectCharacter(charViewModel.name)}
 	/>
-	<WeightLabel charViewModel="{charViewModel}" on:click={() => selectCharacter(charViewModel.name)} small/>
+	<WeightLabel groupCharacters={groupCharacters} charViewModel="{charViewModel}" on:click={() => selectCharacter(charViewModel.name)} small/>
   {/each}
 
 <style>

@@ -22,6 +22,7 @@
     $: selectedCharacterName = null;
 
     let displayImmobilityThresholds = false;
+    let groupCharacters = false;
 
     function setPage(newPage: string) {
       page = newPage;
@@ -81,11 +82,14 @@
         <image x="25%" y="3%" width="50%" xlink:href="{titleJpg}" />
 
         {#if page === 'MENU'}
-          <text x="20%" y="20%" class="menu" on:click={() => setPage('CHARACTER_CHART')}>-> Character chart</text>
-          <text x="20%" y="30%" class="menu" on:click={() => (displayImmobilityThresholds = !displayImmobilityThresholds)}>Immobility thresholds: {displayImmobilityThresholds ? 'ON' : 'OFF'}</text>
-          <text x="20%" y="40%" class="menu" on:click={() => setPage('PARTY_CHART')}>-> Party chart</text>
+        <text x="20%" y="20%">
+          <tspan x="20%" dy="0%" class="menu" on:click={() => setPage('CHARACTER_CHART')}>-> Character chart</tspan>
+          <tspan x="20%" dy="7%" class="menu" on:click={() => (displayImmobilityThresholds = !displayImmobilityThresholds)}>Immobility thresholds: {displayImmobilityThresholds ? 'ON' : 'OFF'}</tspan>
+          <tspan x="20%" dy="5%" class="menu" on:click={() => (groupCharacters = !groupCharacters)}>Group unnamed characters: {groupCharacters ? 'ON' : 'OFF'}</tspan>
+          <tspan x="20%" dy="10%" class="menu" on:click={() => setPage('PARTY_CHART')}>-> Party chart</tspan>
+        </text>
         {:else if page === 'CHARACTER_CHART'}
-          <CharacterChart viewModel="{viewModel}" displayPromoText={!displayImmobilityThresholds} on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
+          <CharacterChart viewModel="{viewModel}" groupCharacters={groupCharacters} displayPromoText={!displayImmobilityThresholds} on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
         {:else if page === 'PARTY_CHART'}
           <PartyChart viewModel="{viewModel}" />
         {/if}

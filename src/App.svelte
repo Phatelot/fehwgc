@@ -29,6 +29,9 @@
     let groupCharacters = false;
 
     function setPage(newPage: string) {
+      if (selectedCharacterName) {
+        return;
+      }
       page = newPage;
       saveStateToLocalStorage();
     }

@@ -1,3 +1,4 @@
+import { biggerThanTheXSmallestCombined, toSortedNonGroupWeights } from "./gini";
 import { getPartyMetadata } from "./party_metadata";
 import type { CharacterViewModel, ChartViewModel } from "./view_model";
 import { formatWeight, formatBMI, toImperialHeight, toBMICategory } from "./weight_utils";
@@ -21,7 +22,7 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		sentences.push(`${charViewModel.displayName || charViewModel.name} still hasn't gained any weight, and weighs ${formatWeight(charViewModel.weight)}lbs.`)
 	} else {
 		sentences.push(
-			`${charViewModel.displayName || charViewModel.name} has gained ${formatWeight(charViewModel.weight - charViewModel.baseWeight)}lbs, and now weighs ${formatWeight(charViewModel.weight)}lbs.`,
+			`${charViewModel.displayName || charViewModel.name} weighs ${formatWeight(charViewModel.weight)}lbs, up from ${formatWeight(charViewModel.baseWeight)}lbs.`,
 		)
 	}
 	sentences.push(
@@ -38,6 +39,13 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		} else {
 			sentences.push(`${pronoun[0]}'s the fattest among ${partyMetadata.displayName}.`)
 		}
+	}
+
+	const sortedNonGroupWeights = toSortedNonGroupWeights(viewModel.characters);
+	const biggerThan = biggerThanTheXSmallestCombined(sortedNonGroupWeights, charViewModel.weight);
+
+	if (biggerThan > 1) {
+		sentences.push(`${pronoun[0]}'s heavier than the ${biggerThan} smallest characters combined.`);
 	}
 
 	if (hasReceivedDonation(charViewModel)) {
@@ -69,8 +77,13 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 		`She has a normalized BMI of ${formatBMI(charViewModel.BMI)}, and is ${toBMICategory(charViewModel.BMI)}.`,
 	);
 
-	if (charViewModel.weight > viewModel.totalWeight) {
+	const sortedNonGroupWeights = toSortedNonGroupWeights(viewModel.characters);
+	const biggerThan = biggerThanTheXSmallestCombined(sortedNonGroupWeights, charViewModel.weight);
+
+	if (charViewModel.weight > viewModel.totalWeight - charViewModel.weight) {
 		sentences.push(`She's heavier than all the other characters, combined.`);
+	} else if (biggerThan > 1) {
+		sentences.push(`She's heavier than the ${biggerThan} smallest characters combined.`);
 	}
 
 	if (hasReceivedDonation(charViewModel)) {

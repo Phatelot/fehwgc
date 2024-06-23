@@ -40,6 +40,14 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		}
 	}
 
+	if (hasReceivedDonation(charViewModel)) {
+		const totalGain = charViewModel.weight - charViewModel.baseWeight;
+		const percentage = Math.round(charViewModel.totalDonatedAmount / totalGain * 100);
+		sentences.push(`${pronoun[0]} has received $${charViewModel.totalDonatedAmount} of donation (${percentage}% of ${pronoun[2].toLowerCase()} gain).`)
+	} else {
+		sentences.push(`${pronoun[0]} hasn't received any donation yet.`)
+	}
+
 	if (isImmobile(charViewModel)) {
 		sentences.push(`${pronoun[0]}'s immobile.`)
 	}
@@ -63,6 +71,14 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 
 	if (charViewModel.weight > viewModel.totalWeight) {
 		sentences.push(`She's heavier than all the other characters, combined.`);
+	}
+
+	if (hasReceivedDonation(charViewModel)) {
+		const totalGain = charViewModel.weight - charViewModel.baseWeight;
+		const percentage = Math.round(charViewModel.totalDonatedAmount / totalGain * 100);
+		sentences.push(`She has received $${charViewModel.totalDonatedAmount} of donation (${percentage}% of her gain).`)
+	} else {
+		sentences.push("She hasn't received any donation yet.")
 	}
 
 	if (isImmobile(charViewModel)) {
@@ -107,4 +123,8 @@ function isFattestCharacterOfParty(charViewModel : CharacterViewModel, viewModel
 
 function isImmobile(charViewModel : CharacterViewModel) : boolean {
 	return charViewModel.BMI >= charViewModel.immobilityBMI;
+}
+
+function hasReceivedDonation(charViewModel : CharacterViewModel) : boolean {
+	return charViewModel.totalDonatedAmount > 0;
 }

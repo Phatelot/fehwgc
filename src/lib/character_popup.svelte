@@ -35,6 +35,7 @@
 		<tspan x="{i < 6 && charViewModel.pictureLink ? 23 : 10}%" dy="4.6%">{sentence}</tspan>
 	{/each}
 </text>
+<rect x="83.1%" y="83.5%" height="4.6%" width="8%" rx="1px" ry="1px" stroke="#ae2f29" stroke-width="0.4" stroke-linecap="round" fill="#f9edd5" on:click={() => close()}></rect>
 <text x="84%" y="87%" class="close" on:click={() => close()}>close</text>
 
 <style>
@@ -45,7 +46,6 @@
 
 
   .close {
-    fill: blue;
     font-size: 4px;
   }
 </style>

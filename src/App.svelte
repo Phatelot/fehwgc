@@ -143,7 +143,7 @@
         <image x="25%" y="3%" width="50%" xlink:href="{titleJpg}" />
 
         {#if !!selectedCharacterName}
-          <CharacterPopup viewModel="{viewModel}" characterName="{selectedCharacterName}" on:close={() => selectedCharacterName = null}/>
+          <CharacterPopup viewModel="{viewModel}" characterName="{selectedCharacterName}" on:close={() => {(selectedCharacterName = null); saveStateToLocalStorage()}}/>
         {/if}
       {:catch error}
         <text x="50%" y="45%" class="menu" text-anchor="middle">Error: {error}</text>

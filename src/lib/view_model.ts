@@ -1,6 +1,7 @@
 import { getCharacterMetadata, getFemaleCharactersNumber} from "./character_metadata";
-import type { CharacterMetadata, CharacterStats, Party, PartyMetadata, PartyStats } from "./model";
+import type { CharacterMetadata, CharacterStats, DonationLogEntry, Party, PartyMetadata, PartyStats, RawDonation } from "./model";
 import { getPartyMetadata } from "./party_metadata";
+import { extractLastDonationLogEntries } from "./stats";
 
 type BarViewModel = {
     x: number;
@@ -29,6 +30,7 @@ export type ChartViewModel = {
     viewPortHeight: number;
     viewPortWidth: number;
     totalWeight: number;
+    donationLog: DonationLogEntry[];
 };
 
 export function getMonsterFalinViewModel(viewModel: ChartViewModel): CharacterViewModel & {gender: 'YES'} {
@@ -38,7 +40,7 @@ export function getMonsterFalinViewModel(viewModel: ChartViewModel): CharacterVi
 const viewPortHeight = 100;
 const viewPortWidth = 220;
 
-export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[]): ChartViewModel {
+export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[], rawDonations: RawDonation[]): ChartViewModel {
     const characters = toCharactersViewModel(stats);
     const totalWeight = characters.map(c => c.groupWeight).reduce((a, b) => a + b, 0);
 
@@ -55,6 +57,7 @@ export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[]): 
         viewPortHeight,
         viewPortWidth,
         totalWeight,
+        donationLog: extractLastDonationLogEntries(rawDonations, stats),
     }
 }
 

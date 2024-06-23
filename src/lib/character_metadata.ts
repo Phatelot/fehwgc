@@ -418,3 +418,8 @@ export function getPartySize(party: Party) : number {
         .filter(c => c.party === party)
         .length; // poly characters still count as 1 for bonus weight repartition
 }
+
+export function getPartyMembersNames(characterName : string) : string[] {
+    const party = getParty(characterName);
+    return Object.keys(characterMetadata).filter(c => characterMetadata[c].party === party);
+}

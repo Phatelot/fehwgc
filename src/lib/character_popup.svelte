@@ -2,7 +2,6 @@
 
 	import { createEventDispatcher } from 'svelte';
     import type { CharacterViewModel, ChartViewModel } from './view_model';
-    import { formatWeight, toBMICategory, toImperialHeight } from './weight_utils';
     import { generateSentencesFor } from './sentence_generator';
 	const dispatch = createEventDispatcher();
 

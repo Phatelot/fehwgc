@@ -43,3 +43,13 @@ export type PartyStats = {
     totalDonatedAmount: number;
     weight: number;
 }
+
+export type DonationLogEntry = RawDonation & {
+    gains: WeightGain[];
+}
+
+export type WeightGain = {
+    characterName: string;
+    before: number;
+    after: number;
+}

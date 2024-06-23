@@ -1,5 +1,5 @@
-import { getCharacterMetadata, getCharacters, getParty, getPartySize } from "./character_metadata";
-import type { CharacterStats, Party, PartyStats, RawDonation } from "./model";
+import { getCharacterMetadata, getCharacters, getParty, getPartyMembersNames, getPartySize } from "./character_metadata";
+import type { CharacterStats, DonationLogEntry, Party, PartyStats, RawDonation } from "./model";
 import { getParties } from "./party_metadata";
 import { BMI, weightInLbsForBMI } from "./weight_utils";
 
@@ -68,4 +68,51 @@ export function toPartyStats(characterStats: CharacterStats[]) : PartyStats[] {
     }
 
     return Object.values(partyStatsByName);
+}
+
+export function extractLastDonationLogEntries(donations: RawDonation[], characterStats: CharacterStats[]): DonationLogEntry[] {
+    const donationLogEntries : DonationLogEntry[] = [];
+    const previousWeights : {[key: string]: number} = {};
+
+    const getWeight = function(characterName: string) : number {
+        return previousWeights[characterName] || (characterStats.find(c => c.name === characterName)?.weight) as number;
+    }
+
+    const limit = Math.min(4, donations.length);
+    for (let i = 0; i < limit; i++) {
+        const donation = donations[donations.length - 1 -i]
+
+        const entry : DonationLogEntry = {
+            amount: donation.amount,
+            character: donation.character,
+            gains: [],
+        };
+        donationLogEntries.push(entry);
+
+        const gains : {[key: string]: number} = {};
+        const partyMembers = getPartyMembersNames(donation.character);
+        const partySize = getPartySize(getParty(donation.character));
+        const groupNumber = getCharacterMetadata(donation.character).numbers || 1;
+
+        gains[donation.character] = donation.amount;
+        for (let partyMember of partyMembers) {
+            gains[partyMember] = gains[partyMember] || 0;
+            gains[partyMember] += donation.amount / partySize / groupNumber;
+        }
+        gains['Monster_Falin'] = gains['Monster_Falin'] || 0;
+        gains['Monster_Falin'] += donation.amount;
+
+        for (let character of Object.keys(gains)) {
+            const currentWeight = getWeight(character);
+            const previousWeight = currentWeight - gains[character];
+            entry.gains.push({
+                characterName: character,
+                after: currentWeight,
+                before: previousWeight,
+            });
+            previousWeights[character] = previousWeight;
+        }
+
+    }
+    return donationLogEntries;
 }

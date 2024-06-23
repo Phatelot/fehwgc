@@ -10,15 +10,17 @@
     import { type ChartViewModel, toViewModel } from './lib/view_model';
     import CharacterPopup from './lib/character_popup.svelte';
     import AllCharacters from './lib/all_characters.svelte';
+    import ReverseDonationLog from './lib/reverse_donation_log.svelte';
 
     async function fetchData(): Promise<ChartViewModel> {
       let response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vShRwjPHvlfF_8R6YEjJ4LvbvJ8BOCn5r3HikzbXJhrJYklPAr19Ibbpmcb09wCg9Gr5_OhfX_F-1LS/pub?gid=0&single=true&output=tsv");
-      const characterStats = toCharacterStats(parseTsvData(await response.text()));
+      const rawDonations = parseTsvData(await response.text());
+      const characterStats = toCharacterStats(rawDonations);
       const partyStats = toPartyStats(characterStats);
-      return toViewModel(characterStats, partyStats);
+      return toViewModel(characterStats, partyStats, rawDonations);
     }
 
-    $: page = 'CHARACTER_CHART';
+    $: page = 'REVERSE_DONATION_LOG';
     let selectedCharacterName: string | null;
     $: selectedCharacterName = null;
 
@@ -89,6 +91,7 @@
           <tspan x="20%" dy="5%" class="menu" on:click={() => (groupCharacters = !groupCharacters)}>Group unnamed characters: {groupCharacters ? 'ON' : 'OFF'}</tspan>
           <tspan x="20%" dy="10%" class="menu" on:click={() => setPage('PARTY_CHART')}>-> Party chart</tspan>
           <tspan x="20%" dy="10%" class="menu" on:click={() => setPage('CHARACTER_STATS')}>-> Character stats</tspan>
+          <tspan x="20%" dy="10%" class="menu" on:click={() => setPage('REVERSE_DONATION_LOG')}>-> Donation log</tspan>
         </text>
         {:else if page === 'CHARACTER_CHART'}
           <CharacterChart viewModel="{viewModel}" groupCharacters={groupCharacters} displayPromoText={!displayImmobilityThresholds} on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
@@ -96,6 +99,8 @@
           <PartyChart viewModel="{viewModel}" />
         {:else if page === 'CHARACTER_STATS'}
           <AllCharacters viewModel="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
+        {:else if page === 'REVERSE_DONATION_LOG'}
+          <ReverseDonationLog viewModel="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
         {/if}
 
 

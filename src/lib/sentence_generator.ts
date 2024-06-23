@@ -70,7 +70,7 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 		sentences.push(`Monster Falin still hasn't gained any weight, and weighs ${formatWeight(charViewModel.weight)}lbs.`)
 	} else {
 		sentences.push(
-			`She has gained ${formatWeight(charViewModel.weight - charViewModel.baseWeight)}lbs, and now weighs ${formatWeight(charViewModel.weight)}lbs.`,
+			`Monster Falin has gained ${formatWeight(charViewModel.weight - charViewModel.baseWeight)}lbs, and now weighs ${formatWeight(charViewModel.weight)}lbs.`,
 		)
 	}
 	sentences.push(

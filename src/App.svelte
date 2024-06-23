@@ -7,7 +7,7 @@
 
     import { parseTsvData } from './lib/data_parser';
     import { toCharacterStats, toPartyStats } from './lib/stats';
-    import { type ChartViewModel, toViewModel } from './lib/view_model';
+    import { type ChartViewModel, toViewModel, viewPortHeight, viewPortWidth } from './lib/view_model';
     import CharacterPopup from './lib/character_popup.svelte';
     import AllCharacters from './lib/all_characters.svelte';
     import ReverseDonationLog from './lib/reverse_donation_log.svelte';
@@ -61,11 +61,9 @@
   </script>
 
   <main>
-    {#await fetchData()}
-      <p>loading data...</p>
-    {:then viewModel}
 
-      <svg viewBox="0 0 {viewModel.viewPortWidth} {viewModel.viewPortHeight}" xmlns="http://www.w3.org/2000/svg" class="chart">
+
+      <svg viewBox="0 0 {viewPortWidth} {viewPortHeight}" xmlns="http://www.w3.org/2000/svg" class="chart">
         <defs>
           <linearGradient id="orangeGradient" x1="0" x2="0" y1="1" y2="0">
             <stop offset="0%" stop-color="#8b4b22" />
@@ -102,6 +100,26 @@
 
         </defs>
 
+        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" />
+        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" transform='scale(-1, 1)' transform-origin="center"/>
+        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" transform='scale(1, -1)' transform-origin="center"/>
+        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" transform='scale(-1, -1)' transform-origin="center"/>
+        <rect x="{`${8 * viewPortHeight / viewPortWidth - 0.2}%`}" y="0" height="1.4%" width="{`${100 - 2 * 8 * viewPortHeight / viewPortWidth + 0.4}%`}" fill="#ae2f29" />
+        <rect x="{`${8 * viewPortHeight / viewPortWidth - 0.2}%`}" y="1.7%" height="0.75%" width="{`${100 - 2 * 8 * viewPortHeight / viewPortWidth + 0.4}%`}" fill="#ae2f29" />
+
+        <rect x="0%" y="98.6%" height="1.5%" width="100%" fill="#ae2f29" />
+        <rect x="{`${8 * viewPortHeight / viewPortWidth - 0.2}%`}" y="97.55%" height="0.75%" width="{`${100 - 2 * 8 * viewPortHeight / viewPortWidth + 0.4}%`}" fill="#ae2f29" />
+
+        <rect x="0%" y="7.8%" height="84.4%" width="0.65%" fill="#ae2f29" />
+        <rect x="0.8%" y="7.8%" height="84.4%" width="0.4%" fill="#ae2f29" />
+
+        <rect x="99.35%" y="7.8%" height="84.4%" width="0.65%" fill="#ae2f29" />
+        <rect x="98.8%" y="7.8%" height="84.4%" width="0.4%" fill="#ae2f29" />
+
+      {#await fetchData()}
+        <text x="50%" y="45%" class="menu" text-anchor="middle">Loading data...</text>
+      {:then viewModel}
+
         {#if page !== 'MENU'}
           <rect x="4%" y="3.5%" height="4.6%" width="6%" rx="1px" ry="1px" stroke="#ae2f29" stroke-width="0.4" stroke-linecap="round" fill="#f9edd5"></rect>
           <text x="4.2%" y="7%" class="menu" on:click={() => setPage('MENU')} >Menu</text>
@@ -133,32 +151,18 @@
         {/if}
 
 
-        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" />
-        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" transform='scale(-1, 1)' transform-origin="center"/>
-        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" transform='scale(1, -1)' transform-origin="center"/>
-        <image x="0%" y="0%" height="8%" xlink:href="{cornerSvg}" transform='scale(-1, -1)' transform-origin="center"/>
-        <rect x="{`${8 * viewModel.viewPortHeight / viewModel.viewPortWidth - 0.2}%`}" y="0" height="1.4%" width="{`${100 - 2 * 8 * viewModel.viewPortHeight / viewModel.viewPortWidth + 0.4}%`}" fill="#ae2f29" />
-        <rect x="{`${8 * viewModel.viewPortHeight / viewModel.viewPortWidth - 0.2}%`}" y="1.7%" height="0.75%" width="{`${100 - 2 * 8 * viewModel.viewPortHeight / viewModel.viewPortWidth + 0.4}%`}" fill="#ae2f29" />
 
-        <rect x="0%" y="98.6%" height="1.5%" width="100%" fill="#ae2f29" />
-        <rect x="{`${8 * viewModel.viewPortHeight / viewModel.viewPortWidth - 0.2}%`}" y="97.55%" height="0.75%" width="{`${100 - 2 * 8 * viewModel.viewPortHeight / viewModel.viewPortWidth + 0.4}%`}" fill="#ae2f29" />
-
-        <rect x="0%" y="7.8%" height="84.4%" width="0.65%" fill="#ae2f29" />
-        <rect x="0.8%" y="7.8%" height="84.4%" width="0.4%" fill="#ae2f29" />
-
-        <rect x="99.35%" y="7.8%" height="84.4%" width="0.65%" fill="#ae2f29" />
-        <rect x="98.8%" y="7.8%" height="84.4%" width="0.4%" fill="#ae2f29" />
 
         {#if !!selectedCharacterName}
           <CharacterPopup viewModel="{viewModel}" characterName="{selectedCharacterName}" on:close={() => selectedCharacterName = null}/>
         {/if}
-
+        {:catch error}
+        <text x="50%" y="45%" class="menu" text-anchor="middle">Error: {error}</text>
+        {/await}
 
       </svg>
 
-    {:catch error}
-      <p>error: {error}</p>
-    {/await}
+
   </main>
 
 <style>

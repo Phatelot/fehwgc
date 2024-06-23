@@ -37,8 +37,8 @@ export function getMonsterFalinViewModel(viewModel: ChartViewModel): CharacterVi
     return viewModel.characters.find(c => c.name === 'Monster_Falin') as CharacterViewModel & {gender: 'YES'};
 }
 
-const viewPortHeight = 100;
-const viewPortWidth = 220;
+export const viewPortHeight = 100;
+export const viewPortWidth = 220;
 
 export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[], rawDonations: RawDonation[]): ChartViewModel {
     const characters = toCharactersViewModel(stats);

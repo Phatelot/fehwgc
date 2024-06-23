@@ -1,4 +1,4 @@
-import { biggerThanTheXSmallestCombined, toSortedNonGroupWeights } from "./gini";
+import { biggerThanTheXSmallestCombined, gini, toSortedNonGroupWeights } from "./gini";
 import { getPartyMetadata } from "./party_metadata";
 import type { CharacterViewModel, ChartViewModel } from "./view_model";
 import { formatWeight, formatBMI, toImperialHeight, toBMICategory } from "./weight_utils";
@@ -123,6 +123,25 @@ function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel &
 
 	return sentences;
 }
+
+export function generateSentencesForGlobal(viewModel : ChartViewModel) : string[] {
+	const baseTotalWeight = viewModel.characters.map(c => c.baseWeight).reduce((a, b) => a + b, 0);
+	const sortedNonGroupWeights = toSortedNonGroupWeights(viewModel.characters);
+	const totalDonationAmount = viewModel.rawDonations.map(d => d.amount).reduce((a, b) => a + b, 0);
+	const totalBMI = viewModel.characters.map(c => c.BMI * (c.numbers || 1)).reduce((a, b) => a + b, 0);
+	const averageBMI = totalBMI / sortedNonGroupWeights.length;
+	const averageWeight = viewModel.totalWeight / sortedNonGroupWeights.length;
+
+	const sentences : string[] = [
+		`The total group weight is ${formatWeight(viewModel.totalWeight)}lbs, up from ${formatWeight(baseTotalWeight)}lbs.`,
+		`The average weight is ${formatWeight(averageWeight)}lbs, and the average BMI is ${formatBMI(averageBMI)} (${toBMICategory(averageBMI)}).`,
+		`The gini index for weights is ${Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(gini(sortedNonGroupWeights))} (0 is perfect equality).`,
+		`There has been ${viewModel.rawDonations.length} donations, for a total of $${totalDonationAmount}.`,
+	];
+
+	return sentences;
+}
+
 
 function isFattestCharacter(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : boolean {
 	const maxWeight = Math.max(...viewModel.characters.map(c => c.weight));

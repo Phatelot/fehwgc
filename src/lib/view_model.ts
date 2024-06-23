@@ -31,6 +31,7 @@ export type ChartViewModel = {
     viewPortWidth: number;
     totalWeight: number;
     donationLog: DonationLogEntry[];
+    rawDonations: RawDonation[];
 };
 
 export function getMonsterFalinViewModel(viewModel: ChartViewModel): CharacterViewModel & {gender: 'YES'} {
@@ -58,6 +59,7 @@ export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[], r
         viewPortWidth,
         totalWeight,
         donationLog: extractLastDonationLogEntries(rawDonations, stats),
+        rawDonations,
     }
 }
 

@@ -17,6 +17,7 @@
       const rawDonations = parseTsvData(await response.text());
       const characterStats = toCharacterStats(rawDonations);
       const partyStats = toPartyStats(characterStats);
+      restoreStateFromLocalStorage();
       return toViewModel(characterStats, partyStats, rawDonations);
     }
 
@@ -29,10 +30,33 @@
 
     function setPage(newPage: string) {
       page = newPage;
+      saveStateToLocalStorage();
     }
 
     function selectCharacter(characterName: string) {
       selectedCharacterName = characterName;
+      saveStateToLocalStorage();
+    }
+
+    function saveStateToLocalStorage() {
+      localStorage.setItem("dmwgc", JSON.stringify({
+        displayImmobilityThresholds,
+        selectedCharacterName,
+        page,
+        groupCharacters,
+      }))
+    }
+
+    function restoreStateFromLocalStorage() {
+      const retrieved = localStorage.getItem("dmwgc");
+      if (!retrieved) {
+        return
+      }
+      const parsedRetrieved = JSON.parse(retrieved);
+      displayImmobilityThresholds = parsedRetrieved.displayImmobilityThresholds;
+      selectedCharacterName = parsedRetrieved.selectedCharacterName;
+      page = parsedRetrieved.page;
+      groupCharacters = parsedRetrieved.groupCharacters;
     }
   </script>
 
@@ -92,8 +116,8 @@
         <rect x="20%" y="58.5%" height="4.6%" width="22%" rx="1px" ry="1px" stroke="#ae2f29" stroke-width="0.4" stroke-linecap="round" fill="#f9edd5" on:click={() => setPage('REVERSE_DONATION_LOG')}></rect>
         <text x="20%" y="20%">
           <tspan x="22%" dy="0%" class="menu" on:click={() => setPage('CHARACTER_CHART')}>Character chart</tspan>
-          <tspan x="20%" dy="7%" class="menu" on:click={() => (displayImmobilityThresholds = !displayImmobilityThresholds)}>Immobility thresholds: {displayImmobilityThresholds ? 'ON' : 'OFF'}</tspan>
-          <tspan x="20%" dy="5%" class="menu" on:click={() => (groupCharacters = !groupCharacters)}>Group unnamed characters: {groupCharacters ? 'ON' : 'OFF'}</tspan>
+          <tspan x="20%" dy="7%" class="menu" on:click={() => {(displayImmobilityThresholds = !displayImmobilityThresholds); saveStateToLocalStorage()}}>Immobility thresholds: {displayImmobilityThresholds ? 'ON' : 'OFF'}</tspan>
+          <tspan x="20%" dy="5%" class="menu" on:click={() => {(groupCharacters = !groupCharacters); saveStateToLocalStorage()}}>Group unnamed characters: {groupCharacters ? 'ON' : 'OFF'}</tspan>
           <tspan x="22%" dy="10%" class="menu" on:click={() => setPage('PARTY_CHART')}>Party chart</tspan>
           <tspan x="22%" dy="10%" class="menu" on:click={() => setPage('CHARACTER_STATS')}>Character stats</tspan>
           <tspan x="22%" dy="10%" class="menu" on:click={() => setPage('REVERSE_DONATION_LOG')}>Donation log</tspan>

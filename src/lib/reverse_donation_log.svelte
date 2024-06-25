@@ -39,7 +39,7 @@
 	{/each}
 </text>
 
-<text  text-anchor="middle" x="50%" y="90%" class="not-so-small grey">
+<text  text-anchor="middle" x="50%" y="95%" class="not-so-small grey">
 	donations at the top are the most recent ones
 </text>
 

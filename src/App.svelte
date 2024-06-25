@@ -12,6 +12,7 @@
     import AllCharacters from './lib/all_characters.svelte';
     import ReverseDonationLog from './lib/reverse_donation_log.svelte';
     import GlobalStats from './lib/global_stats.svelte';
+    import BmiChart from './lib/bmi_chart.svelte';
 
     async function fetchData(): Promise<ChartViewModel> {
       let response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vShRwjPHvlfF_8R6YEjJ4LvbvJ8BOCn5r3HikzbXJhrJYklPAr19Ibbpmcb09wCg9Gr5_OhfX_F-1LS/pub?gid=0&single=true&output=tsv");
@@ -119,6 +120,7 @@
         <rect x="20%" y="48.5%" height="4.6%" width="22%" rx="1px" ry="1px" stroke="#ae2f29" stroke-width="0.4" stroke-linecap="round" fill="#f9edd5" on:click={() => setPage('CHARACTER_STATS')}></rect>
         <rect x="20%" y="58.5%" height="4.6%" width="22%" rx="1px" ry="1px" stroke="#ae2f29" stroke-width="0.4" stroke-linecap="round" fill="#f9edd5" on:click={() => setPage('REVERSE_DONATION_LOG')}></rect>
         <rect x="20%" y="68.5%" height="4.6%" width="22%" rx="1px" ry="1px" stroke="#ae2f29" stroke-width="0.4" stroke-linecap="round" fill="#f9edd5" on:click={() => setPage('GLOBAL_STATS')}></rect>
+        <rect x="20%" y="78.5%" height="4.6%" width="22%" rx="1px" ry="1px" stroke="#ae2f29" stroke-width="0.4" stroke-linecap="round" fill="#f9edd5" on:click={() => setPage('CHARACTER_BMI')}></rect>
         <text x="20%" y="20%">
           <tspan x="22%" dy="0%" class="menu" on:click={() => setPage('CHARACTER_CHART')}>Character chart</tspan>
           <tspan x="20%" dy="7%" class="menu" on:click={() => {(displayImmobilityThresholds = !displayImmobilityThresholds); saveStateToLocalStorage()}}>Immobility thresholds: {displayImmobilityThresholds ? 'ON' : 'OFF'}</tspan>
@@ -127,6 +129,7 @@
           <tspan x="22%" dy="10%" class="menu" on:click={() => setPage('CHARACTER_STATS')}>Character stats</tspan>
           <tspan x="22%" dy="10%" class="menu" on:click={() => setPage('REVERSE_DONATION_LOG')}>Donation log</tspan>
           <tspan x="22%" dy="10%" class="menu" on:click={() => setPage('GLOBAL_STATS')}>Global stats</tspan>
+          <tspan x="22%" dy="10%" class="menu" on:click={() => setPage('CHARACTER_BMI')}>BMI chart</tspan>
         </text>
         {:else if page === 'CHARACTER_CHART'}
           <CharacterChart viewModel="{viewModel}" groupCharacters={groupCharacters} displayPromoText={!displayImmobilityThresholds} on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
@@ -138,6 +141,8 @@
           <ReverseDonationLog viewModel="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
         {:else if page === 'GLOBAL_STATS'}
           <GlobalStats viewModel="{viewModel}" />
+        {:else if page === 'CHARACTER_BMI'}
+          <BmiChart viewModel="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterName)} />
         {/if}
 
         <image x="25%" y="3%" width="50%" xlink:href="{titleJpg}" />

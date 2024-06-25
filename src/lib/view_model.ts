@@ -26,6 +26,7 @@ export type ChartViewModel = {
     characters: CharacterViewModel[];
     femaleCharacters: FemaleCharacterViewModel[];
     femaleGroupCharacters: FemaleCharacterViewModel[];
+    femaleCharactersBMI: FemaleCharacterViewModel[];
     parties: PartyViewModel[];
     viewPortHeight: number;
     viewPortWidth: number;
@@ -48,12 +49,15 @@ export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[], r
     const femaleCharacters = toFemaleCharactersViewModel(characters);
     const femaleGroupCharacters = toCharacterGroupsViewModel(stats);
 
+    const femaleCharactersBMI = toFemaleCharactersBMIViewModel(stats);
+
     const parties = toPartyViewModel(partyStats);
 
     return {
         characters,
         femaleCharacters,
         femaleGroupCharacters,
+        femaleCharactersBMI,
         parties,
         viewPortHeight,
         viewPortWidth,
@@ -117,6 +121,35 @@ function toCharacterGroupsViewModel(stats: CharacterStats[]) : FemaleCharacterVi
             x: 2.5 + margin + 5 * margin * index,
             y,
             immobilityThresholdY,
+            picHeight: width * viewPortWidth / viewPortHeight,
+            barGradient: toBarGradient(metadata.party),
+        }
+    }).filter(c => c.gender === "WOMAN")
+    .map((c, index) => ({...c, x: 2.5 + margin + 5 * margin * index,})) as FemaleCharacterViewModel[];
+}
+
+function toFemaleCharactersBMIViewModel(stats: CharacterStats[]) : FemaleCharacterViewModel[] {
+    const highestBMI = Math.max(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.BMI));
+    const lowestBMI = Math.min(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.BMI));
+    const maxDisplayableBMI = 50 * lowestBMI;
+
+    const margin = 95 / (5 * getFemaleCharactersNumber() + 1);
+
+    return stats.sort((a, b) => a.BMI - b.BMI).map((stat, index) => {
+        const metadata = getCharacterMetadata(stat.name);
+        const width = 4 * margin;
+        const height = stat.BMI / Math.min(maxDisplayableBMI, highestBMI) * 75;
+
+        const y = 83 - height;
+
+        return {
+            ...stat,
+            ...metadata,
+            height,
+            width,
+            x: 2.5 + margin + 5 * margin * index,
+            y,
+            immobilityThresholdY: 0, // does not make sense, will maybe handle later
             picHeight: width * viewPortWidth / viewPortHeight,
             barGradient: toBarGradient(metadata.party),
         }

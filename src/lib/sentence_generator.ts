@@ -1,3 +1,4 @@
+import { getPartySize } from "./character_metadata";
 import { biggerThanTheXSmallestCombined, gini, toSortedNonGroupWeights } from "./gini";
 import { getPartyMetadata } from "./party_metadata";
 import type { CharacterViewModel, ChartViewModel } from "./view_model";
@@ -60,6 +61,8 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		sentences.push(`${pronoun[0]}'s immobile.`)
 	}
 
+	sentences.push(`Donating $1 for ${pronoun[1].toLowerCase()} will make ${pronoun[1].toLowerCase()} put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(getLbsPerDollar(charViewModel))}lbs.`)
+
 	return sentences;
 }
 
@@ -98,6 +101,8 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 		sentences.push(`She's immobile.`)
 	}
 
+	sentences.push(`Donating $1 for her will make her put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(1 + getLbsPerDollar(charViewModel))}lbs.`)
+
 	return sentences;
 }
 
@@ -120,6 +125,8 @@ function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel &
 	if (isImmobile(charViewModel)) {
 		sentences.push("They're immobile.")
 	}
+
+	sentences.push(`Donating $1 for them will make each of them put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(getLbsPerDollar(charViewModel))}lbs.`)
 
 	return sentences;
 }
@@ -151,6 +158,12 @@ function isFattestCharacter(charViewModel : CharacterViewModel, viewModel : Char
 function isFattestCharacterOfParty(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : boolean {
 	const maxWeight = Math.max(...viewModel.characters.filter(c => c.party === charViewModel.party).map(c => c.weight));
 	return charViewModel.weight >= maxWeight;
+}
+
+function getLbsPerDollar(charViewModel : CharacterViewModel) : number {
+	const partySize = getPartySize(charViewModel.party);
+	const base = 1 + 1/partySize;
+	return base / (charViewModel.numbers || 1);
 }
 
 function isImmobile(charViewModel : CharacterViewModel) : boolean {

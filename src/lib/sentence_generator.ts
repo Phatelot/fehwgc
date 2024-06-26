@@ -2,7 +2,7 @@ import { getPartySize } from "./character_metadata";
 import { biggerThanTheXSmallestCombined, gini, toSortedNonGroupWeights } from "./gini";
 import { getPartyMetadata } from "./party_metadata";
 import type { CharacterViewModel, ChartViewModel } from "./view_model";
-import { formatWeight, formatBMI, toImperialHeight, toBMICategory } from "./weight_utils";
+import { formatWeight, formatBMI, toImperialHeight, toBMICategory, weightInLbsForBMI } from "./weight_utils";
 
 export function generateSentencesFor(characterName: string, viewModel: ChartViewModel) : string[] {
 	const charViewModel = viewModel.characters.find(c => c.name === characterName) as CharacterViewModel;
@@ -29,6 +29,7 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 	sentences.push(
 		`${pronoun[0]}'s ${toImperialHeight(charViewModel.heightInMeters)} tall.`,
 		`That gives ${pronoun[1].toLowerCase()} a BMI of ${formatBMI(charViewModel.BMI)}, so ${pronoun[0].toLowerCase()} is ${toBMICategory(charViewModel.BMI)}.`,
+		`If ${pronoun[0].toLowerCase()} was 5'5", with constant BMI, ${pronouns[0].toLowerCase()}'d weigh ${formatWeight(weightInLbsForBMI(1.651, charViewModel.BMI))}lbs.`,
 	);
 
 	if (isFattestCharacter(charViewModel, viewModel)) {

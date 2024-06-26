@@ -94,8 +94,9 @@ export function extractLastDonationLogEntries(donations: RawDonation[], characte
         const partySize = getPartySize(getParty(donation.character));
         const groupNumber = getCharacterMetadata(donation.character).numbers || 1;
 
-        gains[donation.character] = donation.amount;
+        gains[donation.character] = donation.amount / groupNumber;
         for (let partyMember of partyMembers) {
+            const groupNumber = getCharacterMetadata(partyMember).numbers || 1;
             gains[partyMember] = gains[partyMember] || 0;
             gains[partyMember] += donation.amount / partySize / groupNumber;
         }

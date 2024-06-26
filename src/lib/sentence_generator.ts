@@ -63,6 +63,12 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 
 	sentences.push(`Donating $1 for ${pronoun[1].toLowerCase()} will make ${pronoun[1].toLowerCase()} put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(getLbsPerDollar(charViewModel))}lbs.`)
 
+	if (!isImmobile(charViewModel)) {
+		const diffToImmobility = charViewModel.immobilityThreshold - charViewModel.weight;
+		const dollarsToImmobility = diffToImmobility / getLbsPerDollar(charViewModel);
+		sentences.push(`Donate ${pronoun[1].toLowerCase()} $${new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(Math.ceil(dollarsToImmobility))} to make ${pronoun[1].toLowerCase()} gain ${formatWeight(diffToImmobility)}lbs and get immobile.`)
+	}
+
 	return sentences;
 }
 

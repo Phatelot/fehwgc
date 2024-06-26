@@ -29,7 +29,7 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 	sentences.push(
 		`${pronoun[0]}'s ${toImperialHeight(charViewModel.heightInMeters)} tall.`,
 		`That gives ${pronoun[1].toLowerCase()} a BMI of ${formatBMI(charViewModel.BMI)}, so ${pronoun[0].toLowerCase()} is ${toBMICategory(charViewModel.BMI)}.`,
-		`If ${pronoun[0].toLowerCase()} was 5'5", with constant BMI, ${pronouns[0].toLowerCase()}'d weigh ${formatWeight(weightInLbsForBMI(1.651, charViewModel.BMI))}lbs.`,
+		`If ${pronoun[0].toLowerCase()} was 5'5", with constant BMI, ${pronoun[0].toLowerCase()}'d weigh ${formatWeight(weightInLbsForBMI(1.651, charViewModel.BMI))}lbs.`,
 	);
 
 	if (isFattestCharacter(charViewModel, viewModel)) {

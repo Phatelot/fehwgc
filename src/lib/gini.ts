@@ -4,6 +4,10 @@ export function toSortedNonGroupWeights(viewModel: CharacterViewModel[]): number
 	return viewModel.flatMap(c => Array(c.numbers || 1).fill(c.weight)).sort((a, b) => a - b);
 }
 
+export function toSortedNonGroupBMIs(viewModel: CharacterViewModel[]): number[] {
+	return viewModel.flatMap(c => Array(c.numbers || 1).fill(c.BMI)).sort((a, b) => a - b);
+}
+
 export function biggerThanTheXSmallestCombined(sortedValues: number[], value: number) : number {
 	let sum = 0;
 	let i = 0

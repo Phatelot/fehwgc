@@ -1,7 +1,7 @@
 import { getParty, getPartySize } from "./character_metadata";
-import { biggerThanTheXSmallestCombined, gini, toSortedNonGroupWeights } from "./gini";
+import { biggerThanTheXSmallestCombined, gini, toSortedNonGroupWeights, toSortedNonGroupBMIs } from "./gini";
 import { getPartyMetadata } from "./party_metadata";
-import type { CharacterViewModel, ChartViewModel } from "./view_model";
+import { getMonsterFalinViewModel, type CharacterViewModel, type ChartViewModel } from "./view_model";
 import { formatWeight, formatBMI, toImperialHeight, toBMICategory, weightInLbsForBMI } from "./weight_utils";
 
 export function generateSentencesFor(characterName: string, viewModel: ChartViewModel) : string[] {
@@ -145,16 +145,30 @@ function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel &
 }
 
 export function generateSentencesForGlobal(viewModel : ChartViewModel) : string[] {
+	const falin = getMonsterFalinViewModel(viewModel);
+
 	const baseTotalWeight = viewModel.characters.map(c => c.baseWeight).reduce((a, b) => a + b, 0);
+	const baseMonsterFalinWeight = falin.baseWeight;
 	const sortedNonGroupWeights = toSortedNonGroupWeights(viewModel.characters);
 	const totalDonationAmount = viewModel.rawDonations.map(d => d.amount).reduce((a, b) => a + b, 0);
 	const totalBMI = viewModel.characters.map(c => c.BMI * (c.numbers || 1)).reduce((a, b) => a + b, 0);
 	const averageBMI = totalBMI / sortedNonGroupWeights.length;
 	const averageWeight = viewModel.totalWeight / sortedNonGroupWeights.length;
+	const averageWeightWithoutFalin = (viewModel.totalWeight - falin.baseWeight) / (sortedNonGroupWeights.length - 1)
+	const averageBMIWithoutFalin = (totalBMI - falin.BMI) / (sortedNonGroupWeights.length - 1)
+	const medianWeight = getMedian(sortedNonGroupWeights);
+	const medianBMI = getMedian(toSortedNonGroupBMIs(viewModel.characters));
 
 	const sentences : string[] = [
+		`There are ${sortedNonGroupWeights.length} characters.`,
+		'\n',
 		`The total group weight is ${formatWeight(viewModel.totalWeight)}lbs, up from ${formatWeight(baseTotalWeight)}lbs.`,
+		`Without Monster Falin, it's ${formatWeight(viewModel.totalWeight - falin.weight)}lbs, up from ${formatWeight(baseTotalWeight - baseMonsterFalinWeight)}lbs.`,
+		'\n',
 		`The average weight is ${formatWeight(averageWeight)}lbs, and the average BMI is ${formatBMI(averageBMI)} (${toBMICategory(averageBMI)}).`,
+		`Without Monster Falin, it's ${formatWeight(averageWeightWithoutFalin)}lbs, and a BMI of ${formatBMI(averageBMIWithoutFalin)} (${toBMICategory(averageBMIWithoutFalin)}).`,
+		`The median weight is ${formatWeight(medianWeight)}lbs, and the median BMI is ${formatBMI(medianBMI)} (${toBMICategory(medianBMI)}).`,
+		'\n',
 		`The gini index for weights is ${Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(gini(sortedNonGroupWeights))} (0 is perfect equality).`,
 		`There has been ${viewModel.rawDonations.length} donations, for a total of $${totalDonationAmount}.`,
 	];
@@ -204,4 +218,11 @@ function getNeededDonationToOvertakeWeight(charViewModel : CharacterViewModel, n
 	} else {
 		return Math.ceil((nextCharViewModel.weight - charViewModel.weight) / getLbsPerDollar(charViewModel))
 	}
+}
+
+function getMedian(values : number[]) : number {
+	if (values.length % 2 === 1) {
+		return values[Math.floor(values.length/2)];
+	}
+	return Math.round((values[values.length/2-1] + values[values.length/2]) / 2)
 }

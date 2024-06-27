@@ -50,6 +50,14 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		sentences.push(`${pronoun[0]}'s heavier than the ${biggerThan} smallest characters combined.`);
 	}
 
+	const monsterFalinWeight = getMonsterFalinViewModel(viewModel).weight;
+	const percentageOfTotalWeight = charViewModel.weight / viewModel.totalWeight * 100;
+	const percentageOfTotalWeightWithoutMonsterFalin = charViewModel.weight / (viewModel.totalWeight - monsterFalinWeight) * 100;
+	sentences.push(
+		`She accounts for ${formatBMI(percentageOfTotalWeight)}% of the total weight.`,
+		`${formatBMI(percentageOfTotalWeightWithoutMonsterFalin)}% without monster Falin.`,
+	)
+
 	if (hasReceivedDonation(charViewModel)) {
 		const totalGain = charViewModel.weight - charViewModel.baseWeight;
 		const percentage = Math.round(charViewModel.totalDonatedAmount / totalGain * 100);
@@ -123,7 +131,10 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 		sentences.push(`She's immobile.`)
 	}
 
-	sentences.push(`Donating $1 for her will make her put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(1 + getLbsPerDollar(charViewModel))}lbs.`)
+	sentences.push(
+		`She accounts for ${formatBMI(charViewModel.weight / viewModel.totalWeight * 100)}% of the total weight.`,
+		`Donating $1 for her will make her put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(1 + getLbsPerDollar(charViewModel))}lbs.`
+	)
 
 	return sentences;
 }

@@ -70,7 +70,7 @@ export function toViewModel(stats: CharacterStats[], partyStats: PartyStats[], r
 function toCharactersViewModel(stats: CharacterStats[]) : CharacterViewModel[] {
     const highestWeight = Math.max(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.weight));
     const lowestWeight = Math.min(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.weight));
-    const maxDisplayableWeight = 50 * lowestWeight;
+    const maxDisplayableWeight = 40 * lowestWeight;
 
     const margin = 95 / (5 * getFemaleCharactersNumber() + 1);
 
@@ -100,7 +100,7 @@ function toCharactersViewModel(stats: CharacterStats[]) : CharacterViewModel[] {
 function toCharacterGroupsViewModel(stats: CharacterStats[]) : FemaleCharacterViewModel[] {
     const highestWeight = Math.max(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.groupWeight));
     const lowestWeight = Math.min(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.groupWeight));
-    const maxDisplayableWeight = 50 * lowestWeight;
+    const maxDisplayableWeight = 40 * lowestWeight;
 
     const margin = 95 / (5 * getFemaleCharactersNumber() + 1);
 
@@ -131,7 +131,7 @@ function toCharacterGroupsViewModel(stats: CharacterStats[]) : FemaleCharacterVi
 function toFemaleCharactersBMIViewModel(stats: CharacterStats[]) : FemaleCharacterViewModel[] {
     const highestBMI = Math.max(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.BMI));
     const lowestBMI = Math.min(...stats.filter(s => getCharacterMetadata(s.name).gender === "WOMAN").map(stat => stat.BMI));
-    const maxDisplayableBMI = 50 * lowestBMI;
+    const maxDisplayableBMI = 40 * lowestBMI;
 
     const margin = 95 / (5 * getFemaleCharactersNumber() + 1);
 
@@ -168,7 +168,7 @@ function toPartyViewModel(stats : PartyStats[]) : PartyViewModel[] {
 
     const highestWeight = Math.max(...stats.map(stat => stat.weight));
     const lowestWeight = Math.min(...stats.map(stat => stat.weight));
-    const maxDisplayableWeight = 50 * lowestWeight;
+    const maxDisplayableWeight = 40 * lowestWeight;
 
     const width = 4 * margin;
 

@@ -1,4 +1,4 @@
-import { getPartySize } from "./character_metadata";
+import { getParty, getPartySize } from "./character_metadata";
 import { biggerThanTheXSmallestCombined, gini, toSortedNonGroupWeights } from "./gini";
 import { getPartyMetadata } from "./party_metadata";
 import type { CharacterViewModel, ChartViewModel } from "./view_model";
@@ -68,6 +68,12 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		const diffToImmobility = charViewModel.immobilityThreshold - charViewModel.weight;
 		const dollarsToImmobility = diffToImmobility / getLbsPerDollar(charViewModel);
 		sentences.push(`Donate ${pronoun[1].toLowerCase()} $${new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(Math.ceil(dollarsToImmobility))} to make ${pronoun[1].toLowerCase()} gain ${formatWeight(diffToImmobility)}lbs and get immobile.`)
+	}
+
+	const nextFatterFemaleCharacterByWeight = getNextFatterFemaleCharacterByWeight(charViewModel, viewModel);
+	if (nextFatterFemaleCharacterByWeight) {
+		const neededDonationToOvertakeWeight = getNeededDonationToOvertakeWeight(charViewModel, nextFatterFemaleCharacterByWeight);
+		sentences.push(`Donate ${pronoun[1].toLowerCase()} $${new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(neededDonationToOvertakeWeight)} to make ${pronoun[1].toLowerCase()} outweigh ${nextFatterFemaleCharacterByWeight.displayName || nextFatterFemaleCharacterByWeight.name}.`)
 	}
 
 	return sentences;
@@ -179,4 +185,23 @@ function isImmobile(charViewModel : CharacterViewModel) : boolean {
 
 function hasReceivedDonation(charViewModel : CharacterViewModel) : boolean {
 	return charViewModel.totalDonatedAmount > 0;
+}
+
+function getNextFatterFemaleCharacterByWeight(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : CharacterViewModel | null {
+	for (let i = 0; i < viewModel.femaleCharacters.length - 1; i++) {
+		if (viewModel.femaleCharacters[i].name === charViewModel.name) {
+			return viewModel.femaleCharacters[i+1];
+		}
+	}
+	return null;
+}
+
+function getNeededDonationToOvertakeWeight(charViewModel : CharacterViewModel, nextCharViewModel : CharacterViewModel) : number {
+	const charViewModelParty = getParty(charViewModel.name);
+	const nextCharViewModelParty = getParty(nextCharViewModel.name);
+	if (charViewModelParty === nextCharViewModelParty) {
+		return Math.ceil(nextCharViewModel.weight - charViewModel.weight);
+	} else {
+		return Math.ceil((nextCharViewModel.weight - charViewModel.weight) / getLbsPerDollar(charViewModel))
+	}
 }

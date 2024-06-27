@@ -58,13 +58,16 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 		sentences.push(`${pronoun[0]} hasn't received any donation yet.`)
 	}
 
-	if (isImmobile(charViewModel)) {
+	const itr = immobilityThresholdReached(charViewModel)
+	if (itr > 1) {
+		sentences.push(`${pronoun[0]}'s immobile, ${itr} times over.`)
+	} else if (itr) {
 		sentences.push(`${pronoun[0]}'s immobile.`)
 	}
 
 	sentences.push(`Donating $1 for ${pronoun[1].toLowerCase()} will make ${pronoun[1].toLowerCase()} put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(getLbsPerDollar(charViewModel))}lbs.`)
 
-	if (!isImmobile(charViewModel)) {
+	if (!immobilityThresholdReached(charViewModel)) {
 		const diffToImmobility = charViewModel.immobilityThreshold - charViewModel.weight;
 		const dollarsToImmobility = diffToImmobility / getLbsPerDollar(charViewModel);
 		sentences.push(`Donate ${pronoun[1].toLowerCase()} $${new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(Math.ceil(dollarsToImmobility))} to make ${pronoun[1].toLowerCase()} gain ${formatWeight(diffToImmobility)}lbs and get immobile.`)
@@ -72,6 +75,12 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 
 	const nextFatterFemaleCharacterByWeight = getNextFatterFemaleCharacterByWeight(charViewModel, viewModel);
 	if (nextFatterFemaleCharacterByWeight) {
+		const neededDonationToOvertakeWeight = getNeededDonationToOvertakeWeight(charViewModel, nextFatterFemaleCharacterByWeight);
+		sentences.push(`Donate ${pronoun[1].toLowerCase()} $${new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(neededDonationToOvertakeWeight)} to make ${pronoun[1].toLowerCase()} outweigh ${nextFatterFemaleCharacterByWeight.displayName || nextFatterFemaleCharacterByWeight.name}.`)
+	} else if (charViewModel.party === "DUNGEON") {
+		sentences.push(`${pronoun[0].toLowerCase()} can't outgrow Monster Falin.`)
+	} else {
+		const nextFatterFemaleCharacterByWeight = getMonsterFalinViewModel(viewModel);
 		const neededDonationToOvertakeWeight = getNeededDonationToOvertakeWeight(charViewModel, nextFatterFemaleCharacterByWeight);
 		sentences.push(`Donate ${pronoun[1].toLowerCase()} $${new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(neededDonationToOvertakeWeight)} to make ${pronoun[1].toLowerCase()} outweigh ${nextFatterFemaleCharacterByWeight.displayName || nextFatterFemaleCharacterByWeight.name}.`)
 	}
@@ -110,7 +119,7 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 		sentences.push("She hasn't received any donation yet.")
 	}
 
-	if (isImmobile(charViewModel)) {
+	if (immobilityThresholdReached(charViewModel)) {
 		sentences.push(`She's immobile.`)
 	}
 
@@ -135,7 +144,7 @@ function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel &
 		`That gives them a BMI of ${formatBMI(charViewModel.BMI)}, so they are ${toBMICategory(charViewModel.BMI)}.`,
 	);
 
-	if (isImmobile(charViewModel)) {
+	if (immobilityThresholdReached(charViewModel)) {
 		sentences.push("They're immobile.")
 	}
 
@@ -178,7 +187,7 @@ export function generateSentencesForGlobal(viewModel : ChartViewModel) : string[
 
 
 function isFattestCharacter(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : boolean {
-	const maxWeight = Math.max(...viewModel.characters.map(c => c.weight));
+	const maxWeight = Math.max(...viewModel.characters.filter(c => c.name !== "Monster_Falin").map(c => c.weight));
 	return charViewModel.weight >= maxWeight;
 }
 
@@ -193,8 +202,8 @@ function getLbsPerDollar(charViewModel : CharacterViewModel) : number {
 	return base / (charViewModel.numbers || 1);
 }
 
-function isImmobile(charViewModel : CharacterViewModel) : boolean {
-	return charViewModel.BMI >= charViewModel.immobilityBMI;
+function immobilityThresholdReached(charViewModel : CharacterViewModel) : number {
+	return Math.floor(charViewModel.BMI / charViewModel.immobilityBMI);
 }
 
 function hasReceivedDonation(charViewModel : CharacterViewModel) : boolean {

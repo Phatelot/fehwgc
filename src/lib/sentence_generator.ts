@@ -59,9 +59,11 @@ function generateSentencesForNonGroupCharacter(charViewModel : CharacterViewMode
 	)
 
 	if (hasReceivedDonation(charViewModel)) {
-		const totalGain = charViewModel.weight - charViewModel.baseWeight;
-		const percentage = Math.round(charViewModel.totalDonatedAmount / totalGain * 100);
-		sentences.push(`${pronoun[0]} has received $${charViewModel.totalDonatedAmount} of donation (${percentage}% of ${pronoun[2].toLowerCase()} gain).`)
+		const weightWithoutSpillovers = charViewModel.baseWeight + charViewModel.totalDonatedAmount * getLbsPerDollar(charViewModel)
+		sentences.push(
+			`${pronoun[0]} has received $${charViewModel.totalDonatedAmount} of donation.`,
+			`Without party bonuses, ${pronoun[0].toLowerCase()}'d weigh ${formatWeight(weightWithoutSpillovers)}lbs.`
+		)
 	} else {
 		sentences.push(`${pronoun[0]} hasn't received any donation yet.`)
 	}

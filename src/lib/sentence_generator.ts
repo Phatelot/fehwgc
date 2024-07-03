@@ -109,7 +109,7 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 		)
 	}
 	sentences.push(
-		`She has a normalized BMI of ${formatBMI(charViewModel.BMI)}, and is ${toBMICategory(charViewModel.BMI)}.`,
+		`Her normalized BMI is ${formatBMI(charViewModel.BMI)}, so she is ${toBMICategory(charViewModel.BMI)}.`,
 	);
 
 	const sortedNonGroupWeights = toSortedNonGroupWeights(viewModel.characters);

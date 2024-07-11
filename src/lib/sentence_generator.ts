@@ -181,6 +181,12 @@ export function generateSentencesForGlobal(viewModel : ChartViewModel) : string[
 	const medianWeight = getMedian(sortedNonGroupWeights);
 	const medianBMI = getMedian(toSortedNonGroupBMIs(viewModel.characters));
 
+	const stillMobileFemaleCharacterNames = viewModel.characters
+		.filter(c => !immobilityThresholdReached(c))
+		.filter(c => c.gender === "WOMAN")
+		.filter(c => !c.numbers)
+		.map(c => c.displayName || c.name);
+
 	const sentences : string[] = [
 		`There are ${sortedNonGroupWeights.length} characters.`,
 		'\n',
@@ -193,11 +199,19 @@ export function generateSentencesForGlobal(viewModel : ChartViewModel) : string[
 		'\n',
 		`The gini index for weights is ${Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(gini(sortedNonGroupWeights))} (0 is perfect equality).`,
 		`There has been ${viewModel.rawDonations.length} donations, for a total of $${totalDonationAmount}.`,
+		'\n',
 	];
+
+	if (stillMobileFemaleCharacterNames.length === 0) {
+		sentences.push(`All named women are now immobile.`);
+	} else if (stillMobileFemaleCharacterNames.length === 1) {
+		sentences.push(`${stillMobileFemaleCharacterNames[0]} is the only named woman still mobile.`);
+	} else {
+		sentences.push(`The following named women are still mobile: ${stillMobileFemaleCharacterNames.join(', ')}.`);
+	}
 
 	return sentences;
 }
-
 
 function isFattestCharacter(charViewModel : CharacterViewModel, viewModel : ChartViewModel) : boolean {
 	const maxWeight = Math.max(...viewModel.characters.filter(c => c.name !== "Monster_Falin").map(c => c.weight));

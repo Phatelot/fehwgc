@@ -110,6 +110,7 @@ function generateSentencesForMonsterFalin(charViewModel : CharacterViewModel, vi
 	}
 	sentences.push(
 		`Her normalized BMI is ${formatBMI(charViewModel.BMI)}, so she is ${toBMICategory(charViewModel.BMI)}.`,
+		`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, charViewModel.BMI))}lbs.`,
 	);
 
 	const sortedNonGroupWeights = toSortedNonGroupWeights(viewModel.characters);
@@ -155,6 +156,7 @@ function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel &
 		`Their total weight is ${formatWeight(charViewModel.groupWeight)}lbs.`,
 		`They're on average ${toImperialHeight(charViewModel.heightInMeters)} tall.`,
 		`That gives them a BMI of ${formatBMI(charViewModel.BMI)}, so they are ${toBMICategory(charViewModel.BMI)}.`,
+		`If they were 5'5", with constant BMI, they'd each weigh ${formatWeight(weightInLbsForBMI(1.651, charViewModel.BMI))}lbs.`,
 	);
 
 	if (immobilityThresholdReached(charViewModel)) {
@@ -162,6 +164,12 @@ function generateSentencesForGroupCharacter(charViewModel : CharacterViewModel &
 	}
 
 	sentences.push(`Donating $1 for them will make each of them put on ${new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(getLbsPerDollar(charViewModel))}lbs.`)
+
+	if (!immobilityThresholdReached(charViewModel)) {
+		const diffToImmobility = charViewModel.immobilityThreshold - charViewModel.weight;
+		const dollarsToImmobility = diffToImmobility / getLbsPerDollar(charViewModel);
+		sentences.push(`Donate them $${new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(Math.ceil(dollarsToImmobility))} to make them each gain ${formatWeight(diffToImmobility)}lbs and get immobile.`)
+	}
 
 	return sentences;
 }

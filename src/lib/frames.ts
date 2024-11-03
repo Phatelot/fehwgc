@@ -1,0 +1,67 @@
+export function toFrameType(outfitSlug: string): string {
+	switch (outfitSlug) {
+		case 'ascendant':
+		case 'ascended':
+		case 'beloved_queen':
+		case 'dream':
+		case 'flame_ascendant':
+		case "scion":
+			return "Ascended-Dream"
+		case "":
+		case "base":
+			return "Base"
+		case "bride":
+		case "brides":
+		case "maid":
+		case "picnic":
+			return "Bride-Maid"
+		case "broken":
+			return "Broken-Frame"
+		case 'ballroom':
+		case 'dancer':
+		case 'wind_tribe':
+			return "Dancer-Ballroom"
+		case "harvest":
+			return "Fall-Harvest-Halloween"
+		case 'dark':
+		case 'fallen':
+		case 'night':
+		case 'beautiful_mage':
+		case 'embla':
+			return "Fallen-Night"
+		case "flame_tribe":
+		case "summer":
+		case "hot_spring":
+			return "Flame-Tribe-Hot-Spring"
+		case "ninja":
+		case "persona":
+		case "pirate":
+		case "thief":
+		case "marths_faithful":
+			return "Ninja-Pirate-Thief-Persona"
+		case 'armored':
+		case 'brave':
+		case 'rearmed':
+			return "Rearmed-Armored-Brave-"
+		case 'askr':
+		case 'resplendant':
+		case 'muspell':
+		case 'muspelt':
+		case 'legendary':
+			return "Resplendant"
+		case 'spring':
+			return "Spring"
+		case 'devoted':
+		case 'valentine':
+			return "Valentines-Devoted"
+		case "ice_tribe":
+		case "christmas":
+		case "winter":
+			return "Winter-Ice-Tribe"
+		case 'yukata':
+		case 'new_year':
+			return "Yukata-New-Year"
+	}
+
+	return 'Not-Special-Other-Frame';
+}

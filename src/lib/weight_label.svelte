@@ -1,25 +1,25 @@
 <script lang="ts">
   import { formatWeight } from "./weight_utils";
 
-	export let charViewModel: {
+	export let outfit: {
     x: number;
     y: number;
-    weight: number;
-    groupWeight: number;
+    width: number;
+    weightInLbs: number;
     height: number;
+    pictureHeight: number;
   };
   export let small: boolean;
-  export let groupCharacters: boolean;
 
-	$: formattedWeight = formatWeight(groupCharacters ? charViewModel.groupWeight : charViewModel.weight);
+	$: formattedWeight = formatWeight(outfit.weightInLbs);
 </script>
 
 {#if small}
-  <text x="{charViewModel.x}%" y="{charViewModel.y + charViewModel.height}%" transform="translate(0, 10)">
+  <text x="{outfit.x + outfit.width / 4}%" y="{outfit.y + outfit.height}%" transform="translate(0, -1)">
     <tspan class="{ formattedWeight.length > 3 ? 'very-small' : 'small'}">{formattedWeight}</tspan><tspan class="very-small">lbs</tspan>
   </text>
 {:else}
-  <text x="{charViewModel.x}%" y="{charViewModel.y + charViewModel.height}%" transform="translate(3, 25)">
+  <text x="{outfit.x}%" y="{outfit.y + outfit.height}%" transform="translate(3, 25)">
     <tspan class="{ formattedWeight.length > 3 ? 'not-so-big' : 'big'}">{formattedWeight}</tspan><tspan class="not-so-big">lbs</tspan>
   </text>
 {/if}

@@ -17,7 +17,7 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build -- --base=/dmwgc
+          npm run build -- --base=/fehwgc
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

@@ -1,0 +1,721 @@
+[
+    {
+        "name": "Female Alear",
+        "nameSlug": "female_alear",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "💎",
+                "secondaryShape": "🍎"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "💎",
+                "outfit": "Ascended",
+                "outfitSlug": "ascended"
+            }
+        ]
+    },
+    {
+        "name": "Lumera",
+        "nameSlug": "lumera",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "💎",
+                "secondaryShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "⌛",
+                "outfit": "Ascended",
+                "outfitSlug": "ascended",
+                "secondaryShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "💎",
+                "outfit": "Fallen",
+                "outfitSlug": "fallen",
+                "secondaryShape": "💎"
+            }
+        ]
+    },
+    {
+        "name": "Chloé",
+        "nameSlug": "chloe",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "⌛",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "⏳",
+                "outfit": "Spring",
+                "outfitSlug": "spring"
+            }
+        ]
+    },
+    {
+        "name": "Lapis",
+        "nameSlug": "lapis",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "⌛",
+                "outfit": "Bride",
+                "outfitSlug": "bride",
+                "secondaryShape": "🟣"
+            }
+        ]
+    },
+    {
+        "name": "Citrinne",
+        "nameSlug": "citrinne",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 600.0,
+                "mainShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Ivy",
+        "nameSlug": "ivy",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "⌛",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "⌛"
+            }
+        ]
+    },
+    {
+        "name": "Timerra",
+        "nameSlug": "timerra",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍎"
+            },
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍎",
+                "outfit": "Harvest",
+                "outfitSlug": "harvest",
+                "secondaryShape": "🍎"
+            }
+        ]
+    },
+    {
+        "name": "Merrin",
+        "nameSlug": "merrin",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🍎"
+            }
+        ]
+    },
+    {
+        "name": "Panette",
+        "nameSlug": "panette",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Zephia",
+        "nameSlug": "zephia",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 600.0,
+                "mainShape": "⌛",
+                "secondaryShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Nel",
+        "nameSlug": "nel",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🟣",
+                "outfit": "Bride",
+                "outfitSlug": "bride",
+                "secondaryShape": "🟣"
+            }
+        ]
+    },
+    {
+        "name": "Goldmary",
+        "nameSlug": "goldmary",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "💎",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "💎"
+            }
+        ]
+    },
+    {
+        "name": "Etie",
+        "nameSlug": "etie",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "🍎"
+            }
+        ]
+    },
+    {
+        "name": "Yunaka",
+        "nameSlug": "yunaka",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🍐",
+                "outfit": "Christmas",
+                "outfitSlug": "christmas",
+                "secondaryShape": "🍎"
+            }
+        ]
+    },
+    {
+        "name": "Céline",
+        "nameSlug": "celine",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Female Byleth",
+        "nameSlug": "female_byleth",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "💎",
+                "secondaryShape": "🍎"
+            },
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "🍎",
+                "outfit": "Ascended",
+                "outfitSlug": "ascended",
+                "secondaryShape": "💎"
+            },
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "💎",
+                "outfit": "Fallen",
+                "outfitSlug": "fallen",
+                "secondaryShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "💎",
+                "outfit": "Summer",
+                "outfitSlug": "summer"
+            },
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "💎",
+                "outfit": "Legendary",
+                "outfitSlug": "legendary",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍎",
+                "outfit": "Winter",
+                "outfitSlug": "winter"
+            }
+        ]
+    },
+    {
+        "name": "Rhea",
+        "nameSlug": "rhea",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "🍎",
+                "outfit": "Persona",
+                "outfitSlug": "persona"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍐",
+                "outfit": "Fallen",
+                "outfitSlug": "fallen"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "💎",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "💎"
+            },
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "⌛",
+                "outfit": "Harvest",
+                "outfitSlug": "harvest",
+                "secondaryShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Catherine",
+        "nameSlug": "catherine",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍎"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🍎",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "💎"
+            }
+        ]
+    },
+    {
+        "name": "Shamir",
+        "nameSlug": "shamir",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍐"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "⌛",
+                "outfit": "Ninja",
+                "outfitSlug": "ninja"
+            },
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "🍐",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "⌛"
+            }
+        ]
+    },
+    {
+        "name": "Cornelia",
+        "nameSlug": "cornelia",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "⌛",
+                "secondaryShape": "💎"
+            }
+        ]
+    },
+    {
+        "name": "Kronya",
+        "nameSlug": "kronya",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "⌛",
+                "secondaryShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Female Shez",
+        "nameSlug": "female_shez",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍎"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍎",
+                "outfit": "Brave",
+                "outfitSlug": "brave",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🟣",
+                "outfit": "Summer",
+                "outfitSlug": "summer"
+            }
+        ]
+    },
+    {
+        "name": "Monica",
+        "nameSlug": "monica",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🟣",
+                "secondaryShape": "💎"
+            }
+        ]
+    },
+    {
+        "name": "Arval",
+        "nameSlug": "arval",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 600.0,
+                "mainShape": "🍎",
+                "secondaryShape": "🍎"
+            }
+        ]
+    },
+    {
+        "name": "Manuela",
+        "nameSlug": "manuela",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "💎",
+                "outfit": "Winter",
+                "outfitSlug": "winter"
+            }
+        ]
+    },
+    {
+        "name": "Edelgard",
+        "nameSlug": "edelgard",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "🍎",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍎",
+                "outfit": "Legendary",
+                "outfitSlug": "legendary"
+            },
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "🟣",
+                "outfit": "Ascended",
+                "outfitSlug": "ascended"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍐",
+                "outfit": "Christmas",
+                "outfitSlug": "christmas"
+            },
+            {
+                "outfitWeightThresholdInLb": 450.0,
+                "mainShape": "🍎",
+                "outfit": "Persona",
+                "outfitSlug": "persona",
+                "secondaryShape": "🍎"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🍐",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍎",
+                "outfit": "Fallen",
+                "outfitSlug": "fallen",
+                "secondaryShape": "💎"
+            }
+        ]
+    },
+    {
+        "name": "Dorothea",
+        "nameSlug": "dorothea",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "🍐"
+            },
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍐",
+                "outfit": "Christmas",
+                "outfitSlug": "christmas",
+                "secondaryShape": "🍎"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍐",
+                "outfit": "Dancer",
+                "outfitSlug": "dancer",
+                "secondaryShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 600.0,
+                "mainShape": "🍐",
+                "outfit": "Summer",
+                "outfitSlug": "summer"
+            }
+        ]
+    },
+    {
+        "name": "Annette",
+        "nameSlug": "annette",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🟣",
+                "outfit": "Christmas",
+                "outfitSlug": "christmas"
+            }
+        ]
+    },
+    {
+        "name": "Bernadetta",
+        "nameSlug": "bernadetta",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍐"
+            },
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "🍐",
+                "outfit": "Spring",
+                "outfitSlug": "spring",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "🍐",
+                "outfit": "Winter",
+                "outfitSlug": "winter",
+                "secondaryShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 200.0,
+                "mainShape": "🍐",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Constance",
+        "nameSlug": "constance",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🟣"
+            }
+        ]
+    },
+    {
+        "name": "Hapi",
+        "nameSlug": "hapi",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "⌛"
+            }
+        ]
+    },
+    {
+        "name": "Hilda",
+        "nameSlug": "hilda",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "💎",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "⌛",
+                "outfit": "Ascended",
+                "outfitSlug": "ascended"
+            },
+            {
+                "outfitWeightThresholdInLb": 450.0,
+                "mainShape": "🍐",
+                "outfit": "Christmas",
+                "outfitSlug": "christmas",
+                "secondaryShape": "⌛"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "⌛",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "💎"
+            }
+        ]
+    },
+    {
+        "name": "Ingrid",
+        "nameSlug": "ingrid",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🍎",
+                "outfit": "Rearmed",
+                "outfitSlug": "rearmed",
+                "secondaryShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍐",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "🍎"
+            }
+        ]
+    },
+    {
+        "name": "Lysithea",
+        "nameSlug": "lysithea",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🍐"
+            }
+        ]
+    },
+    {
+        "name": "Marianne",
+        "nameSlug": "marianne",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🟣"
+            },
+            {
+                "outfitWeightThresholdInLb": 250.0,
+                "mainShape": "🍎",
+                "outfit": "Dancer",
+                "outfitSlug": "dancer"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🟣",
+                "outfit": "Armored",
+                "outfitSlug": "armored",
+                "secondaryShape": "💎"
+            },
+            {
+                "outfitWeightThresholdInLb": 500.0,
+                "mainShape": "🍎",
+                "outfit": "Summer",
+                "outfitSlug": "summer",
+                "secondaryShape": "🟣"
+            }
+        ]
+    },
+    {
+        "name": "Mercedes",
+        "nameSlug": "mercedes",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 400.0,
+                "mainShape": "🍎",
+                "secondaryShape": "💎"
+            },
+            {
+                "outfitWeightThresholdInLb": 300.0,
+                "mainShape": "🟣",
+                "outfit": "Summer",
+                "outfitSlug": "summer"
+            },
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "💎",
+                "outfit": "Maid",
+                "outfitSlug": "maid"
+            }
+        ]
+    },
+    {
+        "name": "Leonie",
+        "nameSlug": "leonie",
+        "heightInCm": 160.0,
+        "outfits": [
+            {
+                "outfitWeightThresholdInLb": 350.0,
+                "mainShape": "🍐",
+                "outfit": "Summer",
+                "outfitSlug": "summer"
+            }
+        ]
+    }
+]

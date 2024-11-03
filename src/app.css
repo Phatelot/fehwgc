@@ -1,17 +1,17 @@
 @font-face {
-  font-family: "Copperplate Gothic";
-  src: url("/src/assets/Copperplate_Gothic_Bold_Regular.ttf");
+  font-family: "Fire Emblem";
+  src: url("/src/assets/Fire_Emblem_Heroes_Font.ttf");
   font-display: swap;
 }
 
 
 :root {
-    font-family: "Copperplate Gothic", sans-serif;
+    font-family: "Fire Emblem", sans-serif;
     line-height: 1.5;
     font-weight: 550;
 
     color-scheme: light dark;
-    background-color: #ae2f29;
+    background-color: #f1f5dd;
     background-size: cover;
 
     font-synthesis: none;

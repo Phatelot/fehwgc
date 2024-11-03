@@ -1,70 +1,97 @@
 <script lang="ts">
-    import { getMonsterFalinViewModel, type ChartViewModel } from "./view_model";
+	import frameMaskLink from '/src/assets/frames/mask.png'
+	import appleLink from '/src/assets/shapes/apple.png'
+	import circleLink from '/src/assets/shapes/circle.png'
+	import hourglassLink from '/src/assets/shapes/hourglass.png'
+	import pearLink from '/src/assets/shapes/pear.png'
+	import triangleLink from '/src/assets/shapes/triangle.png'
+
+    import type { CompletedState } from "./completed_state";
+    import { createViewModel, type OutfitViewModel } from "./view_model";
     import WeightLabel from "./weight_label.svelte";
-    import { formatWeight } from "./weight_utils";
-	import waterCanPng from '/src/assets/Water_Can_Big_PNG.png';
-	import { createEventDispatcher } from 'svelte';
+    import type { Shape } from './metadata';
 
-	export let viewModel: ChartViewModel;
+	// import { createEventDispatcher } from 'svelte';
 
-	export let displayPromoText : boolean;
-	export let groupCharacters : boolean;
+	export let state: CompletedState;
 
-	const dispatch = createEventDispatcher<{
-		selectcharacter: {characterName: string}
-	}>();
+	let viewModel: OutfitViewModel[] = createViewModel(state);
 
-	function selectCharacter(characterName: string) {
-		dispatch('selectcharacter', {characterName})
+	function linkFromShape(shape: Shape) : string {
+		return {
+			'💎': triangleLink,
+			'🍎': appleLink,
+			'⌛': hourglassLink,
+			'🟣': circleLink,
+			'🍐': pearLink,
+		}[shape]
 	}
+
+	// export let displayPromoText : boolean;
+	// export let groupCharacters : boolean;
+
+	// const dispatch = createEventDispatcher<{
+	// 	selectcharacter: {characterName: string}
+	// }>();
+
+	// function selectCharacter(characterName: string) {
+	// 	dispatch('selectcharacter', {characterName})
+	// }
+
 </script>
 
-{#if displayPromoText}
-<text x="15%" y="25%" class="small">
-	<tspan text-anchor="middle">Every 1$* contributed to the collage adds</tspan>
-	<tspan dy="3%" x="15%" text-anchor="middle">three pounds to the characters!</tspan>
-	<tspan dy="2%" x="15%" text-anchor="middle" class="very-small">*Canadian Dollars, so  US Dollars go further</tspan>
-	<tspan dy="4%" x="15%" text-anchor="middle" class="not-so-small">*</tspan>
-	<tspan dy="1%" x="15%" text-anchor="middle">1lb goes to the character you choose by commenting</tspan>
-	<tspan dy="3%" x="15%" text-anchor="middle">JUST their name with your contribution</tspan>
-	<tspan dy="4%" x="15%" text-anchor="middle" class="not-so-small">*</tspan>
-	<tspan dy="1%" x="15%" text-anchor="middle">1lb is split between them and their group</tspan>
-	<tspan dy="4%" x="15%" text-anchor="middle" class="not-so-small">*</tspan>
-	<tspan dy="1%" x="15%" text-anchor="middle">1lb goes to monster Falin</tspan>
-	<tspan dy="3%" x="15%" text-anchor="middle"><a class="link-tree-link" href="https://linktr.ee/ebcart">Click here to fatten your favorite</a></tspan>
-  </text>
-  <image x="16%" y="9%" height="12%" xlink:href="{waterCanPng}" />
-{/if}
+  {#each viewModel as outfit}
+	<rect x="{outfit.x}%" y="{outfit.outgrownY}%" width="{outfit.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
 
-
-
-  <image
-	  xlink:href="{getMonsterFalinViewModel(viewModel).pictureLink}"
-	  x="4%"
-	  y="{5 / viewModel.viewPortHeight * viewModel.viewPortWidth}%"
-	  height="{getMonsterFalinViewModel(viewModel).picHeight * 1.4}%"
+	<rect x="{outfit.x}%" y="{outfit.y}%" width="{outfit.width}%" height="{outfit.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{outfit.barGradient})" />
+	<image
+	  xlink:href="{outfit.bgPictureLink}"
+	  x="{outfit.x}%"
+	  y="{outfit.y + outfit.height + 6}%"
+	  height="{outfit.pictureHeight}%"
 	  preserveAspectRatio="true"
-	  on:click={() => selectCharacter('Monster_Falin')}
-  />
-  <text x="4.8%" y="{5 / viewModel.viewPortHeight * viewModel.viewPortWidth}%" transform="translate(10, 4)" on:click={() => selectCharacter('Monster_Falin')}>
-	<tspan class="small">{formatWeight(getMonsterFalinViewModel(viewModel).weight)}lbs</tspan>
-  </text>
+	/>
+	<defs>
+		<mask id="{'image-mask-' + outfit.id}" x="0%" y="0%" width="100%" height="100%" maskUnits="userSpaceOnUse">
+		  <image xlink:href="{frameMaskLink}" width="{viewModel[0].width}%" height="{viewModel[0].pictureHeight}%" x="{outfit.x}%" y="{outfit.y + outfit.height + 6}%"/>
+		</mask>
+	</defs>
 
-  {#each (groupCharacters ? viewModel.femaleGroupCharacters : viewModel.femaleCharacters) as charViewModel}
-  	{#if !displayPromoText}
-		<rect x="{charViewModel.x}%" y="{charViewModel.immobilityThresholdY}%" width="{charViewModel.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
+	<image
+	  mask="url(#{'image-mask-' + outfit.id})"
+	  xlink:href="{outfit.pictureLink}"
+	  x="{outfit.x}%"
+	  y="{outfit.y + outfit.height + 6}%"
+	  height="{outfit.pictureHeight}%"
+	  preserveAspectRatio="true"
+	/>
+	<image
+	  xlink:href="{outfit.framePictureLink}"
+	  x="{outfit.x}%"
+	  y="{outfit.y + outfit.height + 6}%"
+	  height="{outfit.pictureHeight}%"
+	  preserveAspectRatio="true"
+    />
+	{#if outfit.mainShape}
+		<image
+			xlink:href="{linkFromShape(outfit.mainShape)}"
+			x="{outfit.x + outfit.width * 0.05}%"
+			y="{5.5 + outfit.y + outfit.height - outfit.pictureHeight * 0.4}%"
+			height="{outfit.pictureHeight * 0.4}%"
+			preserveAspectRatio="true"
+		/>
+	{/if}
+	{#if outfit.secondaryShape}
+		<image
+			xlink:href="{linkFromShape(outfit.secondaryShape)}"
+			x="{outfit.x + outfit.width * 0.55}%"
+			y="{5.5 + outfit.y + outfit.height - outfit.pictureHeight * 0.4}%"
+			height="{outfit.pictureHeight * 0.4}%"
+			preserveAspectRatio="true"
+		/>
 	{/if}
 
-	<rect x="{charViewModel.x}%" y="{charViewModel.y}%" width="{charViewModel.width}%" height="{charViewModel.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{charViewModel.barGradient})" on:click={() => selectCharacter(charViewModel.name)} />
-	<image
-	  xlink:href="{charViewModel.pictureLink}"
-	  x="{charViewModel.x}%"
-	  y="{charViewModel.y + charViewModel.height + 1}%"
-	  height="{charViewModel.picHeight}%"
-	  preserveAspectRatio="true"
-	  on:click={() => selectCharacter(charViewModel.name)}
-	/>
-	<WeightLabel groupCharacters={groupCharacters} charViewModel="{charViewModel}" on:click={() => selectCharacter(charViewModel.name)} small/>
+	<WeightLabel outfit="{outfit}" small/>
   {/each}
 
 <style>

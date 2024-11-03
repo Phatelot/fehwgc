@@ -1,6 +1,8 @@
 <script lang="ts">
     import bgLink from '/src/assets/BG.webp'
 
+    import.meta.glob('/src/assets/characters/*');
+
     import CharacterChart from './lib/character_chart.svelte';
 
     import { toCompletedState, type CompletedState } from './lib/completed_state';

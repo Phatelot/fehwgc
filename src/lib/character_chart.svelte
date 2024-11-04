@@ -1,5 +1,5 @@
 <script lang="ts">
-	import frameMaskLink from '/src/assets/frames/mask.png'
+	import frameMaskLink from '/src/assets/mask.png'
 	import appleLink from '/src/assets/shapes/apple.png'
 	import circleLink from '/src/assets/shapes/circle.png'
 	import hourglassLink from '/src/assets/shapes/hourglass.png'

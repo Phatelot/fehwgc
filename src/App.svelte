@@ -74,7 +74,18 @@
 
 
       <svg viewBox="0 0 {viewPortWidth} {viewPortHeight}" xmlns="http://www.w3.org/2000/svg" class="chart">
-        <image xlink:href="{bgLink}" width=100% />
+        <defs>
+          <linearGradient id="bg-mask-gradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"></stop>
+            <stop offset="60%" stop-color="#ffffff"></stop>
+            <stop offset="100%" stop-color="#000000"></stop>
+          </linearGradient>
+          <mask id="bg-mask" x="0%" y="0%" width="100%" height="100%" maskUnits="userSpaceOnUse">
+            <rect x="0%" y="0%" width="100%" height="100%" fill="url(#bg-mask-gradient)" />
+          </mask>
+        </defs>
+
+        <image xlink:href="{bgLink}" width=100% mask="url(#bg-mask)"/>
 
       {#await fetchData()}
         <text x="50%" y="45%" class="menu" text-anchor="middle">Loading data...</text>

@@ -41,7 +41,9 @@
 </script>
 
   {#each viewModel as outfit}
-	<rect x="{outfit.x}%" y="{outfit.outgrownY}%" width="{outfit.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
+	{#if outfit.outgrownY}
+		<rect x="{outfit.x}%" y="{outfit.outgrownY}%" width="{outfit.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
+	{/if}
 
 	<rect x="{outfit.x}%" y="{outfit.y}%" width="{outfit.width}%" height="{outfit.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{outfit.barGradient})" />
 	<image

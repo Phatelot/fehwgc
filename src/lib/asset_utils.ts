@@ -19,6 +19,11 @@ export function getFacePicLink(characterSlug: string, outfitSlug: string) : stri
 	return normalize(import.meta.env.BASE_URL + "/characters/" + characterSlug + outfitSuffix + "_face.webp");
 }
 
+export function getBodyPicLink(characterSlug: string, outfitSlug: string) : string {
+	const outfitSuffix = outfitSlug === "base" ? '' : '_' + outfitSlug;
+	return normalize(import.meta.env.BASE_URL + "/characters/" + characterSlug + outfitSuffix + "_body.webp");
+}
+
 function normalize(url: string): string {
 	return url.replace('//', '/')
 }

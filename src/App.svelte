@@ -28,6 +28,8 @@
       const states = applyDonations(initState(), donations)
       const lastState = states[states.length-1];
 
+      restoreStateFromLocalStorage();
+
       return toCompletedState(lastState);
     }
 
@@ -37,47 +39,35 @@
     let selectedOutfitSlug: string | null;
     $: selectedOutfitSlug = null;
 
-    // let displayImmobilityThresholds = false;
-    // let groupCharacters = false;
-
-    // function setPage(newPage: string) {
-    //   if (selectedCharacterName) {
-    //     return;
-    //   }
-    //   page = newPage;
-    //   saveStateToLocalStorage();
-    // }
-
     function selectOutfit(characterSlug: string, outfitSlug: string) {
       selectedCharacterSlug = characterSlug;
       selectedOutfitSlug = outfitSlug;
-      // saveStateToLocalStorage();
+      saveStateToLocalStorage();
     }
 
     function selectCharacter(characterSlug: string) {
       selectedCharacterSlug = characterSlug;
+      saveStateToLocalStorage();
     }
 
-    // function saveStateToLocalStorage() {
-    //   localStorage.setItem("fehwgc", JSON.stringify({
-    //     displayImmobilityThresholds,
-    //     selectedCharacterName,
-    //     page,
-    //     groupCharacters,
-    //   }))
-    // }
+    function saveStateToLocalStorage() {
+      localStorage.setItem("fehwgc", JSON.stringify({
+        page,
+        selectedCharacterSlug,
+        selectedOutfitSlug,
+      }))
+    }
 
-    // function restoreStateFromLocalStorage() {
-    //   const retrieved = localStorage.getItem("fehwgc");
-    //   if (!retrieved) {
-    //     return
-    //   }
-    //   const parsedRetrieved = JSON.parse(retrieved);
-    //   displayImmobilityThresholds = parsedRetrieved.displayImmobilityThresholds;
-    //   selectedCharacterName = parsedRetrieved.selectedCharacterName;
-    //   page = parsedRetrieved.page;
-    //   groupCharacters = parsedRetrieved.groupCharacters;
-    // }
+    function restoreStateFromLocalStorage() {
+      const retrieved = localStorage.getItem("fehwgc");
+      if (!retrieved) {
+        return
+      }
+      const parsedRetrieved = JSON.parse(retrieved);
+      page = parsedRetrieved.page;
+      selectedCharacterSlug = parsedRetrieved.selectedCharacterSlug;
+      selectedOutfitSlug = parsedRetrieved.selectedOutfitSlug;
+    }
   </script>
 
   <main>
@@ -113,7 +103,7 @@
         {:else if page === 'CHARACTER_CHART'}
           <CharacterChart state="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else}
-          <MenuPopup on:selectpage={(e) => {(page = e.detail.page);  /* saveStateToLocalStorage()*/}}/>
+          <MenuPopup on:selectpage={(e) => {(page = e.detail.page);  saveStateToLocalStorage()}}/>
         {/if}
 
         {#if !!selectedCharacterSlug && !!selectedOutfitSlug}
@@ -121,13 +111,13 @@
             characterSlug="{selectedCharacterSlug}"
             outfitSlug="{selectedOutfitSlug}"
             state="{viewModel}"
-            on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); /* saveStateToLocalStorage()*/}}
+            on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
           />
         {:else if !!selectedCharacterSlug}
           <CharacterPopup
             characterSlug="{selectedCharacterSlug}"
             state="{viewModel}"
-            on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); /* saveStateToLocalStorage()*/}}
+            on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
           />
         {:else if page !== 'MENU'}
           <Box x={1.5} y={3} width={10} height={5} on:click={(e) => {(page = 'MENU');}} />

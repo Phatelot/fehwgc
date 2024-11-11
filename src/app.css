@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "Fire Emblem";
-  src: url("/src/assets/Fire_Emblem_Heroes_Font.ttf");
+  font-family: "fire_emblem";
+  src: url("/Fire_Emblem_Heroes_Font.woff2");
   font-display: swap;
 }
 
 
 :root {
-    font-family: "Fire Emblem", sans-serif;
+    font-family: "fire_emblem", sans-serif;
     line-height: 1.5;
     font-weight: 550;
 

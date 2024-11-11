@@ -2,6 +2,7 @@
     import { getBodyPicLink } from "./asset_utils";
     import Box from "./box.svelte";
     import { getOutfitCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
+    import { traitNames } from "./trait";
     import { formatBMI, formatWeight, toBMICategory, toImperialHeight } from "./weight_utils";
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -16,6 +17,7 @@
 		`In this outfit, ${outfit.characterName} weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
 		`She is ${toImperialHeight(outfit.heightInMeters)} tall.`,
 		`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${toBMICategory(outfit.BMI)}.`,
+		`Her trait is ${traitNames[outfit.trait] || ''}.`,
 	];
 
 	function close() {

@@ -24,15 +24,28 @@ export type GameBaseMetadata = {
     characters: CharacterBaseMetadata[];
 }
 
-export function getCharacterDisplayName(nameSlug: string): string {
+export function getOutfitMetadata(characterNameSlug: string, outfitSlug: string): OutfitBaseMetadata | undefined {
+    for (const outfit of (getCharacterMetadata(characterNameSlug)?.outfits) || []) {
+        if (outfit.outfitSlug === outfitSlug) {
+            return outfit
+        }
+    }
+    return undefined
+}
+
+export function getCharacterMetadata(characterNameSlug: string): CharacterBaseMetadata | undefined {
     for (const game of baseMetadata) {
         for (const character of game.characters) {
-            if (character.nameSlug === nameSlug) {
-                return character.name;
+            if (character.nameSlug === characterNameSlug) {
+                return character
             }
         }
     }
-    return nameSlug;
+    return undefined
+}
+
+export function getCharacterDisplayName(characterNameSlug: string): string {
+    return getCharacterMetadata(characterNameSlug)?.name ||  characterNameSlug;
 }
 
 export function getCharacterOutfitDisplayName(characterNameSlug: string, outfitSlug?: string): string {
@@ -787,6 +800,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Igrene",
                 "nameSlug": "igrene",
                 "heightInCm": 160.0,
+                initialRoaster: true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -1208,6 +1222,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Mathilda",
                 "nameSlug": "mathilda",
                 "heightInCm": 160.0,
+                initialRoaster: true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -2277,6 +2292,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Fjorm",
                 "nameSlug": "fjorm",
                 "heightInCm": 160.0,
+                initialRoaster: true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2716,6 +2732,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Dagr",
                 "nameSlug": "dagr",
                 "heightInCm": 160.0,
+                initialRoaster: true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2940,6 +2957,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Loki",
                 "nameSlug": "loki",
+                initialRoaster: true,
                 "heightInCm": 160.0,
                 "outfits": [
                     {
@@ -3054,8 +3072,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 ]
             },
             {
-                "name": "Ayra",
-                "nameSlug": "ayra",
+                "name": "Arya",
+                "nameSlug": "arya",
                 "heightInCm": 160.0,
                 "initialRoaster": true,
                 "outfits": [

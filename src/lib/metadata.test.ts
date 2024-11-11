@@ -1,6 +1,4 @@
 import { describe, expect, it } from 'vitest'
-import { createSampleState } from './utils_test'
-import { totalDonationsForCharacter } from './state'
 import { getCharacterDisplayName, getCharacterOutfitDisplayName } from './metadata'
 
 describe('getCharacterDisplayName', () => {

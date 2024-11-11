@@ -1,4 +1,5 @@
 import { baseMetadata, type CharacterBaseMetadata, type GameBaseMetadata } from "./metadata";
+import { selectTraitFor, selectTraitForInitial } from "./trait";
 
 export type Donation = {
     character: string;
@@ -24,13 +25,24 @@ export type OutfitState = {
     donationReceived: number;
     weightInLbs: number;
     thresholdInLbs: number;
-}
+} & ({
+	unlocked: true;
+	trait: string;
+} | {
+	unlocked: false;
+	trait: undefined;
+})
 
 export type BrokenOutfitState = {
-    slug?: string;
     donationReceived: number;
     weightInLbs: number;
-}
+} & ({
+	slug: string;
+	trait: string;
+} | {
+	slug: undefined;
+	trait: undefined;
+})
 
 export function initState(): GameState[] {
 	return baseMetadata.map(initGameState)
@@ -47,16 +59,25 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState
 	return {
 		slug: baseMetadata.nameSlug,
 		donationReceived: 0,
-		outfits: baseMetadata.outfits.map((outfitBaseMetadata, i) => ({
-			slug: outfitBaseMetadata.outfitSlug,
-			weightInLbs: 150,
-			donationReceived: 0,
-			thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
-			unlocked: (i == 0 && baseMetadata.initialRoaster) || false,
-		})),
+		outfits: baseMetadata.outfits.map((outfitBaseMetadata, i) => {
+			const unlocked = (i == 0 && baseMetadata.initialRoaster) || false
+
+			const outfitState = {
+				slug: outfitBaseMetadata.outfitSlug,
+				weightInLbs: 150,
+				donationReceived: 0,
+				thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
+				unlocked: unlocked,
+				trait: unlocked ? selectTraitForInitial(baseMetadata) : undefined,
+			} as OutfitState
+
+			return outfitState
+		}),
 		brokenOutfit: {
+			slug: undefined,
 			donationReceived: 0,
 			weightInLbs: 0,
+			trait: undefined,
 		}
 	}
 }

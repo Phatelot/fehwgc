@@ -24,6 +24,7 @@ export type OutfitCompletedState = {
 	// weighsAsMuchAsTheXSmallestCharactersCombined: number;
 	mainShape?: Shape;
 	secondaryShape?: Shape;
+	trait: string;
 }
 
 export type CharacterCompletedState = {
@@ -122,6 +123,7 @@ export function toBrokenOutfitState(state: CharacterState, characterMetadata: Ch
 		donationReceived: state.donationReceived,
 		frame: toFrameType(state.slug),
 		bgFrame: gameMetadata.nameSlug,
+		trait: state.brokenOutfit.trait || '',
 	}
 }
 
@@ -147,6 +149,7 @@ export function toOutfitCompletedState(state: OutfitState, characterMetadata: Ch
 		donationReceived: state.donationReceived,
 		frame: toFrameType(state.slug),
 		bgFrame: gameMetadata.nameSlug,
+		trait: state.trait || '',
 	}
 }
 

@@ -50,6 +50,7 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 			id: `${outfitState.characterSlug}-${outfitState.nameSlug}${outfitState.broken ? '-broken' : ''}`,
 			mainShape: outfitState.mainShape,
 			secondaryShape: outfitState.secondaryShape,
+			trait: outfitState.trait,
 		};
 	})
 }
@@ -69,6 +70,7 @@ export type OutfitViewModel = {
 	framePictureLink: string;
 	weightInLbs: number;
 	id: string;
+	trait: string;
 	mainShape?: Shape;
 	secondaryShape?: Shape;
 	broken: boolean;

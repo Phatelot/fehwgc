@@ -38,11 +38,14 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
+					trait: undefined,
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
+				slug: undefined,
+				trait: undefined,
 			}
 		}
 		const after : CharacterState = structuredClone(before)
@@ -61,11 +64,14 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
+					trait: undefined,
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
+				slug: undefined,
+				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
@@ -78,11 +84,14 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
+					trait: undefined,
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240.4,
+				slug: undefined,
+				trait: undefined,
 			}
 		}
 
@@ -101,11 +110,14 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
+					trait: undefined
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
+				slug: undefined,
+				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
@@ -118,11 +130,14 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
+					trait: 'Sedentary',
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
+				slug: undefined,
+				trait: undefined,
 			}
 		}
 
@@ -140,6 +155,7 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 320,
 					thresholdInLbs: 320,
+					trait: 'Sedentary',
 				},
 				{
 					slug: 'winter',
@@ -147,11 +163,14 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
+					trait: 'Fat_Hands',
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
+				slug: undefined,
+				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
@@ -164,6 +183,7 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 320,
 					thresholdInLbs: 320,
+					trait: 'Sedentary',
 				},
 				{
 					slug: 'winter',
@@ -171,12 +191,14 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 340,
 					thresholdInLbs: 320,
+					trait: 'Fat_Hands',
 				}
 			],
 			brokenOutfit: {
 				slug: 'winter',
 				donationReceived: 20,
 				weightInLbs: 700,
+				trait: 'Sedentary'
 			}
 		}
 
@@ -196,11 +218,14 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 320,
 					thresholdInLbs: 320,
+					trait: 'Sedentary',
 				}
 			],
 			brokenOutfit: {
+				slug: undefined,
 				donationReceived: 20,
 				weightInLbs: 240,
+				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
@@ -213,12 +238,14 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 320,
 					thresholdInLbs: 320,
+					trait: 'Sedentary',
 				}
 			],
 			brokenOutfit: {
 				slug: 'winter',
 				donationReceived: 320,
 				weightInLbs: 700,
+				trait: 'Fat_Hands',
 			}
 		}
 
@@ -237,6 +264,7 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 320,
 					thresholdInLbs: 320,
+					trait: 'Sedentary',
 				},
 				{
 					slug: 'winter',
@@ -244,11 +272,14 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
+					trait: 'Fat_Hands',
 				}
 			],
 			brokenOutfit: {
+				slug: undefined,
 				donationReceived: 20,
 				weightInLbs: 240,
+				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
@@ -261,6 +292,7 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 340,
 					thresholdInLbs: 320,
+					trait: 'Sedentary',
 				},
 				{
 					slug: 'winter',
@@ -268,11 +300,14 @@ describe('toCharacterChange', () => {
 					unlocked: true,
 					weightInLbs: 250,
 					thresholdInLbs: 320,
+					trait: 'Fat_Hands',
 				}
 			],
 			brokenOutfit: {
+				slug: undefined,
 				donationReceived: 20,
 				weightInLbs: 400,
+				trait: undefined,
 			}
 		}
 
@@ -290,6 +325,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 230,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 		const after : OutfitState = structuredClone(before)
 
@@ -303,6 +339,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 230,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 		const after : OutfitState = {
 			slug: "base",
@@ -310,6 +347,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 230.5,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 
 		expect(toOutfitChange(before, after)).toBeNull()
@@ -322,6 +360,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 230,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 		const after : OutfitState = {
 			slug: "base",
@@ -329,6 +368,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 300,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 
 		expect(toOutfitChange(before, after)).toEqual({
@@ -347,6 +387,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 230,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 		const after : OutfitState = {
 			slug: "base",
@@ -354,6 +395,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 450,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 
 		expect(toOutfitChange(before, after)).toEqual({
@@ -372,6 +414,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 0,
 			weightInLbs: 180,
 			thresholdInLbs: 340,
+			trait: undefined,
 		}
 		const after : OutfitState = {
 			slug: "base",
@@ -379,6 +422,7 @@ describe('toOutfitChange', () => {
 			donationReceived: 150,
 			weightInLbs: 300,
 			thresholdInLbs: 340,
+			trait: 'Sedentary',
 		}
 
 		expect(toOutfitChange(before, after)).toEqual({

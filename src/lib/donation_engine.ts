@@ -1,4 +1,5 @@
 import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, outfitWithMostDonation, isUnlocked } from "./state";
+import { selectTraitFor, selectTraitForBroken } from "./trait";
 
 const UNLOCK_CHARACTER_THRESHOLD_IN_CAD = 125;
 
@@ -53,10 +54,15 @@ export function updateCharacterStateUnlock(characterState: CharacterState) {
 	if (!characterIsUnlocked || characterState.brokenOutfit.slug) {
 		return;
 	}
-	characterState.outfits[0].unlocked = true;
+	const firstOutfit = characterState.outfits[0]
+	firstOutfit.unlocked = true
+	firstOutfit.trait = selectTraitFor(characterState, firstOutfit)
+
 	for (let i = 0; i < characterState.outfits.length - 1; i++) {
 		if (isOutgrown(characterState.outfits[i])) {
-			characterState.outfits[i+1].unlocked = true
+			const nextOutfit = characterState.outfits[i+1];
+			nextOutfit.unlocked = true
+			nextOutfit.trait = selectTraitFor(characterState, nextOutfit)
 		} else {
 			break;
 		}
@@ -64,5 +70,6 @@ export function updateCharacterStateUnlock(characterState: CharacterState) {
 	const lastOutfit = characterState.outfits[characterState.outfits.length - 1];
 	if (lastOutfit.unlocked && lastOutfit.weightInLbs >= lastOutfit.thresholdInLbs) {
 		characterState.brokenOutfit.slug = outfitWithMostDonation(characterState)
+		characterState.brokenOutfit.trait = selectTraitForBroken(characterState)
 	}
 }

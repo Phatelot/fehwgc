@@ -19,9 +19,9 @@
 </script>
 
 <Box x={2} y={5} width={96} height={90}></Box>
-<text x="36%" y="14%" class="character-name">{outfit.characterName} - {outfit.name}</text>
+<text x="38%" y="14%" class="character-name">{outfit.characterName} - {outfit.name}</text>
 <image
-	xlink:href="{getBodyPicLink(outfit.characterSlug, outfit.broken ? 'broken' : outfit.nameSlug || '')}"
+	xlink:href="{getBodyPicLink(outfit.characterSlug, outfit.nameSlug || '')}"
 	x="6%"
 	y="10%"
 	height="80%"
@@ -30,7 +30,7 @@
 
 <text class="sentence" y="18%">
 	{#each sentences as sentence}
-		<tspan x="34%" dy="4%">{sentence}</tspan>
+		<tspan x="36%" dy="4%">{sentence}</tspan>
 	{/each}
 
 </text>

@@ -44,6 +44,7 @@ export function createViewModel(state: CompletedState) : OutfitViewModel[] {
 			bgPictureLink: getBgPictureLink(outfitState.gameSlug),
 			framePictureLink: getFramePictureLink(outfitState.broken ? 'broken' : (outfitState.nameSlug as string)),
 			pictureLink: getFacePicLink(outfitState.characterSlug, (outfitState.broken && !outfitState.unlocked) ? '' : (outfitState.nameSlug as string)),
+			broken: outfitState.broken,
 			pictureHeight: width * viewPortWidth / viewPortHeight,
 			weightInLbs: outfitState.weightInLbs,
 			id: `${outfitState.characterSlug}-${outfitState.nameSlug}${outfitState.broken ? '-broken' : ''}`,
@@ -70,4 +71,5 @@ export type OutfitViewModel = {
 	id: string;
 	mainShape?: Shape;
 	secondaryShape?: Shape;
+	broken: boolean;
 }

@@ -11,7 +11,7 @@
     import WeightLabel from "./weight_label.svelte";
     import type { Shape } from './metadata';
 
-	// import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	export let state: CompletedState;
 
@@ -27,16 +27,19 @@
 		}[shape]
 	}
 
-	// export let displayPromoText : boolean;
-	// export let groupCharacters : boolean;
+	const dispatch = createEventDispatcher<{
+		selectoutfit: {
+			characterSlug: string,
+			outfitSlug: string,
+		}
+	}>();
 
-	// const dispatch = createEventDispatcher<{
-	// 	selectcharacter: {characterName: string}
-	// }>();
-
-	// function selectCharacter(characterName: string) {
-	// 	dispatch('selectcharacter', {characterName})
-	// }
+	function selectOutfit(outfit: OutfitViewModel) {
+		dispatch('selectoutfit', {
+			characterSlug: outfit.characterSlug,
+			outfitSlug: outfit.broken ? 'broken': outfit.outfitSlug || '',
+		})
+	}
 
 </script>
 
@@ -45,7 +48,19 @@
 		<rect x="{outfit.x}%" y="{outfit.outgrownY}%" width="{outfit.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
 	{/if}
 
-	<rect x="{outfit.x}%" y="{outfit.y}%" width="{outfit.width}%" height="{outfit.height}%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="url(#{outfit.barGradient})" />
+	<rect
+	  x="{outfit.x}%"
+	  y="{outfit.y}%"
+	  width="{outfit.width}%"
+	  height="{outfit.height}%"
+	  rx="0.5px"
+	  ry="0.5px"
+	  stroke="white"
+	  stroke-width="0.4"
+	  stroke-linecap="round"
+	  fill="url(#{outfit.barGradient})"
+	  on:click={() => selectOutfit(outfit)}
+	/>
 	<image
 	  xlink:href="{outfit.bgPictureLink}"
 	  x="{outfit.x}%"
@@ -73,6 +88,7 @@
 	  y="{outfit.y + outfit.height + 6}%"
 	  height="{outfit.pictureHeight}%"
 	  preserveAspectRatio="true"
+	  on:click={() => selectOutfit(outfit)}
     />
 	{#if outfit.mainShape}
 		<image
@@ -95,25 +111,3 @@
 
 	<WeightLabel outfit="{outfit}" small/>
   {/each}
-
-<style>
-  .not-so-small {
-    font-size: 4px;
-    fill: black;
-  }
-
-  .small {
-    font-size: 1.8px;
-    fill: black;
-  }
-
-  .very-small {
-    font-size: 1.4px;
-    fill: black;
-  }
-
-  .link-tree-link {
-    fill: blue;
-    text-decoration: underline;
-  }
-</style>

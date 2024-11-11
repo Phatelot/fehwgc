@@ -28,46 +28,49 @@
       return toCompletedState(lastState);
     }
 
-    $: page = 'CHARACTER_CHART';
-    let selectedCharacterName: string | null;
-    $: selectedCharacterName = null;
+    // $: page = 'CHARACTER_CHART';
+    let selectedCharacterSlug: string | null;
+    $: selectedCharacterSlug = null;
+    let selectedOutfitSlug: string | null;
+    $: selectedOutfitSlug = null;
 
-    let displayImmobilityThresholds = false;
-    let groupCharacters = false;
+    // let displayImmobilityThresholds = false;
+    // let groupCharacters = false;
 
-    function setPage(newPage: string) {
-      if (selectedCharacterName) {
-        return;
-      }
-      page = newPage;
-      saveStateToLocalStorage();
+    // function setPage(newPage: string) {
+    //   if (selectedCharacterName) {
+    //     return;
+    //   }
+    //   page = newPage;
+    //   saveStateToLocalStorage();
+    // }
+
+    function selectOutfit(characterSlug: string, outfitSlug: string) {
+      selectedCharacterSlug = characterSlug;
+      selectedOutfitSlug = outfitSlug;
+      // saveStateToLocalStorage();
     }
 
-    function selectCharacter(characterName: string) {
-      selectedCharacterName = characterName;
-      saveStateToLocalStorage();
-    }
+    // function saveStateToLocalStorage() {
+    //   localStorage.setItem("fehwgc", JSON.stringify({
+    //     displayImmobilityThresholds,
+    //     selectedCharacterName,
+    //     page,
+    //     groupCharacters,
+    //   }))
+    // }
 
-    function saveStateToLocalStorage() {
-      localStorage.setItem("fehwgc", JSON.stringify({
-        displayImmobilityThresholds,
-        selectedCharacterName,
-        page,
-        groupCharacters,
-      }))
-    }
-
-    function restoreStateFromLocalStorage() {
-      const retrieved = localStorage.getItem("fehwgc");
-      if (!retrieved) {
-        return
-      }
-      const parsedRetrieved = JSON.parse(retrieved);
-      displayImmobilityThresholds = parsedRetrieved.displayImmobilityThresholds;
-      selectedCharacterName = parsedRetrieved.selectedCharacterName;
-      page = parsedRetrieved.page;
-      groupCharacters = parsedRetrieved.groupCharacters;
-    }
+    // function restoreStateFromLocalStorage() {
+    //   const retrieved = localStorage.getItem("fehwgc");
+    //   if (!retrieved) {
+    //     return
+    //   }
+    //   const parsedRetrieved = JSON.parse(retrieved);
+    //   displayImmobilityThresholds = parsedRetrieved.displayImmobilityThresholds;
+    //   selectedCharacterName = parsedRetrieved.selectedCharacterName;
+    //   page = parsedRetrieved.page;
+    //   groupCharacters = parsedRetrieved.groupCharacters;
+    // }
   </script>
 
   <main>
@@ -99,9 +102,11 @@
         </defs>
 
 
-        <CharacterChart state="{viewModel}" />
+        <CharacterChart state="{viewModel}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
 
-        <OutfitPopup characterSlug="kronya" outfitSlug="base" state="{viewModel}"/>
+        {#if !!selectedCharacterSlug && !!selectedOutfitSlug}
+          <OutfitPopup characterSlug="{selectedCharacterSlug}" outfitSlug="{selectedOutfitSlug}" state="{viewModel}"/>
+        {/if}
         <!-- <Box x={3} y={7} width={35} height={24}></Box> -->
 
       {:catch error}

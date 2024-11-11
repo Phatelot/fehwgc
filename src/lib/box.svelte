@@ -9,8 +9,10 @@
 	<defs>
 	  <linearGradient id="box-mask-gradient" x1="0" x2="1" y1="0" y2="0">
 		<stop offset="0%" stop-color="#000000"></stop>
-		<stop offset="15%" stop-color="#ffffff"></stop>
-		<stop offset="85%" stop-color="#ffffff"></stop>
+		<stop offset="4%" stop-color="#aaaaaa"></stop>
+		<stop offset="12%" stop-color="#ffffff"></stop>
+		<stop offset="88%" stop-color="#ffffff"></stop>
+		<stop offset="96%" stop-color="#aaaaaa"></stop>
 		<stop offset="100%" stop-color="#000000"></stop>
 	  </linearGradient>
 	  <mask id="box-mask" x="{x}%" y="{y}%" width="{width}%" height="{height}%" maskUnits="userSpaceOnUse">

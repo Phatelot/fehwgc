@@ -16,6 +16,7 @@ export type OutfitCompletedState = {
 	outgrownThresholdInLbs?: number;
 	broken: boolean;
 	weightInLbs: number;
+	heightInMeters: number;
 	BMI: number;
 	frame: string;
 	bgFrame: string;
@@ -110,6 +111,7 @@ export function toBrokenOutfitState(state: CharacterState, characterMetadata: Ch
 		outgrown: false,
 		broken: true,
 		weightInLbs: state.brokenOutfit.weightInLbs,
+		heightInMeters: characterMetadata.heightInCm / 100.,
 		BMI: BMI(characterMetadata.heightInCm / 100., state.brokenOutfit.weightInLbs),
 		mainShape: selectedOutfit?.mainShape,
 		secondaryShape: selectedOutfit?.secondaryShape,
@@ -134,11 +136,26 @@ export function toOutfitCompletedState(state: OutfitState, characterMetadata: Ch
 		outgrownThresholdInLbs: state.thresholdInLbs,
 		broken: false,
 		weightInLbs: state.weightInLbs,
+		heightInMeters: characterMetadata.heightInCm / 100.,
 		BMI: BMI(characterMetadata.heightInCm / 100., state.weightInLbs),
 		mainShape: outfitMetadata.mainShape,
 		secondaryShape: outfitMetadata.secondaryShape,
 		donationReceived: state.donationReceived,
 		frame: toFrameType(state.slug),
 		bgFrame: gameMetadata.nameSlug,
+	}
+}
+
+export function getOutfitCompletedState(state: CompletedState, characterSlug: string, outfitSlug: string): OutfitCompletedState | undefined {
+	for (const game of state.games) {
+		for (const character of game.characters) {
+			if (character.nameSlug === characterSlug) {
+				for (const outfit of character.outfits) {
+					if (outfit.broken && outfitSlug === 'broken' || outfit.nameSlug === outfitSlug) {
+						return outfit;
+					}
+				}
+			}
+		}
 	}
 }

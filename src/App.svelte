@@ -9,6 +9,7 @@
     import { initState } from './lib/state';
     import { viewPortHeight, viewPortWidth } from './lib/view_model';
     import Box from './lib/box.svelte';
+    import OutfitPopup from './lib/outfit_popup.svelte';
 
     async function fetchData(): Promise<CompletedState> {
       const response = await fetch("https://api.github.com/gists/8c4b31c95b425cb40d3f865d95561bfa", {
@@ -24,8 +25,6 @@
       const states = applyDonations(initState(), donations)
       const lastState = states[states.length-1];
 
-      // console.log("donations", JSON.stringify(rawDonations, null, 2))
-      // console.log("last state", JSON.stringify(lastState, null, 2))
       return toCompletedState(lastState);
     }
 
@@ -102,8 +101,8 @@
 
         <CharacterChart state="{viewModel}" />
 
-        <Box x={5} y={5} width={90} height={90}></Box>
-
+        <OutfitPopup characterSlug="kronya" outfitSlug="base" state="{viewModel}"/>
+        <!-- <Box x={3} y={7} width={35} height={24}></Box> -->
 
       {:catch error}
         <text x="50%" y="45%" class="menu" text-anchor="middle">Error: {JSON.stringify(error)}</text>

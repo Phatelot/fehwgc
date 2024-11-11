@@ -4120,6 +4120,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "base",
                     },
                     {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "🍐",
+                        "outfit": "Summer",
+                        "outfitSlug": "summer",
+                    },
+                    {
                         "outfitWeightThresholdInLb": 200.0,
                         "mainShape": "🍎",
                         "outfit": "Askr",
@@ -4131,19 +4137,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Dancer",
                         "outfitSlug": "dancer",
                         "secondaryShape": "🟣"
-                    }
-                ]
-            },
-            {
-                "name": "Linde (Summer",
-                "nameSlug": "linde_summer",
-                "heightInCm": 160.0,
-                "outfits": [
-                    {
-                        "outfitWeightThresholdInLb": 400.0,
-                        "mainShape": "🍐",
-                        "outfit": "Base",
-                        "outfitSlug": "base",
                     }
                 ]
             },

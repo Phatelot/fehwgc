@@ -1,4 +1,4 @@
-import { isUnlocked, type CharacterState, type GameState, type OutfitState } from "./state";
+import { isUnlocked, type CharacterState, type GameState, type OutfitState, isOutgrown } from "./state";
 import { average, median, sum } from "./stats_utils";
 
 export type WeightDonationNode = {
@@ -23,10 +23,18 @@ function fromGameState(state: GameState) : WeightDonationNode {
 }
 
 function fromCharacterState(state: CharacterState) : WeightDonationNode {
+	const leafs = state.outfits.filter(outfit => outfit.unlocked).map(fromOutfitState);
+	leafs.push({
+		slug: 'broken',
+		donationReceived: state.brokenOutfit.donationReceived,
+		weightInLbs: state.brokenOutfit.slug ? state.brokenOutfit.weightInLbs : 0,
+		leafs: [],
+	})
+
 	return {
 		slug: state.slug,
 		donationReceived: state.donationReceived,
-		leafs: state.outfits.filter(outfit => outfit.unlocked).map(fromOutfitState),
+		leafs: leafs,
 	}
 }
 
@@ -55,7 +63,7 @@ export function toGroupStats(tree: WeightDonationNode) : GroupStats {
 	if (tree.weightInLbs) {
 		weightsInLbs.push(tree.weightInLbs);
 	}
-	const sortedWeightsInLbs = weightsInLbs.sort();
+	const sortedWeightsInLbs = weightsInLbs.filter(w => w !== 0).sort();
 
 	return {
 		slug: tree.slug,

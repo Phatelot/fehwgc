@@ -1,7 +1,6 @@
 <script lang="ts">
     import bgLink from '/src/assets/BG.webp'
 
-    import CharacterChart from './lib/character_chart.svelte';
 
     import { toCompletedState, type CompletedState } from './lib/completed_state';
     import { applyDonations } from './lib/donation_engine';
@@ -9,7 +8,11 @@
     import { initState } from './lib/state';
     import { viewPortHeight, viewPortWidth } from './lib/view_model';
     import Box from './lib/box.svelte';
+    import OutfitChart from './lib/outfit_chart.svelte';
     import OutfitPopup from './lib/outfit_popup.svelte';
+    import CharacterChart from './lib/character_chart.svelte';
+    import CharacterPopup from './lib/character_popup.svelte';
+    import MenuPopup from './lib/menu_popup.svelte';
 
     async function fetchData(): Promise<CompletedState> {
       const response = await fetch("https://api.github.com/gists/8c4b31c95b425cb40d3f865d95561bfa", {
@@ -28,7 +31,7 @@
       return toCompletedState(lastState);
     }
 
-    // $: page = 'CHARACTER_CHART';
+    $: page = 'OUTFIT_CHART';
     let selectedCharacterSlug: string | null;
     $: selectedCharacterSlug = null;
     let selectedOutfitSlug: string | null;
@@ -49,6 +52,10 @@
       selectedCharacterSlug = characterSlug;
       selectedOutfitSlug = outfitSlug;
       // saveStateToLocalStorage();
+    }
+
+    function selectCharacter(characterSlug: string) {
+      selectedCharacterSlug = characterSlug;
     }
 
     // function saveStateToLocalStorage() {
@@ -101,8 +108,13 @@
           {/each}
         </defs>
 
-
-        <CharacterChart state="{viewModel}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+        {#if page === 'OUTFIT_CHART'}
+          <OutfitChart state="{viewModel}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+        {:else if page === 'CHARACTER_CHART'}
+          <CharacterChart state="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+        {:else}
+          <MenuPopup on:selectpage={(e) => {(page = e.detail.page);  /* saveStateToLocalStorage()*/}}/>
+        {/if}
 
         {#if !!selectedCharacterSlug && !!selectedOutfitSlug}
           <OutfitPopup
@@ -111,11 +123,19 @@
             state="{viewModel}"
             on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); /* saveStateToLocalStorage()*/}}
           />
+        {:else if !!selectedCharacterSlug}
+          <CharacterPopup
+            characterSlug="{selectedCharacterSlug}"
+            state="{viewModel}"
+            on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); /* saveStateToLocalStorage()*/}}
+          />
+        {:else if page !== 'MENU'}
+          <Box x={1.5} y={3} width={10} height={5} on:click={(e) => {(page = 'MENU');}} />
+          <text x="4.5%" y="6.2%" class="button-menu" on:click={(e) => {(page = 'MENU');}}>menu</text>
         {/if}
-        <!-- <Box x={3} y={7} width={35} height={24}></Box> -->
 
       {:catch error}
-        <text x="50%" y="45%" class="menu" text-anchor="middle">Error: {JSON.stringify(error)}</text>
+        <text x="50%" y="45%" style="font-size: 3px" text-anchor="middle">Error: {JSON.stringify(error)}</text>
       {/await}
 
 
@@ -130,7 +150,8 @@
     display: block;
   }
 
-  .menu {
-    font-size: 4px;
+  .button-menu {
+    fill: white;
+    font-size: 3px;
   }
 </style>

@@ -27,6 +27,8 @@ export type OutfitCompletedState = {
 }
 
 export type CharacterCompletedState = {
+	gameName: string;
+	gameSlug: string
 	name: string;
 	nameSlug: string;
 	unlocked: boolean;
@@ -83,6 +85,8 @@ export function toCharacterCompletedState(state: CharacterState, gameMetadata: G
 	outfits.push(toBrokenOutfitState(state, characterMetadata, gameMetadata))
 
 	return {
+		gameName: gameMetadata.name,
+		gameSlug: gameMetadata.nameSlug,
 		name: characterMetadata.name,
 		nameSlug: state.slug,
 		unlocked: isUnlocked(state),
@@ -146,16 +150,24 @@ export function toOutfitCompletedState(state: OutfitState, characterMetadata: Ch
 	}
 }
 
-export function getOutfitCompletedState(state: CompletedState, characterSlug: string, outfitSlug: string): OutfitCompletedState | undefined {
+export function getCharacterCompletedState(state: CompletedState, characterSlug: string): CharacterCompletedState | undefined {
 	for (const game of state.games) {
 		for (const character of game.characters) {
 			if (character.nameSlug === characterSlug) {
-				for (const outfit of character.outfits) {
-					if (outfit.broken && outfitSlug === 'broken' || outfit.nameSlug === outfitSlug) {
-						return outfit;
-					}
-				}
+				return character;
 			}
+		}
+	}
+}
+
+export function getOutfitCompletedState(state: CompletedState, characterSlug: string, outfitSlug: string): OutfitCompletedState | undefined {
+	const character = getCharacterCompletedState(state, characterSlug)
+	if (!character) {
+		return undefined;
+	}
+	for (const outfit of character.outfits) {
+		if (outfit.broken && outfitSlug === 'broken' || outfit.nameSlug === outfitSlug) {
+			return outfit;
 		}
 	}
 }

@@ -1,5 +1,5 @@
 import { getBgPictureLink, getFacePicLink, getFramePictureLink } from "./asset_utils";
-import type { CompletedState, OutfitCompletedState } from "./completed_state";
+import type { CharacterCompletedState, CompletedState, OutfitCompletedState } from "./completed_state";
 import type { Shape } from "./metadata";
 
 export const viewPortHeight = 100;
@@ -7,7 +7,7 @@ export const viewPortWidth = 220;
 
 const maxNumberOfDisplayedCharacters = 14;
 
-export function createViewModel(state: CompletedState) : OutfitViewModel[] {
+export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[] {
 
 	const outfitStates : OutfitCompletedState[] = state.games
 		.flatMap(game => game.characters)
@@ -72,4 +72,58 @@ export type OutfitViewModel = {
 	mainShape?: Shape;
 	secondaryShape?: Shape;
 	broken: boolean;
+}
+
+export function createCharacterViewModel(state: CompletedState) : CharacterViewModel[] {
+
+	const characterStates : CharacterCompletedState[] = state.games
+		.flatMap(game => game.characters)
+		.filter(character => character.unlocked)
+		.sort((a, b) => (a.stats?.totalWeightUnlockedInLbs || 0) - (b.stats?.totalWeightUnlockedInLbs || 0))
+		.slice(-maxNumberOfDisplayedCharacters);
+
+	const lowestWeight = (characterStates[0].stats?.totalWeightUnlockedInLbs || 150);
+	const highestWeight = characterStates[characterStates.length - 1].stats?.totalWeightUnlockedInLbs || 150;
+	const maxDisplayableWeight = 40 * lowestWeight;
+
+	const margin = 95 / (5 * maxNumberOfDisplayedCharacters + 1);
+	const width = 4 * margin;
+
+	return characterStates.map((characterState, i) => {
+		const weightInLbs = characterState.stats?.totalWeightUnlockedInLbs || 150;
+
+		const height = weightInLbs / Math.min(maxDisplayableWeight, highestWeight) * 60;
+		const magic75 = 75;
+		const y = magic75 - height;
+
+		return {
+			width,
+			height,
+			x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharacters - characterStates.length + i),
+			y,
+			barGradient: characterState.gameSlug + "Gradient",
+			characterSlug: characterState.nameSlug,
+			bgPictureLink: getBgPictureLink(characterState.gameSlug),
+			framePictureLink: getFramePictureLink('base'),
+			pictureLink: getFacePicLink(characterState.nameSlug, 'base'),
+			pictureHeight: width * viewPortWidth / viewPortHeight,
+			weightInLbs,
+			id: `${characterState.nameSlug}`,
+		};
+	})
+}
+
+export type CharacterViewModel = {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+	barGradient: string;
+	characterSlug: string;
+	pictureHeight: number;
+	bgPictureLink: string;
+	pictureLink: string;
+	framePictureLink: string;
+	weightInLbs: number;
+	id: string;
 }

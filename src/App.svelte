@@ -105,7 +105,12 @@
         <CharacterChart state="{viewModel}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
 
         {#if !!selectedCharacterSlug && !!selectedOutfitSlug}
-          <OutfitPopup characterSlug="{selectedCharacterSlug}" outfitSlug="{selectedOutfitSlug}" state="{viewModel}"/>
+          <OutfitPopup
+            characterSlug="{selectedCharacterSlug}"
+            outfitSlug="{selectedOutfitSlug}"
+            state="{viewModel}"
+            on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); /* saveStateToLocalStorage()*/}}
+          />
         {/if}
         <!-- <Box x={3} y={7} width={35} height={24}></Box> -->
 

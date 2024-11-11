@@ -3,6 +3,8 @@
     import Box from "./box.svelte";
     import { getOutfitCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
     import { formatBMI, formatWeight, toBMICategory, toImperialHeight } from "./weight_utils";
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	export let characterSlug: string;
 	export let outfitSlug: string;
@@ -15,6 +17,10 @@
 		`She is ${toImperialHeight(outfit.heightInMeters)} tall.`,
 		`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${toBMICategory(outfit.BMI)}.`,
 	];
+
+	function close() {
+		dispatch('close', {})
+	}
 
 </script>
 
@@ -35,6 +41,9 @@
 
 </text>
 
+<rect x="83.1%" y="83.5%" height="4.6%" width="8%" rx="1px" ry="1px" stroke="#aeffff" stroke-width="0.4" stroke-linecap="round" fill="#004858" on:click={() => close()}></rect>
+<text x="84%" y="87%" class="button-label" on:click={() => close()}>close</text>
+
 <style>
 	.character-name {
 		fill: white;
@@ -42,6 +51,11 @@
 	}
 
 	.sentence {
+		fill: white;
+		font-size: 3px;
+	}
+
+	.button-label {
 		fill: white;
 		font-size: 3px;
 	}

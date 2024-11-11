@@ -8,6 +8,7 @@
     import { parseCsvData } from './lib/donation_log_parser';
     import { initState } from './lib/state';
     import { viewPortHeight, viewPortWidth } from './lib/view_model';
+    import Box from './lib/box.svelte';
 
     async function fetchData(): Promise<CompletedState> {
       const response = await fetch("https://api.github.com/gists/8c4b31c95b425cb40d3f865d95561bfa", {
@@ -102,6 +103,9 @@
 
 
         <CharacterChart state="{viewModel}" />
+
+        <Box x={5} y={5} width={90} height={90}></Box>
+
 
       {:catch error}
         <text x="50%" y="45%" class="menu" text-anchor="middle">Error: {JSON.stringify(error)}</text>

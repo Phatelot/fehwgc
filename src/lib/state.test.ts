@@ -16,16 +16,16 @@ describe('initState', () => {
 	it('should correctly initialize state', () => {
 		const initialState : GameState[] = initState();
 
-		const titania = getCharacterState(initialState, "titania")
-		expect(titania.donationReceived).toBe(0)
-		expect(titania.brokenOutfit.weightInLbs).toBe(0)
-		expect(titania.outfits[0].donationReceived).toBe(0)
-		expect(titania.outfits[0].unlocked).toBe(true)
-		expect(titania.outfits[0].weightInLbs).toBe(150)
-		expect(titania.outfits[0].trait).toBe('Cellulite')
-		expect(titania.outfits[1].donationReceived).toBe(0)
-		expect(titania.outfits[1].unlocked).toBe(false)
-		expect(titania.outfits[1].weightInLbs).toBe(150)
+		const tharja = getCharacterState(initialState, "tharja")
+		expect(tharja.donationReceived).toBe(0)
+		expect(tharja.brokenOutfit.weightInLbs).toBe(0)
+		expect(tharja.outfits[0].donationReceived).toBe(0)
+		expect(tharja.outfits[0].unlocked).toBe(true)
+		expect(tharja.outfits[0].weightInLbs).toBe(150)
+		expect(tharja.outfits[0].trait).toBe('Strongfat')
+		expect(tharja.outfits[1].donationReceived).toBe(0)
+		expect(tharja.outfits[1].unlocked).toBe(false)
+		expect(tharja.outfits[1].weightInLbs).toBe(150)
 
 		const elincia = getCharacterState(initialState, "elincia")
 		expect(elincia.donationReceived).toBe(0)

@@ -3439,7 +3439,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Titania",
                 "nameSlug": "titania",
                 "heightInCm": 160.0,
-                "initialRoaster": true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,

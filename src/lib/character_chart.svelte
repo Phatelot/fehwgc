@@ -1,5 +1,6 @@
 <script lang="ts">
 	import frameMaskLink from '/src/assets/mask.png'
+	import arrowSvg from '/src/assets/arrow.svg'
 
     import type { CompletedState } from "./completed_state";
     import {createCharacterViewModel, type CharacterViewModel } from "./view_model";
@@ -9,7 +10,12 @@
 
 	export let state: CompletedState;
 
-	let viewModel: CharacterViewModel[] = createCharacterViewModel(state);
+	let viewModel: CharacterViewModel[][] = createCharacterViewModel(state);
+	$: page = 0;
+	$: canGoFatter = page > 0;
+	$: canGoThinner = page < viewModel.length - 1;
+
+	$: pageViewModel = viewModel[page];
 
 	const dispatch = createEventDispatcher<{
 		selectcharacter: {
@@ -23,9 +29,22 @@
 		})
 	}
 
+	function fatterPage() {
+		if (canGoFatter) {
+			page--;
+			pageViewModel = viewModel[page]  // do NOT try to one-line this
+		}
+	}
+
+	function thinnerPage() {
+		if (canGoThinner) {
+			page++;
+			pageViewModel = viewModel[page] // do NOT try to one-line this
+		}
+	}
 </script>
 
-  {#each viewModel as character}
+  {#each pageViewModel as character}
 	<rect
 	  x="{character.x}%"
 	  y="{character.y}%"
@@ -44,11 +63,10 @@
 	  x="{character.x}%"
 	  y="{character.y + character.height + 6}%"
 	  height="{character.pictureHeight}%"
-	  preserveAspectRatio="true"
 	/>
 	<defs>
 		<mask id="{'image-mask-' + character.id}" x="0%" y="0%" width="100%" height="100%" maskUnits="userSpaceOnUse">
-		  <image xlink:href="{frameMaskLink}" width="{viewModel[0].width}%" height="{viewModel[0].pictureHeight}%" x="{character.x}%" y="{character.y + character.height + 6}%"/>
+		  <image xlink:href="{frameMaskLink}" width="{viewModel[0][0].width}%" height="{viewModel[0][0].pictureHeight}%" x="{character.x}%" y="{character.y + character.height + 6}%"/>
 		</mask>
 	</defs>
 
@@ -58,16 +76,23 @@
 	  x="{character.x}%"
 	  y="{character.y + character.height + 6}%"
 	  height="{character.pictureHeight}%"
-	  preserveAspectRatio="true"
 	/>
 	<image
 	  xlink:href="{character.framePictureLink}"
 	  x="{character.x}%"
 	  y="{character.y + character.height + 6}%"
 	  height="{character.pictureHeight}%"
-	  preserveAspectRatio="true"
 	  on:click={() => selectCharacter(character)}
     />
 
 	<WeightLabel outfit="{character}" small/>
   {/each}
+
+  {#if canGoThinner}
+	<image x="0.6%" y="86%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => thinnerPage()}/>
+	<rect x="0%" y="80%" height="15%" width="3.8%" fill="#ae2f29" opacity='0' on:click={() => thinnerPage()}/>
+  {/if}
+  {#if canGoFatter}
+	<image x="-99.4%" y="86%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => fatterPage()}/>
+	<rect x="96.2%" y="80%" height="15%" width="3.8%" fill="#ae2f29" opacity='0' on:click={() => fatterPage()}/>
+  {/if}

@@ -3997,6 +3997,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tethys",
                 "nameSlug": "tethys",
+                initialRoaster: true,
                 "heightInCm": 160.0,
                 "outfits": [
                     {

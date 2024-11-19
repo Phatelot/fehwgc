@@ -33,7 +33,6 @@
 	x="6%"
 	y="10%"
 	height="80%"
-	preserveAspectRatio="true"
 />
 
 <text class="sentence" y="18%">

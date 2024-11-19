@@ -5,6 +5,7 @@
 	import hourglassLink from '/src/assets/shapes/hourglass.png'
 	import pearLink from '/src/assets/shapes/pear.png'
 	import triangleLink from '/src/assets/shapes/triangle.png'
+	import arrowSvg from '/src/assets/arrow.svg'
 
     import type { CompletedState } from "./completed_state";
     import { createOutfitViewModel as createOutfitViewModel, type OutfitViewModel } from "./view_model";
@@ -15,7 +16,12 @@
 
 	export let state: CompletedState;
 
-	let viewModel: OutfitViewModel[] = createOutfitViewModel(state);
+	let viewModel: OutfitViewModel[][] = createOutfitViewModel(state);
+	$: page = 0;
+	$: canGoFatter = page > 0;
+	$: canGoThinner = page < viewModel.length - 1;
+
+	$: pageViewModel = viewModel[page];
 
 	function linkFromShape(shape: Shape) : string {
 		return {
@@ -41,9 +47,23 @@
 		})
 	}
 
+	function fatterPage() {
+		if (canGoFatter) {
+			page--;
+			pageViewModel = viewModel[page]  // do NOT try to one-line this
+		}
+	}
+
+	function thinnerPage() {
+		if (canGoThinner) {
+			page++;
+			pageViewModel = viewModel[page] // do NOT try to one-line this
+		}
+	}
+
 </script>
 
-  {#each viewModel as outfit}
+  {#each pageViewModel as outfit}
 	{#if outfit.outgrownY}
 		<rect x="{outfit.x}%" y="{outfit.outgrownY}%" width="{outfit.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
 	{/if}
@@ -66,11 +86,10 @@
 	  x="{outfit.x}%"
 	  y="{outfit.y + outfit.height + 6}%"
 	  height="{outfit.pictureHeight}%"
-	  preserveAspectRatio="true"
 	/>
 	<defs>
 		<mask id="{'image-mask-' + outfit.id}" x="0%" y="0%" width="100%" height="100%" maskUnits="userSpaceOnUse">
-		  <image xlink:href="{frameMaskLink}" width="{viewModel[0].width}%" height="{viewModel[0].pictureHeight}%" x="{outfit.x}%" y="{outfit.y + outfit.height + 6}%"/>
+		  <image xlink:href="{frameMaskLink}" width="{viewModel[0][0].width}%" height="{viewModel[0][0].pictureHeight}%" x="{outfit.x}%" y="{outfit.y + outfit.height + 6}%"/>
 		</mask>
 	</defs>
 
@@ -80,14 +99,12 @@
 	  x="{outfit.x}%"
 	  y="{outfit.y + outfit.height + 6}%"
 	  height="{outfit.pictureHeight}%"
-	  preserveAspectRatio="true"
 	/>
 	<image
 	  xlink:href="{outfit.framePictureLink}"
 	  x="{outfit.x}%"
 	  y="{outfit.y + outfit.height + 6}%"
 	  height="{outfit.pictureHeight}%"
-	  preserveAspectRatio="true"
 	  on:click={() => selectOutfit(outfit)}
     />
 	{#if outfit.mainShape}
@@ -96,7 +113,6 @@
 			x="{outfit.x + outfit.width * 0.05}%"
 			y="{5.5 + outfit.y + outfit.height - outfit.pictureHeight * 0.4}%"
 			height="{outfit.pictureHeight * 0.4}%"
-			preserveAspectRatio="true"
 		/>
 	{/if}
 	{#if outfit.secondaryShape}
@@ -105,9 +121,17 @@
 			x="{outfit.x + outfit.width * 0.55}%"
 			y="{5.5 + outfit.y + outfit.height - outfit.pictureHeight * 0.4}%"
 			height="{outfit.pictureHeight * 0.4}%"
-			preserveAspectRatio="true"
 		/>
 	{/if}
 
 	<WeightLabel outfit="{outfit}" small/>
   {/each}
+
+  {#if canGoThinner}
+	<image x="0.6%" y="86%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => thinnerPage()}/>
+	<rect x="0%" y="80%" height="15%" width="3.8%" fill="#ae2f29" opacity='0' on:click={() => thinnerPage()}/>
+  {/if}
+  {#if canGoFatter}
+	<image x="-99.4%" y="86%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => fatterPage()}/>
+	<rect x="96.2%" y="80%" height="15%" width="3.8%" fill="#ae2f29" opacity='0' on:click={() => fatterPage()}/>
+  {/if}

@@ -1102,6 +1102,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Sonia",
                 "nameSlug": "sonia",
                 "heightInCm": 160.0,
+                initialRoaster: true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -1363,6 +1364,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lumera",
                 "nameSlug": "lumera",
                 "heightInCm": 177.0,
+                initialRoaster: true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4367,6 +4369,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Malice",
                 "nameSlug": "malice",
                 "heightInCm": 160.0,
+                initialRoaster: true,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 550.0,

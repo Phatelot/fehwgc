@@ -14,9 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install and Build
+      - name: Install, Test and Build
         run: |
           npm install
+          npm run test
           npm run build -- --base=/fehwgc
 
       - name: Deploy

@@ -11,10 +11,15 @@
 
 	let character = getCharacterCompletedState(state, characterSlug) as CharacterCompletedState;
 
+	const unlockedOutfitsSentence = character.numberOfUnlockedOutfits === character.outfits.length ?
+		'All her outfits are unlocked and outgrown.' :
+		`${character.numberOfUnlockedOutfits} of her ${character.outfits.length} outfits (including the final broken one) ${character.numberOfUnlockedOutfits === 1 ? 'is' : 'are'} unlocked.`;
+
 	let sentences = [
 		`${character.name} weighs ${formatWeight(character.stats?.totalWeightUnlockedInLbs || 0)}lbs if you count all her outfits.`,
 		`She is ${toImperialHeight(character.heightInMeters)} tall.`,
 		`Her build is ${character.build}.`,
+		unlockedOutfitsSentence,
 	];
 
 	function close() {

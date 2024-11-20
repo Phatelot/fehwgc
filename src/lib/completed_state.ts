@@ -40,6 +40,7 @@ export type CharacterCompletedState = {
 	lightColor: string;
 	heightInMeters: number;
 	outfits: OutfitCompletedState[];
+	numberOfUnlockedOutfits: number;
 	stats: GroupStats | null;
 	build: Build;
 }
@@ -99,6 +100,7 @@ export function toCharacterCompletedState(state: CharacterState, gameMetadata: G
 		lightColor: gameMetadata.lightColor,
 		heightInMeters: characterMetadata.heightInCm / 100.,
 		outfits: outfits,
+		numberOfUnlockedOutfits: outfits.filter(outfit => outfit.unlocked).length,
 		stats: getChildGroupStats(gameGroupStats, state.slug),
 		build: characterMetadata.build,
 	}

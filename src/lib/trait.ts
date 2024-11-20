@@ -1,4 +1,4 @@
-import { getCharacterMetadata, getCharacterOutfitDisplayName, getOutfitMetadata, type CharacterBaseMetadata, type OutfitBaseMetadata, type Shape } from "./metadata";
+import { getCharacterMetadata, getCharacterOutfitDisplayName, getOutfitMetadata, type CharacterBaseMetadata, type OutfitBaseMetadata, type Shape, type Build } from "./metadata";
 import type { CharacterState, OutfitState } from "./state";
 
 const baseTraits = [
@@ -12,7 +12,6 @@ const baseTraits = [
 	'Sedentary',
 	'Slob',
 	'Stretch_Marks',
-	'Strongfat',
 	'Thick_FUpa',
 	'Thin_Face',
 	'Thin_Forearms',
@@ -54,6 +53,10 @@ const notHourglassOrPearTraits = [
 
 const noSecondaryShapeTraits = [
 	'Extreme',
+]
+
+const strongTraits = [
+	'Strongfat',
 ]
 
 const rareTraits = [
@@ -109,12 +112,12 @@ export const traitNames : {[key: string]: string} = {
 
 export function selectTraitFor(character: CharacterState, outfit: OutfitState): string {
 	const seed = `${character.slug}-${outfit.slug}`
-	const characterMetadata = getCharacterMetadata(character.slug);
+	const characterMetadata = getCharacterMetadata(character.slug) as CharacterBaseMetadata;
 	const outfitMetadata = getOutfitMetadata(character.slug, outfit.slug) as OutfitBaseMetadata
-	const possibleTraits = removeAlreadySelectedTraits(possibleCommonTraitsFor(outfitMetadata.mainShape, outfitMetadata.secondaryShape), character)
+	const possibleTraits = removeAlreadySelectedTraits(possibleCommonTraitsFor(characterMetadata.nameSlug, characterMetadata.build, outfitMetadata.mainShape, outfitMetadata.secondaryShape), character)
 
-	const rareSelected = !(characterMetadata?.initialRoaster && outfitMetadata.outfitSlug === characterMetadata?.outfits[0].outfitSlug) && // no rare traits if first outfit of initial roaster
-		(characterMetadata?.outfits || []).length > 1 && // no rare traits if only one outfit
+	const rareSelected = !(characterMetadata.initialRoaster && outfitMetadata.outfitSlug === characterMetadata.outfits[0].outfitSlug) && // no rare traits if first outfit of initial roaster
+		(characterMetadata.outfits || []).length > 1 && // no rare traits if only one outfit
 		!containsARareTrait(character) && // at most one rare trait per character
 		stringToRandomNumber(seed + '-rare', 10) === 0; // 10% chance
 
@@ -128,20 +131,21 @@ export function selectTraitFor(character: CharacterState, outfit: OutfitState): 
 export function selectTraitForInitial(character: CharacterBaseMetadata): string {
 	const outfit = character.outfits[0]
 	const seed = `${character.nameSlug}-${outfit.outfitSlug}`
-	const possibleTraits = possibleCommonTraitsFor(outfit.mainShape, outfit.secondaryShape);
+	const possibleTraits = possibleCommonTraitsFor(character.nameSlug, character.build, outfit.mainShape, outfit.secondaryShape);
 
 	return possibleTraits.sort()[stringToRandomNumber(seed, possibleTraits.length)]
 }
 
 export function selectTraitForBroken(character: CharacterState): string {
+	const baseCharacterMetadata = getCharacterMetadata(character.slug) as CharacterBaseMetadata
 	const baseOutfitMetadata = getOutfitMetadata(character.slug, character.brokenOutfit.slug as string) as OutfitBaseMetadata
-	const possibleTraits = removeAlreadySelectedTraits(possibleCommonTraitsFor(baseOutfitMetadata.mainShape, baseOutfitMetadata.secondaryShape), character)
+	const possibleTraits = removeAlreadySelectedTraits(possibleCommonTraitsFor(baseCharacterMetadata.nameSlug, baseCharacterMetadata.build, baseOutfitMetadata.mainShape, baseOutfitMetadata.secondaryShape), character)
 
 	const seed = `${character.slug}`
 	return possibleTraits.sort()[stringToRandomNumber(seed, possibleTraits.length)]
 }
 
-function possibleCommonTraitsFor(shape: Shape, secondaryShape?: Shape): string[] {
+function possibleCommonTraitsFor(characterSlug: String, build: Build, shape: Shape, secondaryShape?: Shape): string[] {
 	const results = [...baseTraits];
 	if (shape === "🍐") {
 		results.push(...pearTraits)
@@ -161,6 +165,9 @@ function possibleCommonTraitsFor(shape: Shape, secondaryShape?: Shape): string[]
 	}
 	if (!secondaryShape) {
 		results.push(...noSecondaryShapeTraits)
+	}
+	if (characterSlug === 'etie' || build === "Strong") {
+		results.push(...strongTraits)
 	}
 	return results;
 }

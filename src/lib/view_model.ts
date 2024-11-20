@@ -1,6 +1,6 @@
 import { getBgPictureLink, getFacePicLink, getFramePictureLink } from "./asset_utils";
 import type { CharacterCompletedState, CompletedState, OutfitCompletedState } from "./completed_state";
-import type { Shape } from "./metadata";
+import type { Build, Shape } from "./metadata";
 import { groupConsecutive } from "./utils";
 
 export const viewPortHeight = 100;
@@ -54,6 +54,7 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 				mainShape: outfitState.mainShape,
 				secondaryShape: outfitState.secondaryShape,
 				trait: outfitState.trait,
+				build: outfitState.build,
 			};
 		})
 	})
@@ -75,6 +76,7 @@ export type OutfitViewModel = {
 	weightInLbs: number;
 	id: string;
 	trait: string;
+	build: Build,
 	mainShape?: Shape;
 	secondaryShape?: Shape;
 	broken: boolean;
@@ -117,6 +119,7 @@ export function createCharacterViewModel(state: CompletedState) : CharacterViewM
 				pictureHeight: width * viewPortWidth / viewPortHeight,
 				weightInLbs,
 				id: `${characterState.nameSlug}`,
+				build: characterState.build,
 			};
 		})
 	})
@@ -135,4 +138,5 @@ export type CharacterViewModel = {
 	framePictureLink: string;
 	weightInLbs: number;
 	id: string;
+	build: Build;
 }

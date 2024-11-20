@@ -1,5 +1,5 @@
 import { toFrameType } from "./frames";
-import { baseMetadata, type CharacterBaseMetadata, type GameBaseMetadata, type OutfitBaseMetadata, type Shape } from "./metadata";
+import { baseMetadata, type Build, type CharacterBaseMetadata, type GameBaseMetadata, type OutfitBaseMetadata, type Shape } from "./metadata";
 import { isOutgrown, type GameState, type OutfitState, type CharacterState, isUnlocked, getOutfitState } from "./state";
 import { createWeightDonationTree, getChildGroupStats, toGroupStats, type GroupStats } from "./weight_donation_tree";
 import { BMI } from "./weight_utils";
@@ -25,6 +25,7 @@ export type OutfitCompletedState = {
 	mainShape?: Shape;
 	secondaryShape?: Shape;
 	trait: string;
+	build: Build;
 }
 
 export type CharacterCompletedState = {
@@ -40,6 +41,7 @@ export type CharacterCompletedState = {
 	heightInMeters: number;
 	outfits: OutfitCompletedState[];
 	stats: GroupStats | null;
+	build: Build;
 }
 
 export type GameCompletedState = {
@@ -98,6 +100,7 @@ export function toCharacterCompletedState(state: CharacterState, gameMetadata: G
 		heightInMeters: characterMetadata.heightInCm / 100.,
 		outfits: outfits,
 		stats: getChildGroupStats(gameGroupStats, state.slug),
+		build: characterMetadata.build,
 	}
 }
 
@@ -124,6 +127,7 @@ export function toBrokenOutfitState(state: CharacterState, characterMetadata: Ch
 		frame: toFrameType(state.slug),
 		bgFrame: gameMetadata.nameSlug,
 		trait: state.brokenOutfit.trait || '',
+		build: characterMetadata.build,
 	}
 }
 
@@ -150,6 +154,7 @@ export function toOutfitCompletedState(state: OutfitState, characterMetadata: Ch
 		frame: toFrameType(state.slug),
 		bgFrame: gameMetadata.nameSlug,
 		trait: state.trait || '',
+		build: characterMetadata.build,
 	}
 }
 

@@ -2,7 +2,7 @@
     import { getBodyPicLink } from "./asset_utils";
     import Box from "./box.svelte";
     import { getCharacterCompletedState, type CharacterCompletedState, type CompletedState } from "./completed_state";
-    import { formatWeight } from "./weight_utils";
+    import { formatWeight, toImperialHeight } from "./weight_utils";
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
@@ -13,6 +13,8 @@
 
 	let sentences = [
 		`${character.name} weighs ${formatWeight(character.stats?.totalWeightUnlockedInLbs || 0)}lbs if you count all her outfits.`,
+		`She is ${toImperialHeight(character.heightInMeters)} tall.`,
+		`Her build is ${character.build}.`,
 	];
 
 	function close() {

@@ -27,6 +27,7 @@
 		`She is ${toImperialHeight(outfit.heightInMeters)} tall.`,
 		`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${toBMICategory(outfit.BMI)}.`,
 		`Her trait is ${traitNames[outfit.trait] || ''}:`,
+		`Her build is ${outfit.build}.`,
 	];
 
 	function close() {

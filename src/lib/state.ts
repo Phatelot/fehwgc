@@ -1,4 +1,4 @@
-import { baseMetadata, type CharacterBaseMetadata, type GameBaseMetadata } from "./metadata";
+import { baseMetadata, initialWeightForBuild, type CharacterBaseMetadata, type GameBaseMetadata } from "./metadata";
 import { selectTraitFor, selectTraitForInitial } from "./trait";
 
 export type Donation = {
@@ -64,7 +64,7 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState
 
 			const outfitState = {
 				slug: outfitBaseMetadata.outfitSlug,
-				weightInLbs: 150,
+				weightInLbs: initialWeightForBuild(baseMetadata.build),
 				donationReceived: 0,
 				thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
 				unlocked: unlocked,

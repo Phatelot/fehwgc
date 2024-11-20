@@ -1,5 +1,16 @@
 export type Shape = '💎' | '🍎' | '⌛' | '🟣' | '🍐';
 
+export type Build = 'Petite' | 'Regular' | 'Strong' | 'Giant';
+
+export function initialWeightForBuild(b: Build): number {
+    return {
+        'Petite': 100,
+        'Regular': 120,
+        'Strong': 160,
+        'Giant': 300,
+    }[b];
+}
+
 export type OutfitBaseMetadata = {
     outfitWeightThresholdInLb: number;
     mainShape: Shape;
@@ -12,7 +23,9 @@ export type CharacterBaseMetadata = {
     name: string;
     nameSlug: string;
     heightInCm: number;
+    build: Build;
     initialRoaster?: boolean;
+
     outfits: OutfitBaseMetadata[];
 };
 
@@ -79,6 +92,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Female Robin",
                 "nameSlug": "female_robin",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -136,6 +150,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Emmeryn",
                 "nameSlug": "emmeryn",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -149,6 +164,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Sully",
                 "nameSlug": "sully",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -162,6 +178,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Sumia",
                 "nameSlug": "sumia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -175,6 +192,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Maribelle",
                 "nameSlug": "maribelle",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -188,6 +206,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Miriel",
                 "nameSlug": "miriel",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -201,6 +220,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Cordelia",
                 "nameSlug": "cordelia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -247,6 +267,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Phila",
                 "nameSlug": "phila",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -260,6 +281,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Flavia",
                 "nameSlug": "flavia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -281,6 +303,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Olivia",
                 "nameSlug": "olivia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -315,6 +338,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "tharja",
                 "heightInCm": 160.0,
                 "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -369,6 +393,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Aversa",
                 "nameSlug": "aversa",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -389,6 +414,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Say'ri",
                 "nameSlug": "sayri",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -409,6 +435,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Cherche",
                 "nameSlug": "cherche",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -429,6 +456,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Adult Tiki",
                 "nameSlug": "adult_tiki",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -469,6 +497,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Panne",
                 "nameSlug": "panne",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -488,6 +517,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Awakening Anna",
                 "nameSlug": "awakening_anna",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -513,6 +543,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lucina",
                 "nameSlug": "lucina",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -578,6 +609,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Naga",
                 "nameSlug": "naga",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -598,6 +630,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Kjelle",
                 "nameSlug": "kjelle",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -611,6 +644,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Cynthia",
                 "nameSlug": "cynthia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -624,6 +658,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Severa",
                 "nameSlug": "severa",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -643,6 +678,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Noire",
                 "nameSlug": "noire",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -657,6 +693,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lissa",
                 "nameSlug": "lissa",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -692,6 +729,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Gwendolyn",
                 "nameSlug": "gwendolyn",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -705,6 +743,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Cecilia",
                 "nameSlug": "cecilia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -738,6 +777,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Brunnya",
                 "nameSlug": "brunnya",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -752,6 +792,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Guinivere",
                 "nameSlug": "guinivere",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -773,6 +814,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Melady",
                 "nameSlug": "melady",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -786,6 +828,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Echidna",
                 "nameSlug": "echidna",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -800,7 +843,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Igrene",
                 "nameSlug": "igrene",
                 "heightInCm": 160.0,
-                initialRoaster: true,
+                "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -828,6 +872,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Idunn",
                 "nameSlug": "idunn",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -861,6 +906,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Elimine",
                 "nameSlug": "elimine",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -875,6 +921,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Juno",
                 "nameSlug": "juno",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -903,6 +950,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lyn",
                 "nameSlug": "lyn",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -976,6 +1024,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Isadora",
                 "nameSlug": "isadora",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -990,6 +1039,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Leila",
                 "nameSlug": "leila",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -1009,6 +1059,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Louise",
                 "nameSlug": "louise",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1035,6 +1086,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Fiora",
                 "nameSlug": "fiora",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1055,6 +1107,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Karla",
                 "nameSlug": "karla",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -1089,6 +1142,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Limstella",
                 "nameSlug": "limstella",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1102,7 +1156,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Sonia",
                 "nameSlug": "sonia",
                 "heightInCm": 160.0,
-                initialRoaster: true,
+                "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -1117,6 +1172,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ursula",
                 "nameSlug": "ursula",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1164,6 +1220,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Silque",
                 "nameSlug": "silque",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1184,6 +1241,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Clair",
                 "nameSlug": "clair",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1197,6 +1255,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Faye",
                 "nameSlug": "faye",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1223,7 +1282,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Mathilda",
                 "nameSlug": "mathilda",
                 "heightInCm": 160.0,
-                initialRoaster: true,
+                "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -1237,6 +1297,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Sonya",
                 "nameSlug": "sonya",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1270,6 +1331,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Tatiana",
                 "nameSlug": "tatiana",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1284,6 +1346,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Mila",
                 "nameSlug": "mila",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 700.0,
@@ -1297,6 +1360,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Marla",
                 "nameSlug": "marla",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1310,6 +1374,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Hestia",
                 "nameSlug": "hestia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1323,6 +1388,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Rinea",
                 "nameSlug": "rinea",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1344,6 +1410,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Female Alear",
                 "nameSlug": "female_alear",
                 "heightInCm": 165.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1364,7 +1431,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lumera",
                 "nameSlug": "lumera",
                 "heightInCm": 177.0,
-                initialRoaster: true,
+                "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1393,6 +1461,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Chloé",
                 "nameSlug": "chloe",
                 "heightInCm": 167.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -1413,6 +1482,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lapis",
                 "nameSlug": "lapis",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1433,6 +1503,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Citrinne",
                 "nameSlug": "citrinne",
                 "heightInCm": 163.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -1446,6 +1517,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ivy",
                 "nameSlug": "ivy",
                 "heightInCm": 172.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1466,6 +1538,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Timerra",
                 "nameSlug": "timerra",
                 "heightInCm": 159.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -1486,6 +1559,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Merrin",
                 "nameSlug": "merrin",
                 "heightInCm": 173.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1499,6 +1573,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Panette",
                 "nameSlug": "panette",
                 "heightInCm": 164.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1512,6 +1587,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Zephia",
                 "nameSlug": "zephia",
                 "heightInCm": 177.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -1526,6 +1602,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nel",
                 "nameSlug": "nel",
                 "heightInCm": 175.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1540,6 +1617,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Goldmary",
                 "nameSlug": "goldmary",
                 "heightInCm": 173.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1554,6 +1632,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Etie",
                 "nameSlug": "etie",
                 "heightInCm": 154.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -1567,6 +1646,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Yunaka",
                 "nameSlug": "yunaka",
                 "heightInCm": 164.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1581,6 +1661,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Céline",
                 "nameSlug": "celine",
                 "heightInCm": 155.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1602,6 +1683,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Female Corrin",
                 "nameSlug": "female_corrin",
                 "heightInCm": 165.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -1670,6 +1752,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Azura",
                 "nameSlug": "azura",
                 "heightInCm": 168.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 200.0,
@@ -1723,6 +1806,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Felicia",
                 "nameSlug": "felicia",
                 "heightInCm": 158.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1748,6 +1832,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Mikoto",
                 "nameSlug": "mikoto",
                 "heightInCm": 170.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1761,6 +1846,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Kagero",
                 "nameSlug": "kagero",
                 "heightInCm": 165.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 200.0,
@@ -1808,6 +1894,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Hinoka",
                 "nameSlug": "hinoka",
                 "heightInCm": 170.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -1853,6 +1940,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Setsuna",
                 "nameSlug": "setsuna",
                 "heightInCm": 163.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1867,6 +1955,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Oboro",
                 "nameSlug": "oboro",
                 "heightInCm": 163.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1886,6 +1975,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Orochi",
                 "nameSlug": "orochi",
                 "heightInCm": 167.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -1907,6 +1997,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "rinkah",
                 "heightInCm": 161.0,
                 "initialRoaster": true,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1928,6 +2019,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Peri",
                 "nameSlug": "peri",
                 "heightInCm": 163.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1941,6 +2033,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Camilla",
                 "nameSlug": "camilla",
                 "heightInCm": 178.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -2021,6 +2114,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Selena",
                 "nameSlug": "selena",
                 "heightInCm": 158.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2041,6 +2135,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Effie",
                 "nameSlug": "effie",
                 "heightInCm": 172.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -2067,6 +2162,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Charlotte",
                 "nameSlug": "charlotte",
                 "heightInCm": 161.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2086,6 +2182,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Flora",
                 "nameSlug": "flora",
                 "heightInCm": 181.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2113,6 +2210,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Candace",
                 "nameSlug": "candace",
                 "heightInCm": 165.0,
+                "build": 'Giant',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2126,6 +2224,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Arete",
                 "nameSlug": "arete",
                 "heightInCm": 175.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -2140,6 +2239,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Reina",
                 "nameSlug": "reina",
                 "heightInCm": 170.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2161,6 +2261,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Anna",
                 "nameSlug": "anna",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2181,6 +2282,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Henriette",
                 "nameSlug": "henriette",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -2201,6 +2303,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ash",
                 "nameSlug": "ash",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2221,6 +2324,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Letizia",
                 "nameSlug": "letizia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -2240,6 +2344,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Embla",
                 "nameSlug": "embla",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -2267,6 +2372,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nifl",
                 "nameSlug": "nifl",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2294,7 +2400,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Fjorm",
                 "nameSlug": "fjorm",
                 "heightInCm": 160.0,
-                initialRoaster: true,
+                "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2346,6 +2453,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Gunnthra",
                 "nameSlug": "gunnthra",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2373,6 +2481,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Laegjarn",
                 "nameSlug": "laegjarn",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -2412,6 +2521,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Hel",
                 "nameSlug": "hel",
                 "heightInCm": 160.0,
+                "build": 'Giant',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2426,6 +2536,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Thrasir",
                 "nameSlug": "thrasir",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2445,6 +2556,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ganglot",
                 "nameSlug": "ganglot",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2459,6 +2571,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Eir",
                 "nameSlug": "eir",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -2492,6 +2605,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ymir",
                 "nameSlug": "ymir",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2512,6 +2626,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Peony",
                 "nameSlug": "peony",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 200.0,
@@ -2547,6 +2662,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Mirabilis",
                 "nameSlug": "mirabilis",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 200.0,
@@ -2572,6 +2688,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Triandra",
                 "nameSlug": "triandra",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2606,6 +2723,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Plumeria",
                 "nameSlug": "plumeria",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -2639,6 +2757,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Freyja",
                 "nameSlug": "freyja",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2667,6 +2786,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Eitr ",
                 "nameSlug": "eitr",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2681,6 +2801,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ginnungagap",
                 "nameSlug": "ginnungagap",
                 "heightInCm": 160.0,
+                "build": 'Giant',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -2694,6 +2815,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Reginn",
                 "nameSlug": "reginn",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -2720,6 +2842,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Thjazi",
                 "nameSlug": "thjazi",
                 "heightInCm": 160.0,
+                "build": 'Giant',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -2734,7 +2857,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Dagr",
                 "nameSlug": "dagr",
                 "heightInCm": 160.0,
-                initialRoaster: true,
+                "initialRoaster": true,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2767,6 +2891,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nott",
                 "nameSlug": "nott",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2787,6 +2912,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Seior",
                 "nameSlug": "seior",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2813,6 +2939,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Gullveig",
                 "nameSlug": "gullveig",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2840,6 +2967,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Kvasir",
                 "nameSlug": "kvasir",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2859,6 +2987,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Heior",
                 "nameSlug": "heior",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2878,6 +3007,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nerpuz",
                 "nameSlug": "nerpuz",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2906,6 +3036,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ratatoskr",
                 "nameSlug": "ratatoskr",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 550.0,
@@ -2920,6 +3051,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Hraesvelgr",
                 "nameSlug": "hraesvelgr",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -2933,6 +3065,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Niohoggr",
                 "nameSlug": "niohoggr",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2946,6 +3079,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Heiorun",
                 "nameSlug": "heiorun",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -2959,8 +3093,9 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Loki",
                 "nameSlug": "loki",
-                initialRoaster: true,
+                "initialRoaster": true,
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -2996,6 +3131,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Thorr",
                 "nameSlug": "thorr",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3024,6 +3160,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Tailtiu",
                 "nameSlug": "tailtiu",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3050,6 +3187,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ethyln",
                 "nameSlug": "ethyln",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3063,6 +3201,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ethlyn",
                 "nameSlug": "ethlyn",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3078,6 +3217,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "arya",
                 "heightInCm": 160.0,
                 "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3105,6 +3245,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Annand",
                 "nameSlug": "annand",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3118,6 +3259,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Dithorba",
                 "nameSlug": "dithorba",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3131,6 +3273,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Erinys",
                 "nameSlug": "erinys",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3144,6 +3287,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lachesis",
                 "nameSlug": "lachesis",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3170,6 +3314,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Deirdre",
                 "nameSlug": "deirdre",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3203,6 +3348,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Silvia",
                 "nameSlug": "silvia",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3217,6 +3363,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Larcei",
                 "nameSlug": "larcei",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3236,6 +3383,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lene",
                 "nameSlug": "lene",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3257,6 +3405,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Julia ",
                 "nameSlug": "julia",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3296,6 +3445,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Altena",
                 "nameSlug": "altena",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3310,6 +3460,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ishtar",
                 "nameSlug": "ishtar",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -3344,6 +3495,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Hilda",
                 "nameSlug": "hilda",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3357,6 +3509,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ullr",
                 "nameSlug": "ullr",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3371,6 +3524,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Brigid",
                 "nameSlug": "brigid",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3392,6 +3546,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Tsubasa",
                 "nameSlug": "tsubasa",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3405,6 +3560,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Kiria",
                 "nameSlug": "kiria",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3418,6 +3574,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Eleanora",
                 "nameSlug": "eleanora",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3439,6 +3596,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Titania",
                 "nameSlug": "titania",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3459,6 +3617,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Elincia",
                 "nameSlug": "elincia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3507,6 +3666,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nephenee",
                 "nameSlug": "nephenee",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -3540,6 +3700,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Sigrun",
                 "nameSlug": "sigrun",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3561,6 +3722,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Tanith",
                 "nameSlug": "tanith",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3581,6 +3743,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Marcia",
                 "nameSlug": "marcia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3595,6 +3758,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Astrid",
                 "nameSlug": "astrid",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3610,6 +3774,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "petrine",
                 "heightInCm": 160.0,
                 "initialRoaster": true,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -3624,6 +3789,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ilyana",
                 "nameSlug": "ilyana",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3637,6 +3803,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Mia",
                 "nameSlug": "mia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3650,6 +3817,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lethe",
                 "nameSlug": "lethe",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3676,6 +3844,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Leanne",
                 "nameSlug": "leanne",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3690,6 +3859,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Leane",
                 "nameSlug": "leane",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3703,6 +3873,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ena",
                 "nameSlug": "ena",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3716,6 +3887,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lucia",
                 "nameSlug": "lucia",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3737,6 +3909,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nailah",
                 "nameSlug": "nailah",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3764,6 +3937,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Altina",
                 "nameSlug": "altina",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3797,6 +3971,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ashera",
                 "nameSlug": "ashera",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3811,6 +3986,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Heather",
                 "nameSlug": "heather",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3824,6 +4000,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Vika",
                 "nameSlug": "vika",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3845,6 +4022,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Eirika",
                 "nameSlug": "eirika",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -3912,6 +4090,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Syrene",
                 "nameSlug": "syrene",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3925,6 +4104,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Vanessa",
                 "nameSlug": "vanessa",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3938,6 +4118,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Selena",
                 "nameSlug": "selena",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -3964,6 +4145,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Natasha",
                 "nameSlug": "natasha",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -3977,6 +4159,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Marisa",
                 "nameSlug": "marisa",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3996,8 +4179,9 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tethys",
                 "nameSlug": "tethys",
-                initialRoaster: true,
+                "initialRoaster": true,
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4011,6 +4195,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "L'Arachel",
                 "nameSlug": "larachel",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4052,6 +4237,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Caeda",
                 "nameSlug": "caeda",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 200.0,
@@ -4098,6 +4284,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Elice",
                 "nameSlug": "elice",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -4118,6 +4305,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nyna",
                 "nameSlug": "nyna",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4132,6 +4320,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Linde",
                 "nameSlug": "linde",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4164,6 +4353,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Minerva",
                 "nameSlug": "minerva",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4190,6 +4380,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Palla",
                 "nameSlug": "palla",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -4217,6 +4408,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Catria",
                 "nameSlug": "catria",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4263,6 +4455,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lena",
                 "nameSlug": "lena",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4276,6 +4469,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Sheena",
                 "nameSlug": "sheena",
                 "heightInCm": 160.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4296,6 +4490,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nagi",
                 "nameSlug": "nagi",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4316,6 +4511,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Eremiya",
                 "nameSlug": "eremiya",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4329,6 +4525,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Clarisse",
                 "nameSlug": "clarisse",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4342,6 +4539,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Phina",
                 "nameSlug": "phina",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -4355,6 +4553,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Athena",
                 "nameSlug": "athena",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4369,7 +4568,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Malice",
                 "nameSlug": "malice",
                 "heightInCm": 160.0,
-                initialRoaster: true,
+                "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 550.0,
@@ -4384,6 +4584,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Kris",
                 "nameSlug": "kris",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -4405,6 +4606,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Eyvel",
                 "nameSlug": "eyvel",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4418,6 +4620,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Tanya",
                 "nameSlug": "tanya",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4431,6 +4634,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Safy",
                 "nameSlug": "safy",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4445,6 +4649,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Olwen",
                 "nameSlug": "olwen",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4480,6 +4685,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "female_byleth",
                 "heightInCm": 164.0,
                 "initialRoaster": true,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4527,6 +4733,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Rhea",
                 "nameSlug": "rhea",
                 "heightInCm": 172.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4566,6 +4773,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Catherine",
                 "nameSlug": "catherine",
                 "heightInCm": 175.0,
+                "build": 'Strong',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -4586,6 +4794,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Shamir",
                 "nameSlug": "shamir",
                 "heightInCm": 169.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4612,6 +4821,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Cornelia",
                 "nameSlug": "cornelia",
                 "heightInCm": 168.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4626,6 +4836,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Kronya",
                 "nameSlug": "kronya",
                 "heightInCm": 157.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4640,6 +4851,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Female Shez",
                 "nameSlug": "female_shez",
                 "heightInCm": 170.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4666,6 +4878,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Monica",
                 "nameSlug": "monica",
                 "heightInCm": 157.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4680,6 +4893,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Arval",
                 "nameSlug": "arval",
                 "heightInCm": 160.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -4694,6 +4908,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Manuela",
                 "nameSlug": "manuela",
                 "heightInCm": 172.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4707,6 +4922,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Edelgard",
                 "nameSlug": "edelgard",
                 "heightInCm": 158.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4760,6 +4976,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Dorothea",
                 "nameSlug": "dorothea",
                 "heightInCm": 170.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4793,6 +5010,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Annette",
                 "nameSlug": "annette",
                 "heightInCm": 153.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4806,6 +5024,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Bernadetta",
                 "nameSlug": "bernadetta",
                 "heightInCm": 150.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4840,6 +5059,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Constance",
                 "nameSlug": "constance",
                 "heightInCm": 164.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4853,6 +5073,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Hapi",
                 "nameSlug": "hapi",
                 "heightInCm": 169.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4866,6 +5087,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Hilda",
                 "nameSlug": "hilda",
                 "heightInCm": 154.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4900,6 +5122,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Ingrid",
                 "nameSlug": "ingrid",
                 "heightInCm": 165.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -4927,6 +5150,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Lysithea",
                 "nameSlug": "lysithea",
                 "heightInCm": 160.0,
+                "build": 'Petite',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -4940,6 +5164,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Marianne",
                 "nameSlug": "marianne",
                 "heightInCm": 163.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4973,6 +5198,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Mercedes",
                 "nameSlug": "mercedes",
                 "heightInCm": 169.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4999,6 +5225,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Leonie",
                 "nameSlug": "leonie",
                 "heightInCm": 168.0,
+                "build": 'Regular',
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,

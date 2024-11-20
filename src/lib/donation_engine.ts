@@ -1,7 +1,7 @@
 import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, outfitWithMostDonation, isUnlocked } from "./state";
 import { selectTraitFor, selectTraitForBroken } from "./trait";
 
-const UNLOCK_CHARACTER_THRESHOLD_IN_CAD = 125;
+const UNLOCK_CHARACTER_THRESHOLD_IN_CAD = 120;
 
 export function applyDonations(state: GameState[], donations: Donation[]): GameState[][] {
 	const states : GameState[][] = [state];

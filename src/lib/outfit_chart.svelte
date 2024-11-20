@@ -12,7 +12,8 @@
     import WeightLabel from "./weight_label.svelte";
     import type { Shape } from './metadata';
 
-	import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
+    import { getTraitPicLink } from './asset_utils';
 
 	export let state: CompletedState;
 
@@ -123,6 +124,12 @@
 			height="{outfit.pictureHeight * 0.4}%"
 		/>
 	{/if}
+	<image
+		xlink:href="{getTraitPicLink(outfit.trait)}"
+		x="{outfit.x - 1.3}%"
+		y="{5.5 + outfit.y + outfit.height + 8}%"
+		height="7%"
+	/>
 
 	<WeightLabel outfit="{outfit}" small/>
   {/each}

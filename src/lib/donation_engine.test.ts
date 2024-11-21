@@ -82,10 +82,16 @@ describe('big donation to a specified outfit', () => {
 		expect(getCharacterState(outputState, "edelgard")?.outfits[0].weightInLbs).toBe(2400)
 	})
 
-	it('should update the weights of other characters from the same game, with spillover', () => {
+	it('should update the weights of other characters from the same game & group, with spillover', () => {
+		const annetteState = getCharacterState(outputState, "annette")
+		expect(annetteState?.outfits[0].weightInLbs).toBe(200)
+		expect(annetteState?.brokenOutfit.weightInLbs).toBe(2720)
+	})
+
+	it('should not change the weights of other characters from the same game but different group', () => {
 		const kronyaState = getCharacterState(outputState, "kronya")
 		expect(kronyaState?.outfits[0].weightInLbs).toBe(1500)
-		expect(kronyaState?.brokenOutfit.weightInLbs).toBe(2800)
+		expect(kronyaState?.brokenOutfit.weightInLbs).toBe(2000)
 	})
 
 	it('should update the weight of the broken outfit', () => {

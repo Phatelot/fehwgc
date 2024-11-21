@@ -15,6 +15,7 @@ export type GameState = {
 export type CharacterState = {
     slug: string;
     donationReceived: number;
+    groupSlug: string;
     outfits: OutfitState[];
     brokenOutfit: BrokenOutfitState;
 }
@@ -58,6 +59,7 @@ function initGameState(baseMetadata: GameBaseMetadata): GameState {
 function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState {
 	return {
 		slug: baseMetadata.nameSlug,
+		groupSlug: baseMetadata.group?.slug || 'no_group',
 		donationReceived: 0,
 		outfits: baseMetadata.outfits.map((outfitBaseMetadata, i) => {
 			const unlocked = (i == 0 && baseMetadata.initialRoaster) || false

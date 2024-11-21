@@ -23,11 +23,13 @@ export function applyDonation(state: GameState[], donation: Donation) : GameStat
 		addWeightToOutfit(outfitState, donation.amount)
 	}
 	addWeightToOutfit(characterState.brokenOutfit, donation.amount)
-	getGameState(state, donation.character)?.characters.forEach(characterState => {
-		addWeightTo(characterState, donation.amount * 0.2)
-		addWeightToOutfit(characterState.brokenOutfit, donation.amount * 0.2)
-		updateCharacterStateUnlock(characterState);
-	})
+	getGameState(state, donation.character)?.characters
+		.filter(characterStateForSpillOver => characterStateForSpillOver.groupSlug === characterState.groupSlug)
+		.forEach(characterStateForSpillOver => {
+			addWeightTo(characterStateForSpillOver, donation.amount * 0.2)
+			addWeightToOutfit(characterStateForSpillOver.brokenOutfit, donation.amount * 0.2)
+			updateCharacterStateUnlock(characterStateForSpillOver);
+		})
 	return state;
 }
 

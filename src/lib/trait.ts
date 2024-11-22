@@ -1,4 +1,5 @@
 import { getCharacterMetadata, getCharacterOutfitDisplayName, getOutfitMetadata, type CharacterBaseMetadata, type OutfitBaseMetadata, type Shape, type Build } from "./metadata";
+import { stringToRandomNumber } from "./rng";
 import type { CharacterState, OutfitState } from "./state";
 
 const baseTraits = [
@@ -184,16 +185,4 @@ function alreadySelectedTraits(characterState: CharacterState): string[] {
 	return characterState.outfits
 		.map(outfitState => outfitState.trait)
 		.filter(trait => !!trait) as string[];
-}
-
-export function stringToRandomNumber(str: string, excludedUpperBound: number): number {
-    let hash = 0;
-
-    // Simple hashing loop
-    for (let i = 0; i < str.length; i++) {
-        hash = (hash << 5) - hash + str.charCodeAt(i);
-        hash |= 0; // Convert to 32-bit integer
-    }
-
-    return Math.abs(hash % excludedUpperBound);
 }

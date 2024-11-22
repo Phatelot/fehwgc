@@ -3101,7 +3101,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Seior",
                 "nameSlug": "seior",
                 "heightInCm": 160.0,
-                "build": 'Regular',
+                "build": 'Strong',
                 "group": heroesBook68Group,
                 "outfits": [
                     {

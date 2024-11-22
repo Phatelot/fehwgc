@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { stringToRandomNumber } from './trait'
+import { stringToRandomNumber } from './rng'
 
 describe('stringToRandomNumber', () => {
 	it("should be deterministic", () => {

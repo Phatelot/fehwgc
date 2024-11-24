@@ -1,11 +1,11 @@
 <script lang="ts">
     import bgLink from '/src/assets/BG.webp'
 
-
+    import { Octokit } from 'octokit';
     import { toCompletedState, type CompletedState } from './lib/completed_state';
     import { applyDonations } from './lib/donation_engine';
     import { parseCsvData } from './lib/donation_log_parser';
-    import { initState } from './lib/state';
+    import { initState, type Donation } from './lib/state';
     import { viewPortHeight, viewPortWidth } from './lib/view_model';
     import Box from './lib/box.svelte';
     import OutfitChart from './lib/outfit_chart.svelte';
@@ -15,15 +15,31 @@
     import MenuPopup from './lib/menu_popup.svelte';
 
     async function fetchData(): Promise<CompletedState> {
-      const response = await fetch("https://api.github.com/gists/8c4b31c95b425cb40d3f865d95561bfa", {
-        cache: "no-store",
-        headers: {
-          "Accept": "application/vnd.github+json",
-        },
-      });
-      const donations = parseCsvData(JSON.parse(await response.text())
-        .files['donos.csv']
-        .content);
+      const token = localStorage.getItem('fehwgc-admin') || '';
+      const gistId = '8c4b31c95b425cb40d3f865d95561bfa';
+
+      let donations: Donation[];
+      if (!token) {
+        const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+          cache: "no-store",
+          headers: {
+            "Accept": "application/vnd.github+json",
+          },
+        });
+        donations = parseCsvData(JSON.parse(await response.text())
+          .files['donos.csv']
+          .content);
+      } else {
+        const octokit = new Octokit({
+          auth: token,
+        });
+
+        const response = await octokit.request(`GET /gists/${gistId}`);
+        const files = response.data.files;
+        const donoFile = (files || {})['donos.csv'];
+        const content = donoFile?.content || '';
+        donations = parseCsvData(content);
+      }
 
       const states = applyDonations(initState(), donations)
       const lastState = states[states.length-1];

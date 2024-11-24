@@ -33,7 +33,6 @@ function fromCharacterState(state: CharacterState) : WeightDonationNode {
 
 	return {
 		slug: state.slug,
-		donationReceived: state.donationReceived,
 		leafs: leafs,
 	}
 }

@@ -7,13 +7,12 @@ export function createSampleState() : GameState[] {
       characters: [
         {
           slug: "edelgard",
-          donationReceived: 150,
           groupSlug: 'students',
           outfits: [
             {
               slug: "base",
 			  unlocked: true,
-              donationReceived: 20,
+              donationReceived: 120,
               thresholdInLbs: 500,
               weightInLbs: 400,
               trait: 'Active',
@@ -24,19 +23,15 @@ export function createSampleState() : GameState[] {
               donationReceived: 20,
               thresholdInLbs: 500,
               weightInLbs: 170,
-              trait: undefined,
 			},
           ],
 		  brokenOutfit: {
 			donationReceived: 0,
 			weightInLbs: 450,
-			slug: undefined,
-			trait: undefined,
 		  }
         },
 		{
 			slug: "kronya",
-			donationReceived: 150,
 			groupSlug: 'professionals',
 			outfits: [
 			  {
@@ -57,7 +52,6 @@ export function createSampleState() : GameState[] {
 		  },
 		{
 			slug: "annette",
-			donationReceived: 0,
 			groupSlug: 'students',
 			outfits: [
 			  {
@@ -70,10 +64,8 @@ export function createSampleState() : GameState[] {
 			  }
 			],
 			brokenOutfit: {
-				slug: undefined,
 				donationReceived: 300,
 				weightInLbs: 2000,
-				trait: undefined,
 			}
 		  },
       ],
@@ -83,7 +75,6 @@ export function createSampleState() : GameState[] {
 		characters: [
 			{
 				slug: "chloe",
-				donationReceived: 50,
 				groupSlug: 'no_group',
 				outfits: [
 					{
@@ -92,19 +83,15 @@ export function createSampleState() : GameState[] {
 						weightInLbs: 200,
 						donationReceived: 0,
 						thresholdInLbs: 600,
-						trait: undefined,
 					}
 				],
 				brokenOutfit: {
 					donationReceived: 0,
 					weightInLbs: 200,
-					slug: undefined,
-					trait: undefined,
 				}
 			},
 			{
 				slug: "timerra",
-				donationReceived: 50,
 				groupSlug: 'no_group',
 				outfits: [
 					{
@@ -113,7 +100,6 @@ export function createSampleState() : GameState[] {
 						weightInLbs: 200,
 						donationReceived: 0,
 						thresholdInLbs: 210,
-						trait: undefined,
 					},
 					{
 						slug: "harvest",
@@ -121,14 +107,11 @@ export function createSampleState() : GameState[] {
 						weightInLbs: 200,
 						donationReceived: 0,
 						thresholdInLbs: 600,
-						trait: undefined
 					}
 				],
 				brokenOutfit: {
 					donationReceived: 0,
 					weightInLbs: 200,
-					slug: undefined,
-					trait: undefined,
 				}
 			},
 		],

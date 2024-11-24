@@ -14,10 +14,14 @@ export type GameState = {
 
 export type CharacterState = {
     slug: string;
-    donationReceived: number;
     groupSlug: string;
     outfits: OutfitState[];
     brokenOutfit: BrokenOutfitState;
+}
+
+export type OutfitKey = {
+	characterSlug: string,
+	outfitSlug: string,
 }
 
 export type OutfitState = {
@@ -29,9 +33,11 @@ export type OutfitState = {
 } & ({
 	unlocked: true;
 	trait: string;
+	boundTo?: OutfitKey;
 } | {
 	unlocked: false;
-	trait: undefined;
+	trait?: undefined;
+	boundTo?: undefined;
 })
 
 export type BrokenOutfitState = {
@@ -41,8 +47,8 @@ export type BrokenOutfitState = {
 	slug: string;
 	trait: string;
 } | {
-	slug: undefined;
-	trait: undefined;
+	slug?: undefined;
+	trait?: undefined;
 })
 
 export function initState(): GameState[] {
@@ -60,7 +66,6 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState
 	return {
 		slug: baseMetadata.nameSlug,
 		groupSlug: baseMetadata.group?.slug || 'no_group',
-		donationReceived: 0,
 		outfits: baseMetadata.outfits.map((outfitBaseMetadata, i) => {
 			const unlocked = (i == 0 && baseMetadata.initialRoaster) || false
 
@@ -76,16 +81,22 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState
 			return outfitState
 		}),
 		brokenOutfit: {
-			slug: undefined,
 			donationReceived: 0,
 			weightInLbs: 0,
-			trait: undefined,
 		}
 	}
 }
 
 export function isOutgrown(outfit: OutfitState): boolean {
     return outfit.weightInLbs >= outfit.thresholdInLbs
+}
+
+export function isFattenable(outfit: OutfitState): boolean {
+	return ![
+		'Bound_Feeder',
+		'Chaos_Feeder',
+		'Self_Feeder',
+	].includes(outfit.trait || '');
 }
 
 export function outfitWithMostDonation(characterState: CharacterState): string | undefined {
@@ -110,8 +121,7 @@ export function totalDonationsForCharacter(state: GameState[], nameSlug: string)
 }
 
 export function totalDonationsForCharacterState(characterState: CharacterState): number {
-	return characterState.donationReceived +
-		characterState.outfits.map(o => o.donationReceived).reduce((a, b) => a + b) +
+	return characterState.outfits.map(o => o.donationReceived).reduce((a, b) => a + b) +
 		characterState.brokenOutfit.donationReceived;
 }
 
@@ -136,6 +146,19 @@ export function getCharacterState(state: GameState[], nameSlug: string) : Charac
 		}
 	}
 	throw `unknown character ${nameSlug}`
+}
+
+export function getCurrentOutfitForCharacter(characterState: CharacterState) : OutfitState | BrokenOutfitState {
+	if (!isUnlocked(characterState)) {
+		return characterState.outfits[0];
+	}
+	for (let i = 0; i < characterState.outfits.length; i++) {
+		const outfitState = characterState.outfits[i];
+		if (!isOutgrown(outfitState) && isFattenable(outfitState)) {
+			return outfitState
+		}
+	}
+	return characterState.brokenOutfit;
 }
 
 export function isUnlocked(character: CharacterState) : boolean {

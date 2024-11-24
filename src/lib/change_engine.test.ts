@@ -31,6 +31,7 @@ describe('toCharacterChange', () => {
 		const before : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -38,14 +39,11 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
-					trait: undefined,
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
-				slug: undefined,
-				trait: undefined,
 			}
 		}
 		const after : CharacterState = structuredClone(before)
@@ -57,6 +55,7 @@ describe('toCharacterChange', () => {
 		const before : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -64,19 +63,17 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
-					trait: undefined,
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
-				slug: undefined,
-				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -84,14 +81,11 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
-					trait: undefined,
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240.4,
-				slug: undefined,
-				trait: undefined,
 			}
 		}
 
@@ -103,6 +97,7 @@ describe('toCharacterChange', () => {
 		const before : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -110,19 +105,17 @@ describe('toCharacterChange', () => {
 					unlocked: false,
 					weightInLbs: 200,
 					thresholdInLbs: 320,
-					trait: undefined
 				}
 			],
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
-				slug: undefined,
-				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 150,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -136,8 +129,6 @@ describe('toCharacterChange', () => {
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
-				slug: undefined,
-				trait: undefined,
 			}
 		}
 
@@ -148,6 +139,7 @@ describe('toCharacterChange', () => {
 		const before : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -169,13 +161,12 @@ describe('toCharacterChange', () => {
 			brokenOutfit: {
 				donationReceived: 20,
 				weightInLbs: 240,
-				slug: undefined,
-				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 150,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -211,6 +202,7 @@ describe('toCharacterChange', () => {
 		const before : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -222,15 +214,14 @@ describe('toCharacterChange', () => {
 				}
 			],
 			brokenOutfit: {
-				slug: undefined,
 				donationReceived: 20,
 				weightInLbs: 240,
-				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -257,6 +248,7 @@ describe('toCharacterChange', () => {
 		const before : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 120,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -276,15 +268,14 @@ describe('toCharacterChange', () => {
 				}
 			],
 			brokenOutfit: {
-				slug: undefined,
 				donationReceived: 20,
 				weightInLbs: 240,
-				trait: undefined,
 			}
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
 			donationReceived: 150,
+			groupSlug: 'no_group',
 			outfits: [
 				{
 					slug: 'base',
@@ -304,10 +295,8 @@ describe('toCharacterChange', () => {
 				}
 			],
 			brokenOutfit: {
-				slug: undefined,
 				donationReceived: 20,
 				weightInLbs: 400,
-				trait: undefined,
 			}
 		}
 
@@ -414,7 +403,6 @@ describe('toOutfitChange', () => {
 			donationReceived: 0,
 			weightInLbs: 180,
 			thresholdInLbs: 340,
-			trait: undefined,
 		}
 		const after : OutfitState = {
 			slug: "base",

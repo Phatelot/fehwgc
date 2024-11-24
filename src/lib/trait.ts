@@ -186,3 +186,9 @@ function alreadySelectedTraits(characterState: CharacterState): string[] {
 		.map(outfitState => outfitState.trait)
 		.filter(trait => !!trait) as string[];
 }
+
+export function isSelfFed(characterState: CharacterState): boolean {
+	return !!characterState.outfits
+		.map(outfit => outfit.trait)
+		.find(trait => trait === 'Self_Feeder');
+}

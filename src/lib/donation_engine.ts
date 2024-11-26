@@ -211,7 +211,7 @@ export function updateCharacterStateUnlock(state: GameState[], characterState: C
 	const firstOutfit = characterState.outfits[0]
 	firstOutfit.unlocked = true
 	if (!firstOutfit.trait) {
-		firstOutfit.trait = selectTraitFor(characterState, firstOutfit)
+		attributeTraitToOutfit(state, characterState, firstOutfit);
 	}
 
 	for (let i = 0; i < characterState.outfits.length - 1; i++) {
@@ -223,27 +223,31 @@ export function updateCharacterStateUnlock(state: GameState[], characterState: C
 		if (nextOutfit.trait) {
 			continue;
 		}
-		nextOutfit.trait = selectTraitFor(characterState, nextOutfit)
-		const possibleBoundTargets = getPossibleBoundTargets(state, true)
-			.filter(o => o.characterSlug !== characterState.slug || o.outfitSlug !== nextOutfit.slug); // prevent self-targeting
-		const boundOutfitKey = possibleBoundTargets[stringToRandomNumber(`${nextOutfit.slug}${totalDonationsForCharacterState(characterState)}`, possibleBoundTargets.length)]
-
-		if (nextOutfit.trait === 'Bound_Feeder') {
-			nextOutfit.boundTo = boundOutfitKey;
-		} else if (nextOutfit.trait === 'Mutual_Gainer') {
-			nextOutfit.boundTo = boundOutfitKey;
-			const boundOutfitState = getOutfitState(getCharacterState(state, boundOutfitKey.characterSlug), boundOutfitKey.outfitSlug) as OutfitState
-			boundOutfitState.boundTo = {
-				characterSlug: characterState.slug,
-				outfitSlug: nextOutfit.slug,
-			}
-		}
+		attributeTraitToOutfit(state, characterState, nextOutfit);
 	}
 	const lastOutfit = characterState.outfits[characterState.outfits.length - 1];
 	if (lastOutfit.unlocked && (!isFattenable(lastOutfit) || isOutgrown(lastOutfit))) {
 		if (!characterState.brokenOutfit.slug) {
 			characterState.brokenOutfit.slug = outfitWithMostDonation(characterState)
 			characterState.brokenOutfit.trait = selectTraitForBroken(characterState)
+		}
+	}
+}
+
+function attributeTraitToOutfit(state: GameState[], characterState: CharacterState, outfitState: OutfitState) {
+	outfitState.trait = selectTraitFor(characterState, outfitState)
+	const possibleBoundTargets = getPossibleBoundTargets(state, true)
+		.filter(o => o.characterSlug !== characterState.slug || o.outfitSlug !== outfitState.slug); // prevent self-targeting
+	const boundOutfitKey = possibleBoundTargets[stringToRandomNumber(`${outfitState.slug}${totalDonationsForCharacterState(characterState)}`, possibleBoundTargets.length)]
+
+	if (outfitState.trait === 'Bound_Feeder') {
+		outfitState.boundTo = boundOutfitKey;
+	} else if (outfitState.trait === 'Mutual_Gainer') {
+		outfitState.boundTo = boundOutfitKey;
+		const boundOutfitState = getOutfitState(getCharacterState(state, boundOutfitKey.characterSlug), boundOutfitKey.outfitSlug) as OutfitState
+		boundOutfitState.boundTo = {
+			characterSlug: characterState.slug,
+			outfitSlug: outfitState.slug,
 		}
 	}
 }

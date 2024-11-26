@@ -1,6 +1,7 @@
 import { toFrameType } from "./frames";
-import { baseMetadata, type Build, type CharacterBaseMetadata, type GameBaseMetadata, type OutfitBaseMetadata, type Shape } from "./metadata";
-import { isOutgrown, type GameState, type OutfitState, type CharacterState, isUnlocked, getOutfitState } from "./state";
+import { baseMetadata, getCharacterMetadata, type Build, type CharacterBaseMetadata, type GameBaseMetadata, type OutfitBaseMetadata, type Shape, getOutfitMetadata } from "./metadata";
+import { isOutgrown, type GameState, type OutfitState, type CharacterState, isUnlocked, getOutfitState, totalDonationsForCharacterState, type OutfitKey, getCharacterState } from "./state";
+import { isSelfFed } from "./trait";
 import { createWeightDonationTree, getChildGroupStats, toGroupStats, type GroupStats } from "./weight_donation_tree";
 import { BMI } from "./weight_utils";
 
@@ -26,6 +27,11 @@ export type OutfitCompletedState = {
 	secondaryShape?: Shape;
 	trait: string;
 	build: Build;
+	isSelfFeeding: boolean;
+	selfFedBy?: string;
+	boundFeeding?: string;
+	boundFedBy?: string;
+	mutualGainingWith?: string;
 }
 
 export type CharacterCompletedState = {
@@ -63,52 +69,52 @@ export function toCompletedState(state: GameState[]): CompletedState {
 	const groupStats = toGroupStats(createWeightDonationTree(state));
 
 	return {
-		games: state.map(gameState => toGameCompletedState(gameState, baseMetadata, groupStats)),
+		games: state.map(gameState => toGameCompletedState(state, gameState, baseMetadata, groupStats)),
 		stats: groupStats,
 	}
 }
 
-export function toGameCompletedState(state: GameState, baseMetadata: GameBaseMetadata[], rootGroupStats : GroupStats) : GameCompletedState {
-	const gameMetadata = baseMetadata.find(gameMetadata => gameMetadata.nameSlug === state.slug) as GameBaseMetadata;
-	const stats = getChildGroupStats(rootGroupStats, state.slug) as GroupStats;
+export function toGameCompletedState(state: GameState[], gameState: GameState, baseMetadata: GameBaseMetadata[], rootGroupStats : GroupStats) : GameCompletedState {
+	const gameMetadata = baseMetadata.find(gameMetadata => gameMetadata.nameSlug === gameState.slug) as GameBaseMetadata;
+	const stats = getChildGroupStats(rootGroupStats, gameState.slug) as GroupStats;
 
 	return {
 		name: gameMetadata.name,
-		nameSlug: state.slug,
+		nameSlug: gameState.slug,
 		lightColor: gameMetadata.lightColor,
 		darkColor: gameMetadata.darkColor,
-		characters: state.characters.map(characterState => toCharacterCompletedState(characterState, gameMetadata, stats)),
+		characters: gameState.characters.map(characterState => toCharacterCompletedState(state, characterState, gameMetadata, stats)),
 		stats: stats,
 	};
 }
 
-export function toCharacterCompletedState(state: CharacterState, gameMetadata: GameBaseMetadata, gameGroupStats: GroupStats): CharacterCompletedState {
-	const characterMetadata = gameMetadata.characters.find(characterMetadata => characterMetadata.nameSlug === state.slug) as CharacterBaseMetadata;
+export function toCharacterCompletedState(state: GameState[], characterState: CharacterState, gameMetadata: GameBaseMetadata, gameGroupStats: GroupStats): CharacterCompletedState {
+	const characterMetadata = gameMetadata.characters.find(characterMetadata => characterMetadata.nameSlug === characterState.slug) as CharacterBaseMetadata;
 
-	const outfits = state.outfits.map(outfitState => toOutfitCompletedState(outfitState, characterMetadata, gameMetadata));
-	outfits.push(toBrokenOutfitState(state, characterMetadata, gameMetadata))
+	const outfits = characterState.outfits.map(outfitState => toOutfitCompletedState(state, characterState, outfitState, characterMetadata, gameMetadata));
+	outfits.push(toBrokenOutfitState(characterState, characterMetadata, gameMetadata))
 
 	return {
 		gameName: gameMetadata.name,
 		gameSlug: gameMetadata.nameSlug,
 		name: characterMetadata.name,
-		nameSlug: state.slug,
-		unlocked: isUnlocked(state),
-		donationReceived: state.donationReceived,
+		nameSlug: characterState.slug,
+		unlocked: isUnlocked(characterState),
+		donationReceived: totalDonationsForCharacterState(characterState),
 		bgFrame: gameMetadata.nameSlug,
 		darkColor: gameMetadata.darkColor,
 		lightColor: gameMetadata.lightColor,
 		heightInMeters: characterMetadata.heightInCm / 100.,
 		outfits: outfits,
 		numberOfUnlockedOutfits: outfits.filter(outfit => outfit.unlocked).length,
-		stats: getChildGroupStats(gameGroupStats, state.slug),
+		stats: getChildGroupStats(gameGroupStats, characterState.slug),
 		build: characterMetadata.build,
 	}
 }
 
-export function toBrokenOutfitState(state: CharacterState, characterMetadata: CharacterBaseMetadata, gameMetadata: GameBaseMetadata): OutfitCompletedState {
-	const unlocked = isUnlocked(state) && isOutgrown(state.outfits[state.outfits.length - 1]);
-	const selectedOutfit = characterMetadata.outfits.find(outfit => outfit.outfitSlug === state.brokenOutfit.slug)
+export function toBrokenOutfitState(characterState: CharacterState, characterMetadata: CharacterBaseMetadata, gameMetadata: GameBaseMetadata): OutfitCompletedState {
+	const unlocked = isUnlocked(characterState) && isOutgrown(characterState.outfits[characterState.outfits.length - 1]);
+	const selectedOutfit = characterMetadata.outfits.find(outfit => outfit.outfitSlug === characterState.brokenOutfit.slug)
 
 	return {
 		gameName: gameMetadata.name,
@@ -116,25 +122,30 @@ export function toBrokenOutfitState(state: CharacterState, characterMetadata: Ch
 		characterName: characterMetadata.name,
 		characterSlug: characterMetadata.nameSlug,
 		name: "Broken",
-		nameSlug: state.brokenOutfit.slug,
+		nameSlug: characterState.brokenOutfit.slug,
 		unlocked: unlocked,
 		outgrown: false,
 		broken: true,
-		weightInLbs: state.brokenOutfit.weightInLbs,
+		weightInLbs: characterState.brokenOutfit.weightInLbs,
 		heightInMeters: characterMetadata.heightInCm / 100.,
-		BMI: BMI(characterMetadata.heightInCm / 100., state.brokenOutfit.weightInLbs),
+		BMI: BMI(characterMetadata.heightInCm / 100., characterState.brokenOutfit.weightInLbs),
 		mainShape: selectedOutfit?.mainShape,
 		secondaryShape: selectedOutfit?.secondaryShape,
-		donationReceived: state.donationReceived,
-		frame: toFrameType(state.slug),
+		donationReceived: characterState.brokenOutfit.donationReceived,
+		frame: toFrameType(characterState.slug),
 		bgFrame: gameMetadata.nameSlug,
-		trait: state.brokenOutfit.trait || '',
+		trait: characterState.brokenOutfit.trait || '',
 		build: characterMetadata.build,
+		isSelfFeeding: false,
+		selfFedBy: isSelfFed(characterState) ? getSelfFeedingOutfitDisplayName(characterState) : undefined,
 	}
 }
 
-export function toOutfitCompletedState(state: OutfitState, characterMetadata: CharacterBaseMetadata, gameMetadata: GameBaseMetadata): OutfitCompletedState {
-	const outfitMetadata = characterMetadata.outfits.find(outfitMetadata => outfitMetadata.outfitSlug === state.slug) as OutfitBaseMetadata;
+export function toOutfitCompletedState(state: GameState[], characterState: CharacterState, outfitState: OutfitState, characterMetadata: CharacterBaseMetadata, gameMetadata: GameBaseMetadata): OutfitCompletedState {
+	const outfitMetadata = characterMetadata.outfits.find(outfitMetadata => outfitMetadata.outfitSlug === outfitState.slug) as OutfitBaseMetadata;
+
+	const boundOutfitState = getBoundOutfitState(state, outfitState.boundTo);
+	const boundOutfitDisplayName = getDisplayNameFromOutfitKey(outfitState.boundTo);
 
 	return {
 		gameName: gameMetadata.name,
@@ -142,21 +153,26 @@ export function toOutfitCompletedState(state: OutfitState, characterMetadata: Ch
 		characterName: characterMetadata.name,
 		characterSlug: characterMetadata.nameSlug,
 		name: outfitMetadata?.outfit,
-		nameSlug: state.slug,
-		unlocked: state.unlocked,
-		outgrown: isOutgrown(state),
-		outgrownThresholdInLbs: state.thresholdInLbs,
+		nameSlug: outfitState.slug,
+		unlocked: outfitState.unlocked,
+		outgrown: isOutgrown(outfitState),
+		outgrownThresholdInLbs: outfitState.thresholdInLbs,
 		broken: false,
-		weightInLbs: state.weightInLbs,
+		weightInLbs: outfitState.weightInLbs,
 		heightInMeters: characterMetadata.heightInCm / 100.,
-		BMI: BMI(characterMetadata.heightInCm / 100., state.weightInLbs),
+		BMI: BMI(characterMetadata.heightInCm / 100., outfitState.weightInLbs),
 		mainShape: outfitMetadata.mainShape,
 		secondaryShape: outfitMetadata.secondaryShape,
-		donationReceived: state.donationReceived,
-		frame: toFrameType(state.slug),
+		donationReceived: outfitState.donationReceived,
+		frame: toFrameType(outfitState.slug),
 		bgFrame: gameMetadata.nameSlug,
-		trait: state.trait || '',
+		trait: outfitState.trait || '',
 		build: characterMetadata.build,
+		isSelfFeeding: outfitState.trait === 'Self_Feeder',
+		selfFedBy: (isSelfFed(characterState) && outfitState.trait !== 'Self_Feeder') ? getSelfFeedingOutfitDisplayName(characterState) : undefined,
+		boundFeeding: outfitState.trait === "Bound_Feeder" ? getDisplayNameFromOutfitKey(outfitState.boundTo) : undefined,
+		boundFedBy: boundOutfitState?.trait === "Bound_Feeder" ? boundOutfitDisplayName : undefined,
+		mutualGainingWith: (outfitState.trait === "Mutual_Gainer" || boundOutfitState?.trait === "Mutual_Gainer") ? boundOutfitDisplayName : undefined,
 	}
 }
 
@@ -180,4 +196,32 @@ export function getOutfitCompletedState(state: CompletedState, characterSlug: st
 			return outfit;
 		}
 	}
+}
+
+function getBoundOutfitState(state: GameState[], outfitKey: OutfitKey | undefined): OutfitState | undefined {
+	if (!outfitKey) {
+		return undefined;
+	}
+	return getOutfitState(getCharacterState(state, outfitKey.characterSlug), outfitKey.outfitSlug) as OutfitState;
+}
+
+
+function getSelfFeedingOutfitDisplayName(character: CharacterState) : string {
+	const selfFeederOutfits = character.outfits.filter(o => o.trait === 'Self_Feeder');
+	if (selfFeederOutfits.length === 0) {
+		return ""
+	}
+	return getDisplayNameFromOutfitKey({
+		characterSlug: character.slug,
+		outfitSlug: selfFeederOutfits[0].slug,
+	})
+}
+
+function getDisplayNameFromOutfitKey(key: OutfitKey | undefined) : string {
+	if (!key) {
+		return '';
+	}
+	const characterMetadata = getCharacterMetadata(key.characterSlug) as CharacterBaseMetadata;
+	const outfitMetadata = getOutfitMetadata(key.characterSlug, key.outfitSlug) as OutfitBaseMetadata;
+	return `${characterMetadata.name} (${outfitMetadata.outfit})`;
 }

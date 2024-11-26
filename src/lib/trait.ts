@@ -72,7 +72,7 @@ const rareTraits = [
 
 export const traitNames : {[key: string]: string} = {
 	'Blob_Bound': 'Blob bound',
-	'Bound_Feeder': 'Bound geeder',
+	'Bound_Feeder': 'Bound feeder',
 	'Chaos_Feeder': 'Chaos feeder',
 	'Generous': 'Generous',
 	'Greedy_Guts': 'Greedy guts',

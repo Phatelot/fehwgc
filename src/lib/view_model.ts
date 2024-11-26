@@ -55,6 +55,11 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 				secondaryShape: outfitState.secondaryShape,
 				trait: outfitState.trait,
 				build: outfitState.build,
+				isSelfFeeding: outfitState.isSelfFeeding,
+				selfFedBy: outfitState.selfFedBy,
+				boundFeeding: outfitState.boundFeeding,
+				boundFedBy: outfitState.boundFedBy,
+				mutualGainingWith: outfitState.mutualGainingWith,
 			};
 		})
 	})
@@ -80,6 +85,11 @@ export type OutfitViewModel = {
 	mainShape?: Shape;
 	secondaryShape?: Shape;
 	broken: boolean;
+	isSelfFeeding: boolean;
+	selfFedBy?: string;
+	boundFeeding?: string;
+	boundFedBy?: string;
+	mutualGainingWith?: string;
 }
 
 export function createCharacterViewModel(state: CompletedState) : CharacterViewModel[][] {

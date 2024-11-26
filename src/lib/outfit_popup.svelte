@@ -30,6 +30,19 @@
 		`Her build is ${outfit.build}.`,
 	];
 
+	if (outfit.isSelfFeeding) {
+		sentences.push(`She feeds her other outfits.`);
+	} else if (outfit.selfFedBy) {
+		sentences.push(`She is self-fed by ${outfit.selfFedBy}.`);
+	}
+	if (outfit.boundFedBy) {
+		sentences.push(`She is fed by ${outfit.boundFedBy}.`);
+	} else if (outfit.boundFeeding) {
+		sentences.push(`She feeds ${outfit.boundFeeding}.`);
+	} else if (outfit.mutualGainingWith) {
+		sentences.push(`She and ${outfit.mutualGainingWith} are mutual gainers.`);
+	}
+
 	function close() {
 		dispatch('close', {})
 	}

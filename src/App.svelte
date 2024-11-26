@@ -15,38 +15,43 @@
     import MenuPopup from './lib/menu_popup.svelte';
 
     async function fetchData(): Promise<CompletedState> {
-      const token = localStorage.getItem('fehwgc-admin') || '';
-      const gistId = '8c4b31c95b425cb40d3f865d95561bfa';
+      try {
+        const token = localStorage.getItem('fehwgc-admin') || '';
+        const gistId = '8c4b31c95b425cb40d3f865d95561bfa';
 
-      let donations: Donation[];
-      if (!token) {
-        const response = await fetch(`https://api.github.com/gists/${gistId}`, {
-          cache: "no-store",
-          headers: {
-            "Accept": "application/vnd.github+json",
-          },
-        });
-        donations = parseCsvData(JSON.parse(await response.text())
-          .files['donos.csv']
-          .content);
-      } else {
-        const octokit = new Octokit({
-          auth: token,
-        });
+        let donations: Donation[];
+        if (!token) {
+          const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+            cache: "no-store",
+            headers: {
+              "Accept": "application/vnd.github+json",
+            },
+          });
+          donations = parseCsvData(JSON.parse(await response.text())
+            .files['donos.csv']
+            .content);
+        } else {
+          const octokit = new Octokit({
+            auth: token,
+          });
 
-        const response = await octokit.request(`GET /gists/${gistId}`);
-        const files = response.data.files;
-        const donoFile = (files || {})['donos.csv'];
-        const content = donoFile?.content || '';
-        donations = parseCsvData(content);
+          const response = await octokit.request(`GET /gists/${gistId}`);
+          const files = response.data.files;
+          const donoFile = (files || {})['donos.csv'];
+          const content = donoFile?.content || '';
+          donations = parseCsvData(content);
+        }
+
+        const states = applyDonations(initState(), donations)
+        const lastState = states[states.length-1];
+
+        restoreStateFromLocalStorage();
+
+        return toCompletedState(lastState);
+      } catch (e) {
+        console.error(e);
+        throw e;
       }
-
-      const states = applyDonations(initState(), donations)
-      const lastState = states[states.length-1];
-
-      restoreStateFromLocalStorage();
-
-      return toCompletedState(lastState);
     }
 
     $: page = 'OUTFIT_CHART';

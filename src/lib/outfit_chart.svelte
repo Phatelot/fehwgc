@@ -100,6 +100,7 @@
 	  x="{outfit.x}%"
 	  y="{outfit.y + outfit.height + 6}%"
 	  height="{outfit.pictureHeight}%"
+	  on:click={() => selectOutfit(outfit)}
 	/>
 	<image
 	  xlink:href="{outfit.framePictureLink}"
@@ -129,6 +130,7 @@
 		x="{outfit.x - 1.3}%"
 		y="{5.5 + outfit.y + outfit.height + 8}%"
 		height="7%"
+		on:click={() => selectOutfit(outfit)}
 	/>
 
 	<WeightLabel outfit="{outfit}" small/>

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getBodyPicLink } from "./asset_utils";
     import Box from "./box.svelte";
-    import { getCharacterCompletedState, type CharacterCompletedState, type CompletedState } from "./completed_state";
+    import { getCharacterCompletedState, getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState } from "./completed_state";
     import { formatWeight, toImperialHeight } from "./weight_utils";
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -31,7 +31,7 @@
 <Box x={2} y={5} width={96} height={90}></Box>
 <text x="38%" y="14%" class="character-name">{character.name}</text>
 <image
-	xlink:href="{getBodyPicLink(character.nameSlug, 'base')}"
+	xlink:href="{getBodyPicLink(character.nameSlug, getHeaviestOutfitSlug(character))}"
 	x="6%"
 	y="10%"
 	height="80%"

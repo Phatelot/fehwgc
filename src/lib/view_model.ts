@@ -1,5 +1,5 @@
 import { getBgPictureLink, getFacePicLink, getFramePictureLink } from "./asset_utils";
-import type { CharacterCompletedState, CompletedState, OutfitCompletedState } from "./completed_state";
+import { getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
 import type { Build, Shape } from "./metadata";
 import { groupConsecutive } from "./utils";
 
@@ -125,7 +125,7 @@ export function createCharacterViewModel(state: CompletedState) : CharacterViewM
 				characterSlug: characterState.nameSlug,
 				bgPictureLink: getBgPictureLink(characterState.gameSlug),
 				framePictureLink: getFramePictureLink('base'),
-				pictureLink: getFacePicLink(characterState.nameSlug, 'base'),
+				pictureLink: getFacePicLink(characterState.nameSlug, getHeaviestOutfitSlug(characterState)),
 				pictureHeight: width * viewPortWidth / viewPortHeight,
 				weightInLbs,
 				id: `${characterState.nameSlug}`,

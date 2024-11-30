@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { getBodyPicLink } from "./asset_utils";
     import Box from "./box.svelte";
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher<{

@@ -225,3 +225,11 @@ function getDisplayNameFromOutfitKey(key: OutfitKey | undefined) : string {
 	const outfitMetadata = getOutfitMetadata(key.characterSlug, key.outfitSlug) as OutfitBaseMetadata;
 	return `${characterMetadata.name} (${outfitMetadata.outfit})`;
 }
+
+export type Omnistate = {
+
+export function getHeaviestOutfitSlug(state: CharacterCompletedState): string {
+	return state.outfits
+		.filter(o => o.unlocked)
+		.sort((a, b) => b.weightInLbs - a.weightInLbs)[0].nameSlug || 'base';
+}

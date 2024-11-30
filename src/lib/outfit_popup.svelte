@@ -27,8 +27,14 @@
 	let sentences = [
 		`In this outfit, ${outfit.characterName} weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
 		`She is ${imperialHeight} tall.`,
-		`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${toBMICategory(outfit.BMI)}.`,
 	];
+
+	const bmiCategory = toBMICategory(outfit.BMI);
+	if (bmiCategory === 'underweight') {
+		sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so the poor girl is ${bmiCategory}.`)
+	} else {
+		sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${bmiCategory}.`)
+	}
 
 	if (imperialHeight !== `5'5"`) {
 		sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);

@@ -92,6 +92,84 @@ export type OutfitViewModel = {
 	mutualGainingWith?: string;
 }
 
+export function createBMIOutfitViewModel(state: CompletedState) : BMIOutfitViewModel[][] {
+
+	const outfitStates : OutfitCompletedState[] = state.games
+		.flatMap(game => game.characters)
+		.flatMap(character => character.outfits)
+		.filter(outfit => outfit.unlocked)
+		.sort((a, b) => a.BMI - b.BMI);
+
+	const paginatedOutfitStates = groupConsecutive(outfitStates, maxNumberOfDisplayedCharacters);
+
+	const lowestBMI = outfitStates[0].BMI;
+	const highestBMI = outfitStates[outfitStates.length - 1].BMI;
+	const maxDisplayableBMI = 40 * lowestBMI;
+
+	const margin = 95 / (5 * maxNumberOfDisplayedCharacters + 1);
+	const width = 4 * margin;
+
+	return paginatedOutfitStates.map(outfitStatesPage => {
+		return outfitStatesPage.map((outfitState, i) => {
+			const height = outfitState.BMI / Math.min(maxDisplayableBMI, highestBMI) * 60;
+			const magic75 = 75;
+			const y = magic75 - height;
+
+			return {
+				width,
+				height,
+				x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharacters - outfitStatesPage.length + i),
+				y,
+				barGradient: outfitState.gameSlug + "Gradient",
+				characterSlug: outfitState.characterSlug,
+				outfitSlug: outfitState.nameSlug,
+				bgPictureLink: getBgPictureLink(outfitState.gameSlug),
+				framePictureLink: getFramePictureLink(outfitState.broken ? 'broken' : (outfitState.nameSlug as string)),
+				pictureLink: getFacePicLink(outfitState.characterSlug, (outfitState.broken && !outfitState.unlocked) ? '' : (outfitState.nameSlug as string)),
+				broken: outfitState.broken,
+				pictureHeight: width * viewPortWidth / viewPortHeight,
+				BMI: outfitState.BMI,
+				id: `${outfitState.characterSlug}-${outfitState.nameSlug}${outfitState.broken ? '-broken' : ''}`,
+				mainShape: outfitState.mainShape,
+				secondaryShape: outfitState.secondaryShape,
+				trait: outfitState.trait,
+				build: outfitState.build,
+				isSelfFeeding: outfitState.isSelfFeeding,
+				selfFedBy: outfitState.selfFedBy,
+				boundFeeding: outfitState.boundFeeding,
+				boundFedBy: outfitState.boundFedBy,
+				mutualGainingWith: outfitState.mutualGainingWith,
+			};
+		})
+	})
+}
+
+export type BMIOutfitViewModel = {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+	barGradient: string;
+	characterSlug: string;
+	outfitSlug?: string;
+	pictureHeight: number;
+	bgPictureLink: string;
+	pictureLink: string;
+	framePictureLink: string;
+	BMI: number;
+	id: string;
+	trait: string;
+	build: Build,
+	mainShape?: Shape;
+	secondaryShape?: Shape;
+	broken: boolean;
+	isSelfFeeding: boolean;
+	selfFedBy?: string;
+	boundFeeding?: string;
+	boundFedBy?: string;
+	mutualGainingWith?: string;
+}
+
 export function createCharacterViewModel(state: CompletedState) : CharacterViewModel[][] {
 
 	const characterStates : CharacterCompletedState[] = state.games

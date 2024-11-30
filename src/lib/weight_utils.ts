@@ -21,7 +21,7 @@ export function toBMICategory(bmi: number): string {
 	if (bmi < 18.5) {
 		return 'underweight'
 	} else if (bmi < 25) {
-		return 'normal'
+		return 'considered normal'
 	} else if (bmi < 30) {
 		return 'overweight'
 	} else if (bmi < 40) {

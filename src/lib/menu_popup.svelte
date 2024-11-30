@@ -8,8 +8,9 @@
 	}>();
 
 	const pages = [
-		['OUTFIT_CHART', 'Outfit chart'],
-		['CHARACTER_CHART', 'Character chart'],
+		['OUTFIT_CHART', 'Outfit Chart'],
+		['BMI_CHART', 'BMI Chart'],
+		['CHARACTER_CHART', 'Character Chart'],
 		['CHANGELOG', 'Changelog'],
 	]
 

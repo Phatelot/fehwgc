@@ -13,6 +13,7 @@
     import CharacterChart from './lib/character_chart.svelte';
     import CharacterPopup from './lib/character_popup.svelte';
     import MenuPopup from './lib/menu_popup.svelte';
+    import BmiChart from './lib/bmi_chart.svelte';
 
     async function fetchData(): Promise<Omnistate> {
       try {
@@ -124,6 +125,8 @@
           <CharacterChart state="{viewModel.completedState}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else if page === 'CHANGELOG'}
           <Changelog state="{viewModel}" />
+        {:else if page === 'BMI_CHART'}
+          <BmiChart state="{viewModel.completedState}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else}
           <MenuPopup on:selectpage={(e) => {(page = e.detail.page);  saveStateToLocalStorage()}}/>
         {/if}

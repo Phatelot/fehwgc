@@ -30,7 +30,6 @@ describe('toCharacterChange', () => {
 	it("should return null if no changes", () => {
 		const before : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -54,7 +53,6 @@ describe('toCharacterChange', () => {
 	it("should return null if insignificant changes", () => {
 		const before : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -72,7 +70,6 @@ describe('toCharacterChange', () => {
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -96,7 +93,6 @@ describe('toCharacterChange', () => {
 	it("should detect if character is unlocked", () => {
 		const before : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -114,7 +110,6 @@ describe('toCharacterChange', () => {
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 150,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -138,7 +133,6 @@ describe('toCharacterChange', () => {
 	it("should detect if character has reached broken outfit", () => {
 		const before : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -165,7 +159,6 @@ describe('toCharacterChange', () => {
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 150,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -201,7 +194,6 @@ describe('toCharacterChange', () => {
 	it("should detect if character has gained a significant amount of weight in broken", () => {
 		const before : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -220,7 +212,6 @@ describe('toCharacterChange', () => {
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -247,7 +238,6 @@ describe('toCharacterChange', () => {
 	it("should sort outfit changes by decreasing significance", () => {
 		const before : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 120,
 			groupSlug: 'no_group',
 			outfits: [
 				{
@@ -274,7 +264,6 @@ describe('toCharacterChange', () => {
 		}
 		const after : CharacterState = {
 			slug: "edelgard",
-			donationReceived: 150,
 			groupSlug: 'no_group',
 			outfits: [
 				{

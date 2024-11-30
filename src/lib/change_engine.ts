@@ -1,6 +1,5 @@
-import { applyDonation } from "./donation_engine";
 import { getCharacterDisplayName, getCharacterOutfitDisplayName } from "./metadata";
-import { isOutgrown, type Donation, type GameState, type OutfitState, type CharacterState } from "./state";
+import { isOutgrown, type GameState, type OutfitState, type CharacterState } from "./state";
 import { formatWeight } from "./weight_utils";
 
 const insignificantChangeThresholdInLbs = 1;
@@ -78,6 +77,10 @@ export function toOutfitChange(before: OutfitState, after: OutfitState): OutfitC
 	const isOutgrownBefore = isOutgrown(before);
 	const isOutgrownAfter = isOutgrown(after);
 
+	if (!after.unlocked) {
+		return null;
+	}
+
 	if (before.unlocked === after.unlocked && (after.weightInLbs - before.weightInLbs < insignificantChangeThresholdInLbs) && isOutgrownBefore === isOutgrownAfter) {
 		return null;
 	}
@@ -116,18 +119,18 @@ function serializeCharacterChanges(change: CharacterChange): string[] {
 
 	if (change.unlocked && change.brokenUnlockSlug) {
 		sentences.push(
-			`${characterDisplayName} has just been unlocked and has already outgrown all her outfits`,
-			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}'`
+			`${characterDisplayName} has just been unlocked and has already outgrown all her outfits.`,
+			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}.'`
 		)
 	} else if (change.unlocked) {
-		sentences.push(`${characterDisplayName} has just been unlocked and is ready to outgrow her outfits`)
+		sentences.push(`${characterDisplayName} has just been unlocked and is ready to outgrow her outfits.`)
 	} else if (change.brokenUnlockSlug) {
 		sentences.push(
-			`${characterDisplayName} has outgrown all her outfits`,
-			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}'`
+			`${characterDisplayName} has outgrown all her outfits.`,
+			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}'.`
 		)
 	} else if (change.newState.brokenOutfit.slug && change.brokenWeightGainInLbs >= insignificantChangeThresholdInLbs) {
-		sentences.push(`${characterDisplayName} has gained ${formatWeight(change.brokenWeightGainInLbs)}lbs in her broken outfit`)
+		sentences.push(`${characterDisplayName} has gained ${formatWeight(change.brokenWeightGainInLbs)}lbs in her broken outfit.`)
 	}
 
 	sentences.push(...change.outfitChanges.map(outfitChange => serializeOutfitChanges(characterDisplayName, change.slug, outfitChange)))
@@ -136,16 +139,16 @@ function serializeCharacterChanges(change: CharacterChange): string[] {
 }
 
 function serializeOutfitChanges(characterDisplayName: string, characterSlug: string, change: OutfitChange): string {
-	const outfitName = getCharacterOutfitDisplayName(characterSlug, change.slug);
+	const outfitName = getCharacterOutfitDisplayName(characterSlug, change.slug).toLowerCase();
 
 	if (change.unlocked && change.outgrown) {
-		return `${characterDisplayName}'s '${outfitName}' outfit has been unlocked and already outgrown (she now weighs ${formatWeight(change.newState.weightInLbs)}lbs)'`
+		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs).`
 	}
 	if (change.unlocked) {
-		return `${characterDisplayName}'s '${outfitName}' outfit has been unlocked (she now weighs ${formatWeight(change.newState.weightInLbs)}lbs)`
+		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs).`
 	}
 	if (change.outgrown) {
-		return `${characterDisplayName} has outgrown her '${outfitName}' outfit (she now weighs ${formatWeight(change.newState.weightInLbs)}lbs, having gained ${formatWeight(change.weightGainedInLbs)} more lbs)`
+		return `${characterDisplayName} has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`
 	}
-	return `${characterDisplayName} is stretching her '${outfitName}' outfit (she now weighs ${formatWeight(change.newState.weightInLbs)}lbs, having gained ${formatWeight(change.weightGainedInLbs)} more lbs)`
+	return `${characterDisplayName} is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`
 }

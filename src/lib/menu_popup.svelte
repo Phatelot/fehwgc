@@ -10,6 +10,7 @@
 	const pages = [
 		['OUTFIT_CHART', 'Outfit chart'],
 		['CHARACTER_CHART', 'Character chart'],
+		['CHANGELOG', 'Changelog'],
 	]
 
 	function selectPage(page: string) {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyDonation, getPossibleBoundTargets, requiredRemainingAmountToUnlock, } from './donation_engine'
+import { applyDonation, getPossibleBoundTargets, requiredRemainingAmountToUnlock, serializeDonation, } from './donation_engine'
 import { getCharacterState, type GameState, totalDonationsForCharacterState } from './state'
 import { createSampleState } from './utils_test'
 
@@ -1136,3 +1136,21 @@ function createSampleStateForPossibleBoundTargets(): GameState[] {
 	},
   ];
 }
+
+describe('serializeDonation', () => {
+	it('should serialize the donation to a character', () => {
+		expect(serializeDonation({
+			character: 'kronya',
+			outfit: 'undeclared',
+			amount: 74,
+		})).toBe('Kronya receives $74!')
+	})
+
+	it('should serialize the donation to an outfit', () => {
+		expect(serializeDonation({
+			character: 'kronya',
+			outfit: 'broken',
+			amount: 74,
+		})).toBe('Kronya (Broken) receives $74!')
+	})
+})

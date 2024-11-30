@@ -2,20 +2,22 @@
     import bgLink from '/src/assets/BG.webp'
 
     import { Octokit } from 'octokit';
-    import { toCompletedState, type CompletedState } from './lib/completed_state';
-    import { applyDonations } from './lib/donation_engine';
+    import { donationsToOmnistate, type Omnistate } from './lib/completed_state';
     import { parseCsvData } from './lib/donation_log_parser';
-    import { initState, type Donation } from './lib/state';
+    import { type Donation } from './lib/state';
     import { viewPortHeight, viewPortWidth } from './lib/view_model';
     import Box from './lib/box.svelte';
     import OutfitChart from './lib/outfit_chart.svelte';
     import OutfitPopup from './lib/outfit_popup.svelte';
+    import Changelog from './lib/changelog.svelte';
     import CharacterChart from './lib/character_chart.svelte';
     import CharacterPopup from './lib/character_popup.svelte';
     import MenuPopup from './lib/menu_popup.svelte';
 
-    async function fetchData(): Promise<CompletedState> {
+    async function fetchData(): Promise<Omnistate> {
       try {
+        restoreStateFromLocalStorage();
+
         const token = localStorage.getItem('fehwgc-admin') || '';
         const gistId = '8c4b31c95b425cb40d3f865d95561bfa';
 
@@ -42,12 +44,9 @@
           donations = parseCsvData(content);
         }
 
-        const states = applyDonations(initState(), donations)
-        const lastState = states[states.length-1];
+        const omnistate = donationsToOmnistate(donations);
 
-        restoreStateFromLocalStorage();
-
-        return toCompletedState(lastState);
+        return omnistate;
       } catch (e) {
         console.error(e);
         throw e;
@@ -111,7 +110,7 @@
       {:then viewModel}
 
         <defs>
-          {#each viewModel.games as game}
+          {#each viewModel.completedState.games as game}
             <linearGradient id="{game.nameSlug}Gradient" x1="0" x2="0" y1="1" y2="0">
               <stop offset="0%" stop-color="{game.darkColor}" />
               <stop offset="100%" stop-color="{game.lightColor}" />
@@ -120,9 +119,11 @@
         </defs>
 
         {#if page === 'OUTFIT_CHART'}
-          <OutfitChart state="{viewModel}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <OutfitChart state="{viewModel.completedState}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'CHARACTER_CHART'}
-          <CharacterChart state="{viewModel}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+          <CharacterChart state="{viewModel.completedState}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+        {:else if page === 'CHANGELOG'}
+          <Changelog state="{viewModel}" />
         {:else}
           <MenuPopup on:selectpage={(e) => {(page = e.detail.page);  saveStateToLocalStorage()}}/>
         {/if}
@@ -131,13 +132,13 @@
           <OutfitPopup
             characterSlug="{selectedCharacterSlug}"
             outfitSlug="{selectedOutfitSlug}"
-            state="{viewModel}"
+            state="{viewModel.completedState}"
             on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
           />
         {:else if !!selectedCharacterSlug}
           <CharacterPopup
             characterSlug="{selectedCharacterSlug}"
-            state="{viewModel}"
+            state="{viewModel.completedState}"
             on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
           />
         {:else if page !== 'MENU'}

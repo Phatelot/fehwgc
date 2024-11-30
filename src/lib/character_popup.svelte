@@ -12,7 +12,7 @@
 	let character = getCharacterCompletedState(state, characterSlug) as CharacterCompletedState;
 
 	const unlockedOutfitsSentence = character.numberOfUnlockedOutfits === character.outfits.length ?
-		'All her outfits are unlocked and outgrown.' :
+		`All her ${character.outfits.length} (including the final broken one) outfits are unlocked and outgrown.` :
 		`${character.numberOfUnlockedOutfits} of her ${character.outfits.length} outfits (including the final broken one) ${character.numberOfUnlockedOutfits === 1 ? 'is' : 'are'} unlocked.`;
 
 	let sentences = [

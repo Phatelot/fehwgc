@@ -1,5 +1,4 @@
 <script lang="ts">
-	import frameMaskLink from '/src/assets/mask.png'
 	import appleLink from '/src/assets/shapes/apple.png'
 	import circleLink from '/src/assets/shapes/circle.png'
 	import hourglassLink from '/src/assets/shapes/hourglass.png'
@@ -9,12 +8,11 @@
 
     import type { CompletedState } from "./completed_state";
     import { createBMIOutfitViewModel, type BMIOutfitViewModel } from "./view_model";
-    import WeightLabel from "./weight_label.svelte";
     import type { Shape } from './metadata';
 
     import { createEventDispatcher } from 'svelte';
-    import { getTraitPicLink } from './asset_utils';
     import BmiLabel from './bmi_label.svelte';
+    import Portrait from './portrait.svelte';
 
 	export let state: CompletedState;
 
@@ -80,33 +78,9 @@
 	  fill="url(#{outfit.barGradient})"
 	  on:click={() => selectOutfit(outfit)}
 	/>
-	<image
-	  xlink:href="{outfit.bgPictureLink}"
-	  x="{outfit.x}%"
-	  y="{outfit.y + outfit.height + 6}%"
-	  height="{outfit.pictureHeight}%"
-	/>
-	<defs>
-		<mask id="{'image-mask-' + outfit.id}" x="0%" y="0%" width="100%" height="100%" maskUnits="userSpaceOnUse">
-		  <image xlink:href="{frameMaskLink}" width="{viewModel[0][0].width}%" height="{viewModel[0][0].pictureHeight}%" x="{outfit.x}%" y="{outfit.y + outfit.height + 6}%"/>
-		</mask>
-	</defs>
 
-	<image
-	  mask="url(#{'image-mask-' + outfit.id})"
-	  xlink:href="{outfit.pictureLink}"
-	  x="{outfit.x}%"
-	  y="{outfit.y + outfit.height + 6}%"
-	  height="{outfit.pictureHeight}%"
-	  on:click={() => selectOutfit(outfit)}
-	/>
-	<image
-	  xlink:href="{outfit.framePictureLink}"
-	  x="{outfit.x}%"
-	  y="{outfit.y + outfit.height + 6}%"
-	  height="{outfit.pictureHeight}%"
-	  on:click={() => selectOutfit(outfit)}
-    />
+	<Portrait model={outfit} on:click={() => selectOutfit(outfit)}/>
+
 	{#if outfit.mainShape}
 		<image
 			xlink:href="{linkFromShape(outfit.mainShape)}"
@@ -123,13 +97,6 @@
 			height="{outfit.pictureHeight * 0.4}%"
 		/>
 	{/if}
-	<image
-		xlink:href="{getTraitPicLink(outfit.trait)}"
-		x="{outfit.x - 1.3}%"
-		y="{5.5 + outfit.y + outfit.height + 8}%"
-		height="7%"
-		on:click={() => selectOutfit(outfit)}
-	/>
 
 	<BmiLabel outfit="{outfit}" />
   {/each}

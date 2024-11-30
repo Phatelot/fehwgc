@@ -23,7 +23,7 @@
         const token = localStorage.getItem('fehwgc-admin') || '';
         const gistId = '8c4b31c95b425cb40d3f865d95561bfa';
 
-        let donations: Donation[];
+        let donations: Donation[] = [];
         if (!token) {
           const response = await fetch(`https://api.github.com/gists/${gistId}`, {
             cache: "no-store",

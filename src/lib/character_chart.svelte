@@ -1,5 +1,4 @@
 <script lang="ts">
-	import frameMaskLink from '/src/assets/mask.png'
 	import arrowSvg from '/src/assets/arrow.svg'
 
     import type { CompletedState } from "./completed_state";
@@ -7,6 +6,7 @@
     import WeightLabel from "./weight_label.svelte";
 
 	import { createEventDispatcher } from 'svelte';
+    import Portrait from './portrait.svelte';
 
 	export let state: CompletedState;
 
@@ -58,32 +58,7 @@
 	  fill="url(#{character.barGradient})"
 	  on:click={() => selectCharacter(character)}
 	/>
-	<image
-	  xlink:href="{character.bgPictureLink}"
-	  x="{character.x}%"
-	  y="{character.y + character.height + 6}%"
-	  height="{character.pictureHeight}%"
-	/>
-	<defs>
-		<mask id="{'image-mask-' + character.id}" x="0%" y="0%" width="100%" height="100%" maskUnits="userSpaceOnUse">
-		  <image xlink:href="{frameMaskLink}" width="{viewModel[0][0].width}%" height="{viewModel[0][0].pictureHeight}%" x="{character.x}%" y="{character.y + character.height + 6}%"/>
-		</mask>
-	</defs>
-
-	<image
-	  mask="url(#{'image-mask-' + character.id})"
-	  xlink:href="{character.pictureLink}"
-	  x="{character.x}%"
-	  y="{character.y + character.height + 6}%"
-	  height="{character.pictureHeight}%"
-	/>
-	<image
-	  xlink:href="{character.framePictureLink}"
-	  x="{character.x}%"
-	  y="{character.y + character.height + 6}%"
-	  height="{character.pictureHeight}%"
-	  on:click={() => selectCharacter(character)}
-    />
+	<Portrait model={character} on:click={() => selectCharacter(character)}/>
 
 	<WeightLabel outfit="{character}" small/>
   {/each}

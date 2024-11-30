@@ -4,7 +4,7 @@
     import { getOutfitCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
     import { traitNames } from "./trait";
     import { viewPortWidth } from "./view_model";
-    import { formatBMI, formatWeight, toBMICategory, toImperialHeight } from "./weight_utils";
+    import { formatBMI, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
@@ -22,13 +22,24 @@
 
 	let outfit = getOutfitCompletedState(state, characterSlug, outfitSlug) as OutfitCompletedState;
 
+	const imperialHeight = toImperialHeight(outfit.heightInMeters);
+
 	let sentences = [
 		`In this outfit, ${outfit.characterName} weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
-		`She is ${toImperialHeight(outfit.heightInMeters)} tall.`,
+		`She is ${imperialHeight} tall.`,
 		`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${toBMICategory(outfit.BMI)}.`,
+	];
+
+	if (imperialHeight !== `5'5"`) {
+		sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);
+	}
+
+	const traitSentenceIndex = sentences.length;
+
+	sentences.push(
 		`Her trait is ${traitNames[outfit.trait] || ''}:`,
 		`Her build is ${outfit.build}.`,
-	];
+	);
 
 	if (outfit.isSelfFeeding) {
 		sentences.push(`She feeds her other outfits.`);
@@ -61,7 +72,7 @@
 
 <text class="sentence" y="18%">
 	{#each sentences as sentence, i}
-		{#if i == 3}
+		{#if i == traitSentenceIndex}
 			<tspan bind:this={textElement} id="sentence-3" x="36%" dy="4%">{sentence}</tspan>
 		{:else}
 			<tspan x="36%" dy="4%">{sentence}</tspan>
@@ -71,7 +82,7 @@
 
 
 {#each sentences as _, i}
-	{#if i == 3}
+	{#if i == traitSentenceIndex}
 	<image
 		xlink:href="{getTraitPicLink(outfit.trait)}"
 		x="{36 + textWidthPercent}%"

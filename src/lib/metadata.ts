@@ -228,9 +228,9 @@ export const baseMetadata: GameBaseMetadata[] = [
         ...awakeningGamePrecursor,
         characters: [
             {
-                "name": "Female Robin",
+                "name": "Robin",
                 "nameSlug": "female_robin",
-                "heightInCm": 160.0,
+                "heightInCm": 158.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -289,7 +289,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Emmeryn",
                 "nameSlug": "emmeryn",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "build": 'Petite',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -304,7 +304,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Sully",
                 "nameSlug": "sully",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Strong',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -319,7 +319,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Sumia",
                 "nameSlug": "sumia",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -349,7 +349,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Miriel",
                 "nameSlug": "miriel",
-                "heightInCm": 160.0,
+                "heightInCm": 166.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -364,7 +364,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Cordelia",
                 "nameSlug": "cordelia",
-                "heightInCm": 160.0,
+                "heightInCm": 166.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -412,7 +412,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Phila",
                 "nameSlug": "phila",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -427,7 +427,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Flavia",
                 "nameSlug": "flavia",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -450,7 +450,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Olivia",
                 "nameSlug": "olivia",
-                "heightInCm": 160.0,
+                "heightInCm": 156.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -485,7 +485,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tharja",
                 "nameSlug": "tharja",
-                "heightInCm": 160.0,
+                "heightInCm": 156.0,
                 "initialRoaster": true,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
@@ -542,7 +542,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Aversa",
                 "nameSlug": "aversa",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -564,7 +564,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Say'ri",
                 "nameSlug": "sayri",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -586,7 +586,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Cherche",
                 "nameSlug": "cherche",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -608,7 +608,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Adult Tiki",
                 "nameSlug": "adult_tiki",
-                "heightInCm": 160.0,
+                "heightInCm": 156.0,
                 "build": 'Petite',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -650,7 +650,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Panne",
                 "nameSlug": "panne",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -671,7 +671,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Awakening Anna",
                 "nameSlug": "awakening_anna",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -698,7 +698,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lucina",
                 "nameSlug": "lucina",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -765,7 +765,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Naga",
                 "nameSlug": "naga",
-                "heightInCm": 160.0,
+                "heightInCm": 181.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -802,7 +802,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Cynthia",
                 "nameSlug": "cynthia",
-                "heightInCm": 160.0,
+                "heightInCm": 156.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -838,7 +838,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Noire",
                 "nameSlug": "noire",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "group": awakeningSecondaryCastGroup,
                 "outfits": [
@@ -854,7 +854,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lissa",
                 "nameSlug": "lissa",
-                "heightInCm": 160.0,
+                "heightInCm": 154.0,
                 "build": 'Petite',
                 "group": awakeningMainCastGroup,
                 "outfits": [
@@ -888,7 +888,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Gwendolyn",
                 "nameSlug": "gwendolyn",
-                "heightInCm": 160.0,
+                "heightInCm": 164.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -902,7 +902,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Cecilia",
                 "nameSlug": "cecilia",
-                "heightInCm": 160.0,
+                "heightInCm": 167.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -936,7 +936,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Brunnya",
                 "nameSlug": "brunnya",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -951,7 +951,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Guinivere",
                 "nameSlug": "guinivere",
-                "heightInCm": 160.0,
+                "heightInCm": 158.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -973,7 +973,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Melady",
                 "nameSlug": "melady",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -987,7 +987,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Echidna",
                 "nameSlug": "echidna",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Strong',
                 "outfits": [
                     {
@@ -1002,7 +1002,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Igrene",
                 "nameSlug": "igrene",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "initialRoaster": true,
                 "build": 'Regular',
                 "outfits": [
@@ -1031,7 +1031,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Idunn",
                 "nameSlug": "idunn",
-                "heightInCm": 160.0,
+                "heightInCm": 165.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -1065,7 +1065,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Elimine",
                 "nameSlug": "elimine",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1080,7 +1080,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Juno",
                 "nameSlug": "juno",
-                "heightInCm": 160.0,
+                "heightInCm": 158.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1106,7 +1106,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lyn",
                 "nameSlug": "lyn",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1180,7 +1180,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Isadora",
                 "nameSlug": "isadora",
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1195,7 +1195,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Leila",
                 "nameSlug": "leila",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1215,7 +1215,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Louise",
                 "nameSlug": "louise",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1242,7 +1242,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Fiora",
                 "nameSlug": "fiora",
-                "heightInCm": 160.0,
+                "heightInCm": 161.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1263,7 +1263,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Karla",
                 "nameSlug": "karla",
-                "heightInCm": 160.0,
+                "heightInCm": 180.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1298,7 +1298,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Limstella",
                 "nameSlug": "limstella",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1312,7 +1312,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Sonia",
                 "nameSlug": "sonia",
-                "heightInCm": 160.0,
+                "heightInCm": 161.0,
                 "initialRoaster": true,
                 "build": 'Regular',
                 "outfits": [
@@ -1328,7 +1328,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ursula",
                 "nameSlug": "ursula",
-                "heightInCm": 160.0,
+                "heightInCm": 164.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1373,7 +1373,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Silque",
                 "nameSlug": "silque",
-                "heightInCm": 160.0,
+                "heightInCm": 159.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -1394,7 +1394,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Clair",
                 "nameSlug": "clair",
-                "heightInCm": 160.0,
+                "heightInCm": 169.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1435,7 +1435,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Mathilda",
                 "nameSlug": "mathilda",
-                "heightInCm": 160.0,
+                "heightInCm": 174.0,
                 "initialRoaster": true,
                 "build": 'Regular',
                 "outfits": [
@@ -1450,7 +1450,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Sonya",
                 "nameSlug": "sonya",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1484,7 +1484,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tatiana",
                 "nameSlug": "tatiana",
-                "heightInCm": 160.0,
+                "heightInCm": 167.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -1499,7 +1499,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Mila",
                 "nameSlug": "mila",
-                "heightInCm": 160.0,
+                "heightInCm": 169.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1513,7 +1513,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Marla",
                 "nameSlug": "marla",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1527,7 +1527,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Hestia",
                 "nameSlug": "hestia",
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1541,7 +1541,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Rinea",
                 "nameSlug": "rinea",
-                "heightInCm": 160.0,
+                "heightInCm": 165.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -1558,7 +1558,7 @@ export const baseMetadata: GameBaseMetadata[] = [
         ...engageGamePrecursor,
         characters: [
             {
-                "name": "Female Alear",
+                "name": "Alear",
                 "nameSlug": "female_alear",
                 "heightInCm": 165.0,
                 "build": 'Regular',
@@ -1828,7 +1828,7 @@ export const baseMetadata: GameBaseMetadata[] = [
         ...fatesGamePrecursor,
         characters: [
             {
-                "name": "Female Corrin",
+                "name": "Corrin",
                 "nameSlug": "female_corrin",
                 "heightInCm": 165.0,
                 "build": 'Regular',
@@ -2424,7 +2424,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Anna",
                 "nameSlug": "anna",
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2446,7 +2446,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Henriette",
                 "nameSlug": "henriette",
-                "heightInCm": 160.0,
+                "heightInCm": 180.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2468,7 +2468,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ash",
                 "nameSlug": "ash",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -2490,7 +2490,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Letizia",
                 "nameSlug": "letizia",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -2511,7 +2511,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Embla",
                 "nameSlug": "embla",
-                "heightInCm": 160.0,
+                "heightInCm": 158.0,
                 "build": 'Petite',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -2540,7 +2540,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nifl",
                 "nameSlug": "nifl",
-                "heightInCm": 160.0,
+                "heightInCm": 162.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2569,7 +2569,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Fjorm",
                 "nameSlug": "fjorm",
-                "heightInCm": 160.0,
+                "heightInCm": 161.0,
                 "initialRoaster": true,
                 "build": 'Regular',
                 "group": heroesBook13Group,
@@ -2623,7 +2623,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Gunnthra",
                 "nameSlug": "gunnthra",
-                "heightInCm": 160.0,
+                "heightInCm": 165.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2652,7 +2652,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Laegjarn",
                 "nameSlug": "laegjarn",
-                "heightInCm": 160.0,
+                "heightInCm": 177.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2693,7 +2693,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Hel",
                 "nameSlug": "hel",
-                "heightInCm": 160.0,
+                "heightInCm": 205.0,
                 "build": 'Giant',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2709,7 +2709,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Thrasir",
                 "nameSlug": "thrasir",
-                "heightInCm": 160.0,
+                "heightInCm": 171.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2730,7 +2730,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ganglot",
                 "nameSlug": "ganglot",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2746,7 +2746,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Eir",
                 "nameSlug": "eir",
-                "heightInCm": 160.0,
+                "heightInCm": 171.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -2781,7 +2781,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ymir",
                 "nameSlug": "ymir",
-                "heightInCm": 160.0,
+                "heightInCm": 161.0,
                 "build": 'Regular',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2803,7 +2803,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Peony",
                 "nameSlug": "peony",
-                "heightInCm": 160.0,
+                "heightInCm": 165.0,
                 "build": 'Regular',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2840,7 +2840,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Mirabilis",
                 "nameSlug": "mirabilis",
-                "heightInCm": 160.0,
+                "heightInCm": 158.0,
                 "build": 'Petite',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2867,7 +2867,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Triandra",
                 "nameSlug": "triandra",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2903,7 +2903,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Plumeria",
                 "nameSlug": "plumeria",
-                "heightInCm": 160.0,
+                "heightInCm": 178.0,
                 "build": 'Strong',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2938,7 +2938,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Freyja",
                 "nameSlug": "freyja",
-                "heightInCm": 160.0,
+                "heightInCm": 184.0,
                 "build": 'Strong',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2968,7 +2968,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Eitr ",
                 "nameSlug": "eitr",
-                "heightInCm": 160.0,
+                "heightInCm": 155.0,
                 "build": 'Regular',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2984,7 +2984,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ginnungagap",
                 "nameSlug": "ginnungagap",
-                "heightInCm": 160.0,
+                "heightInCm": 210.0,
                 "build": 'Giant',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -2999,7 +2999,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Reginn",
                 "nameSlug": "reginn",
-                "heightInCm": 160.0,
+                "heightInCm": 164.0,
                 "build": 'Petite',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -3027,7 +3027,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Thjazi",
                 "nameSlug": "thjazi",
-                "heightInCm": 160.0,
+                "heightInCm": 220.0,
                 "build": 'Giant',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -3043,7 +3043,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Dagr",
                 "nameSlug": "dagr",
-                "heightInCm": 160.0,
+                "heightInCm": 195.0,
                 "initialRoaster": true,
                 "build": 'Strong',
                 "group": heroesBook45Group,
@@ -3078,7 +3078,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nott",
                 "nameSlug": "nott",
-                "heightInCm": 160.0,
+                "heightInCm": 197.0,
                 "build": 'Strong',
                 "group": heroesBook45Group,
                 "outfits": [
@@ -3100,7 +3100,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Seior",
                 "nameSlug": "seior",
-                "heightInCm": 160.0,
+                "heightInCm": 183.0,
                 "build": 'Strong',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3128,7 +3128,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Gullveig",
                 "nameSlug": "gullveig",
-                "heightInCm": 160.0,
+                "heightInCm": 190.0,
                 "build": 'Strong',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3157,7 +3157,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Kvasir",
                 "nameSlug": "kvasir",
-                "heightInCm": 160.0,
+                "heightInCm": 150.0,
                 "build": 'Regular',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3178,7 +3178,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Heior",
                 "nameSlug": "heior",
-                "heightInCm": 160.0,
+                "heightInCm": 178.0,
                 "build": 'Regular',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3199,7 +3199,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nerpuz",
                 "nameSlug": "nerpuz",
-                "heightInCm": 160.0,
+                "heightInCm": 188.0,
                 "build": 'Strong',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3229,7 +3229,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ratatoskr",
                 "nameSlug": "ratatoskr",
-                "heightInCm": 160.0,
+                "heightInCm": 152.0,
                 "build": 'Petite',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3245,7 +3245,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Hraesvelgr",
                 "nameSlug": "hraesvelgr",
-                "heightInCm": 160.0,
+                "heightInCm": 164.0,
                 "build": 'Petite',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3260,7 +3260,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nidhoggr",
                 "nameSlug": "niohoggr",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "build": 'Regular',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3275,7 +3275,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Heidrun",
                 "nameSlug": "heiorun",
-                "heightInCm": 160.0,
+                "heightInCm": 184.0,
                 "build": 'Regular',
                 "group": heroesBook68Group,
                 "outfits": [
@@ -3292,7 +3292,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Loki",
                 "nameSlug": "loki",
                 "initialRoaster": true,
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -3329,7 +3329,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Thorr",
                 "nameSlug": "thorr",
-                "heightInCm": 160.0,
+                "heightInCm": 174.0,
                 "build": 'Regular',
                 "group": heroesBook13Group,
                 "outfits": [
@@ -3356,7 +3356,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tailtiu",
                 "nameSlug": "tailtiu",
-                "heightInCm": 160.0,
+                "heightInCm": 148.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3383,7 +3383,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ethlyn",
                 "nameSlug": "ethlyn",
-                "heightInCm": 160.0,
+                "heightInCm": 159.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3404,7 +3404,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Arya",
                 "nameSlug": "arya",
-                "heightInCm": 160.0,
+                "heightInCm": 154.0,
                 "initialRoaster": true,
                 "build": 'Regular',
                 "outfits": [
@@ -3433,7 +3433,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Annand",
                 "nameSlug": "annand",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3447,7 +3447,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Dithorba",
                 "nameSlug": "dithorba",
-                "heightInCm": 160.0,
+                "heightInCm": 161.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3461,7 +3461,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Erinys",
                 "nameSlug": "erinys",
-                "heightInCm": 160.0,
+                "heightInCm": 157.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3475,7 +3475,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lachesis",
                 "nameSlug": "lachesis",
-                "heightInCm": 160.0,
+                "heightInCm": 151.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -3502,7 +3502,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Deirdre",
                 "nameSlug": "deirdre",
-                "heightInCm": 160.0,
+                "heightInCm": 159.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3536,7 +3536,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Silvia",
                 "nameSlug": "silvia",
-                "heightInCm": 160.0,
+                "heightInCm": 150.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -3551,7 +3551,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Larcei",
                 "nameSlug": "larcei",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3571,7 +3571,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lene",
                 "nameSlug": "lene",
-                "heightInCm": 160.0,
+                "heightInCm": 153.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3593,7 +3593,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Julia ",
                 "nameSlug": "julia",
-                "heightInCm": 160.0,
+                "heightInCm": 151.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -3633,7 +3633,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Altena",
                 "nameSlug": "altena",
-                "heightInCm": 160.0,
+                "heightInCm": 164.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3648,7 +3648,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ishtar",
                 "nameSlug": "ishtar",
-                "heightInCm": 160.0,
+                "heightInCm": 155.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3683,7 +3683,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Hilda [Holy War]",
                 "nameSlug": "hilda_holy_war",
-                "heightInCm": 160.0,
+                "heightInCm": 151.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3712,7 +3712,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Brigid",
                 "nameSlug": "brigid",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3731,7 +3731,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tsubasa",
                 "nameSlug": "tsubasa",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3745,7 +3745,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Kiria",
                 "nameSlug": "kiria",
-                "heightInCm": 160.0,
+                "heightInCm": 176.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3759,7 +3759,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Eleanora",
                 "nameSlug": "eleanora",
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -3778,7 +3778,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Titania",
                 "nameSlug": "titania",
-                "heightInCm": 160.0,
+                "heightInCm": 180.0,
                 "build": 'Strong',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3800,7 +3800,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Elincia",
                 "nameSlug": "elincia",
-                "heightInCm": 160.0,
+                "heightInCm": 180.0,
                 "build": 'Regular',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3850,7 +3850,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nephenee",
                 "nameSlug": "nephenee",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3885,7 +3885,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Sigrun",
                 "nameSlug": "sigrun",
-                "heightInCm": 160.0,
+                "heightInCm": 177.0,
                 "build": 'Strong',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3908,7 +3908,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tanith",
                 "nameSlug": "tanith",
-                "heightInCm": 160.0,
+                "heightInCm": 180.0,
                 "build": 'Strong',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3930,7 +3930,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Marcia",
                 "nameSlug": "marcia",
-                "heightInCm": 160.0,
+                "heightInCm": 165.0,
                 "build": 'Regular',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3946,7 +3946,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Astrid",
                 "nameSlug": "astrid",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3962,7 +3962,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Petrine",
                 "nameSlug": "petrine",
-                "heightInCm": 160.0,
+                "heightInCm": 187.0,
                 "initialRoaster": true,
                 "build": 'Strong',
                 "group": telliusPathOfRadianceGroup,
@@ -3979,7 +3979,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ilyana",
                 "nameSlug": "ilyana",
-                "heightInCm": 160.0,
+                "heightInCm": 155.0,
                 "build": 'Regular',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -3994,7 +3994,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Mia",
                 "nameSlug": "mia",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -4009,7 +4009,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lethe",
                 "nameSlug": "lethe",
-                "heightInCm": 160.0,
+                "heightInCm": 164.0,
                 "build": 'Regular',
                 "group": telliusPathOfRadianceGroup,
                 "outfits": [
@@ -4037,7 +4037,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Leanne",
                 "nameSlug": "leanne",
-                "heightInCm": 160.0,
+                "heightInCm": 172.0,
                 "build": 'Regular',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4059,7 +4059,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ena",
                 "nameSlug": "ena",
-                "heightInCm": 160.0,
+                "heightInCm": 155.0,
                 "build": 'Regular',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4074,7 +4074,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lucia",
                 "nameSlug": "lucia",
-                "heightInCm": 160.0,
+                "heightInCm": 170.0,
                 "build": 'Regular',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4097,7 +4097,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nailah",
                 "nameSlug": "nailah",
-                "heightInCm": 160.0,
+                "heightInCm": 183.0,
                 "build": 'Strong',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4126,7 +4126,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Altina",
                 "nameSlug": "altina",
-                "heightInCm": 160.0,
+                "heightInCm": 159.0,
                 "build": 'Regular',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4161,7 +4161,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Ashera",
                 "nameSlug": "ashera",
-                "heightInCm": 160.0,
+                "heightInCm": 190.0,
                 "build": 'Strong',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4177,7 +4177,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Heather",
                 "nameSlug": "heather",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4192,7 +4192,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Vika",
                 "nameSlug": "vika",
-                "heightInCm": 160.0,
+                "heightInCm": 180.0,
                 "build": 'Regular',
                 "group": telliusRadiantDawnGroup,
                 "outfits": [
@@ -4212,7 +4212,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Eirika",
                 "nameSlug": "eirika",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4280,7 +4280,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Syrene",
                 "nameSlug": "syrene",
-                "heightInCm": 160.0,
+                "heightInCm": 1685.0,
                 "build": 'Strong',
                 "outfits": [
                     {
@@ -4294,7 +4294,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Vanessa",
                 "nameSlug": "vanessa",
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4308,7 +4308,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Selena (Sacred Stones)",
                 "nameSlug": "selena_sacred_stones",
-                "heightInCm": 160.0,
+                "heightInCm": 178.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4335,7 +4335,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Natasha",
                 "nameSlug": "natasha",
-                "heightInCm": 160.0,
+                "heightInCm": 177.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4349,7 +4349,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Marisa",
                 "nameSlug": "marisa",
-                "heightInCm": 160.0,
+                "heightInCm": 182.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4371,7 +4371,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Tethys",
                 "nameSlug": "tethys",
                 "initialRoaster": true,
-                "heightInCm": 160.0,
+                "heightInCm": 180.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4385,7 +4385,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "L'Arachel",
                 "nameSlug": "larachel",
-                "heightInCm": 160.0,
+                "heightInCm": 172.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4424,7 +4424,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Caeda",
                 "nameSlug": "caeda",
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -4492,7 +4492,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nyna",
                 "nameSlug": "nyna",
-                "heightInCm": 160.0,
+                "heightInCm": 167.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4507,7 +4507,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Linde",
                 "nameSlug": "linde",
-                "heightInCm": 160.0,
+                "heightInCm": 151.0,
                 "build": 'Petite',
                 "outfits": [
                     {
@@ -4540,7 +4540,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Minerva",
                 "nameSlug": "minerva",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4567,7 +4567,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Palla",
                 "nameSlug": "palla",
-                "heightInCm": 160.0,
+                "heightInCm": 167.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4595,7 +4595,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Catria",
                 "nameSlug": "catria",
-                "heightInCm": 160.0,
+                "heightInCm": 169.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4642,7 +4642,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Lena",
                 "nameSlug": "lena",
-                "heightInCm": 160.0,
+                "heightInCm": 157.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4656,7 +4656,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Sheena",
                 "nameSlug": "sheena",
-                "heightInCm": 160.0,
+                "heightInCm": 172.0,
                 "build": 'Strong',
                 "outfits": [
                     {
@@ -4677,7 +4677,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Nagi",
                 "nameSlug": "nagi",
-                "heightInCm": 160.0,
+                "heightInCm": 171.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4698,7 +4698,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Eremiya",
                 "nameSlug": "eremiya",
-                "heightInCm": 160.0,
+                "heightInCm": 178.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4712,7 +4712,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Clarisse",
                 "nameSlug": "clarisse",
-                "heightInCm": 160.0,
+                "heightInCm": 165.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4726,7 +4726,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Phina",
                 "nameSlug": "phina",
-                "heightInCm": 160.0,
+                "heightInCm": 154.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4740,7 +4740,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Athena",
                 "nameSlug": "athena",
-                "heightInCm": 160.0,
+                "heightInCm": 173.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4755,7 +4755,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Malice",
                 "nameSlug": "malice",
-                "heightInCm": 160.0,
+                "heightInCm": 168.0,
                 "initialRoaster": true,
                 "build": 'Regular',
                 "outfits": [
@@ -4771,7 +4771,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Kris",
                 "nameSlug": "kris",
-                "heightInCm": 160.0,
+                "heightInCm": 162.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4790,7 +4790,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Eyvel",
                 "nameSlug": "eyvel",
-                "heightInCm": 160.0,
+                "heightInCm": 175.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4804,7 +4804,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Tanya",
                 "nameSlug": "tanya",
-                "heightInCm": 160.0,
+                "heightInCm": 159.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4818,7 +4818,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Safy",
                 "nameSlug": "safy",
-                "heightInCm": 160.0,
+                "heightInCm": 163.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4833,7 +4833,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Olwen",
                 "nameSlug": "olwen",
-                "heightInCm": 160.0,
+                "heightInCm": 165.0,
                 "build": 'Regular',
                 "outfits": [
                     {
@@ -4863,7 +4863,7 @@ export const baseMetadata: GameBaseMetadata[] = [
         ...threeHousesGamePrecursor,
         characters: [
             {
-                "name": "Female Byleth",
+                "name": "Byleth",
                 "nameSlug": "female_byleth",
                 "heightInCm": 164.0,
                 "initialRoaster": true,
@@ -5036,7 +5036,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 ]
             },
             {
-                "name": "Female Shez",
+                "name": "Shez",
                 "nameSlug": "female_shez",
                 "heightInCm": 170.0,
                 "build": 'Regular',

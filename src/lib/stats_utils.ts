@@ -14,7 +14,7 @@ export function median(values: number[]): number {
 	}
 	const sortedValues = structuredClone(values).sort((a, b) => a - b)
 	if ((number % 2) === 1) {
-		return sortedValues[number/2]
+		return sortedValues[Math.floor(number/2)]
 	}
 	return (sortedValues[number/2-1] + sortedValues[number/2])/2.
 }

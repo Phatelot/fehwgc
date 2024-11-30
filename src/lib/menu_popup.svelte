@@ -12,6 +12,7 @@
 		['BMI_CHART', 'BMI Chart'],
 		['CHARACTER_CHART', 'Character Chart'],
 		['CHANGELOG', 'Changelog'],
+		['GLOBAL_STATS', 'Global Stats'],
 	]
 
 	function selectPage(page: string) {

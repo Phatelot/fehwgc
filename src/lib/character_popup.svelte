@@ -20,6 +20,7 @@
 		`She is ${toImperialHeight(character.heightInMeters)} tall.`,
 		`Her build is ${character.build}.`,
 		unlockedOutfitsSentence,
+		`So far, she has received $${character.stats?.totalDonationReceived}.`,
 	];
 
 	function close() {

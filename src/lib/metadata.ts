@@ -499,8 +499,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 250.0,
                         "mainShape": "⌛",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🟣"
                     },
                     {
@@ -555,8 +555,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "⌛",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "⌛"
                     }
                 ]
@@ -635,8 +635,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "💎",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🍎"
                     },
                     {
@@ -743,8 +743,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 450.0,
@@ -914,8 +914,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🟣",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "💎"
                     },
                     {
@@ -1131,8 +1131,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🍎"
                     },
                     {
@@ -1347,8 +1347,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "⌛",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 200.0,
@@ -1871,8 +1871,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 250.0,
                         "mainShape": "🟣",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "💎"
                     },
                     {
@@ -2017,8 +2017,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -2071,8 +2071,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2224,8 +2224,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "⌛",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "⌛"
                     },
                     {
@@ -2309,8 +2309,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🟣",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -3418,8 +3418,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 500.0,
                         "mainShape": "🍎",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🟣"
                     },
                     {
@@ -3522,8 +3522,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 250.0,
                         "mainShape": "⌛",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3605,8 +3605,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍎",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -3667,8 +3667,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 500.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🟣"
                     },
                     {
@@ -3827,8 +3827,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 250.0,
                         "mainShape": "💎",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "⌛"
                     },
                     {
@@ -3864,8 +3864,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -4251,8 +4251,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🍎"
                     },
                     {
@@ -4398,8 +4398,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     },
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -4462,8 +4462,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🟣",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🍐"
                     }
                 ]
@@ -4579,8 +4579,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🍐"
                     },
                     {
@@ -4627,8 +4627,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "⌛",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
                         "secondaryShape": "🟣"
                     },
                     {
@@ -4852,8 +4852,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 250.0,
                         "mainShape": "🍐",
-                        "outfit": "Resplendant",
-                        "outfitSlug": "resplendant"
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent"
                     }
                 ]
             }
@@ -5419,8 +5419,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "💎",
-                        "outfit": "Picnic",
-                        "outfitSlug": "picnic"
+                        "outfit": "Maid",
+                        "outfitSlug": "maid"
                     }
                 ]
             },

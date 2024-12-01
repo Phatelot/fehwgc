@@ -188,6 +188,7 @@ describe('toCharacterChange', () => {
 
 		const change = toCharacterChange(before, after)
 		expect(change?.brokenUnlockSlug).toBe("winter")
+		expect(change?.brokenUnlockTrait).toBe("Sedentary")
 		expect(change?.brokenWeightGainInLbs).toBe(460)
 	})
 
@@ -406,6 +407,7 @@ describe('toOutfitChange', () => {
 			slug: "base",
 			unlocked: true,
 			weightGainedInLbs: 120,
+			trait: "Sedentary",
 			outgrown: false,
 			newState: after,
 		})

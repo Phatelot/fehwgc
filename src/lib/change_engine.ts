@@ -1,5 +1,6 @@
 import { getCharacterDisplayName, getCharacterOutfitDisplayName } from "./metadata";
 import { isOutgrown, type GameState, type OutfitState, type CharacterState } from "./state";
+import { traitNames } from "./trait";
 import { formatWeight } from "./weight_utils";
 
 const insignificantChangeThresholdInLbs = 1;
@@ -8,6 +9,7 @@ export type CharacterChange = {
 	slug: string;
 	unlocked: boolean;
 	brokenUnlockSlug?: string;
+	brokenUnlockTrait?: string;
 	brokenWeightGainInLbs: number;
 	outfitChanges: OutfitChange[];
 	newState: CharacterState;
@@ -16,6 +18,7 @@ export type CharacterChange = {
 type OutfitChange = {
 	slug: string;
 	unlocked: boolean;
+	trait?: string;
 	weightGainedInLbs: number;
 	outgrown: boolean;
 	newState: OutfitState;
@@ -67,6 +70,7 @@ export function toCharacterChange(before: CharacterState, after: CharacterState)
 		slug: before.slug,
 		unlocked: outfitChanges.length > 0 ? outfitChanges[0].unlocked : false,
 		brokenUnlockSlug: !before.brokenOutfit.slug ? after.brokenOutfit.slug : undefined,
+		brokenUnlockTrait: !before.brokenOutfit.trait ? after.brokenOutfit.trait : undefined,
 		brokenWeightGainInLbs: brokenWeightGain,
 		outfitChanges: outfitChanges.sort(compareSignificanceOfOutfitChanges).reverse(),
 		newState: after,
@@ -87,6 +91,7 @@ export function toOutfitChange(before: OutfitState, after: OutfitState): OutfitC
 	return {
 		slug: before.slug,
 		unlocked: before.unlocked !== after.unlocked,
+		trait: !before.unlocked ? after.trait : undefined,
 		weightGainedInLbs: after.weightInLbs - before.weightInLbs,
 		outgrown: isOutgrownBefore != isOutgrownAfter,
 		newState: after,
@@ -113,6 +118,10 @@ function compareSignificanceOfOutfitChanges(changeA: OutfitChange, changeB: Outf
 	return weightDiff;
 }
 
+function traitName(traitSlug?: string): string {
+	return traitNames[traitSlug || ''].toLowerCase();
+}
+
 function serializeCharacterChanges(change: CharacterChange): string[] {
 	const sentences: string[] = [];
 	const characterDisplayName = getCharacterDisplayName(change.slug);
@@ -120,14 +129,14 @@ function serializeCharacterChanges(change: CharacterChange): string[] {
 	if (change.unlocked && change.brokenUnlockSlug) {
 		sentences.push(
 			`${characterDisplayName} has just been unlocked and has already outgrown all her outfits.`,
-			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}.'`
+			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`
 		)
 	} else if (change.unlocked) {
 		sentences.push(`${characterDisplayName} has just been unlocked and is ready to outgrow her outfits.`)
 	} else if (change.brokenUnlockSlug) {
 		sentences.push(
 			`${characterDisplayName} has outgrown all her outfits.`,
-			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}'.`
+			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`
 		)
 	} else if (change.newState.brokenOutfit.slug && change.brokenWeightGainInLbs >= insignificantChangeThresholdInLbs) {
 		sentences.push(`${characterDisplayName} has gained ${formatWeight(change.brokenWeightGainInLbs)}lbs in her broken outfit.`)
@@ -142,10 +151,10 @@ function serializeOutfitChanges(characterDisplayName: string, characterSlug: str
 	const outfitName = getCharacterOutfitDisplayName(characterSlug, change.slug).toLowerCase();
 
 	if (change.unlocked && change.outgrown) {
-		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs).`
+		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`
 	}
 	if (change.unlocked) {
-		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs).`
+		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`
 	}
 	if (change.outgrown) {
 		return `${characterDisplayName} has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`

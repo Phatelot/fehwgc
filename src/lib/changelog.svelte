@@ -23,7 +23,7 @@
                 end = end + 1;
             }
         }
-        clampPageNumber()
+        pageNumber = 0
     }
 
     function decrementEnd() {
@@ -33,7 +33,7 @@
                 start = start - 1
             }
         }
-        clampPageNumber()
+        pageNumber = 0
     }
 
     function incrementEnd() {
@@ -48,6 +48,7 @@
     function lastDonation() {
         start = Math.max(state.donations.length - 1, 0);
         end = state.donations.length;
+        pageNumber = 0;
     }
 
     $: sentences = (() => {
@@ -77,11 +78,6 @@
 
     function decrementPageNumber() {
         pageNumber = Math.max(0, pageNumber - 1)
-    }
-
-    function clampPageNumber() {
-        maxPageNumber = Math.floor(sentences.length / maxSentencesPerPage);
-        pageNumber = Math.min(pageNumber, maxPageNumber);
     }
 
     function incrementPageNumber() {
@@ -126,7 +122,7 @@
 
 <text class="sentence" y="30%">
 	{#each page as sentence, i}
-        <tspan x="16%" dy="5%">{sentence}</tspan>
+        <tspan x="12%" dy="5%">{sentence}</tspan>
 	{/each}
 </text>
 

@@ -93,6 +93,7 @@
 	x="6%"
 	y="10%"
 	height="80%"
+	style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
 />
 
 

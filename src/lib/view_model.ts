@@ -6,7 +6,8 @@ import { groupConsecutive } from "./utils";
 export const viewPortHeight = 100;
 export const viewPortWidth = 220;
 
-const maxNumberOfDisplayedCharacters = 14;
+const maxNumberOfDisplayedCharactersPerLine = 14;
+const maxNumberOfDisplayedLines = 6;
 
 export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[][] {
 
@@ -16,13 +17,13 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 		.filter(outfit => outfit.unlocked)
 		.sort((a, b) => a.weightInLbs - b.weightInLbs);
 
-	const paginatedOutfitStates = groupConsecutive(outfitStates, maxNumberOfDisplayedCharacters);
+	const paginatedOutfitStates = groupConsecutive(outfitStates, maxNumberOfDisplayedCharactersPerLine);
 
 	const lowestWeight = outfitStates[0].weightInLbs;
 	const highestWeight = outfitStates[outfitStates.length - 1].weightInLbs;
 	const maxDisplayableWeight = 40 * lowestWeight;
 
-	const margin = 95 / (5 * maxNumberOfDisplayedCharacters + 1);
+	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;
 
 	return paginatedOutfitStates.map(outfitStatesPage => {
@@ -38,7 +39,7 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 			return {
 				width,
 				height,
-				x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharacters - outfitStatesPage.length + i),
+				x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharactersPerLine - outfitStatesPage.length + i),
 				y,
 				outgrownY,
 				barGradient: outfitState.gameSlug + "Gradient",
@@ -100,13 +101,13 @@ export function createBMIOutfitViewModel(state: CompletedState) : BMIOutfitViewM
 		.filter(outfit => outfit.unlocked)
 		.sort((a, b) => a.BMI - b.BMI);
 
-	const paginatedOutfitStates = groupConsecutive(outfitStates, maxNumberOfDisplayedCharacters);
+	const paginatedOutfitStates = groupConsecutive(outfitStates, maxNumberOfDisplayedCharactersPerLine);
 
 	const lowestBMI = outfitStates[0].BMI;
 	const highestBMI = outfitStates[outfitStates.length - 1].BMI;
 	const maxDisplayableBMI = 40 * lowestBMI;
 
-	const margin = 95 / (5 * maxNumberOfDisplayedCharacters + 1);
+	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;
 
 	return paginatedOutfitStates.map(outfitStatesPage => {
@@ -118,7 +119,7 @@ export function createBMIOutfitViewModel(state: CompletedState) : BMIOutfitViewM
 			return {
 				width,
 				height,
-				x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharacters - outfitStatesPage.length + i),
+				x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharactersPerLine - outfitStatesPage.length + i),
 				y,
 				barGradient: outfitState.gameSlug + "Gradient",
 				characterSlug: outfitState.characterSlug,
@@ -177,13 +178,13 @@ export function createCharacterViewModel(state: CompletedState) : CharacterViewM
 		.filter(character => character.unlocked)
 		.sort((a, b) => (a.stats?.totalWeightUnlockedInLbs || 0) - (b.stats?.totalWeightUnlockedInLbs || 0));
 
-	const paginatedCharacterStates = groupConsecutive(characterStates, maxNumberOfDisplayedCharacters);
+	const paginatedCharacterStates = groupConsecutive(characterStates, maxNumberOfDisplayedCharactersPerLine);
 
 	const lowestWeight = (characterStates[0].stats?.totalWeightUnlockedInLbs || 150);
 	const highestWeight = characterStates[characterStates.length - 1].stats?.totalWeightUnlockedInLbs || 150;
 	const maxDisplayableWeight = 40 * lowestWeight;
 
-	const margin = 95 / (5 * maxNumberOfDisplayedCharacters + 1);
+	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;
 
 	return paginatedCharacterStates.map(characterStatesPage => {
@@ -197,7 +198,7 @@ export function createCharacterViewModel(state: CompletedState) : CharacterViewM
 			return {
 				width,
 				height,
-				x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharacters - characterStatesPage.length + i),
+				x: 2.5 + margin + 5 * margin * (maxNumberOfDisplayedCharactersPerLine - characterStatesPage.length + i),
 				y,
 				barGradient: characterState.gameSlug + "Gradient",
 				characterSlug: characterState.nameSlug,
@@ -227,4 +228,52 @@ export type CharacterViewModel = {
 	weightInLbs: number;
 	id: string;
 	build: Build;
+}
+
+export function createUnlockViewModel(state: CompletedState): UnlockViewModel[][] {
+	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
+	const width = 4 * margin;
+	const pictureHeight = width * viewPortWidth / viewPortHeight;
+	const maxNumberOfCharactersPerPage = (maxNumberOfDisplayedCharactersPerLine - 1) * maxNumberOfDisplayedLines;
+
+	return groupConsecutive(state.games
+		.flatMap(g => g.characters.map(c => ({game: g, character: c})))
+		.flatMap(c => c.character.outfits.map(o => ({...c, outfit: o})))
+		.map((o, i) => {
+			i %= maxNumberOfCharactersPerPage;
+			return {
+				characterSlug: o.character.nameSlug,
+				outfitSlug: o.outfit.nameSlug || 'should not happen',
+				bgPictureLink: getBgPictureLink(o.game.nameSlug),
+				pictureLink: getFacePicLink(o.character.nameSlug, o.outfit.broken ? getHeaviestOutfitSlug(o.character) : o.outfit.nameSlug || 'base'),
+				framePictureLink: getFramePictureLink(o.outfit.broken ? 'broken' : (o.outfit.nameSlug as string)),
+				x: 2.5 + margin + 5 * margin * (i % (maxNumberOfDisplayedCharactersPerLine - 1)),
+				y: 4.5 + Math.floor(i / (maxNumberOfDisplayedCharactersPerLine - 1)) * (pictureHeight + 2.5),
+				height: 4,
+				pictureHeight,
+				width,
+				id: `un-${o.character.nameSlug}-${o.outfit.nameSlug}${o.outfit.broken ? '-broken' : ''}`,
+				trait: o.outfit.trait,
+				grey: !o.outfit.unlocked,
+				broken: o.outfit.broken,
+			}
+		})
+		.reverse(), maxNumberOfCharactersPerPage);
+}
+
+export type UnlockViewModel = {
+	characterSlug: string;
+	outfitSlug: string;
+	bgPictureLink: string;
+	pictureLink: string;
+	framePictureLink: string;
+	x: number;
+	y: number;
+	height: number;
+	pictureHeight: number;
+	width: number;
+	id: string;
+	trait?: string;
+	grey?: boolean;
+	broken: boolean;
 }

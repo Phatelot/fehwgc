@@ -9,6 +9,7 @@
 
 	const pages = [
 		['OUTFIT_CHART', 'Outfit Chart'],
+		['UNLOCKOMETER', 'Unlock-o-meter'],
 		['BMI_CHART', 'BMI Chart'],
 		['CHARACTER_CHART', 'Character Chart'],
 		['CHANGELOG', 'Changelog'],

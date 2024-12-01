@@ -29,6 +29,7 @@
             cache: "no-store",
             headers: {
               "Accept": "application/vnd.github+json",
+              "If-None-Match": "",
             },
           });
           donations = parseCsvData(JSON.parse(await response.text())

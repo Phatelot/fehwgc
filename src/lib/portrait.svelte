@@ -44,6 +44,7 @@
 	  x="{model.x}%"
 	  y="{model.y + model.height + 6}%"
 	  height="{model.pictureHeight}%"
+	  style="{model.grey ? 'filter: grayscale(1);' : ''}"
 	  on:click
     />
 

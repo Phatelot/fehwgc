@@ -24,41 +24,61 @@
 
 	const imperialHeight = toImperialHeight(outfit.heightInMeters);
 
-	let sentences = [
-		`In this outfit, ${outfit.characterName} weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
-		`She is ${imperialHeight} tall.`,
-	];
+	let traitSentenceIndex: number;
 
-	const bmiCategory = toBMICategory(outfit.BMI);
-	if (bmiCategory === 'underweight') {
-		sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so the poor girl is ${bmiCategory}.`)
-	} else {
-		sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${bmiCategory}.`)
+	function createSentences(): string[] {
+		if (!outfit.unlocked) {
+			return [
+				`Donate to unlock ${outfit.characterName}!`,
+			]
+		}
+
+		let sentences = [
+			`In this outfit, ${outfit.characterName} weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
+			`She is ${imperialHeight} tall.`,
+		];
+
+		const bmiCategory = toBMICategory(outfit.BMI);
+		if (bmiCategory === 'underweight') {
+			sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so the poor girl is ${bmiCategory}.`)
+		} else {
+			sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${bmiCategory}.`)
+		}
+
+		if (imperialHeight !== `5'5"`) {
+			sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);
+		}
+
+		traitSentenceIndex = sentences.length;
+
+		sentences.push(
+			`Her trait is ${traitNames[outfit.trait] || ''}:`,
+			`Her build is ${outfit.build}.`,
+		);
+
+		if (outfit.outgrown && outfit.outgrownThresholdInLbs) {
+			sentences.push(`She has outgrown this outfit since she reached ${formatWeight(outfit.outgrownThresholdInLbs)}lbs.`)
+		} else if (outfit.outgrownThresholdInLbs) {
+			sentences.push(`That outfit can withstand up to ${formatWeight(outfit.outgrownThresholdInLbs)}lbs.`)
+		}
+
+		if (outfit.isSelfFeeding) {
+			sentences.push(`She feeds her other outfits.`);
+		} else if (outfit.selfFedBy) {
+			sentences.push(`She is self-fed by ${outfit.selfFedBy}.`);
+		}
+		if (outfit.boundFedBy) {
+			sentences.push(`She is fed by ${outfit.boundFedBy}.`);
+		} else if (outfit.boundFeeding) {
+			sentences.push(`She feeds ${outfit.boundFeeding}.`);
+		} else if (outfit.mutualGainingWith) {
+			sentences.push(`She and ${outfit.mutualGainingWith} are mutual gainers.`);
+		}
+
+		return sentences;
 	}
 
-	if (imperialHeight !== `5'5"`) {
-		sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);
-	}
-
-	const traitSentenceIndex = sentences.length;
-
-	sentences.push(
-		`Her trait is ${traitNames[outfit.trait] || ''}:`,
-		`Her build is ${outfit.build}.`,
-	);
-
-	if (outfit.isSelfFeeding) {
-		sentences.push(`She feeds her other outfits.`);
-	} else if (outfit.selfFedBy) {
-		sentences.push(`She is self-fed by ${outfit.selfFedBy}.`);
-	}
-	if (outfit.boundFedBy) {
-		sentences.push(`She is fed by ${outfit.boundFedBy}.`);
-	} else if (outfit.boundFeeding) {
-		sentences.push(`She feeds ${outfit.boundFeeding}.`);
-	} else if (outfit.mutualGainingWith) {
-		sentences.push(`She and ${outfit.mutualGainingWith} are mutual gainers.`);
-	}
+	let sentences = createSentences();
 
 	function close() {
 		dispatch('close', {})

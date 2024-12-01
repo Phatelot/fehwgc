@@ -115,7 +115,7 @@ export function toCharacterCompletedState(state: GameState[], characterState: Ch
 }
 
 export function toBrokenOutfitState(characterState: CharacterState, characterMetadata: CharacterBaseMetadata, gameMetadata: GameBaseMetadata): OutfitCompletedState {
-	const unlocked = isUnlocked(characterState) && isOutgrown(characterState.outfits[characterState.outfits.length - 1]);
+	const unlocked = !!characterState.brokenOutfit.trait;
 	const selectedOutfit = characterMetadata.outfits.find(outfit => outfit.outfitSlug === characterState.brokenOutfit.slug)
 
 	return {
@@ -261,6 +261,14 @@ export function donationsToOmnistate(donations: Donation[]): Omnistate {
 }
 
 export function getHeaviestOutfitSlug(state: CharacterCompletedState): string {
+	if (!state.outfits || !state.outfits.length) {
+		return 'base';
+	}
+
+	if (!state.outfits.filter(o => o.unlocked).length) {
+		return state.outfits[0].nameSlug as string
+	}
+
 	return state.outfits
 		.filter(o => o.unlocked)
 		.sort((a, b) => b.weightInLbs - a.weightInLbs)[0].nameSlug || 'base';

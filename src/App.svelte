@@ -18,24 +18,36 @@
     import Unlockometer from './lib/unlockometer.svelte';
 
     async function fetchData(): Promise<Omnistate> {
+      const now = Math.floor(Date.now() / 1000);
+
       try {
         restoreStateFromLocalStorage();
 
         const token = localStorage.getItem('fehwgc-admin') || '';
+        const lastRequest = JSON.parse(localStorage.getItem('fehwgc-request') || "{}");
         const gistId = '8c4b31c95b425cb40d3f865d95561bfa';
 
         let donations: Donation[] = [];
         if (!token) {
-          const response = await fetch(`https://api.github.com/gists/${gistId}`, {
-            cache: "no-store",
-            headers: {
-              "Accept": "application/vnd.github+json",
-              "If-None-Match": "",
-            },
-          });
-          donations = parseCsvData(JSON.parse(await response.text())
-            .files['donos.csv']
-            .content);
+          if (lastRequest.donations && lastRequest.timestamp > now - 60) {
+            donations = lastRequest.donations;
+          } else {
+            const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+              cache: "no-store",
+              headers: {
+                "Accept": "application/vnd.github+json",
+                "If-None-Match": "",
+              },
+            });
+            donations = parseCsvData(JSON.parse(await response.text())
+              .files['donos.csv']
+              .content);
+
+            localStorage.setItem('fehwgc-request', JSON.stringify({
+              donations: donations,
+              timestamp: now,
+            }))
+          }
         } else {
           const octokit = new Octokit({
             auth: token,
@@ -46,6 +58,11 @@
           const donoFile = (files || {})['donos.csv'];
           const content = donoFile?.content || '';
           donations = parseCsvData(content);
+
+          localStorage.setItem('fehwgc-request', JSON.stringify({
+            donations: donations,
+            timestamp: now,
+          }))
         }
 
         const omnistate = donationsToOmnistate(donations);

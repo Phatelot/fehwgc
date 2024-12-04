@@ -2,9 +2,17 @@
     import { getBodyPicLink, getTraitPicLink } from "./asset_utils";
     import Box from "./box.svelte";
     import { getOutfitCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
+    import type { Shape } from "./metadata";
     import { traitNames } from "./trait";
     import { viewPortWidth } from "./view_model";
     import { formatBMI, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
+
+	import appleLink from '/src/assets/shapes/apple.png'
+	import circleLink from '/src/assets/shapes/circle.png'
+	import hourglassLink from '/src/assets/shapes/hourglass.png'
+	import pearLink from '/src/assets/shapes/pear.png'
+	import triangleLink from '/src/assets/shapes/triangle.png'
+
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
@@ -12,12 +20,30 @@
 	export let outfitSlug: string;
 	export let state: CompletedState;
 
-	let textElement: SVGTSpanElement;
-	let textWidthPercent = 0;
+	let traitTextElement: SVGTSpanElement;
+	let traitTextWidthPercent = 0;
 
-	$: if (!!textElement) {
-		const textWidth = textElement.getBBox().width;
-		textWidthPercent = (textWidth / viewPortWidth) * 100;
+	let shapeTextElement: SVGTSpanElement;
+	let shapeTextWidthPercent = 0;
+
+	function linkFromShape(shape: Shape) : string {
+		return {
+			'💎': triangleLink,
+			'🍎': appleLink,
+			'⌛': hourglassLink,
+			'🟣': circleLink,
+			'🍐': pearLink,
+		}[shape]
+	}
+
+	$: if (!!traitTextElement) {
+		const traitTextWidth = traitTextElement.getBBox().width;
+		traitTextWidthPercent = (traitTextWidth / viewPortWidth) * 100;
+	}
+
+	$: if (!!shapeTextElement) {
+		const shapeTextWidth = shapeTextElement.getBBox().width;
+		shapeTextWidthPercent = (shapeTextWidth / viewPortWidth) * 100;
 	}
 
 	let outfit = getOutfitCompletedState(state, characterSlug, outfitSlug) as OutfitCompletedState;
@@ -25,6 +51,7 @@
 	const imperialHeight = toImperialHeight(outfit.heightInMeters);
 
 	let traitSentenceIndex: number;
+	let shapeSentenceIndex: number;
 
 	function createSentences(): string[] {
 		if (!outfit.unlocked) {
@@ -47,6 +74,13 @@
 
 		if (imperialHeight !== `5'5"`) {
 			sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);
+		}
+
+		shapeSentenceIndex = sentences.length;
+		if (outfit.secondaryShape) {
+			sentences.push(`Her shapes are: `)
+		} else {
+			sentences.push(`Her shape is: `)
 		}
 
 		traitSentenceIndex = sentences.length;
@@ -99,8 +133,10 @@
 
 <text class="sentence" y="18%">
 	{#each sentences as sentence, i}
-		{#if i == traitSentenceIndex}
-			<tspan bind:this={textElement} id="sentence-3" x="36%" dy="4%">{sentence}</tspan>
+		{#if i == traitSentenceIndex }
+			<tspan bind:this={traitTextElement} id="sentence-{i}" x="36%" dy="4%">{sentence}</tspan>
+		{:else if i == shapeSentenceIndex}
+			<tspan bind:this={shapeTextElement} id="sentence-{i}" x="36%" dy="4%">{sentence}</tspan>
 		{:else}
 			<tspan x="36%" dy="4%">{sentence}</tspan>
 		{/if}
@@ -109,10 +145,29 @@
 
 
 {#each sentences as _, i}
+	{#if i == shapeSentenceIndex}
+		{#if outfit.mainShape}
+			<image
+				xlink:href="{linkFromShape(outfit.mainShape)}"
+				x="{36 + shapeTextWidthPercent}%"
+				y="{18.5 + i * 4}%"
+				height="5%"
+			/>
+		{/if}
+		{#if outfit.secondaryShape}
+			<image
+				xlink:href="{linkFromShape(outfit.secondaryShape)}"
+				x="{38 + shapeTextWidthPercent}%"
+				y="{18.5 + i * 4}%"
+				height="5%"
+			/>
+		{/if}
+	{/if}
+
 	{#if i == traitSentenceIndex}
 	<image
 		xlink:href="{getTraitPicLink(outfit.trait)}"
-		x="{36 + textWidthPercent}%"
+		x="{36 + traitTextWidthPercent}%"
 		y="{18 + i *4}%"
 		height="7%"
 	/>

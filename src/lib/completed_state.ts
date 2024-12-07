@@ -34,6 +34,10 @@ export type OutfitCompletedState = {
 	boundFeeding?: string;
 	boundFedBy?: string;
 	mutualGainingWith?: string;
+	isChaosFeeder: boolean;
+	isGreedyGuts: boolean;
+	isBlobBound: boolean;
+	isGenerous: boolean;
 }
 
 export type CharacterCompletedState = {
@@ -140,6 +144,10 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 		build: characterMetadata.build,
 		isSelfFeeding: false,
 		selfFedBy: isSelfFed(characterState) ? getSelfFeedingOutfitDisplayName(characterState) : undefined,
+		isBlobBound: false,
+		isChaosFeeder: false,
+		isGreedyGuts: false,
+		isGenerous: false,
 	}
 }
 
@@ -175,6 +183,10 @@ export function toOutfitCompletedState(state: GameState[], characterState: Chara
 		boundFeeding: outfitState.trait === "Bound_Feeder" ? getDisplayNameFromOutfitKey(outfitState.boundTo) : undefined,
 		boundFedBy: boundOutfitState?.trait === "Bound_Feeder" ? boundOutfitDisplayName : undefined,
 		mutualGainingWith: (outfitState.trait === "Mutual_Gainer" || boundOutfitState?.trait === "Mutual_Gainer") ? boundOutfitDisplayName : undefined,
+		isBlobBound: outfitState.trait === 'Blob_Bound',
+		isChaosFeeder: outfitState.trait === 'Chaos_Feeder',
+		isGreedyGuts: outfitState.trait === 'Greedy_Guts',
+		isGenerous: outfitState.trait === 'Generous',
 	}
 }
 

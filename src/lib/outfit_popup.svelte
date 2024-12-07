@@ -82,31 +82,46 @@
 		} else {
 			sentences.push(`Her shape is: `)
 		}
+		sentences.push(`Her build is ${outfit.build}.`);
 
 		traitSentenceIndex = sentences.length;
 
-		sentences.push(
-			`Her trait is ${traitNames[outfit.trait] || ''}:`,
-			`Her build is ${outfit.build}.`,
-		);
-
-		if (outfit.outgrown && outfit.outgrownThresholdInLbs) {
-			sentences.push(`She has outgrown this outfit since she reached ${formatWeight(outfit.outgrownThresholdInLbs)}lbs.`)
-		} else if (outfit.outgrownThresholdInLbs) {
-			sentences.push(`That outfit can withstand up to ${formatWeight(outfit.outgrownThresholdInLbs)}lbs.`)
-		}
+		sentences.push(`Her trait is ${traitNames[outfit.trait] || ''}:`);
 
 		if (outfit.isSelfFeeding) {
-			sentences.push(`She feeds her other outfits.`);
+			sentences.push(
+				`While she can't gain herself, all other outfits of this character have`,
+				`their gain DOUBLED!`,
+			);
 		} else if (outfit.selfFedBy) {
 			sentences.push(`She is self-fed by ${outfit.selfFedBy}.`);
 		}
 		if (outfit.boundFedBy) {
 			sentences.push(`She is fed by ${outfit.boundFedBy}.`);
 		} else if (outfit.boundFeeding) {
-			sentences.push(`She feeds ${outfit.boundFeeding}.`);
+			sentences.push(
+				`While she can't gain herself, all donos to her are DOUBLED, then sent to her feedee!`,
+				`She rolled ${outfit.boundFeeding} as her feedee!`,
+			);
 		} else if (outfit.mutualGainingWith) {
-			sentences.push(`She and ${outfit.mutualGainingWith} are mutual gainers.`);
+			sentences.push(`She is bound to ${outfit.mutualGainingWith}, and all donos to one, grow the other!`);
+		} else if (outfit.isBlobBound) {
+			sentences.push(`Destined for fatness, donations to her are multiplied by an extra 50%!`);
+		} else if (outfit.isGreedyGuts) {
+			sentences.push(`She hates sharing! Donations to her are DOUBLED, but provide NO spillover!`);
+		} else if (outfit.isChaosFeeder) {
+			sentences.push(
+				`While she can't gain weight herself, all donations to her are TRIPLED,`,
+				`and sent to a random unlocked character!`,
+			);
+		} else if (outfit.isGenerous) {
+			sentences.push(`She shares the spoils- donations to her are halved, but all spillover is doubled!`);
+		}
+
+		if (outfit.outgrown && outfit.outgrownThresholdInLbs) {
+			sentences.push(`She has outgrown this outfit since she reached ${formatWeight(outfit.outgrownThresholdInLbs)}lbs.`)
+		} else if (outfit.outgrownThresholdInLbs) {
+			sentences.push(`That outfit can withstand up to ${formatWeight(outfit.outgrownThresholdInLbs)}lbs.`)
 		}
 
 		return sentences;

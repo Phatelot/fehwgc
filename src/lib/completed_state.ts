@@ -9,6 +9,8 @@ import { BMI } from "./weight_utils";
 export type OutfitCompletedState = {
 	gameName: string;
 	gameSlug: string;
+	groupName?: string;
+	groupSlug?: string;
 	characterName: string;
 	characterSlug: string;
 	name: string;
@@ -42,6 +44,8 @@ export type OutfitCompletedState = {
 export type CharacterCompletedState = {
 	gameName: string;
 	gameSlug: string
+	groupName?: string,
+	groupSlug?: string,
 	name: string;
 	nameSlug: string;
 	unlocked: boolean;
@@ -102,6 +106,8 @@ export function toCharacterCompletedState(state: GameState[], characterState: Ch
 	return {
 		gameName: gameMetadata.name,
 		gameSlug: gameMetadata.nameSlug,
+		groupName: characterMetadata.group?.name,
+		groupSlug: characterMetadata.group?.slug,
 		name: characterMetadata.name,
 		nameSlug: characterState.slug,
 		unlocked: isUnlocked(characterState),
@@ -124,6 +130,8 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 	return {
 		gameName: gameMetadata.name,
 		gameSlug: gameMetadata.nameSlug,
+		groupName: characterMetadata.group?.name,
+		groupSlug: characterMetadata.group?.slug,
 		characterName: characterMetadata.name,
 		characterSlug: characterMetadata.nameSlug,
 		name: "Broken",
@@ -159,6 +167,8 @@ export function toOutfitCompletedState(state: GameState[], characterState: Chara
 	return {
 		gameName: gameMetadata.name,
 		gameSlug: gameMetadata.nameSlug,
+		groupName: characterMetadata.group?.name,
+		groupSlug: characterMetadata.group?.slug,
 		characterName: characterMetadata.name,
 		characterSlug: characterMetadata.nameSlug,
 		name: outfitMetadata?.outfit,

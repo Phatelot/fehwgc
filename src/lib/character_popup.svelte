@@ -16,7 +16,8 @@
 		`${character.numberOfUnlockedOutfits} of her ${character.outfits.length} outfits (including the final broken one) ${character.numberOfUnlockedOutfits === 1 ? 'is' : 'are'} unlocked.`;
 
 	let sentences = [
-		`${character.name} weighs ${formatWeight(character.stats?.totalWeightUnlockedInLbs || 0)}lbs if you count all her outfits.`,
+		`${character.name} is from the game ${character.gameName} (${character.groupName ? 'group: ' + character.groupName : 'not in any group'}).`,
+		`She weighs ${formatWeight(character.stats?.totalWeightUnlockedInLbs || 0)}lbs if you count all her outfits.`,
 		`She is ${toImperialHeight(character.heightInMeters)} tall.`,
 		`Her build is ${character.build}.`,
 		unlockedOutfitsSentence,

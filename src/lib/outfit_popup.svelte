@@ -54,16 +54,18 @@
 	let shapeSentenceIndex: number;
 
 	function createSentences(): string[] {
+		const sentences = [
+			`${outfit.characterName} is from the game ${outfit.gameName} (${outfit.groupName ? 'group: ' + outfit.groupName : 'not in any group'}).`
+		]
+
 		if (!outfit.unlocked) {
-			return [
-				`Donate to unlock ${outfit.characterName}!`,
-			]
+			sentences.push(`Donate to unlock her!`);
+			return sentences;
 		}
 
-		let sentences = [
-			`In this outfit, ${outfit.characterName} weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
-			`She is ${imperialHeight} tall.`,
-		];
+		sentences.push(
+			`In this outfit, she weighs ${formatWeight(outfit.weightInLbs)}lbs and is ${imperialHeight} tall.`,
+		);
 
 		const bmiCategory = toBMICategory(outfit.BMI);
 		if (bmiCategory === 'underweight') {
@@ -86,7 +88,11 @@
 
 		traitSentenceIndex = sentences.length;
 
-		sentences.push(`Her trait is ${traitNames[outfit.trait] || ''}:`);
+		sentences.push(`This outfit rolled the trait ${traitNames[outfit.trait] || ''}:`);
+
+		if (outfit.isSelfFeeding || outfit.selfFedBy || outfit.boundFeeding || outfit.mutualGainingWith || outfit.isBlobBound || outfit.isGreedyGuts || outfit.isChaosFeeder || outfit.isGenerous) {
+			sentences.push(`The rules are altered for her!`)
+		}
 
 		if (outfit.isSelfFeeding) {
 			sentences.push(

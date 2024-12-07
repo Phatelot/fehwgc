@@ -180,10 +180,7 @@
         <text x="50%" y="45%" style="font-size: 3px" text-anchor="middle">Error: {JSON.stringify(error)}</text>
       {/await}
 
-
-
       </svg>
-
 
   </main>
 

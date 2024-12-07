@@ -16,6 +16,7 @@
     import BmiChart from './lib/bmi_chart.svelte';
     import GlobalStats from './lib/global_stats.svelte';
     import Unlockometer from './lib/unlockometer.svelte';
+    import Rules from './lib/rules.svelte';
 
     async function fetchData(): Promise<Omnistate> {
       const now = Math.floor(Date.now() / 1000);
@@ -151,6 +152,8 @@
           <GlobalStats state="{viewModel.completedState}" />
         {:else if page === 'UNLOCKOMETER'}
           <Unlockometer state={viewModel.completedState} on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+        {:else if page === 'RULES'}
+          <Rules />
         {:else}
           <MenuPopup on:selectpage={(e) => {(page = e.detail.page);  saveStateToLocalStorage()}}/>
         {/if}

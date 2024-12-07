@@ -14,6 +14,7 @@
 		['CHARACTER_CHART', 'Character Chart'],
 		['CHANGELOG', 'Changelog'],
 		['GLOBAL_STATS', 'Global Stats'],
+		['RULES', 'Rules'],
 	]
 
 	function selectPage(page: string) {

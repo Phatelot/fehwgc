@@ -5,7 +5,6 @@
     import {viewPortHeight, viewPortWidth } from "./view_model";
     import Box from './box.svelte';
     import { serializeChanges } from './change_engine';
-    import { serializeDonation } from './donation_engine';
 
 	export let state: Omnistate;
 
@@ -58,14 +57,7 @@
         const startState = state.states[start];
         const endState = state.states[end];
 
-        const changes = serializeChanges([startState, endState]);
-        if (start + 1 === end) {
-            return [
-                serializeDonation(state.donations[start]),
-                ...changes,
-            ]
-        }
-        return changes;
+        return serializeChanges([startState, endState]);
     })()
 
     const maxSentencesPerPage = 12;

@@ -18,6 +18,7 @@ export type CharacterChange = {
 type OutfitChange = {
 	slug: string;
 	unlocked: boolean;
+	donationReceived: number;
 	trait?: string;
 	weightGainedInLbs: number;
 	outgrown: boolean;
@@ -30,7 +31,14 @@ export function serializeChanges(states: GameState[][]) : string[] {
 	}
 
 	const changes = toGamesChanges(states[0], states[states.length-1])
-	return changes.flatMap(serializeCharacterChanges);
+	return changes.map(serializeCharacterChanges)
+		.filter(scc => scc && scc.length > 0)
+		.flatMap((scc, i) => {
+			if (i === 0) {
+				return scc;
+			}
+			return ['\n', ...scc]
+		});
 }
 
 function toGamesChanges(before: GameState[], after: GameState[]): CharacterChange[] {
@@ -81,16 +89,19 @@ export function toOutfitChange(before: OutfitState, after: OutfitState): OutfitC
 	const isOutgrownBefore = isOutgrown(before);
 	const isOutgrownAfter = isOutgrown(after);
 
-	if (!after.unlocked) {
+	const donationReceived = after.donationReceived - before.donationReceived;
+
+	if (!after.unlocked && !donationReceived) {
 		return null;
 	}
 
-	if (before.unlocked === after.unlocked && (after.weightInLbs - before.weightInLbs < insignificantChangeThresholdInLbs) && isOutgrownBefore === isOutgrownAfter) {
+	if (!donationReceived && before.unlocked === after.unlocked && (after.weightInLbs - before.weightInLbs < insignificantChangeThresholdInLbs) && isOutgrownBefore === isOutgrownAfter) {
 		return null;
 	}
 	return {
 		slug: before.slug,
 		unlocked: before.unlocked !== after.unlocked,
+		donationReceived,
 		trait: !before.unlocked ? after.trait : undefined,
 		weightGainedInLbs: after.weightInLbs - before.weightInLbs,
 		outgrown: isOutgrownBefore != isOutgrownAfter,
@@ -122,42 +133,102 @@ function traitName(traitSlug?: string): string {
 	return traitNames[traitSlug || ''].toLowerCase();
 }
 
+
 function serializeCharacterChanges(change: CharacterChange): string[] {
-	const sentences: string[] = [];
+	return characterChangesToTemplates(change).map((t, i) => i != 0 && t.valueIfNotFirst ? t.valueIfNotFirst : t.value);
+}
+
+type ChangeSentenceTemplate = {
+	value: string;
+	valueIfNotFirst?: string;
+}
+
+function characterChangesToTemplates(change: CharacterChange): ChangeSentenceTemplate[] {
+	const sentences: ChangeSentenceTemplate[] = [];
 	const characterDisplayName = getCharacterDisplayName(change.slug);
+
+	const donationReceived = change.outfitChanges
+		.map(c => c.donationReceived)
+		.reduce((a, b) => a + b, 0);
+
+	const outfitIfDonationToOnlyOne: OutfitChange | undefined = change.outfitChanges
+		.filter(c => c.donationReceived === donationReceived)
+		.at(0);
+
+	const outfitNameIfDonationToOnlyOne: string | undefined = (outfitIfDonationToOnlyOne ? [outfitIfDonationToOnlyOne] : [])
+		.map(c => getCharacterOutfitDisplayName(change.slug, c.slug))
+		.map(outfitName => `${characterDisplayName} (${outfitName})`)
+		.at(0);
+
+	if (donationReceived > 0) {
+		sentences.push({value: `${outfitNameIfDonationToOnlyOne || characterDisplayName} receives $${donationReceived}!`})
+	}
 
 	if (change.unlocked && change.brokenUnlockSlug) {
 		sentences.push(
-			`${characterDisplayName} has just been unlocked and has already outgrown all her outfits.`,
-			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`
+			{
+				value: `${characterDisplayName} has just been unlocked and has already outgrown all her outfits.`,
+				valueIfNotFirst: `She has just been unlocked and has already outgrown all her outfits.`,
+			},
+			{
+				value: `Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`,
+			},
 		)
 	} else if (change.unlocked) {
-		sentences.push(`${characterDisplayName} has just been unlocked and is ready to outgrow her outfits.`)
+		sentences.push({
+			value: `${characterDisplayName} has just been unlocked and is ready to outgrow her outfits.`,
+			valueIfNotFirst: `She has just been unlocked and is ready to outgrow her outfits.`,
+		})
 	} else if (change.brokenUnlockSlug) {
 		sentences.push(
-			`${characterDisplayName} has outgrown all her outfits.`,
-			`Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`
+			{
+				value: `${characterDisplayName} has outgrown all her outfits.`,
+				valueIfNotFirst: `She has outgrown all her outfits.`,
+			},
+			{
+				value: `Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`
+			},
 		)
 	} else if (change.newState.brokenOutfit.slug && change.brokenWeightGainInLbs >= insignificantChangeThresholdInLbs) {
-		sentences.push(`${characterDisplayName} has gained ${formatWeight(change.brokenWeightGainInLbs)}lbs in her broken outfit.`)
+		sentences.push({value: `${characterDisplayName} has gained ${formatWeight(change.brokenWeightGainInLbs)}lbs in her broken outfit.`})
 	}
 
-	sentences.push(...change.outfitChanges.map(outfitChange => serializeOutfitChanges(characterDisplayName, change.slug, outfitChange)))
+	sentences.push(...change.outfitChanges.flatMap(outfitChange => serializeOutfitChanges(characterDisplayName, change.slug, outfitChange)))
 
 	return sentences;
 }
 
-function serializeOutfitChanges(characterDisplayName: string, characterSlug: string, change: OutfitChange): string {
+function serializeOutfitChanges(characterDisplayName: string, characterSlug: string, change: OutfitChange): ChangeSentenceTemplate[] {
+	const sentences : ChangeSentenceTemplate[] = [];
 	const outfitName = getCharacterOutfitDisplayName(characterSlug, change.slug).toLowerCase();
 
+	if (!change.newState.unlocked) {
+		return [{
+			value: `When unlocked, her ${outfitName} outfit will have to withstand ${formatWeight(change.newState.weightInLbs)}lbs of her.`,
+		}]
+	}
+
 	if (change.unlocked && change.outgrown) {
-		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`
+		sentences.push({
+			value: `${characterDisplayName}'s ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`,
+			valueIfNotFirst: `Her ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`
+		})
+	} else if (change.unlocked) {
+		sentences.push({
+			value: `${characterDisplayName}'s ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`,
+			valueIfNotFirst: `Her ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`,
+		})
+	} else if (change.outgrown) {
+		sentences.push({
+			value: `${characterDisplayName} has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
+			valueIfNotFirst: `She has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
+		})
+	} else {
+		sentences.push({
+			value: `${characterDisplayName} is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
+			valueIfNotFirst: `She is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
+		})
 	}
-	if (change.unlocked) {
-		return `${characterDisplayName}'s ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`
-	}
-	if (change.outgrown) {
-		return `${characterDisplayName} has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`
-	}
-	return `${characterDisplayName} is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`
+
+	return sentences
 }

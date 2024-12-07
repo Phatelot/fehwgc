@@ -5,6 +5,7 @@ export type WeightDonationNode = {
 	slug: string;
 	weightInLbs?: number;
 	donationReceived?: number;
+	isUnlocked: boolean;
 	leafs: WeightDonationNode[];
 }
 
@@ -12,28 +13,32 @@ export function createWeightDonationTree(state: GameState[]) : WeightDonationNod
 	return {
 		slug: 'root', // unused anyway
 		leafs: state.map(fromGameState),
+		isUnlocked: true,
 	}
 }
 
 function fromGameState(state: GameState) : WeightDonationNode {
 	return {
 		slug: state.slug,
-		leafs: state.characters.filter(isUnlocked).map(fromCharacterState),
+		leafs: state.characters.map(fromCharacterState),
+		isUnlocked: true,
 	}
 }
 
 function fromCharacterState(state: CharacterState) : WeightDonationNode {
-	const leafs = state.outfits.filter(outfit => outfit.unlocked).map(fromOutfitState);
+	const leafs = state.outfits.filter(outfit => outfit.unlocked || outfit.donationReceived).map(fromOutfitState);
 	leafs.push({
 		slug: 'broken',
 		donationReceived: state.brokenOutfit.donationReceived,
 		weightInLbs: state.brokenOutfit.slug ? state.brokenOutfit.weightInLbs : 0,
+		isUnlocked: !!state.brokenOutfit.slug,
 		leafs: [],
 	})
 
 	return {
 		slug: state.slug,
 		leafs: leafs,
+		isUnlocked: state.outfits[0].unlocked,
 	}
 }
 
@@ -42,6 +47,7 @@ function fromOutfitState(state: OutfitState) : WeightDonationNode {
 		slug: state.slug,
 		weightInLbs: state.weightInLbs,
 		donationReceived: state.donationReceived,
+		isUnlocked: state.unlocked,
 		leafs: [],
 	}
 }
@@ -54,11 +60,14 @@ export type GroupStats = {
 	totalWeightUnlockedInLbs: number;
 	averageWeightUnlockedInLbs: number;
 	medianWeightUnlockedInLbs: number;
+	isUnlocked: boolean;
 }
 
 export function toGroupStats(tree: WeightDonationNode) : GroupStats {
 	const leafGroupStats = tree.leafs.map(toGroupStats);
-	const weightsInLbs: number[] = leafGroupStats.flatMap(stats => stats.sortedWeightsInLbs);
+	const weightsInLbs: number[] = leafGroupStats
+		.filter(lgs => lgs.isUnlocked)
+		.flatMap(stats => stats.sortedWeightsInLbs);
 	if (tree.weightInLbs) {
 		weightsInLbs.push(tree.weightInLbs);
 	}
@@ -72,6 +81,7 @@ export function toGroupStats(tree: WeightDonationNode) : GroupStats {
 		totalWeightUnlockedInLbs: sum(sortedWeightsInLbs),
 		averageWeightUnlockedInLbs: average(sortedWeightsInLbs),
 		medianWeightUnlockedInLbs: median(sortedWeightsInLbs),
+		isUnlocked: tree.isUnlocked,
 	}
 }
 

@@ -89,7 +89,6 @@ describe('toCharacterChange', () => {
 		expect(toCharacterChange(before, after)).toBeNull()
 	})
 
-
 	it("should detect if character is unlocked", () => {
 		const before : CharacterState = {
 			slug: "edelgard",
@@ -352,6 +351,8 @@ describe('toOutfitChange', () => {
 
 		expect(toOutfitChange(before, after)).toEqual({
 			slug: "base",
+			donationReceived: 0,
+			trait: undefined,
 			unlocked: false,
 			weightGainedInLbs: 70,
 			outgrown: false,
@@ -378,11 +379,13 @@ describe('toOutfitChange', () => {
 		}
 
 		expect(toOutfitChange(before, after)).toEqual({
+			donationReceived: 0,
 			slug: "base",
 			unlocked: false,
 			weightGainedInLbs: 220,
 			outgrown: true,
 			newState: after,
+			trait: undefined,
 		})
 	})
 
@@ -405,6 +408,7 @@ describe('toOutfitChange', () => {
 
 		expect(toOutfitChange(before, after)).toEqual({
 			slug: "base",
+			donationReceived: 150,
 			unlocked: true,
 			weightGainedInLbs: 120,
 			trait: "Sedentary",
@@ -423,6 +427,7 @@ describe("characterWeightGainedInLbs", () => {
 				{
 					slug: "base",
 					outgrown: false,
+					donationReceived: 100,
 					unlocked: false,
 					weightGainedInLbs: 230,
 					newState: {} as OutfitState, // we just don't need it here
@@ -430,6 +435,7 @@ describe("characterWeightGainedInLbs", () => {
 				{
 					slug: "winter",
 					outgrown: false,
+					donationReceived: 50,
 					unlocked: false,
 					weightGainedInLbs: 30,
 					newState: {} as OutfitState, // we just don't need it here

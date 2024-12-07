@@ -273,14 +273,8 @@ export function getPossibleBoundTargets(state: GameState[], excludeBound: boolea
 }
 
 export function requiredRemainingAmountToUnlock(character: CharacterState): number {
-	return Math.max(0, UNLOCK_CHARACTER_THRESHOLD_IN_CAD - totalDonationsForCharacterState(character));
-}
-
-export function serializeDonation(donation: Donation): string {
-	const displayName = getCharacterDisplayName(donation.character);
-	if (donation.outfit === 'undeclared') {
-		return `${displayName} receives $${donation.amount}!`;
+	if (isUnlocked(character)) {
+		return 0;
 	}
-	const outfitDisplayName = getCharacterOutfitDisplayName(donation.character, donation.outfit);
-	return `${displayName} (${outfitDisplayName}) receives $${donation.amount}!`;
+	return Math.max(0, UNLOCK_CHARACTER_THRESHOLD_IN_CAD - totalDonationsForCharacterState(character));
 }

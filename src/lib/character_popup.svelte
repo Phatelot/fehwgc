@@ -20,8 +20,13 @@
 		`She is ${toImperialHeight(character.heightInMeters)} tall.`,
 		`Her build is ${character.build}.`,
 		unlockedOutfitsSentence,
-		`So far, she has received $${character.stats?.totalDonationReceived}.`,
 	];
+
+	if (character.stats?.totalDonationReceived) {
+		sentences.push(`So far, she has received $${character.stats?.totalDonationReceived}.`)
+	} else {
+		sentences.push(`She hasn't received any donations... yet.`)
+	}
 
 	function close() {
 		dispatch('close', {})

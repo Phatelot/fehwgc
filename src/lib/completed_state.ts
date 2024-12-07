@@ -1,5 +1,4 @@
-import { serializeChanges } from "./change_engine";
-import { applyDonations, serializeDonation } from "./donation_engine";
+import { applyDonations } from "./donation_engine";
 import { toFrameType } from "./frames";
 import { baseMetadata, getCharacterMetadata, type Build, type CharacterBaseMetadata, type GameBaseMetadata, type OutfitBaseMetadata, type Shape, getOutfitMetadata } from "./metadata";
 import { isOutgrown, type GameState, type OutfitState, type CharacterState, isUnlocked, getOutfitState, totalDonationsForCharacterState, type OutfitKey, getCharacterState, type Donation, initState } from "./state";
@@ -244,31 +243,16 @@ export type Omnistate = {
 	states: GameState[][];
 	completedState: CompletedState;
 	donations: Donation[];
-	donationsAndChanges: SerializedDonationEffects[];
-};
-
-type SerializedDonationEffects = {
-	serializedDonation: string;
-	changelog: string[];
 };
 
 export function donationsToOmnistate(donations: Donation[]): Omnistate {
 	const states = applyDonations(initState(), donations)
 	const lastState = states[states.length-1];
-	const donationsAndChanges: SerializedDonationEffects[] = [];
-
-	for (let i = 0; i < donations.length; i++) {
-		donationsAndChanges.push({
-			serializedDonation: serializeDonation(donations[i]),
-			changelog: serializeChanges(states.slice(i, i+2)),
-		})
-	}
 
 	return {
 		states,
 		completedState: toCompletedState(lastState),
 		donations,
-		donationsAndChanges,
 	};
 }
 

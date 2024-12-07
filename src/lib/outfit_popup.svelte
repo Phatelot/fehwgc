@@ -124,6 +124,12 @@
 			sentences.push(`That outfit can withstand up to ${formatWeight(outfit.outgrownThresholdInLbs)}lbs.`)
 		}
 
+		if (outfit.donationReceived) {
+			sentences.push(`So far, this outfit has received $${outfit.donationReceived}.`)
+		} else {
+			sentences.push(`This outfit hasn't received any donations... yet.`)
+		}
+
 		return sentences;
 	}
 

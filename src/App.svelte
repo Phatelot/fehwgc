@@ -41,9 +41,9 @@
                 "If-None-Match": "",
               },
             });
-            donations = parseCsvData(JSON.parse(await response.text())
+            donations = parseCsvData((JSON.parse(await response.text())
               .files['donos.csv']
-              .content);
+              ?.content) || '');
 
             localStorage.setItem('fehwgc-request', JSON.stringify({
               donations: donations,

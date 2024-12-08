@@ -184,7 +184,7 @@
           <MenuPopup
             state="{viewModel.completedState}"
             selectedGameSlug={selectedGameSlug}
-            on:selectpage={(e) => {(page = e.detail.page);  saveStateToLocalStorage()}}
+            on:selectpage={(e) => {(page = e.detail.page); saveStateToLocalStorage()}}
             on:selectgame={(e) => {(selectGame(e.detail.gameSlug))}}
           />
         {/if}

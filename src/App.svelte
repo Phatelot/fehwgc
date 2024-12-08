@@ -2,7 +2,7 @@
     import bgLink from '/src/assets/BG.webp'
 
     import { Octokit } from 'octokit';
-    import { donationsToOmnistate, type Omnistate } from './lib/completed_state';
+    import { donationsToOmnistate, filterCompletedStateByGameSlug, type Omnistate } from './lib/completed_state';
     import { parseCsvData } from './lib/donation_log_parser';
     import { type Donation } from './lib/state';
     import { viewPortHeight, viewPortWidth } from './lib/view_model';
@@ -81,6 +81,14 @@
     let selectedOutfitSlug: string | null;
     $: selectedOutfitSlug = null;
 
+    let selectedGameSlug: string;
+    $: selectedGameSlug = 'all';
+
+    function selectGame(gameSlug: string) {
+      selectedGameSlug = gameSlug;
+      saveStateToLocalStorage();
+    }
+
     function selectOutfit(characterSlug: string, outfitSlug: string) {
       selectedCharacterSlug = characterSlug;
       selectedOutfitSlug = outfitSlug;
@@ -94,6 +102,7 @@
 
     function saveStateToLocalStorage() {
       localStorage.setItem("fehwgc", JSON.stringify({
+        selectedGameSlug,
         page,
         selectedCharacterSlug,
         selectedOutfitSlug,
@@ -107,6 +116,7 @@
       }
       const parsedRetrieved = JSON.parse(retrieved);
       page = parsedRetrieved.page;
+      selectedGameSlug = parsedRetrieved.selectedGameSlug || 'all';
       selectedCharacterSlug = parsedRetrieved.selectedCharacterSlug;
       selectedOutfitSlug = parsedRetrieved.selectedOutfitSlug;
     }
@@ -141,21 +151,26 @@
         </defs>
 
         {#if page === 'OUTFIT_CHART'}
-          <OutfitChart state="{viewModel.completedState}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <OutfitChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'CHARACTER_CHART'}
-          <CharacterChart state="{viewModel.completedState}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+          <CharacterChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else if page === 'CHANGELOG'}
           <Changelog state="{viewModel}" />
         {:else if page === 'BMI_CHART'}
-          <BmiChart state="{viewModel.completedState}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <BmiChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'GLOBAL_STATS'}
           <GlobalStats state="{viewModel.completedState}" />
         {:else if page === 'UNLOCKOMETER'}
-          <Unlockometer state={viewModel.completedState} on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <Unlockometer state={filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)} on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'RULES'}
           <Rules />
         {:else}
-          <MenuPopup on:selectpage={(e) => {(page = e.detail.page);  saveStateToLocalStorage()}}/>
+          <MenuPopup
+            state="{viewModel.completedState}"
+            selectedGameSlug={selectedGameSlug}
+            on:selectpage={(e) => {(page = e.detail.page);  saveStateToLocalStorage()}}
+            on:selectgame={(e) => {(selectGame(e.detail.gameSlug))}}
+          />
         {/if}
 
         {#if !!selectedCharacterSlug && !!selectedOutfitSlug}

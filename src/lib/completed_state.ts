@@ -74,6 +74,17 @@ export type CompletedState = {
 	stats: GroupStats;
 }
 
+export function filterCompletedStateByGameSlug(completedState: CompletedState, gameSlug: string): CompletedState {
+	if (gameSlug === 'all') {
+		return completedState;
+	}
+
+	return {
+		...completedState,
+		games: completedState.games.filter(g => g.nameSlug === gameSlug),
+	};
+}
+
 export function toCompletedState(state: GameState[]): CompletedState {
 	const groupStats = toGroupStats(createWeightDonationTree(state));
 

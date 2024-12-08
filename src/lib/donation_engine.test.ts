@@ -111,7 +111,6 @@ describe('donating to an unlocked broken outfit', () => {
 	})
 })
 
-
 describe('donation to an outfit still locked of an already unlocked character', () => {
 	const outputState = applyDonation(initState(), {
 		character: "lumera",
@@ -120,11 +119,29 @@ describe('donation to an outfit still locked of an already unlocked character', 
 	})
 
 	it('should update the outfit donationReceived field', () => {
+		expect(getCharacterState(outputState, "lumera")?.outfits[2].slug).toBe("fallen")
 		expect(getCharacterState(outputState, "lumera")?.outfits[2].donationReceived).toBe(30)
 	})
 
 	it('should update the weight of the targeted outfit', () => {
 		expect(getCharacterState(outputState, "lumera")?.outfits[2].weightInLbs).toBe(150)
+	})
+})
+
+describe('donation to the nth outfit of a still locked character', () => {
+	const outputState = applyDonation(initState(), {
+		character: "edelgard",
+		outfit: "summer",
+		amount: 150
+	})
+
+	it('should update the outfit donationReceived field', () => {
+		expect(getCharacterState(outputState, "edelgard")?.outfits[5].slug).toBe("summer")
+		expect(getCharacterState(outputState, "edelgard")?.outfits[5].donationReceived).toBe(150)
+	})
+
+	it('should update the weight of the targeted outfit', () => {
+		expect(getCharacterState(outputState, "edelgard")?.outfits[5].weightInLbs).toBe(130)
 	})
 })
 

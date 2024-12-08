@@ -76,6 +76,7 @@
     }
 
     $: page = 'OUTFIT_CHART';
+    $: displayPromoText = ['OUTFIT_CHART', 'CHARACTER_CHART', 'BMI_CHART'].includes(page);
     let selectedCharacterSlug: string | null;
     $: selectedCharacterSlug = null;
     let selectedOutfitSlug: string | null;
@@ -150,6 +151,20 @@
           {/each}
         </defs>
 
+        {#if displayPromoText}
+          <text x="22%" y="6%" class="small">
+            <tspan text-anchor="middle">Every 1$* contributed to the collage</tspan>
+            <tspan dy="3%" x="22%" text-anchor="middle">fattens the characters!</tspan>
+            <tspan dy="2%" x="22%" text-anchor="middle" class="very-small">*Canadian Dollars, so  US Dollars go further</tspan>
+            <tspan dy="4%" x="22%" text-anchor="middle" class="not-so-small">*</tspan>
+            <tspan dy="1%" x="22%" text-anchor="middle"><a class="link-tree-link" on:click={() => {page = 'RULES'}}>Read the rules here</a></tspan>
+            <tspan dy="4%" x="22%" text-anchor="middle" class="not-so-small">*</tspan>
+            <tspan dy="1%" x="22%" text-anchor="middle"><a class="link-tree-link" href="https://beacons.ai/ebcartwork">...or just donate here</a></tspan>
+            <tspan dy="3%" x="22%" text-anchor="middle">comment JUST the name and outfit of</tspan>
+            <tspan dy="3%" x="22%" text-anchor="middle">the character you're donating to</tspan>
+          </text>
+        {/if}
+
         {#if page === 'OUTFIT_CHART'}
           <OutfitChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'CHARACTER_CHART'}
@@ -207,5 +222,25 @@
   .button-menu {
     fill: white;
     font-size: 3px;
+  }
+
+  .not-so-small {
+    font-size: 4px;
+    fill: black;
+  }
+
+  .small {
+    font-size: 1.8px;
+    fill: black;
+  }
+
+  .very-small {
+    font-size: 1.4px;
+    fill: black;
+  }
+
+  .link-tree-link {
+    fill: blue;
+    text-decoration: underline;
   }
 </style>

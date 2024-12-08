@@ -21,7 +21,7 @@ describe('initState', () => {
 		expect(tharja.outfits[0].donationReceived).toBe(0)
 		expect(tharja.outfits[0].unlocked).toBe(true)
 		expect(tharja.outfits[0].weightInLbs).toBe(120)
-		expect(tharja.outfits[0].trait).toBe('Slob')
+		expect(tharja.outfits[0].trait).toBe('Sedentary')
 		expect(tharja.outfits[1].donationReceived).toBe(0)
 		expect(tharja.outfits[1].unlocked).toBe(false)
 		expect(tharja.outfits[1].weightInLbs).toBe(120)

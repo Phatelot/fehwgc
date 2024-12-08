@@ -7,5 +7,5 @@ export function stringToRandomNumber(str: string, excludedUpperBound: number): n
         hash |= 0; // Convert to 32-bit integer
     }
 
-    return Math.abs(hash % excludedUpperBound);
+    return Math.abs((hash + 1) % excludedUpperBound);
 }

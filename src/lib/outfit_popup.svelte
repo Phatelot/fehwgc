@@ -2,6 +2,7 @@
     import { getBodyPicLink, getTraitPicLink } from "./asset_utils";
     import Box from "./box.svelte";
     import { getOutfitCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
+    import { donationURL } from "./donation_engine";
     import type { Shape } from "./metadata";
     import { traitNames } from "./trait";
     import { viewPortWidth } from "./view_model";
@@ -202,9 +203,9 @@
 {/each}
 
 {#if outfit.unlocked}
-	<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="https://beacons.ai/ebcartwork">Donate to make her grow!</a></text>
+	<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="{donationURL}">Donate to make her grow!</a></text>
 {:else}
-	<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="https://beacons.ai/ebcartwork">Donate to unlock her!</a></text>
+	<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="{donationURL}">Donate to unlock her!</a></text>
 {/if}
 
 <rect x="83.1%" y="83.5%" height="4.6%" width="8%" rx="1px" ry="1px" stroke="#aeffff" stroke-width="0.4" stroke-linecap="round" fill="#004858" on:click={() => close()}></rect>

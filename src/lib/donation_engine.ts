@@ -1,7 +1,8 @@
-import { getCharacterDisplayName, getCharacterOutfitDisplayName } from "./metadata";
 import { stringToRandomNumber } from "./rng";
 import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, outfitWithMostDonation, isUnlocked, type OutfitKey, isFattenable, getCurrentOutfitForCharacter } from "./state";
 import { isSelfFed, selectTraitFor, selectTraitForBroken } from "./trait";
+
+export const donationURL = "https://ko-fi.com/additionalluggagetake" // wdym this should be defined elsewhere?
 
 const UNLOCK_CHARACTER_THRESHOLD_IN_CAD = 120;
 

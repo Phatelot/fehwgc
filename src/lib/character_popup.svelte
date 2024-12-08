@@ -2,6 +2,7 @@
     import { getBodyPicLink } from "./asset_utils";
     import Box from "./box.svelte";
     import { getCharacterCompletedState, getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState } from "./completed_state";
+    import { donationURL } from "./donation_engine";
     import { formatWeight, toImperialHeight } from "./weight_utils";
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -51,7 +52,7 @@
 
 </text>
 
-<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="https://beacons.ai/ebcartwork">Donate to make her grow!</a></text>
+<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="{donationURL}">Donate to make her grow!</a></text>
 
 <rect x="83.1%" y="83.5%" height="4.6%" width="8%" rx="1px" ry="1px" stroke="#aeffff" stroke-width="0.4" stroke-linecap="round" fill="#004858" on:click={() => close()}></rect>
 <text x="84%" y="87%" class="button-label" on:click={() => close()}>close</text>

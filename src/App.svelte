@@ -17,6 +17,7 @@
     import GlobalStats from './lib/global_stats.svelte';
     import Unlockometer from './lib/unlockometer.svelte';
     import Rules from './lib/rules.svelte';
+    import { donationURL } from './lib/donation_engine';
 
     async function fetchData(): Promise<Omnistate> {
       const now = Math.floor(Date.now() / 1000);
@@ -159,7 +160,7 @@
             <tspan dy="4%" x="22%" text-anchor="middle" class="not-so-small">*</tspan>
             <tspan dy="1%" x="22%" text-anchor="middle"><a class="link-tree-link" on:click={() => {page = 'RULES'}}>Read the rules here</a></tspan>
             <tspan dy="4%" x="22%" text-anchor="middle" class="not-so-small">*</tspan>
-            <tspan dy="1%" x="22%" text-anchor="middle"><a class="link-tree-link" href="https://beacons.ai/ebcartwork">...or just donate here</a></tspan>
+            <tspan dy="1%" x="22%" text-anchor="middle"><a class="link-tree-link" href={donationURL}>...or just donate here</a></tspan>
             <tspan dy="3%" x="22%" text-anchor="middle">comment JUST the name and outfit of</tspan>
             <tspan dy="3%" x="22%" text-anchor="middle">the character you're donating to</tspan>
           </text>

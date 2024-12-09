@@ -4098,8 +4098,10 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "name": "Nailah",
                 "nameSlug": "nailah",
                 "heightInCm": 183.0,
+                "initialRoaster": true,
                 "build": 'Strong',
                 "group": telliusRadiantDawnGroup,
+                
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,

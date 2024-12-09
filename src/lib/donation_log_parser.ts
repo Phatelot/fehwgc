@@ -20,5 +20,5 @@ export function parseCsvLine(line: string): Donation | null {
     if (!character || !outfit || !amount) {
         return null;
     }
-    return {character, outfit, amount: parseInt(amount)};
+    return {character, outfit, amount: parseInt(amount) * 1.42};
 }

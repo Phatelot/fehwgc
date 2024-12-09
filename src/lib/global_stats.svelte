@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Box from "./box.svelte";
     import type { CompletedState } from "./completed_state";
+    import { formatMoney } from "./utils";
     import { formatWeight } from "./weight_utils";
 
 
@@ -11,7 +12,7 @@
 			`Total weight of all unlocked characters: ${formatWeight(state.stats.totalWeightUnlockedInLbs)}lbs.`,
 			`Average weight: ${formatWeight(state.stats.averageWeightUnlockedInLbs)}lbs.`,
 			`Median weight: ${formatWeight(state.stats.medianWeightUnlockedInLbs)}lbs.`,
-			`Total donations: $${state.stats.totalDonationReceived}.`,
+			`Total donations: $${formatMoney(state.stats.totalDonationReceived)}.`,
 		];
 
 		return sentences;

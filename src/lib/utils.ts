@@ -1,3 +1,8 @@
+const formatter = new Intl.NumberFormat('en-US', {maximumFractionDigits: 2})
+
+export function formatMoney(weight: number) : string {
+    return formatter.format(weight)
+}
 
 export function groupConsecutive<T>(array: T[], groupSize: number): T[][] {
     const numberOfGroups = Math.ceil(array.length / groupSize)

@@ -5,6 +5,7 @@
     import { donationURL } from "./donation_engine";
     import type { Shape } from "./metadata";
     import { traitNames } from "./trait";
+    import { formatMoney } from "./utils";
     import { viewPortWidth } from "./view_model";
     import { formatBMI, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
 
@@ -132,7 +133,7 @@
 		}
 
 		if (outfit.donationReceived) {
-			sentences.push(`So far, this outfit has received $${outfit.donationReceived}.`)
+			sentences.push(`So far, this outfit has received $${formatMoney(outfit.donationReceived)}.`)
 		} else {
 			sentences.push(`This outfit hasn't received any donations... yet.`)
 		}

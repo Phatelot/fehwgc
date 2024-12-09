@@ -3,6 +3,7 @@
     import Box from "./box.svelte";
     import { getCharacterCompletedState, getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState } from "./completed_state";
     import { donationURL } from "./donation_engine";
+    import { formatMoney } from "./utils";
     import { formatWeight, toImperialHeight } from "./weight_utils";
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -25,7 +26,7 @@
 	];
 
 	if (character.stats?.totalDonationReceived) {
-		sentences.push(`So far, she has received $${character.stats?.totalDonationReceived}.`)
+		sentences.push(`So far, she has received $${formatMoney(character.stats.totalDonationReceived)}.`)
 	} else {
 		sentences.push(`She hasn't received any donations... yet.`)
 	}

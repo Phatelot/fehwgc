@@ -1,6 +1,7 @@
 import { getCharacterDisplayName, getCharacterOutfitDisplayName } from "./metadata";
 import { isOutgrown, type GameState, type OutfitState, type CharacterState } from "./state";
 import { traitNames } from "./trait";
+import { formatMoney } from "./utils";
 import { formatWeight } from "./weight_utils";
 
 const insignificantChangeThresholdInLbs = 1;
@@ -161,7 +162,7 @@ function characterChangesToTemplates(change: CharacterChange): ChangeSentenceTem
 		.at(0);
 
 	if (donationReceived > 0) {
-		sentences.push({value: `${outfitNameIfDonationToOnlyOne || characterDisplayName} receives $${donationReceived}!`})
+		sentences.push({value: `${outfitNameIfDonationToOnlyOne || characterDisplayName} receives $${formatMoney(donationReceived)}!`})
 	}
 
 	if (change.unlocked && change.brokenUnlockSlug) {

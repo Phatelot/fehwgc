@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getBodyPicLink, getTraitPicLink } from "./asset_utils";
     import Box from "./box.svelte";
-    import { getOutfitCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
+    import { getCharacterCompletedState, getOutfitCompletedState, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
     import { donationURL } from "./donation_engine";
     import type { Shape } from "./metadata";
     import { traitNames } from "./trait";
@@ -48,6 +48,7 @@
 		shapeTextWidthPercent = (shapeTextWidth / viewPortWidth) * 100;
 	}
 
+	let character = getCharacterCompletedState(state, characterSlug) as CharacterCompletedState;
 	let outfit = getOutfitCompletedState(state, characterSlug, outfitSlug) as OutfitCompletedState;
 
 	const imperialHeight = toImperialHeight(outfit.heightInMeters);
@@ -61,7 +62,11 @@
 		]
 
 		if (!outfit.unlocked) {
-			sentences.push(`She hasn't been unlocked yet.`);
+			if (character.outfits[0].nameSlug === outfit.nameSlug) {
+				sentences.push(`She hasn't been unlocked yet (she still needs $${formatMoney(120 - character.donationReceived)}).`);
+			} else {
+				sentences.push(`She hasn't been unlocked yet (she needs to outgrow her previous outfits first).`);
+			}
 			return sentences;
 		}
 

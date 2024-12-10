@@ -1,3 +1,15 @@
+const DEFAULT_SEED = 1;
+
+let seed = DEFAULT_SEED;
+
+export function setSeed(s: number) {
+    seed = s;
+}
+
+export function resetSeed() {
+    seed = DEFAULT_SEED;
+}
+
 export function stringToRandomNumber(str: string, excludedUpperBound: number): number {
     let hash = 0;
 
@@ -7,5 +19,5 @@ export function stringToRandomNumber(str: string, excludedUpperBound: number): n
         hash |= 0; // Convert to 32-bit integer
     }
 
-    return Math.abs((hash + 1) % excludedUpperBound);
+    return Math.abs((hash + seed) % excludedUpperBound);
 }

@@ -63,6 +63,8 @@ function initGameState(baseMetadata: GameBaseMetadata): GameState {
 }
 
 function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState {
+	const initialWeightInLbs = initialWeightForBuild(baseMetadata.build);
+
 	return {
 		slug: baseMetadata.nameSlug,
 		groupSlug: baseMetadata.group?.slug || 'no_group',
@@ -71,7 +73,7 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState
 
 			const outfitState = {
 				slug: outfitBaseMetadata.outfitSlug,
-				weightInLbs: initialWeightForBuild(baseMetadata.build),
+				weightInLbs: initialWeightInLbs,
 				donationReceived: 0,
 				thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
 				unlocked: unlocked,
@@ -82,7 +84,7 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState
 		}),
 		brokenOutfit: {
 			donationReceived: 0,
-			weightInLbs: 0,
+			weightInLbs: initialWeightInLbs,
 		}
 	}
 }

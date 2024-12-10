@@ -17,7 +17,7 @@ describe('initState', () => {
 		const initialState : GameState[] = initState();
 
 		const tharja = getCharacterState(initialState, "tharja")
-		expect(tharja.brokenOutfit.weightInLbs).toBe(0)
+		expect(tharja.brokenOutfit.weightInLbs).toBe(120)
 		expect(tharja.outfits[0].donationReceived).toBe(0)
 		expect(tharja.outfits[0].unlocked).toBe(true)
 		expect(tharja.outfits[0].weightInLbs).toBe(120)
@@ -30,7 +30,7 @@ describe('initState', () => {
 		expect(linde.outfits[0].weightInLbs).toBe(100)
 
 		const elincia = getCharacterState(initialState, "elincia")
-		expect(elincia.brokenOutfit.weightInLbs).toBe(0)
+		expect(elincia.brokenOutfit.weightInLbs).toBe(120)
 		expect(elincia.outfits[0].donationReceived).toBe(0)
 		expect(elincia.outfits[0].unlocked).toBe(false)
 		expect(elincia.outfits[0].weightInLbs).toBe(120)

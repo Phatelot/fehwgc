@@ -1,5 +1,5 @@
 import { stringToRandomNumber } from "./rng";
-import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, outfitWithMostDonation, isUnlocked, type OutfitKey, isFattenable, getCurrentOutfitForCharacter } from "./state";
+import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, heaviestOutfit, isUnlocked, type OutfitKey, isFattenable, getCurrentOutfitForCharacter } from "./state";
 import { isSelfFed, selectTraitFor, selectTraitForBroken } from "./trait";
 
 export const donationURL = "https://ko-fi.com/additionalluggagetake" // wdym this should be defined elsewhere?
@@ -230,7 +230,7 @@ export function updateCharacterStateUnlock(state: GameState[], characterState: C
 	const lastOutfit = characterState.outfits[characterState.outfits.length - 1];
 	if (lastOutfit.unlocked && (!isFattenable(lastOutfit) || isOutgrown(lastOutfit))) {
 		if (!characterState.brokenOutfit.slug) {
-			characterState.brokenOutfit.slug = outfitWithMostDonation(characterState)
+			characterState.brokenOutfit.slug = heaviestOutfit(characterState)
 			characterState.brokenOutfit.trait = selectTraitForBroken(characterState)
 		}
 	}

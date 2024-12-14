@@ -101,14 +101,14 @@ export function isFattenable(outfit: OutfitState): boolean {
 	].includes(outfit.trait || '');
 }
 
-export function outfitWithMostDonation(characterState: CharacterState): string | undefined {
+export function heaviestOutfit(characterState: CharacterState): string | undefined {
 	let outfitSlug = undefined;
-	let donation = -1;
+	let weightInLbs = -1;
 	for (let i = 0; i < characterState.outfits.length; i++) {
 		const outfit = characterState.outfits[i]
-		if (outfit.donationReceived > donation) {
+		if (outfit.weightInLbs > weightInLbs) {
 			outfitSlug = outfit.slug;
-			donation = outfit.donationReceived;
+			weightInLbs = outfit.weightInLbs;
 		}
 	}
 	return outfitSlug;

@@ -1,4 +1,5 @@
 import { getCharacterDisplayName, getCharacterOutfitDisplayName } from "./metadata";
+import { stringToRandomNumber } from "./rng";
 import { isOutgrown, type GameState, type OutfitState, type CharacterState } from "./state";
 import { traitNames } from "./trait";
 import { formatMoney } from "./utils";
@@ -131,7 +132,10 @@ function compareSignificanceOfOutfitChanges(changeA: OutfitChange, changeB: Outf
 }
 
 function traitName(traitSlug?: string): string {
-	return traitNames[traitSlug || ''].toLowerCase();
+	if (!traitSlug) {
+		return '';
+	}
+	return traitNames[traitSlug].toLowerCase();
 }
 
 
@@ -191,7 +195,7 @@ function characterChangesToTemplates(change: CharacterChange): ChangeSentenceTem
 			},
 		)
 	} else if (change.newState.brokenOutfit.slug && change.brokenWeightGainInLbs >= insignificantChangeThresholdInLbs) {
-		sentences.push({value: `${characterDisplayName} has gained ${formatWeight(change.brokenWeightGainInLbs)}lbs in her broken outfit.`})
+		sentences.push(getGainingSentenceForBroken(characterDisplayName, `(+${formatWeight(change.brokenWeightGainInLbs)}lbs, new weight ${formatWeight(change.newState.brokenOutfit.weightInLbs)}lbs).`, change.newState.brokenOutfit.weightInLbs))
 	}
 
 	sentences.push(...change.outfitChanges.flatMap(outfitChange => serializeOutfitChanges(characterDisplayName, change.slug, outfitChange)))
@@ -209,27 +213,141 @@ function serializeOutfitChanges(characterDisplayName: string, characterSlug: str
 		}]
 	}
 
+	const suffixIfAbsolute = `(weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`;
+	const suffixIfRelative = `(+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`;
+
 	if (change.unlocked && change.outgrown) {
 		sentences.push({
-			value: `${characterDisplayName}'s ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`,
-			valueIfNotFirst: `Her ${outfitName} outfit has been unlocked and already outgrown (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`
+			value: `${characterDisplayName}'s ${outfitName} outfit has been unlocked and already outgrown ${suffixIfAbsolute}`,
+			valueIfNotFirst: `Her ${outfitName} outfit has been unlocked and already outgrown ${suffixIfAbsolute}`
 		})
 	} else if (change.unlocked) {
 		sentences.push({
-			value: `${characterDisplayName}'s ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`,
-			valueIfNotFirst: `Her ${outfitName} outfit has been unlocked (weight: ${formatWeight(change.newState.weightInLbs)}lbs, trait: ${traitName(change.trait)}).`,
+			value: `${characterDisplayName}'s ${outfitName} outfit has been unlocked ${suffixIfAbsolute}`,
+			valueIfNotFirst: `Her ${outfitName} outfit has been unlocked ${suffixIfAbsolute}`,
 		})
 	} else if (change.outgrown) {
 		sentences.push({
-			value: `${characterDisplayName} has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
-			valueIfNotFirst: `She has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
+			value: `${characterDisplayName} has outgrown her ${outfitName} outfit ${suffixIfRelative}`,
+			valueIfNotFirst: `She has outgrown her ${outfitName} outfit ${suffixIfRelative}`,
 		})
 	} else if (change.weightGainedInLbs >= 1) {
-		sentences.push({
-			value: `${characterDisplayName} is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
-			valueIfNotFirst: `She is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
-		})
+		sentences.push(getStretchingSentence(characterDisplayName, outfitName, suffixIfRelative, change))
 	}
 
 	return sentences
+}
+
+function getStretchingSentence(characterDisplayName: string, outfitName: string, suffixIfRelative: string, change: OutfitChange): ChangeSentenceTemplate {
+	const outfitState = change.newState;
+	const isAlmostOutgrown = outfitState.unlocked && (outfitState.thresholdInLbs - outfitState.weightInLbs <= 30);
+
+	const sentences = isAlmostOutgrown ? [
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit seems like it's close to bursting ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit seems like it's close to bursting ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit seems to be struggling to stay together ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit seems to be struggling to stay together ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit appears ready to split any second ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit appears ready to split any second ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit is holding on for dear life ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit is holding on for dear life ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit creaks under the pressure of her new figure ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit creaks under the pressure of her new figure ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit looks like it might tear with one wrong move ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit looks like it might tear with one wrong move ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit seems to be testing the limits of fabric engineering ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit seems to be testing the limits of fabric engineering ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s belt buckle is clinging to the last hole for dear life ${suffixIfRelative}`,
+			valueIfNotFirst: `Her belt buckle is clinging to the last hole for dear life ${suffixIfRelative}`,
+		},
+	] : [
+		{
+			value: `${characterDisplayName} is stretching her ${outfitName} outfit ${suffixIfRelative}`,
+			valueIfNotFirst: `She is stretching her ${outfitName} outfit ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit looks tighter than before ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit looks tighter than before ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s just popped a button from her ${outfitName} oufit ${suffixIfRelative}`,
+			valueIfNotFirst: `She's just popped a button from her ${outfitName} oufit ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit now has a ripped seam ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit now has a ripped seam ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit has to accommodate her new size ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit has to accommodate her new size ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit feels noticeably snug after her recent indulgences ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit feels noticeably snug after her recent indulgences ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s waistband is starting to pinch in her ${outfitName} outfit ${suffixIfRelative}`,
+			valueIfNotFirst: `Her waistband is starting to pinch in her ${outfitName} outfit ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit now leaves faint marks on her skin when she takes it off ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit leaves marks on her skin when she takes it off ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName} finds herself adjusting her ${outfitName} outfit more often these days ${suffixIfRelative}`,
+			valueIfNotFirst: `She finds herself adjusting her ${outfitName} outfit more often these days ${suffixIfRelative}`,
+		},
+		{
+			value: `${characterDisplayName}'s ${outfitName} outfit buttons now close with a slight protest ${suffixIfRelative}`,
+			valueIfNotFirst: `Her ${outfitName} outfit buttons now close with a slight protest ${suffixIfRelative}`,
+		},
+	];
+
+	return sentences[stringToRandomNumber(characterDisplayName + outfitName + change.donationReceived, sentences.length)]
+}
+
+function getGainingSentenceForBroken(characterDisplayName: string, suffix: string, weight: number): ChangeSentenceTemplate {
+	const sentences = [
+		{
+			value: `${characterDisplayName}’s still expanding in her broken outfit ${suffix}`,
+			valueIfNotFirst: `She’s still expanding in her broken outfit ${suffix}`,
+		},
+		{
+			value: `${characterDisplayName}’s growth in her broken outfit hasn’t slowed ${suffix}`,
+			valueIfNotFirst: `Her growth in her broken outfit hasn’t slowed ${suffix}`,
+		},
+		{
+			value: `The scraps of ${characterDisplayName}'s broken outfit can’t hide her growing figure ${suffix}`,
+			valueIfNotFirst: `The scraps of her broken outfit can’t hide her growing figure ${suffix}`,
+		},
+		{
+			value: `Her broken outfit gave up, but ${characterDisplayName}’s size keeps increasing ${suffix}`,
+			valueIfNotFirst: `Her broken outfit gave up, but her size keeps increasing ${suffix}`,
+		},
+		{
+			value: `${characterDisplayName}’s still filling out her broken outfit ${suffix}`,
+			valueIfNotFirst: `She's still filling out her broken outfit ${suffix}`,
+		},
+		{
+			value: `No outfit could survive the way ${characterDisplayName} keeps growing in her broken one ${suffix}`,
+			valueIfNotFirst: `No outfit could survive the way she keeps growing in her broken one ${suffix}`,
+		},
+	];
+
+	return sentences[stringToRandomNumber(characterDisplayName + weight, sentences.length)]
 }

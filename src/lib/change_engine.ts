@@ -224,7 +224,7 @@ function serializeOutfitChanges(characterDisplayName: string, characterSlug: str
 			value: `${characterDisplayName} has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
 			valueIfNotFirst: `She has outgrown her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
 		})
-	} else {
+	} else if (change.weightGainedInLbs >= 1) {
 		sentences.push({
 			value: `${characterDisplayName} is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,
 			valueIfNotFirst: `She is stretching her ${outfitName} outfit (+${formatWeight(change.weightGainedInLbs)}lbs, new weight ${formatWeight(change.newState.weightInLbs)}lbs).`,

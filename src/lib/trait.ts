@@ -1,4 +1,4 @@
-import { getCharacterMetadata, getCharacterOutfitDisplayName, getOutfitMetadata, type CharacterBaseMetadata, type OutfitBaseMetadata, type Shape, type Build } from "./metadata";
+import { getCharacterMetadata, getOutfitMetadata, type CharacterBaseMetadata, type OutfitBaseMetadata, type Shape, type Build } from "./metadata";
 import { stringToRandomNumber } from "./rng";
 import type { CharacterState, OutfitState } from "./state";
 

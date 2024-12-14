@@ -238,9 +238,17 @@ export function createUnlockViewModel(state: CompletedState): UnlockViewModel[][
 
 	return groupConsecutive(state.games
 		.flatMap(g => g.characters.map(c => ({game: g, character: c})))
-		.flatMap(c => c.character.outfits.map(o => ({...c, outfit: o})))
+		.flatMap(c => c.character.outfits.map((o, i) => ({...c, outfitIndex: i, outfit: o})))
 		.map((o, i) => {
 			i %= maxNumberOfCharactersPerPage;
+
+			let almostUnlocked = !!(o.outfitIndex === 0 ?
+				!o.character.unlocked && o.character.donationReceived : // first outfit: mark as soon as we get any dono
+				o.character.unlocked && !o.outfit.unlocked && (() => { // next outfits: mark when previous outfit is 30lbs or less from being outgrown
+					const previousOutfit = o.character.outfits[o.outfitIndex - 1];
+					return ((previousOutfit.outgrownThresholdInLbs || 0) - previousOutfit.weightInLbs) <= 30;
+				})())
+
 			return {
 				characterSlug: o.character.nameSlug,
 				outfitSlug: o.outfit.nameSlug || 'should not happen',
@@ -256,6 +264,7 @@ export function createUnlockViewModel(state: CompletedState): UnlockViewModel[][
 				trait: o.outfit.trait,
 				grey: !o.outfit.unlocked,
 				broken: o.outfit.broken,
+				almostUnlocked,
 			}
 		})
 		.reverse(), maxNumberOfCharactersPerPage);
@@ -276,4 +285,5 @@ export type UnlockViewModel = {
 	trait?: string;
 	grey?: boolean;
 	broken: boolean;
+	almostUnlocked: boolean;
 }

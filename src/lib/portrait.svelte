@@ -14,6 +14,7 @@
 		id: string;
 		trait?: string;
 		grey?: boolean;
+		almostUnlocked: boolean;
 	}
 
 </script>
@@ -51,6 +52,14 @@
 {#if model.trait}
 	<image
 	  xlink:href="{getTraitPicLink(model.trait)}"
+	  x="{model.x - 1.3}%"
+	  y="{5.5 + model.y + model.height + 8}%"
+	  height="7%"
+	  on:click
+	/>
+{:else if model.almostUnlocked}
+	<image
+	  xlink:href="{getTraitPicLink("Partial_Unlock")}"
 	  x="{model.x - 1.3}%"
 	  y="{5.5 + model.y + model.height + 8}%"
 	  height="7%"

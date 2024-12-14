@@ -285,8 +285,8 @@ function getStretchingSentence(characterDisplayName: string, outfitName: string,
 			valueIfNotFirst: `Her ${outfitName} outfit looks tighter than before ${suffixIfRelative}`,
 		},
 		{
-			value: `${characterDisplayName}'s just popped a button from her ${outfitName} oufit ${suffixIfRelative}`,
-			valueIfNotFirst: `She's just popped a button from her ${outfitName} oufit ${suffixIfRelative}`,
+			value: `${characterDisplayName}'s just popped a button from her ${outfitName} outfit ${suffixIfRelative}`,
+			valueIfNotFirst: `She's just popped a button from her ${outfitName} outfit ${suffixIfRelative}`,
 		},
 		{
 			value: `${characterDisplayName}'s ${outfitName} outfit now has a ripped seam ${suffixIfRelative}`,

@@ -13,6 +13,7 @@ export type CharacterChange = {
 	brokenUnlockSlug?: string;
 	brokenUnlockTrait?: string;
 	brokenWeightGainInLbs: number;
+	brokenDonationReceived: number;
 	outfitChanges: OutfitChange[];
 	newState: CharacterState;
 }
@@ -82,6 +83,7 @@ export function toCharacterChange(before: CharacterState, after: CharacterState)
 		brokenUnlockSlug: !before.brokenOutfit.slug ? after.brokenOutfit.slug : undefined,
 		brokenUnlockTrait: !before.brokenOutfit.trait ? after.brokenOutfit.trait : undefined,
 		brokenWeightGainInLbs: brokenWeightGain,
+		brokenDonationReceived: after.brokenOutfit.donationReceived - before.brokenOutfit.donationReceived,
 		outfitChanges: outfitChanges.sort(compareSignificanceOfOutfitChanges).reverse(),
 		newState: after,
 	}
@@ -154,7 +156,8 @@ function characterChangesToTemplates(change: CharacterChange): ChangeSentenceTem
 
 	const donationReceived = change.outfitChanges
 		.map(c => c.donationReceived)
-		.reduce((a, b) => a + b, 0);
+		.reduce((a, b) => a + b, 0)
+		+ change.brokenDonationReceived;
 
 	const outfitIfDonationToOnlyOne: OutfitChange | undefined = change.outfitChanges
 		.filter(c => c.donationReceived === donationReceived)
@@ -165,8 +168,10 @@ function characterChangesToTemplates(change: CharacterChange): ChangeSentenceTem
 		.map(outfitName => `${characterDisplayName} (${outfitName})`)
 		.at(0);
 
+	const outfitNameIfDonationOnlyToBroken: string | undefined = (change.brokenDonationReceived === donationReceived) ? `${characterDisplayName} (broken)` : undefined;
+
 	if (donationReceived > 0) {
-		sentences.push({value: `${outfitNameIfDonationToOnlyOne || characterDisplayName} receives $${formatMoney(donationReceived)}!`})
+		sentences.push({value: `${outfitNameIfDonationOnlyToBroken || outfitNameIfDonationToOnlyOne || characterDisplayName} receives $${formatMoney(donationReceived)}!`})
 	}
 
 	if (change.unlocked && change.brokenUnlockSlug) {

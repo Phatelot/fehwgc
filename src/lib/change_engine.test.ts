@@ -443,6 +443,7 @@ describe("characterWeightGainedInLbs", () => {
 			],
 			brokenWeightGainInLbs: 300,
 			brokenUnlockSlug: "base",
+			brokenDonationReceived: 100,
 			newState: {} as CharacterState, // we just don't need it here
 		};
 

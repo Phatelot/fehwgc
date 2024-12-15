@@ -116,6 +116,10 @@ describe('donating to an unlocked broken outfit', () => {
 	it("should correctly update the broken outfit weight", () => {
 		expect(getCharacterState(outputState, "kronya")?.brokenOutfit.weightInLbs).toBe(4400)
 	})
+
+	it("should update the donation received by said broken outfit", () => {
+		expect(getCharacterState(outputState, "kronya")?.brokenOutfit.donationReceived).toBe(1300)
+	})
 })
 
 describe('donation to an outfit still locked of an already unlocked character', () => {

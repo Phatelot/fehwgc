@@ -16,6 +16,9 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 		.flatMap(character => character.outfits)
 		.filter(outfit => outfit.unlocked)
 		.sort((a, b) => a.weightInLbs - b.weightInLbs);
+	if (outfitStates.length === 0) {
+		return [];
+	}
 
 	const paginatedOutfitStates = groupConsecutive(outfitStates, maxNumberOfDisplayedCharactersPerLine);
 
@@ -101,6 +104,10 @@ export function createBMIOutfitViewModel(state: CompletedState) : BMIOutfitViewM
 		.filter(outfit => outfit.unlocked)
 		.sort((a, b) => a.BMI - b.BMI);
 
+	if (outfitStates.length === 0) {
+		return [];
+	}
+
 	const paginatedOutfitStates = groupConsecutive(outfitStates, maxNumberOfDisplayedCharactersPerLine);
 
 	const lowestBMI = outfitStates[0].BMI;
@@ -178,6 +185,9 @@ export function createCharacterViewModel(state: CompletedState) : CharacterViewM
 		.filter(character => character.unlocked)
 		.sort((a, b) => (a.stats?.totalWeightUnlockedInLbs || 0) - (b.stats?.totalWeightUnlockedInLbs || 0));
 
+	if (characterStates.length === 0) {
+		return [];
+	}
 	const paginatedCharacterStates = groupConsecutive(characterStates, maxNumberOfDisplayedCharactersPerLine);
 
 	const lowestWeight = (characterStates[0].stats?.totalWeightUnlockedInLbs || 150);

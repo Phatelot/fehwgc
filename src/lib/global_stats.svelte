@@ -4,8 +4,14 @@
     import { formatMoney } from "./utils";
     import { formatWeight } from "./weight_utils";
 
-
 	export let state: CompletedState;
+
+	const totalNumberOfCharacters = state.games.flatMap(g => g.characters).length;
+	const totalNumbefOfUnlockedCharacters = state.games.flatMap(g => g.characters).filter(c => c.unlocked).length;
+	const totalNumberOfCharactersHavingUnlockedBroken = state.games.flatMap(g => g.characters).filter(c => c.outfits[c.outfits.length - 1].unlocked).length;
+
+	const totalNumberOfOutfits = state.games.flatMap(g => g.characters).flatMap(c => c.outfits).length;
+	const totalNumberOfUnlockedOutfits = state.games.flatMap(g => g.characters).flatMap(c => c.outfits).filter(o => o.unlocked).length;
 
 	$: sentences = (() => {
 		const sentences = [
@@ -13,6 +19,9 @@
 			`Average weight: ${formatWeight(state.stats.averageWeightUnlockedInLbs)}lbs.`,
 			`Median weight: ${formatWeight(state.stats.medianWeightUnlockedInLbs)}lbs.`,
 			`Total donations: $${formatMoney(state.stats.totalDonationReceived)}.`,
+			"",
+			`Out of ${totalNumberOfCharacters} characters, ${totalNumbefOfUnlockedCharacters} have been unlocked, and ${totalNumberOfCharactersHavingUnlockedBroken} have unlocked their broken oufit.`,
+			`Out of ${totalNumberOfOutfits} outfits, ${totalNumberOfUnlockedOutfits} have been unlocked.`,
 		];
 
 		return sentences;

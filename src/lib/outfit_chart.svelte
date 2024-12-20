@@ -63,6 +63,7 @@
 
 </script>
 
+{#if pageViewModel && pageViewModel.length > 0}
   {#each pageViewModel as outfit}
 	{#if outfit.outgrownY}
 		<rect x="{outfit.x}%" y="{outfit.outgrownY}%" width="{outfit.width}%" height="0.8%" rx="0.5px" ry="0.5px" stroke="white" stroke-width="0.4" stroke-linecap="round" fill="black"/>
@@ -112,3 +113,4 @@
 	<image x="-99.4%" y="86%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => fatterPage()}/>
 	<rect x="96.2%" y="80%" height="15%" width="3.8%" fill="#ae2f29" opacity='0' on:click={() => fatterPage()}/>
   {/if}
+{/if}

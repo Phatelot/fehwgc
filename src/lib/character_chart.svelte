@@ -44,6 +44,7 @@
 	}
 </script>
 
+{#if pageViewModel && pageViewModel.length > 0}
   {#each pageViewModel as character}
 	<rect
 	  x="{character.x}%"
@@ -71,3 +72,4 @@
 	<image x="-99.4%" y="86%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => fatterPage()}/>
 	<rect x="96.2%" y="80%" height="15%" width="3.8%" fill="#ae2f29" opacity='0' on:click={() => fatterPage()}/>
   {/if}
+{/if}

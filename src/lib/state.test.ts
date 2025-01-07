@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createSampleState } from './utils_test'
-import { initState, totalDonationsForCharacter, type GameState, getCharacterState, type CharacterState, getCurrentOutfitForCharacter, type OutfitState, type BrokenOutfitState } from './state'
+import { initState, totalDonationsForCharacter, type GameState, getCharacterState, type CharacterState, getCurrentOutfitForCharacter, type OutfitState, type BrokenOutfitState, addAdditionalCharactersAndOutfits } from './state'
 
 describe('totalDonationsForCharacter', () => {
 	it("should compute total donations with several outfits", () => {
@@ -25,6 +25,20 @@ describe('initState', () => {
 		expect(tharja.outfits[1].donationReceived).toBe(0)
 		expect(tharja.outfits[1].unlocked).toBe(false)
 		expect(tharja.outfits[1].weightInLbs).toBe(120)
+
+		expect(tharja.outfits.length).toBe(7); // outfits added later shouldn't be in initial state
+
+		const vaidaIsPresent: boolean = function() {
+			for (const gameState of initialState) {
+				for (const characterState of gameState.characters) {
+					if (characterState.slug === 'vaida') {
+						return true;
+					}
+				}
+			}
+			return false;
+		}()
+		expect(vaidaIsPresent).toBe(false); // characters added later shouldn't be in initial state
 
 		const linde = getCharacterState(initialState, "linde")
 		expect(linde.outfits[0].weightInLbs).toBe(100)
@@ -64,5 +78,25 @@ describe('getCurrentOutfitForCharacter', () => {
 
 		expect((getCurrentOutfitForCharacter(getCharacterState(state, "edelgard") as CharacterState) as BrokenOutfitState))
 			.toBe((getCharacterState(state, "edelgard") as CharacterState).brokenOutfit);
+	})
+})
+
+describe('addAdditionalCharactersAndOutfits', () => {
+	it('should not do anything if no characters or outfits are added at the moment', () => {
+		const initialState : GameState[] = initState();
+
+		const initialStateControl : GameState[] = initState();
+
+		addAdditionalCharactersAndOutfits(initialState, 20);
+		expect(initialState).toEqual(initialStateControl);
+	})
+
+	it('should add the new characters and outfits when adequate', () => {
+		const initialState : GameState[] = initState();
+
+		addAdditionalCharactersAndOutfits(initialState, 269);
+
+		const vaida = getCharacterState(initialState, "vaida")
+		expect(vaida).toBeDefined();
 	})
 })

@@ -17,6 +17,7 @@ export type OutfitBaseMetadata = {
     secondaryShape?: Shape;
     outfit: string;
     outfitSlug: string;
+    introducedAfterDonation?: number;
 };
 
 export type CharacterGroup = {
@@ -61,6 +62,15 @@ export function getCharacterMetadata(characterNameSlug: string): CharacterBaseMe
             if (character.nameSlug === characterNameSlug) {
                 return character
             }
+        }
+    }
+    return undefined
+}
+
+export function getGameMetadata(gameNameSlug: string): GameBaseMetadata | undefined {
+    for (const game of baseMetadata) {
+        if (game.nameSlug === gameNameSlug) {
+            return game
         }
     }
     return undefined
@@ -161,7 +171,7 @@ const heroesBook45Group = {
     slug: 'books4_5',
 }
 const heroesBook68Group = {
-    name: 'Books 6-8',
+    name: 'Books 6-9',
     slug: 'books6_8',
 }
 const holyWarGamePrecursor = {
@@ -536,6 +546,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Winter",
                         "outfitSlug": "winter",
                         "secondaryShape": "🟣"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "🍐",
+                        "outfit": "Ninja",
+                        "outfitSlug": "ninja",
+                        "secondaryShape": "🍎",
+                        "introducedAfterDonation": 269
                     }
                 ]
             },
@@ -759,6 +777,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Spring",
                         "outfitSlug": "spring",
                         "secondaryShape": "🟣"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "⌛",
+                        "outfit": "Ninja",
+                        "outfitSlug": "ninja",
+                        "secondaryShape": "🍐",
+                        "introducedAfterDonation": 269
                     }
                 ]
             },
@@ -1209,6 +1235,13 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "⌛",
                         "outfit": "Thief",
                         "outfitSlug": "thief"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🍎",
+                        "outfit": "Rearmed",
+                        "outfitSlug": "rearmed",
+                        "introducedAfterDonation": 269
                     }
                 ]
             },
@@ -1362,6 +1395,22 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Dark",
                         "outfitSlug": "dark"
+                    }
+                ]
+            },
+            {
+                "name": "Vaida",
+                "nameSlug": "vaida",
+                "heightInCm": 172.0,
+                "build": 'Regular',
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 450.0,
+                        "mainShape": "🍐",
+                        "secondaryShape": "🍐",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        "introducedAfterDonation": 269
                     }
                 ]
             }
@@ -1575,6 +1624,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "💎",
                         "outfit": "Ascended",
                         "outfitSlug": "ascended"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 250.0,
+                        "mainShape": "⌛",
+                        "outfit": "Winter",
+                        "outfitSlug": "winter",
+                        "secondaryShape": "🍐",
+                        "introducedAfterDonation": 269
                     }
                 ]
             },
@@ -1819,6 +1876,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "🍐",
+                        "outfit": "Ninja",
+                        "outfitSlug": "ninja",
+                        "secondaryShape": "🟣",
+                        "introducedAfterDonation": 269
                     }
                 ]
             }
@@ -3289,6 +3354,38 @@ export const baseMetadata: GameBaseMetadata[] = [
                 ]
             },
             {
+                "name": "Baldr",
+                "nameSlug": "baldr",
+                "heightInCm": 178.0,
+                "build": 'Regular',
+                "group": heroesBook68Group,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "💎",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        "introducedAfterDonation": 269,
+                    }
+                ]
+            },
+            {
+                "name": "Hodr",
+                "nameSlug": "hodr",
+                "heightInCm": 170.0,
+                "build": 'Regular',
+                "group": heroesBook68Group,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "🍐",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        "introducedAfterDonation": 269,
+                    }
+                ]
+            },
+            {
                 "name": "Loki",
                 "nameSlug": "loki",
                 "initialRoaster": true,
@@ -4101,7 +4198,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "initialRoaster": true,
                 "build": 'Strong',
                 "group": telliusRadiantDawnGroup,
-                
+
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -5062,6 +5159,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Summer",
                         "outfitSlug": "summer"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🟣",
+                        "outfit": "Winter",
+                        "outfitSlug": "winter",
+                        "secondaryShape": "💎",
+                        "introducedAfterDonation": 269
                     }
                 ]
             },

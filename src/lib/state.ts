@@ -1,5 +1,5 @@
-import { baseMetadata, initialWeightForBuild, type CharacterBaseMetadata, type GameBaseMetadata } from "./metadata";
-import { selectTraitFor, selectTraitForInitial } from "./trait";
+import { baseMetadata, initialWeightForBuild, type CharacterBaseMetadata, type GameBaseMetadata, getGameMetadata, getCharacterMetadata, type Build } from "./metadata";
+import { selectTraitForInitial } from "./trait";
 
 export type Donation = {
     character: string;
@@ -58,18 +58,29 @@ export function initState(): GameState[] {
 function initGameState(baseMetadata: GameBaseMetadata): GameState {
 	return {
 		slug: baseMetadata.nameSlug,
-		characters: baseMetadata.characters.map(initCharacterState),
+		characters: baseMetadata.characters.flatMap(initCharacterState),
 	}
 }
 
-function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState {
+function initCharacterState(baseMetadata: CharacterBaseMetadata): [CharacterState] | [] {
 	const initialWeightInLbs = initialWeightForBuild(baseMetadata.build);
 
-	return {
+	const allOutfitsAreAddedLater = baseMetadata.outfits
+		.map(o => o.introducedAfterDonation)
+		.every(i => !!i);
+	if (allOutfitsAreAddedLater) {
+		return [];
+	}
+
+	return [{
 		slug: baseMetadata.nameSlug,
 		groupSlug: baseMetadata.group?.slug || 'no_group',
-		outfits: baseMetadata.outfits.map((outfitBaseMetadata, i) => {
+		outfits: baseMetadata.outfits.flatMap((outfitBaseMetadata, i) => {
 			const unlocked = (i == 0 && baseMetadata.initialRoaster) || false
+
+			if (!!outfitBaseMetadata.introducedAfterDonation) {
+				return []
+			}
 
 			const outfitState = {
 				slug: outfitBaseMetadata.outfitSlug,
@@ -80,13 +91,13 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): CharacterState
 				trait: unlocked ? selectTraitForInitial(baseMetadata) : undefined,
 			} as OutfitState
 
-			return outfitState
+			return [outfitState]
 		}),
 		brokenOutfit: {
 			donationReceived: 0,
 			weightInLbs: initialWeightInLbs,
 		}
-	}
+	}]
 }
 
 export function isOutgrown(outfit: OutfitState): boolean {
@@ -177,4 +188,42 @@ export function getGameState(state: GameState[], characterNameSlug: string) : Ga
 	}
 
 	return null;
+}
+
+export function addAdditionalCharactersAndOutfits(state: GameState[], donationNumber: number) {
+	state.forEach(gameState => {
+		getGameMetadata(gameState.slug)?.characters
+			.filter(c => c.outfits[0].introducedAfterDonation === donationNumber)
+			.forEach(characterBaseMetadata => {
+				gameState.characters.push({
+					slug: characterBaseMetadata.nameSlug,
+					groupSlug: characterBaseMetadata.group?.slug || 'no_group',
+					outfits: [],
+					brokenOutfit: {
+						donationReceived: 0,
+						weightInLbs: initialWeightForBuild(characterBaseMetadata.build),
+					}
+				})
+			});
+
+		gameState.characters.forEach(characterState => {
+			const characterBaseMetadata = getCharacterMetadata(characterState.slug) as CharacterBaseMetadata;
+
+			characterBaseMetadata.outfits
+				.filter(o => o.introducedAfterDonation === donationNumber)
+				.forEach(outfitBaseMetadata => {
+					const lastOutfitIsOutgrown = !!characterState.brokenOutfit.slug;
+					const unlocked = lastOutfitIsOutgrown;
+
+					characterState.outfits.push({
+						slug: outfitBaseMetadata.outfitSlug,
+						weightInLbs: initialWeightForBuild(characterBaseMetadata.build),
+						donationReceived: 0,
+						thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
+						unlocked: unlocked,
+						trait: unlocked ? selectTraitForInitial(characterBaseMetadata) : undefined,
+					} as OutfitState);
+				});
+		});
+	})
 }

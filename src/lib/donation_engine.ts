@@ -1,5 +1,5 @@
 import { stringToRandomNumber } from "./rng";
-import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, heaviestOutfit, isUnlocked, type OutfitKey, isFattenable, getCurrentOutfitForCharacter } from "./state";
+import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, heaviestOutfit, isUnlocked, type OutfitKey, isFattenable, getCurrentOutfitForCharacter, addAdditionalCharactersAndOutfits } from "./state";
 import { isSelfFed, selectTraitFor, selectTraitForBroken } from "./trait";
 
 export const donationURL = "https://ko-fi.com/additionalluggagetake" // wdym this should be defined elsewhere?
@@ -8,8 +8,11 @@ const UNLOCK_CHARACTER_THRESHOLD_IN_CAD = 120;
 
 export function applyDonations(state: GameState[], donations: Donation[]): GameState[][] {
 	const states : GameState[][] = [state];
+	let donationNumber = 0;
 	for (const donation of donations) {
-	  states.push(applyDonation(states[states.length-1], donation));
+		const newState = applyDonation(states[states.length-1], donation);
+		addAdditionalCharactersAndOutfits(newState, ++donationNumber);
+		states.push(newState);
 	}
 	return states;
 }

@@ -32,6 +32,7 @@
 		["CHANGELOG", "Changelog"],
 		["GLOBAL_STATS", "Global Stats"],
 		["RULES", "Rules"],
+		["TRAITS", "Traits Index"],
 	];
 
 	function selectPage(page: string) {

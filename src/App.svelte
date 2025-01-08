@@ -18,6 +18,7 @@
     import Unlockometer from './lib/unlockometer.svelte';
     import Rules from './lib/rules.svelte';
     import { donationURL } from './lib/donation_engine';
+    import Traits from './lib/traits.svelte';
 
     async function fetchData(): Promise<Omnistate> {
       const now = Math.floor(Date.now() / 1000);
@@ -180,6 +181,8 @@
           <Unlockometer state={filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)} on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'RULES'}
           <Rules />
+        {:else if page === 'TRAITS'}
+          <Traits />
         {:else}
           <MenuPopup
             state="{viewModel.completedState}"

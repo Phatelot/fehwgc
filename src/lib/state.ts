@@ -1,5 +1,5 @@
 import { baseMetadata, initialWeightForBuild, type CharacterBaseMetadata, type GameBaseMetadata, getGameMetadata, getCharacterMetadata, type Build } from "./metadata";
-import { selectTraitForInitial } from "./trait";
+import { selectTraitFor, selectTraitForInitial } from "./trait";
 
 export type Donation = {
     character: string;
@@ -215,14 +215,20 @@ export function addAdditionalCharactersAndOutfits(state: GameState[], donationNu
 					const lastOutfitIsOutgrown = !!characterState.brokenOutfit.slug;
 					const unlocked = lastOutfitIsOutgrown;
 
-					characterState.outfits.push({
+					const outfitState = {
 						slug: outfitBaseMetadata.outfitSlug,
 						weightInLbs: initialWeightForBuild(characterBaseMetadata.build),
 						donationReceived: 0,
 						thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
 						unlocked: unlocked,
-						trait: unlocked ? selectTraitForInitial(characterBaseMetadata) : undefined,
-					} as OutfitState);
+						trait: undefined,
+					} as OutfitState;
+
+					if (outfitState.unlocked) {
+						outfitState.trait = selectTraitFor(characterState, outfitState);
+					}
+
+					characterState.outfits.push(outfitState);
 				});
 		});
 	})

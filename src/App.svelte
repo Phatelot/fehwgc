@@ -207,6 +207,7 @@
           <CharacterPopup
             characterSlug="{selectedCharacterSlug}"
             state="{viewModel.completedState}"
+            on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}
             on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
           />
         {:else if page !== 'MENU'}

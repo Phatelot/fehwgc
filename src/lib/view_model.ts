@@ -2,6 +2,7 @@ import { getBgPictureLink, getFacePicLink, getFramePictureLink } from "./asset_u
 import { getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
 import type { Build, Shape } from "./metadata";
 import { groupConsecutive } from "./utils";
+import { formatWeight } from "./weight_utils";
 
 export const viewPortHeight = 100;
 export const viewPortWidth = 220;
@@ -330,4 +331,60 @@ export type CharacterListItemViewModel = {
 	width: number;
 	height: number;
 	unlocked: boolean;
+}
+
+export function createOutfitOfCharacterViewModel(state: CharacterCompletedState): OutfitOfCharacterViewModel[] {
+	const baseMargin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
+	const width = 4 * baseMargin;
+	const pictureHeight = width * viewPortWidth / viewPortHeight;
+	const maxNumberOfPortraitsPerColumn = 4
+
+	return state.outfits
+		.map((o, i) => {
+			let almostUnlocked = !!(i === 0 ?
+				!state.unlocked && state.donationReceived : // first outfit: mark as soon as we get any dono
+				state.unlocked && !o.unlocked && (() => { // next outfits: mark when previous outfit is 30lbs or less from being outgrown
+					const previousOutfit = state.outfits[i - 1];
+					return ((previousOutfit.outgrownThresholdInLbs || 0) - previousOutfit.weightInLbs) <= 30;
+				})())
+
+			return {
+				characterSlug: state.nameSlug,
+				outfitSlug: o.nameSlug || 'should not happen',
+				outfitName: o.name,
+				outfitWeightLabel: o.unlocked ? `${formatWeight(o.weightInLbs)}lbs` : '',
+				bgPictureLink: getBgPictureLink(o.gameSlug),
+				pictureLink: getFacePicLink(state.nameSlug, o.broken ? getHeaviestOutfitSlug(state) : o.nameSlug || 'base'),
+				framePictureLink: getFramePictureLink(o.broken ? 'broken' : (o.nameSlug as string)),
+				x: 35 + 20 * Math.floor(i / maxNumberOfPortraitsPerColumn),
+				y: 8 + (i % maxNumberOfPortraitsPerColumn) * (pictureHeight + 4),
+				height: 4,
+				pictureHeight,
+				width,
+				id: `ooc-${state.nameSlug}-${o.nameSlug}${o.broken ? '-broken' : ''}`,
+				trait: o.trait,
+				grey: !o.unlocked,
+				broken: o.broken,
+				almostUnlocked,
+			}
+		});
+}
+
+export type OutfitOfCharacterViewModel = {
+	outfitSlug: string;
+	outfitName: string;
+	bgPictureLink: string;
+	pictureLink: string;
+	framePictureLink: string;
+	x: number;
+	y: number;
+	height: number;
+	pictureHeight: number;
+	width: number;
+	id: string;
+	trait?: string;
+	grey?: boolean;
+	broken: boolean;
+	almostUnlocked: boolean;
+	outfitWeightLabel: string;
 }

@@ -297,3 +297,37 @@ export type UnlockViewModel = {
 	broken: boolean;
 	almostUnlocked: boolean;
 }
+
+export function createCharacterListItemViewModel(state: CompletedState): CharacterListItemViewModel[][] {
+	const maxNumberOfDisplayedCharactersPerLine = 4;
+	const maxNumberOfDisplayedLines = 7;
+	const maxNumberOfCharactersPerPage = maxNumberOfDisplayedCharactersPerLine * maxNumberOfDisplayedLines;
+
+	return groupConsecutive(state.games
+		.flatMap(g => g.characters)
+		.sort((a, b) => a.name.localeCompare(b.name))
+		.map((c, i) => {
+			i %= maxNumberOfCharactersPerPage;
+
+			return {
+				characterSlug: c.nameSlug,
+				characterName: c.name,
+				x: 10 + 20 * Math.floor(i / maxNumberOfDisplayedLines),
+				y: 18 + (i % maxNumberOfDisplayedLines) * 11,
+				width: 18,
+				height: 10,
+				unlocked: c.unlocked,
+			}
+		})
+		.reverse(), maxNumberOfCharactersPerPage);
+}
+
+export type CharacterListItemViewModel = {
+	characterSlug: string;
+	characterName: string;
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+	unlocked: boolean;
+}

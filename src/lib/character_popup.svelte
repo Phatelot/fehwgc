@@ -13,17 +13,26 @@
 
 	let character = getCharacterCompletedState(state, characterSlug) as CharacterCompletedState;
 
-	const unlockedOutfitsSentence = character.numberOfUnlockedOutfits === character.outfits.length ?
-		`All her ${character.outfits.length} (including the final broken one) outfits are unlocked and outgrown.` :
-		`${character.numberOfUnlockedOutfits} of her ${character.outfits.length} outfits (including the final broken one) ${character.numberOfUnlockedOutfits === 1 ? 'is' : 'are'} unlocked.`;
-
-	let sentences = [
+	const sentences = [
 		`${character.name} is from the game ${character.gameName} (${character.groupName ? 'group: ' + character.groupName : 'not in any group'}).`,
-		`She weighs ${formatWeight(character.stats?.totalWeightUnlockedInLbs || 0)}lbs if you count all her outfits.`,
+	];
+
+	if (character.unlocked) {
+		sentences.push(`She weighs ${formatWeight(character.stats?.totalWeightUnlockedInLbs || 0)}lbs if you count all her outfits.`);
+	}
+
+	sentences.push(
 		`She is ${toImperialHeight(character.heightInMeters)} tall.`,
 		`Her build is ${character.build}.`,
-		unlockedOutfitsSentence,
-	];
+	)
+
+	if (character.numberOfUnlockedOutfits === character.outfits.length) {
+		sentences.push(`All her ${character.outfits.length} (including the final broken one) outfits are unlocked and outgrown.`);
+	} else if (!character.unlocked) {
+		sentences.push("She hasn't been unlocked yet.")
+	} else {
+		sentences.push(`${character.numberOfUnlockedOutfits} of her ${character.outfits.length} outfits (including the final broken one) ${character.numberOfUnlockedOutfits === 1 ? 'is' : 'are'} unlocked.`)
+	}
 
 	if (character.stats?.totalDonationReceived) {
 		sentences.push(`So far, she has received $${formatMoney(character.stats.totalDonationReceived)}.`)
@@ -44,6 +53,7 @@
 	x="6%"
 	y="10%"
 	height="80%"
+	style="{character.unlocked ? '' : 'filter: grayscale(1);'}"
 />
 
 <text class="sentence" y="18%">

@@ -29,6 +29,7 @@
 		["UNLOCKOMETER", "Unlock-o-meter"],
 		["BMI_CHART", "BMI Chart"],
 		["CHARACTER_CHART", "Character Chart"],
+		["CHARACTER_LIST", "Character List"],
 		["CHANGELOG", "Changelog"],
 		["GLOBAL_STATS", "Global Stats"],
 		["RULES", "Rules"],

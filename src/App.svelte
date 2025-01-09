@@ -19,6 +19,7 @@
     import Rules from './lib/rules.svelte';
     import { donationURL } from './lib/donation_engine';
     import Traits from './lib/traits.svelte';
+    import CharactersList from './lib/characters_list.svelte';
 
     async function fetchData(): Promise<Omnistate> {
       const now = Math.floor(Date.now() / 1000);
@@ -171,6 +172,8 @@
           <OutfitChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'CHARACTER_CHART'}
           <CharacterChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+        {:else if page === 'CHARACTER_LIST'}
+          <CharactersList state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else if page === 'CHANGELOG'}
           <Changelog state="{viewModel}" />
         {:else if page === 'BMI_CHART'}

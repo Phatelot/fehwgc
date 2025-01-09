@@ -200,6 +200,7 @@
             characterSlug="{selectedCharacterSlug}"
             outfitSlug="{selectedOutfitSlug}"
             state="{viewModel.completedState}"
+            on:selectcharacter={(e) => {(selectedCharacterSlug = e.detail.characterSlug); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
             on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
           />
         {:else if !!selectedCharacterSlug}

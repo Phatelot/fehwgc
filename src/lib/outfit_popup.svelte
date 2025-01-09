@@ -16,7 +16,12 @@
 	import triangleLink from '/src/assets/shapes/triangle.png'
 
 	import { createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		close: {},
+		selectcharacter: {
+			characterSlug: string,
+		},
+	}>();
 
 	export let characterSlug: string;
 	export let outfitSlug: string;
@@ -152,6 +157,12 @@
 		dispatch('close', {})
 	}
 
+	function openCharacterPopup() {
+		dispatch('selectcharacter', {
+			characterSlug: characterSlug,
+		})
+	}
+
 </script>
 
 <Box x={2} y={5} width={96} height={90}></Box>
@@ -213,6 +224,9 @@
 {:else}
 	<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="{donationURL}">Donate to unlock her!</a></text>
 {/if}
+
+<rect x="68.1%" y="83.5%" height="4.6%" width="12%" rx="1px" ry="1px" stroke="#aeffff" stroke-width="0.4" stroke-linecap="round" fill="#004858" on:click={() => openCharacterPopup()}></rect>
+<text x="69%" y="87%" class="button-label" on:click={() => openCharacterPopup()}>character info</text>
 
 <rect x="83.1%" y="83.5%" height="4.6%" width="8%" rx="1px" ry="1px" stroke="#aeffff" stroke-width="0.4" stroke-linecap="round" fill="#004858" on:click={() => close()}></rect>
 <text x="84%" y="87%" class="button-label" on:click={() => close()}>close</text>

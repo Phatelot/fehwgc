@@ -179,6 +179,8 @@ function feed(state: GameState[], characterState: CharacterState, outfitState: O
 }
 
 function applySpilloverOnGroup(state: GameState[], characterNameSlug: string, groupSlug: string, spillover: number) {
+	getCharacterState(state, characterNameSlug).spillover += spillover;
+
 	getGameState(state, characterNameSlug)?.characters
 		.filter(characterStateForSpillOver => characterStateForSpillOver.groupSlug === groupSlug)
 		.forEach(characterStateForSpillOver => {
@@ -191,7 +193,7 @@ function addWeightToOutfit(outfitState: OutfitState | BrokenOutfitState, weightI
 	outfitState.weightInLbs += weightInLbs;
 }
 
-function addSpilloverWeightToCharacter(characterState: CharacterState, weightInLbs: number) {
+export function addSpilloverWeightToCharacter(characterState: CharacterState, weightInLbs: number) {
 	let remainingWeightToAddInLbs = weightInLbs;
 	let i = 0;
 	while (remainingWeightToAddInLbs > 0 && i < characterState.outfits.length) {

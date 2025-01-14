@@ -1,3 +1,4 @@
+import { addSpilloverWeightToCharacter } from "./donation_engine";
 import { baseMetadata, initialWeightForBuild, type CharacterBaseMetadata, type GameBaseMetadata, getGameMetadata, getCharacterMetadata, type Build } from "./metadata";
 import { selectTraitFor, selectTraitForInitial } from "./trait";
 
@@ -17,6 +18,7 @@ export type CharacterState = {
     groupSlug: string;
     outfits: OutfitState[];
     brokenOutfit: BrokenOutfitState;
+	spillover: number;
 }
 
 export type OutfitKey = {
@@ -96,7 +98,8 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): [CharacterStat
 		brokenOutfit: {
 			donationReceived: 0,
 			weightInLbs: initialWeightInLbs,
-		}
+		},
+		spillover: 0,
 	}]
 }
 
@@ -192,18 +195,23 @@ export function getGameState(state: GameState[], characterNameSlug: string) : Ga
 
 export function addAdditionalCharactersAndOutfits(state: GameState[], donationNumber: number) {
 	state.forEach(gameState => {
+		const addedCharacters : CharacterState[] = [];
+
 		getGameMetadata(gameState.slug)?.characters
 			.filter(c => c.outfits[0].introducedAfterDonation === donationNumber)
 			.forEach(characterBaseMetadata => {
-				gameState.characters.push({
+				const characterToAdd = {
 					slug: characterBaseMetadata.nameSlug,
 					groupSlug: characterBaseMetadata.group?.slug || 'no_group',
 					outfits: [],
 					brokenOutfit: {
 						donationReceived: 0,
 						weightInLbs: initialWeightForBuild(characterBaseMetadata.build),
-					}
-				})
+					},
+					spillover: 0,
+				};
+				addedCharacters.push(characterToAdd);
+				gameState.characters.push(characterToAdd);
 			});
 
 		gameState.characters.forEach(characterState => {
@@ -231,5 +239,16 @@ export function addAdditionalCharactersAndOutfits(state: GameState[], donationNu
 					characterState.outfits.push(outfitState);
 				});
 		});
+
+		addedCharacters.forEach(addedCharacter => {
+			addSpilloverWeightToCharacter(addedCharacter, getSpilloverForGroup(gameState, addedCharacter.groupSlug))
+		})
 	})
+}
+
+export function getSpilloverForGroup(gameState: GameState, groupSlug: string): number {
+	return gameState.characters
+		.filter(c => c.groupSlug === groupSlug)
+		.map(c => c.spillover)
+		.reduce((a, b) => a + b, 0);
 }

@@ -181,7 +181,7 @@ function characterChangesToTemplates(change: CharacterChange): ChangeSentenceTem
 				valueIfNotFirst: `She has just been unlocked and has already outgrown all her outfits.`,
 			},
 			{
-				value: `Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`,
+				value: `Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (weight: ${formatWeight(change.newState.brokenOutfit.weightInLbs)}lbs, trait: ${traitName(change.brokenUnlockTrait)}).`,
 			},
 		)
 	} else if (change.unlocked) {
@@ -196,7 +196,7 @@ function characterChangesToTemplates(change: CharacterChange): ChangeSentenceTem
 				valueIfNotFirst: `She has outgrown all her outfits.`,
 			},
 			{
-				value: `Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (trait: ${traitName(change.brokenUnlockTrait)}).`
+				value: `Her broken outfit is '${getCharacterOutfitDisplayName(change.slug, change.brokenUnlockSlug)}' (weight: ${formatWeight(change.newState.brokenOutfit.weightInLbs)}lbs, trait: ${traitName(change.brokenUnlockTrait)}).`
 			},
 		)
 	} else if (change.newState.brokenOutfit.slug && change.brokenWeightGainInLbs >= insignificantChangeThresholdInLbs) {

@@ -175,13 +175,24 @@
 	style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
 />
 
-<image
-	xlink:href="{getChibiPicLink(outfit.characterSlug, outfit.nameSlug || '')}"
-	x="58%"
-	y="65%"
-	height="25%"
-	style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
-/>
+{#if outfit.characterSlug == 'edelgard' && outfit.broken && outfit.nameSlug == 'fallen'}
+	<image
+		xlink:href="{getChibiPicLink(outfit.characterSlug, outfit.nameSlug || '').replace('chibi', 'chibi_alt')}"
+		x="58%"
+		y="65%"
+		height="25%"
+		style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
+	/>
+{:else}
+	<image
+		xlink:href="{getChibiPicLink(outfit.characterSlug, outfit.nameSlug || '')}"
+		x="58%"
+		y="65%"
+		height="25%"
+		style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
+	/>
+{/if}
+
 
 
 <text class="sentence" y="18%">

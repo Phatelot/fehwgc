@@ -13,6 +13,11 @@ export function getFacePicLink(characterSlug: string, outfitSlug: string) : stri
 	return normalize(import.meta.env.BASE_URL + "/characters/" + characterSlug + outfitSuffix + "_face.webp");
 }
 
+export function getChibiPicLink(characterSlug: string, outfitSlug: string) : string {
+	const outfitSuffix = outfitSlug === "base" ? '' : '_' + outfitSlug;
+	return normalize(import.meta.env.BASE_URL + "/characters/" + characterSlug + outfitSuffix + "_chibi.webp");
+}
+
 export function getBodyPicLink(characterSlug: string, outfitSlug: string) : string {
 	const outfitSuffix = outfitSlug === "base" ? '' : '_' + outfitSlug;
 	return normalize(import.meta.env.BASE_URL + "/characters/" + characterSlug + outfitSuffix + "_body.webp");

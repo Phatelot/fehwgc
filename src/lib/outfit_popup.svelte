@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getBodyPicLink, getTraitPicLink } from "./asset_utils";
+    import { getBodyPicLink, getChibiPicLink, getTraitPicLink } from "./asset_utils";
     import Box from "./box.svelte";
     import { getCharacterCompletedState, getOutfitCompletedState, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
     import { donationURL } from "./donation_engine";
@@ -172,6 +172,14 @@
 	x="6%"
 	y="10%"
 	height="80%"
+	style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
+/>
+
+<image
+	xlink:href="{getChibiPicLink(outfit.characterSlug, outfit.nameSlug || '')}"
+	x="58%"
+	y="65%"
+	height="25%"
 	style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
 />
 

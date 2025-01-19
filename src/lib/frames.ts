@@ -45,6 +45,7 @@ export function toFrameType(outfitSlug: string): string {
 			return "Rearmed-Armored-Brave-"
 		case 'askr':
 		case 'resplendant':
+		case 'resplendent':
 		case 'muspell':
 		case 'muspelt':
 		case 'legendary':

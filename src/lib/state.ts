@@ -220,7 +220,8 @@ export function addAdditionalCharactersAndOutfits(state: GameState[], donationNu
 			characterBaseMetadata.outfits
 				.filter(o => o.introducedAfterDonation === donationNumber)
 				.forEach(outfitBaseMetadata => {
-					const lastOutfitIsOutgrown = !!characterState.brokenOutfit.slug;
+					const lastOutfitIsOutgrown = characterState.outfits.length !== 0 && characterState.outfits.every(o => (isOutgrown(o) || !isFattenable(o)));
+
 					const unlocked = lastOutfitIsOutgrown;
 
 					const outfitState = {
@@ -233,7 +234,7 @@ export function addAdditionalCharactersAndOutfits(state: GameState[], donationNu
 					} as OutfitState;
 
 					if (outfitState.unlocked) {
-						outfitState.trait = selectTraitFor(characterState, outfitState);
+						outfitState.trait = selectTraitFor(characterState, outfitState, donationNumber);
 					}
 
 					characterState.outfits.push(outfitState);

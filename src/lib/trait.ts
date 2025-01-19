@@ -111,14 +111,14 @@ export const traitNames : {[key: string]: string} = {
 	'Thin_Forearms': 'Thin forearms',
 }
 
-export function selectTraitFor(character: CharacterState, outfit: OutfitState): string {
+export function selectTraitFor(character: CharacterState, outfit: OutfitState, donationNumber: number): string {
 	const seed = `${character.slug}-${outfit.slug}`
 	const characterMetadata = getCharacterMetadata(character.slug) as CharacterBaseMetadata;
 	const outfitMetadata = getOutfitMetadata(character.slug, outfit.slug) as OutfitBaseMetadata
 	const possibleTraits = removeAlreadySelectedTraits(possibleCommonTraitsFor(characterMetadata.nameSlug, characterMetadata.build, outfitMetadata.mainShape, outfitMetadata.secondaryShape), character)
 
 	const rareSelected = !(characterMetadata.initialRoaster && outfitMetadata.outfitSlug === characterMetadata.outfits[0].outfitSlug) && // no rare traits if first outfit of initial roaster
-		(characterMetadata.outfits || []).length > 1 && // no rare traits if only one outfit
+		(characterMetadata.outfits.filter(o => !o.introducedAfterDonation || o.introducedAfterDonation <= donationNumber)).length > 1 && // no rare traits if only one outfit (at the time we select the trait)
 		!containsARareTrait(character) && // at most one rare trait per character
 		stringToRandomNumber(seed + '-rare', 10) === 0; // 10% chance
 

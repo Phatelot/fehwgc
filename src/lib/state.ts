@@ -1,4 +1,4 @@
-import { addSpilloverWeightToCharacter } from "./donation_engine";
+import { addSpilloverWeightToCharacter, attributeTraitToOutfit } from "./donation_engine";
 import { baseMetadata, initialWeightForBuild, type CharacterBaseMetadata, type GameBaseMetadata, getGameMetadata, getCharacterMetadata, type Build } from "./metadata";
 import { selectTraitFor, selectTraitForInitial } from "./trait";
 
@@ -234,7 +234,7 @@ export function addAdditionalCharactersAndOutfits(state: GameState[], donationNu
 					} as OutfitState;
 
 					if (outfitState.unlocked) {
-						outfitState.trait = selectTraitFor(characterState, outfitState, donationNumber);
+						attributeTraitToOutfit(state, characterState, outfitState, donationNumber);
 					}
 
 					characterState.outfits.push(outfitState);

@@ -241,7 +241,7 @@ export function updateCharacterStateUnlock(state: GameState[], characterState: C
 	}
 }
 
-function attributeTraitToOutfit(state: GameState[], characterState: CharacterState, outfitState: OutfitState, donationNumber: number) {
+export function attributeTraitToOutfit(state: GameState[], characterState: CharacterState, outfitState: OutfitState, donationNumber: number) {
 	outfitState.trait = selectTraitFor(characterState, outfitState, donationNumber)
 	const possibleBoundTargets = getPossibleBoundTargets(state, true)
 		.filter(o => o.characterSlug !== characterState.slug || o.outfitSlug !== outfitState.slug); // prevent self-targeting

@@ -167,13 +167,25 @@
 
 <Box x={2} y={5} width={96} height={90}></Box>
 <text x="38%" y="14%" class="character-name">{outfit.characterName} - {outfit.name}</text>
-<image
-	xlink:href="{getBodyPicLink(outfit.characterSlug, outfit.nameSlug || '')}"
-	x="6%"
-	y="10%"
-	height="80%"
-	style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
-/>
+
+{#if outfit.characterSlug == 'edelgard' && outfit.broken && outfit.nameSlug == 'fallen'}
+	<image
+		xlink:href="{getBodyPicLink(outfit.characterSlug, outfit.nameSlug || '').replace('body', 'body_alt')}"
+		x="6%"
+		y="10%"
+		height="80%"
+		style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
+	/>
+{:else}
+	<image
+		xlink:href="{getBodyPicLink(outfit.characterSlug, outfit.nameSlug || '')}"
+		x="6%"
+		y="10%"
+		height="80%"
+		style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
+	/>
+{/if}
+
 
 {#if outfit.characterSlug == 'edelgard' && outfit.broken && outfit.nameSlug == 'fallen'}
 	<image

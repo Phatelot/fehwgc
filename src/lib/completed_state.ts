@@ -138,6 +138,10 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 	const unlocked = !!characterState.brokenOutfit.trait;
 	const selectedOutfit = characterMetadata.outfits.find(outfit => outfit.outfitSlug === characterState.brokenOutfit.slug)
 
+	const characterHeight = (characterState.slug === 'edelgard' && characterState.brokenOutfit.slug === 'fallen') ?
+		2.54 :
+		characterMetadata.heightInCm / 100.;
+
 	return {
 		gameName: gameMetadata.name,
 		gameSlug: gameMetadata.nameSlug,
@@ -151,8 +155,8 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 		outgrown: false,
 		broken: true,
 		weightInLbs: characterState.brokenOutfit.weightInLbs,
-		heightInMeters: characterMetadata.heightInCm / 100.,
-		BMI: BMI(characterMetadata.heightInCm / 100., characterState.brokenOutfit.weightInLbs),
+		heightInMeters: characterHeight,
+		BMI: BMI(characterHeight, characterState.brokenOutfit.weightInLbs),
 		mainShape: selectedOutfit?.mainShape,
 		secondaryShape: selectedOutfit?.secondaryShape,
 		donationReceived: characterState.brokenOutfit.donationReceived,

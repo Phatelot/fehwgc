@@ -5503,7 +5503,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍐"
                     },
                     {
-                        "outfitWeightThresholdInLb": 300.0,
+                        "outfitWeightThresholdInLb": 450.0,
                         "mainShape": "🍎",
                         "outfit": "Brave",
                         "outfitSlug": "brave",

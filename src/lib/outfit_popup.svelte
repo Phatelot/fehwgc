@@ -95,6 +95,11 @@
 			sentences.push(`On her own, she weighs as much as the ${weighsAsMuchAsXSmallestCombined} smallest characters combined.`)
 		}
 
+		const weightTotalPercentage = (outfit.weightInLbs * 100)/state.stats.totalWeightUnlockedInLbs
+		if (weightTotalPercentage >= 0.1) {
+			sentences.push(`She accounts for ${formatBMI(weightTotalPercentage)}% of the total weight of all outfits.`)
+		}
+
 		shapeSentenceIndex = sentences.length;
 		if (outfit.secondaryShape) {
 			sentences.push(`Her shapes are: `)

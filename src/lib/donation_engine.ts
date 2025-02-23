@@ -12,6 +12,9 @@ export function applyDonations(state: GameState[], donations: Donation[]): GameS
 	for (const donation of donations) {
 		const newState = applyDonation(states[states.length-1], donation, donationNumber);
 		addAdditionalCharactersAndOutfits(newState, ++donationNumber);
+		if (donationNumber === 402) {
+			resetUnlockedStates(newState);
+		}
 		states.push(newState);
 	}
 	return states;
@@ -283,4 +286,35 @@ export function requiredRemainingAmountToUnlock(character: CharacterState): numb
 		return 0;
 	}
 	return Math.max(0, UNLOCK_CHARACTER_THRESHOLD_IN_CAD - totalDonationsForCharacterState(character));
+}
+
+
+export function resetUnlockedStates(state: GameState[]) {
+	state.forEach(gameState => {
+		gameState.characters.forEach(characterState => {
+			const characterIsUnlocked = (totalDonationsForCharacterState(characterState) >= UNLOCK_CHARACTER_THRESHOLD_IN_CAD) || isUnlocked(characterState);
+
+			characterState.outfits.forEach(o => o.unlocked = false);
+			if (!characterIsUnlocked) {
+				return;
+			}
+
+			const firstOutfit = characterState.outfits[0]
+			firstOutfit.unlocked = true
+
+			for (let i = 0; i < characterState.outfits.length - 1; i++) {
+				const nextOutfit = characterState.outfits[i+1];
+
+				if ("female_alear" === characterState.slug) console.log("IJIJIJIJJI")
+
+				if (isFattenable(characterState.outfits[i]) && !isOutgrown(characterState.outfits[i])) {
+					break;
+				}
+				nextOutfit.unlocked = true
+				if (nextOutfit.trait) {
+					continue;
+				}
+			}
+		})
+	})
 }

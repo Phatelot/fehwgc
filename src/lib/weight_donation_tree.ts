@@ -71,7 +71,7 @@ export function toGroupStats(tree: WeightDonationNode) : GroupStats {
 	if (tree.weightInLbs) {
 		weightsInLbs.push(tree.weightInLbs);
 	}
-	const sortedWeightsInLbs = weightsInLbs.filter(w => w !== 0).sort();
+	const sortedWeightsInLbs = weightsInLbs.filter(w => w !== 0).sort((a, b) => a - b);
 
 	return {
 		slug: tree.slug,

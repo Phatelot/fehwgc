@@ -2,6 +2,7 @@ import { applyDonations } from "./donation_engine";
 import { toFrameType } from "./frames";
 import { baseMetadata, getCharacterMetadata, type Build, type CharacterBaseMetadata, type GameBaseMetadata, type OutfitBaseMetadata, type Shape, getOutfitMetadata } from "./metadata";
 import { isOutgrown, type GameState, type OutfitState, type CharacterState, isUnlocked, getOutfitState, totalDonationsForCharacterState, type OutfitKey, getCharacterState, type Donation, initState } from "./state";
+import { biggerThanTheXSmallestCombined } from "./stats_utils";
 import { isSelfFed } from "./trait";
 import { createWeightDonationTree, getChildGroupStats, toGroupStats, type GroupStats } from "./weight_donation_tree";
 import { BMI } from "./weight_utils";
@@ -25,7 +26,6 @@ export type OutfitCompletedState = {
 	frame: string;
 	bgFrame: string;
 	donationReceived: number;
-	// weighsAsMuchAsTheXSmallestCharactersCombined: number;
 	mainShape?: Shape;
 	secondaryShape?: Shape;
 	trait: string;
@@ -94,7 +94,7 @@ export function toCompletedState(state: GameState[]): CompletedState {
 	}
 }
 
-export function toGameCompletedState(state: GameState[], gameState: GameState, baseMetadata: GameBaseMetadata[], rootGroupStats : GroupStats) : GameCompletedState {
+export function toGameCompletedState(state: GameState[], gameState: GameState, baseMetadata: GameBaseMetadata[], rootGroupStats: GroupStats): GameCompletedState {
 	const gameMetadata = baseMetadata.find(gameMetadata => gameMetadata.nameSlug === gameState.slug) as GameBaseMetadata;
 	const stats = getChildGroupStats(rootGroupStats, gameState.slug) as GroupStats;
 
@@ -244,7 +244,7 @@ function getBoundOutfitState(state: GameState[], outfitKey: OutfitKey | undefine
 }
 
 
-function getSelfFeedingOutfitDisplayName(character: CharacterState) : string {
+function getSelfFeedingOutfitDisplayName(character: CharacterState): string {
 	const selfFeederOutfits = character.outfits.filter(o => o.trait === 'Self_Feeder');
 	if (selfFeederOutfits.length === 0) {
 		return ""
@@ -255,7 +255,7 @@ function getSelfFeedingOutfitDisplayName(character: CharacterState) : string {
 	})
 }
 
-function getDisplayNameFromOutfitKey(key: OutfitKey | undefined) : string {
+function getDisplayNameFromOutfitKey(key: OutfitKey | undefined): string {
 	if (!key) {
 		return '';
 	}
@@ -272,7 +272,7 @@ export type Omnistate = {
 
 export function donationsToOmnistate(donations: Donation[]): Omnistate {
 	const states = applyDonations(initState(), donations)
-	const lastState = states[states.length-1];
+	const lastState = states[states.length - 1];
 
 	return {
 		states,
@@ -293,4 +293,8 @@ export function getHeaviestOutfitSlug(state: CharacterCompletedState): string {
 	return state.outfits
 		.filter(o => o.unlocked)
 		.sort((a, b) => b.weightInLbs - a.weightInLbs)[0].nameSlug || 'base';
+}
+
+export function weighAsMuchAsTheXSmallest(outfitState: OutfitCompletedState, state: CompletedState): number {
+	return biggerThanTheXSmallestCombined(state.stats.sortedWeightsInLbs, outfitState.weightInLbs);
 }

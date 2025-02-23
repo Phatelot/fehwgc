@@ -1,4 +1,5 @@
-export function biggerThanTheXSmallestCombined(sortedValues: number[], value: number) : number {
+export function biggerThanTheXSmallestCombined(values: number[], value: number) : number {
+	const sortedValues = structuredClone(values).sort((a, b) => a - b)
 	let sum = 0;
 	let i = 0
 	while (sum < value) {

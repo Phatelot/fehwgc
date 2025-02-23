@@ -25,7 +25,7 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 
 	const lowestWeight = outfitStates[0].weightInLbs;
 	const highestWeight = outfitStates[outfitStates.length - 1].weightInLbs;
-	const maxDisplayableWeight = 40 * lowestWeight;
+	const maxDisplayableWeight = 80 * lowestWeight;
 
 	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getBodyPicLink, getChibiPicLink, getTraitPicLink } from "./asset_utils";
     import Box from "./box.svelte";
-    import { getCharacterCompletedState, getOutfitCompletedState, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
+    import { getCharacterCompletedState, getOutfitCompletedState, weighAsMuchAsTheXSmallest, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
     import { donationURL } from "./donation_engine";
     import type { Shape } from "./metadata";
     import { traitNames } from "./trait";
@@ -57,6 +57,7 @@
 	let outfit = getOutfitCompletedState(state, characterSlug, outfitSlug) as OutfitCompletedState;
 
 	const imperialHeight = toImperialHeight(outfit.heightInMeters);
+	const weighsAsMuchAsXSmallestCombined = weighAsMuchAsTheXSmallest(outfit, state);
 
 	let traitSentenceIndex: number;
 	let shapeSentenceIndex: number;
@@ -88,6 +89,10 @@
 
 		if (imperialHeight !== `5'5"`) {
 			sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);
+		}
+
+		if (weighsAsMuchAsXSmallestCombined > 1) {
+			sentences.push(`On her own, she weighs as much as the ${weighsAsMuchAsXSmallestCombined} smallest characters combined.`)
 		}
 
 		shapeSentenceIndex = sentences.length;

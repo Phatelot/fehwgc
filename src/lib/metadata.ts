@@ -4609,6 +4609,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Spring",
                         "outfitSlug": "spring",
                         "secondaryShape": "⌛"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🍎",
+                        "secondaryShape": "💎",
+                        "outfit": "Desert",
+                        "outfitSlug": "desert",
+                        "introducedAfterDonation": 403,
                     }
                 ]
             },
@@ -4624,6 +4632,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "🍎",
+                        "secondaryShape": "🍐",
+                        "outfit": "Desert",
+                        "outfitSlug": "desert",
+                        "introducedAfterDonation": 403,
                     }
                 ]
             },
@@ -5010,6 +5026,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 500.0,
+                        "mainShape": "⌛",
+                        "secondaryShape": "⌛",
+                        "outfit": "Desert",
+                        "outfitSlug": "desert",
+                        "introducedAfterDonation": 403,
                     }
                 ]
             },
@@ -5154,6 +5178,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Winter",
                         "outfitSlug": "winter"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🍎",
+                        "secondaryShape": "💎",
+                        "outfit": "Desert",
+                        "outfitSlug": "desert",
+                        "introducedAfterDonation": 403,
                     }
                 ]
             },

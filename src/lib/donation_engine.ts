@@ -2,7 +2,7 @@ import { stringToRandomNumber } from "./rng";
 import { type CharacterState, type GameState, type Donation, type OutfitState, type BrokenOutfitState, getCharacterState, getGameState, getOutfitState, isOutgrown, totalDonationsForCharacterState, heaviestOutfit, isUnlocked, type OutfitKey, isFattenable, getCurrentOutfitForCharacter, addAdditionalCharactersAndOutfits } from "./state";
 import { isSelfFed, selectTraitFor, selectTraitForBroken } from "./trait";
 
-export const donationURL = "https://ko-fi.com/additionalluggagetake" // wdym this should be defined elsewhere?
+export const donationURL = "https://beacons.ai/ebcartwork" // wdym this should be defined elsewhere?
 
 const UNLOCK_CHARACTER_THRESHOLD_IN_CAD = 120;
 

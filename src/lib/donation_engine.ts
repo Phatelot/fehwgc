@@ -7,12 +7,12 @@ export const donationURL = "https://beacons.ai/ebcartwork" // wdym this should b
 const UNLOCK_CHARACTER_THRESHOLD_IN_CAD = 120;
 
 export function applyDonations(state: GameState[], donations: Donation[]): GameState[][] {
-	const states : GameState[][] = [state];
+	const states: GameState[][] = [state];
 	let donationNumber = 0;
 	for (const donation of donations) {
-		const newState = applyDonation(states[states.length-1], donation, donationNumber);
+		const newState = applyDonation(states[states.length - 1], donation, donationNumber);
 		addAdditionalCharactersAndOutfits(newState, ++donationNumber);
-		if (donationNumber === 402) {
+		if (donationNumber === 402 || donationNumber >= 473) {
 			resetUnlockedStates(newState);
 		}
 		states.push(newState);
@@ -20,7 +20,7 @@ export function applyDonations(state: GameState[], donations: Donation[]): GameS
 	return states;
 }
 
-export function applyDonation(state: GameState[], donation: Donation, donationNumber : number = 0) : GameState[] {
+export function applyDonation(state: GameState[], donation: Donation, donationNumber: number = 0): GameState[] {
 	state = structuredClone(state);
 	const characterState = getCharacterState(state, donation.character);
 	if (donation.outfit === 'undeclared') {
@@ -66,66 +66,66 @@ function applyDonationToOutfit(state: GameState[], characterState: CharacterStat
 		}
 	} else {
 		switch (outfitState.trait) {
-		case "Greedy_Guts":
-			addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold * 2)
-			addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold * 2)
-			break;
-		case "Blob_Bound":
-			addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold * 1.5)
-			addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold * 1.5)
-			applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber)
-			break;
-		case "Generous":
-			addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold * 0.5)
-			addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold * 0.5)
-			applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.4, donationNumber)
-			break;
-		case "Mutual_Gainer":
-			{
-				addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold);
-				addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
-				applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
-				const targetOutfitKey = (outfitState as OutfitState)?.boundTo as OutfitKey;
-				const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
-				const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
-				feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold, donationNumber);
-			}
-			break;
-		case "Bound_Feeder":
-			{
-				addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
-				applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
-				const targetOutfitKey = (outfitState as OutfitState)?.boundTo as OutfitKey;
-				const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
-				const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
-				feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold * 2, donationNumber);
-			}
-			break;
-		case "Chaos_Feeder":
-			{
-				addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
-				applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
-				const possibleTargets = getPossibleBoundTargets(state, false);
-				const targetOutfitKey = possibleTargets[stringToRandomNumber(`${outfitState.slug}${totalDonationsForCharacterState(characterState)}`, possibleTargets.length)]
-				const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
-				const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
-				feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold * 3, donationNumber);
+			case "Greedy_Guts":
+				addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold * 2)
+				addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold * 2)
+				break;
+			case "Blob_Bound":
+				addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold * 1.5)
+				addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold * 1.5)
+				applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber)
+				break;
+			case "Generous":
+				addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold * 0.5)
+				addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold * 0.5)
+				applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.4, donationNumber)
+				break;
+			case "Mutual_Gainer":
+				{
+					addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold);
+					addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
+					applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
+					const targetOutfitKey = (outfitState as OutfitState)?.boundTo as OutfitKey;
+					const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
+					const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
+					feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold, donationNumber);
+				}
+				break;
+			case "Bound_Feeder":
+				{
+					addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
+					applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
+					const targetOutfitKey = (outfitState as OutfitState)?.boundTo as OutfitKey;
+					const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
+					const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
+					feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold * 2, donationNumber);
+				}
+				break;
+			case "Chaos_Feeder":
+				{
+					addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
+					applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
+					const possibleTargets = getPossibleBoundTargets(state, false);
+					const targetOutfitKey = possibleTargets[stringToRandomNumber(`${outfitState.slug}${totalDonationsForCharacterState(characterState)}`, possibleTargets.length)]
+					const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
+					const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
+					feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold * 3, donationNumber);
 
-				const secondaryTargetOutfitKey = (targetOutfitState as OutfitState)?.boundTo;
-				if (secondaryTargetOutfitKey) {
-					const secondaryTargetCharacterState = getCharacterState(state, secondaryTargetOutfitKey.characterSlug);
-					const secondaryTargetOutfitState = getOutfitState(secondaryTargetCharacterState, secondaryTargetOutfitKey.outfitSlug) as OutfitState;
-					if (secondaryTargetOutfitState.trait === 'Mutual_Gainer' || targetOutfitState.trait === 'Mutual_Gainer') {
-						feed(state, secondaryTargetCharacterState, secondaryTargetOutfitState, effectiveDonationAfterUnlockThreshold * 3, donationNumber);
+					const secondaryTargetOutfitKey = (targetOutfitState as OutfitState)?.boundTo;
+					if (secondaryTargetOutfitKey) {
+						const secondaryTargetCharacterState = getCharacterState(state, secondaryTargetOutfitKey.characterSlug);
+						const secondaryTargetOutfitState = getOutfitState(secondaryTargetCharacterState, secondaryTargetOutfitKey.outfitSlug) as OutfitState;
+						if (secondaryTargetOutfitState.trait === 'Mutual_Gainer' || targetOutfitState.trait === 'Mutual_Gainer') {
+							feed(state, secondaryTargetCharacterState, secondaryTargetOutfitState, effectiveDonationAfterUnlockThreshold * 3, donationNumber);
+						}
 					}
 				}
-			}
-			break;
-		default:
-			addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold)
-			addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold)
-			applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
-			break;
+				break;
+			default:
+				addWeightToOutfit(outfitState, effectiveDonationAfterUnlockThreshold)
+				addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold)
+				applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
+				break;
 		}
 	}
 
@@ -154,28 +154,28 @@ function feed(state: GameState[], characterState: CharacterState, outfitState: O
 			addWeightToOutfit(characterState.brokenOutfit, amount * 2);
 		}
 	} else {
-		switch(outfitState.trait) {
-		case 'Bound_Feeder':
-			addWeightToOutfit(characterState.brokenOutfit, amount);
-			const secondaryTargetOutfitKey = (outfitState as OutfitState)?.boundTo;
-			if (secondaryTargetOutfitKey) {
-				const secondaryTargetCharacterState = getCharacterState(state, secondaryTargetOutfitKey.characterSlug);
-				const secondaryTargetOutfitState = getOutfitState(secondaryTargetCharacterState, secondaryTargetOutfitKey.outfitSlug) as OutfitState;
-				feed(state, secondaryTargetCharacterState, secondaryTargetOutfitState, amount * 2, donationNumber);
-			}
-			break;
-		case 'Greedy_Guts':
-			addWeightToOutfit(outfitState, amount * 2);
-			addWeightToOutfit(characterState.brokenOutfit, amount * 2);
-			break;
-		case 'Blob_Bound':
-			addWeightToOutfit(outfitState, amount * 1.5);
-			addWeightToOutfit(characterState.brokenOutfit, amount * 1.5);
-			break;
-		default:
-			addWeightToOutfit(outfitState, amount);
-			addWeightToOutfit(characterState.brokenOutfit, amount);
-			break;
+		switch (outfitState.trait) {
+			case 'Bound_Feeder':
+				addWeightToOutfit(characterState.brokenOutfit, amount);
+				const secondaryTargetOutfitKey = (outfitState as OutfitState)?.boundTo;
+				if (secondaryTargetOutfitKey) {
+					const secondaryTargetCharacterState = getCharacterState(state, secondaryTargetOutfitKey.characterSlug);
+					const secondaryTargetOutfitState = getOutfitState(secondaryTargetCharacterState, secondaryTargetOutfitKey.outfitSlug) as OutfitState;
+					feed(state, secondaryTargetCharacterState, secondaryTargetOutfitState, amount * 2, donationNumber);
+				}
+				break;
+			case 'Greedy_Guts':
+				addWeightToOutfit(outfitState, amount * 2);
+				addWeightToOutfit(characterState.brokenOutfit, amount * 2);
+				break;
+			case 'Blob_Bound':
+				addWeightToOutfit(outfitState, amount * 1.5);
+				addWeightToOutfit(characterState.brokenOutfit, amount * 1.5);
+				break;
+			default:
+				addWeightToOutfit(outfitState, amount);
+				addWeightToOutfit(characterState.brokenOutfit, amount);
+				break;
 		}
 	}
 	updateCharacterStateUnlock(state, characterState, donationNumber);
@@ -189,7 +189,7 @@ function applySpilloverOnGroup(state: GameState[], characterNameSlug: string, gr
 		.forEach(characterStateForSpillOver => {
 			addSpilloverWeightToCharacter(characterStateForSpillOver, spillover)
 			updateCharacterStateUnlock(state, characterStateForSpillOver, donationNumber);
-	})
+		})
 }
 
 function addWeightToOutfit(outfitState: OutfitState | BrokenOutfitState, weightInLbs: number) {
@@ -228,7 +228,7 @@ export function updateCharacterStateUnlock(state: GameState[], characterState: C
 		if (isFattenable(characterState.outfits[i]) && !isOutgrown(characterState.outfits[i])) {
 			break;
 		}
-		const nextOutfit = characterState.outfits[i+1];
+		const nextOutfit = characterState.outfits[i + 1];
 		nextOutfit.unlocked = true
 		if (nextOutfit.trait) {
 			continue;
@@ -288,8 +288,7 @@ export function requiredRemainingAmountToUnlock(character: CharacterState): numb
 	return Math.max(0, UNLOCK_CHARACTER_THRESHOLD_IN_CAD - totalDonationsForCharacterState(character));
 }
 
-
-export function resetUnlockedStates(state: GameState[]) {
+function resetUnlockedStates(state: GameState[]) {
 	state.forEach(gameState => {
 		gameState.characters.forEach(characterState => {
 			const characterIsUnlocked = (totalDonationsForCharacterState(characterState) >= UNLOCK_CHARACTER_THRESHOLD_IN_CAD) || isUnlocked(characterState);

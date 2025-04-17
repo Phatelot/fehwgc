@@ -13,7 +13,7 @@ export function applyDonations(state: GameState[], donations: Donation[]): GameS
 		const newState = applyDonation(states[states.length - 1], donation, donationNumber);
 		addAdditionalCharactersAndOutfits(newState, ++donationNumber);
 		if (donationNumber === 402 || donationNumber >= 473) {
-			resetUnlockedStates(newState);
+			resetUnlockedStates(newState, donationNumber);
 		}
 		states.push(newState);
 	}
@@ -288,7 +288,7 @@ export function requiredRemainingAmountToUnlock(character: CharacterState): numb
 	return Math.max(0, UNLOCK_CHARACTER_THRESHOLD_IN_CAD - totalDonationsForCharacterState(character));
 }
 
-function resetUnlockedStates(state: GameState[]) {
+function resetUnlockedStates(state: GameState[], donationNumber: number) {
 	state.forEach(gameState => {
 		gameState.characters.forEach(characterState => {
 			const characterIsUnlocked = (totalDonationsForCharacterState(characterState) >= UNLOCK_CHARACTER_THRESHOLD_IN_CAD) || isUnlocked(characterState);
@@ -312,6 +312,8 @@ function resetUnlockedStates(state: GameState[]) {
 				nextOutfit.unlocked = true
 				if (nextOutfit.trait) {
 					continue;
+				} else if (donationNumber > 478) {
+					attributeTraitToOutfit(state, characterState, nextOutfit, donationNumber);
 				}
 			}
 		})

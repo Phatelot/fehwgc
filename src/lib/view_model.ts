@@ -25,7 +25,7 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 
 	const lowestWeight = outfitStates[0].weightInLbs;
 	const highestWeight = outfitStates[outfitStates.length - 1].weightInLbs;
-	const maxDisplayableWeight = 80 * lowestWeight;
+	const maxDisplayableWeight = 250 * lowestWeight;
 
 	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;
@@ -113,7 +113,7 @@ export function createBMIOutfitViewModel(state: CompletedState) : BMIOutfitViewM
 
 	const lowestBMI = outfitStates[0].BMI;
 	const highestBMI = outfitStates[outfitStates.length - 1].BMI;
-	const maxDisplayableBMI = 40 * lowestBMI;
+	const maxDisplayableBMI = 280 * lowestBMI;
 
 	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;
@@ -193,7 +193,7 @@ export function createCharacterViewModel(state: CompletedState) : CharacterViewM
 
 	const lowestWeight = (characterStates[0].stats?.totalWeightUnlockedInLbs || 150);
 	const highestWeight = characterStates[characterStates.length - 1].stats?.totalWeightUnlockedInLbs || 150;
-	const maxDisplayableWeight = 40 * lowestWeight;
+	const maxDisplayableWeight = 200 * lowestWeight;
 
 	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;

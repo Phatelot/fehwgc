@@ -1,6 +1,6 @@
 import { addSpilloverWeightToCharacter, attributeTraitToOutfit } from "./donation_engine";
 import { baseMetadata, initialWeightForBuild, type CharacterBaseMetadata, type GameBaseMetadata, getGameMetadata, getCharacterMetadata, type Build } from "./metadata";
-import { selectTraitFor, selectTraitForInitial } from "./trait";
+import { selectTraitForInitial } from "./trait";
 
 export type Donation = {
     character: string;
@@ -74,6 +74,10 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): [CharacterStat
 		return [];
 	}
 
+	const initialWeightForBroken = (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(baseMetadata.nameSlug) >= 0) ?
+		initialWeightForBuild('Giant') :
+		initialWeightInLbs;
+
 	return [{
 		slug: baseMetadata.nameSlug,
 		groupSlug: baseMetadata.group?.slug || 'no_group',
@@ -97,7 +101,7 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): [CharacterStat
 		}),
 		brokenOutfit: {
 			donationReceived: 0,
-			weightInLbs: initialWeightInLbs,
+			weightInLbs: initialWeightForBroken,
 		},
 		spillover: 0,
 	}]

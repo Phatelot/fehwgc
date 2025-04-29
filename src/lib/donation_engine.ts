@@ -304,8 +304,6 @@ function resetUnlockedStates(state: GameState[], donationNumber: number) {
 			for (let i = 0; i < characterState.outfits.length - 1; i++) {
 				const nextOutfit = characterState.outfits[i+1];
 
-				if ("female_alear" === characterState.slug) console.log("IJIJIJIJJI")
-
 				if (isFattenable(characterState.outfits[i]) && !isOutgrown(characterState.outfits[i])) {
 					break;
 				}

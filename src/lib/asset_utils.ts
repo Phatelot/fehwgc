@@ -8,9 +8,13 @@ export function getFramePictureLink(outfitSlug: string) : string {
 	return normalize(import.meta.env.BASE_URL + "/frames/" + toFrameType(outfitSlug) + ".png");
 }
 
-export function getFacePicLink(characterSlug: string, outfitSlug: string) : string {
+export function getFacePicLink(characterSlug: string, outfitSlug: string, broken: boolean) : string {
 	const outfitSuffix = outfitSlug === "base" ? '' : '_' + outfitSlug;
-	return normalize(import.meta.env.BASE_URL + "/characters/" + characterSlug + outfitSuffix + "_face.webp");
+	let result = normalize(import.meta.env.BASE_URL + "/characters/" + characterSlug + outfitSuffix + "_face.webp");
+	if (broken && (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(characterSlug) >= 0)) {
+		result = result.replace('_face', '_face_alt')
+	}
+	return result;
 }
 
 export function getChibiPicLink(characterSlug: string, outfitSlug: string) : string {

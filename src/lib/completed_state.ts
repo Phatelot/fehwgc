@@ -138,9 +138,20 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 	const unlocked = !!characterState.brokenOutfit.trait;
 	const selectedOutfit = characterMetadata.outfits.find(outfit => outfit.outfitSlug === characterState.brokenOutfit.slug)
 
-	const characterHeight = (characterState.slug === 'edelgard' && characterState.brokenOutfit.slug === 'fallen') ?
-		2.54 :
-		characterMetadata.heightInCm / 100.;
+	const characterHeight = (() => {
+		if (characterState.slug === 'edelgard' && characterState.brokenOutfit.slug === 'fallen') {
+			return 2.54;
+		} else if (characterState.slug === 'ena') {
+			return 4.89;
+		} else if (characterState.slug === 'heiorun') {
+			return 3.90;
+		} else if (characterState.slug === 'hraesvelgr') {
+			return 3.16;
+		} else if (characterState.slug === 'niohoggr') {
+			return 4.50;
+		}
+		return characterMetadata.heightInCm / 100.;
+	})();
 
 	return {
 		gameName: gameMetadata.name,
@@ -163,7 +174,7 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 		frame: toFrameType(characterState.slug),
 		bgFrame: gameMetadata.nameSlug,
 		trait: characterState.brokenOutfit.trait || '',
-		build: characterMetadata.build,
+		build: (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(characterState.slug) >= 0) ? 'Giant' : characterMetadata.build,
 		isSelfFeeding: false,
 		selfFedBy: isSelfFed(characterState) ? getSelfFeedingOutfitDisplayName(characterState) : undefined,
 		isBlobBound: false,

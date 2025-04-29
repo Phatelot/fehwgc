@@ -76,9 +76,15 @@
 			return sentences;
 		}
 
-		sentences.push(
-			`In this outfit, she weighs ${formatWeight(outfit.weightInLbs)}lbs and is ${imperialHeight} tall.`,
-		);
+		if (outfit.broken && (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(characterSlug) >= 0)) {
+			sentences.push(
+				`In this outfit, she weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
+			);
+		} else {
+			sentences.push(
+				`In this outfit, she weighs ${formatWeight(outfit.weightInLbs)}lbs and is ${imperialHeight} tall.`,
+			);
+		}
 
 		const bmiCategory = toBMICategory(outfit.BMI);
 		if (bmiCategory === 'underweight') {
@@ -186,6 +192,14 @@
 		height="80%"
 		style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
 	/>
+{:else if outfit.broken && (outfit.characterSlug == 'ena' || outfit.characterSlug == 'heiorun' || outfit.characterSlug == 'hraesvelgr' || outfit.characterSlug == 'niohoggr') }
+	<image
+		xlink:href="{getBodyPicLink(outfit.characterSlug, outfit.nameSlug || '').replace('body', 'body_alt')}"
+		x="6%"
+		y="10%"
+		height="80%"
+		style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
+	/>
 {:else}
 	<image
 		xlink:href="{getBodyPicLink(outfit.characterSlug, outfit.nameSlug || '')}"
@@ -198,6 +212,14 @@
 
 
 {#if outfit.characterSlug == 'edelgard' && outfit.broken && outfit.nameSlug == 'fallen'}
+	<image
+		xlink:href="{getChibiPicLink(outfit.characterSlug, outfit.nameSlug || '').replace('chibi', 'chibi_alt')}"
+		x="58%"
+		y="65%"
+		height="25%"
+		style="{outfit.unlocked ? '' : 'filter: grayscale(1);'}"
+	/>
+{:else if outfit.broken && (outfit.characterSlug == 'ena' || outfit.characterSlug == 'heiorun' || outfit.characterSlug == 'hraesvelgr' || outfit.characterSlug == 'niohoggr') }
 	<image
 		xlink:href="{getChibiPicLink(outfit.characterSlug, outfit.nameSlug || '').replace('chibi', 'chibi_alt')}"
 		x="58%"

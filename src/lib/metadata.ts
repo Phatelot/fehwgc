@@ -823,7 +823,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Harvest",
                         "outfitSlug": "harvest",
                         "secondaryShape": "🟣"
-                    }
+                    },
+                    {
+                        outfit: "Ancient",
+                        outfitSlug: "ancient",
+                        mainShape: "⌛",
+                        secondaryShape: "💎",
+                        outfitWeightThresholdInLb: 500,
+                        introducedAfterDonation: 539,
+                    },
                 ]
             },
             {
@@ -1646,7 +1654,23 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "ballroom"
                     }
                 ]
-            }
+            },
+            {
+                "name": "Nuibaba",
+                "nameSlug": "nuibaba",
+                "heightInCm": 183.0,
+                "build": "Strong",
+                "outfits": [
+                    {
+                        outfit: "Rearmed",
+                        outfitSlug: 'rearmed',
+                        mainShape: "💎",
+                        secondaryShape: "💎",
+                        outfitWeightThresholdInLb: 550,
+                        introducedAfterDonation: 539,
+                    }
+                ]
+            },
         ],
     },
     {
@@ -1686,7 +1710,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "summer",
                         "secondaryShape": "🍐",
                         "introducedAfterDonation": 313
-                    }
+                    },
+                    {
+                        outfit: "Past",
+                        outfitSlug: 'past',
+                        mainShape: "🍐",
+                        secondaryShape: "🍐",
+                        outfitWeightThresholdInLb: 500,
+                        introducedAfterDonation: 539,
+                    },
                 ]
             },
             {
@@ -2433,7 +2465,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "heightInCm": 158.0,
                 "build": 'Petite',
                 "group": fatesRevelationsGroup,
-                // FIXME:
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -4591,7 +4622,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Winter",
                         "outfitSlug": "winter"
-                    }
+                    },
+                    {
+                        outfit: "Emblem",
+                        outfitSlug: "emblem",
+                        mainShape: "🍐",
+                        outfitWeightThresholdInLb: 400,
+                        introducedAfterDonation: 539,
+                    },
                 ]
             },
             {
@@ -4798,7 +4836,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
                         "secondaryShape": "🍐"
-                    }
+                    },
+                    {
+                        "outfit": "35th Anniversary",
+                        "outfitSlug": 'anniversary',
+                        mainShape: "🍎",
+                        secondaryShape: "🟣",
+                        outfitWeightThresholdInLb: 400,
+                        introducedAfterDonation: 539,
+                    },
                 ]
             },
             {
@@ -4983,7 +5029,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "⌛",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                    }
+                    },
+                    {
+                        outfit: 'Fallen',
+                        outfitSlug: 'fallen',
+                        mainShape: "🍎",
+                        secondaryShape: "🍐",
+                        outfitWeightThresholdInLb: 350,
+                        introducedAfterDonation: 539
+                    },
                 ]
             },
             {
@@ -5082,7 +5136,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍎",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                    }
+                    },
+                    {
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
+                        mainShape: "🍐",
+                        secondaryShape: "🍐",
+                        outfitWeightThresholdInLb: 350,
+                        introducedAfterDonation: 539,
+                    },
                 ]
             },
             {
@@ -5258,6 +5320,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Desert",
                         "outfitSlug": "desert",
                         "introducedAfterDonation": 403,
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "🍎",
+                        "secondaryShape": "💎",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
+                        "introducedAfterDonation": 539,
                     }
                 ]
             },
@@ -5535,6 +5605,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Valentine",
                         "outfitSlug": "valentine",
                         introducedAfterDonation: 473,
+                    },
+                    {
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
+                        mainShape: "🍐",
+                        secondaryShape: "🍎",
+                        outfitWeightThresholdInLb: 400,
+                        introducedAfterDonation: 539,
                     },
                 ]
             },

@@ -1,10 +1,14 @@
 export function toFrameType(outfitSlug: string): string {
 	switch (outfitSlug) {
+		case 'anniversary':
+		case 'ancient':
 		case 'ascendant':
 		case 'ascended':
 		case 'beloved_queen':
 		case 'dream':
+		case 'emblem':
 		case 'flame_ascendant':
+		case "past":
 		case "scion":
 			return "Ascended-Dream"
 		case "":

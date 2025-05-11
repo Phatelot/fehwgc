@@ -10,10 +10,14 @@
 		selectgame: {
 			gameSlug: string;
 		};
+		selectmaxdisplayfactor: {
+			factor: number;
+		}
 	}>();
 
 	export let state: CompletedState;
 	export let selectedGameSlug: string;
+	export let maxDisplayFactor: number;
 
 	let selectableGameSlugs = [
 		{
@@ -23,6 +27,12 @@
 		...state.games,
 	]
 	let selectedGameIndex = selectableGameSlugs.findIndex(g => g.nameSlug === selectedGameSlug);
+
+	let selectableMaxDisplayFactors = [
+		5, 10, 20, 50, 100, 200, 300,
+	]
+
+	let maxDisplayFactorIndex = selectableMaxDisplayFactors.findIndex(f => f == maxDisplayFactor);
 
 	const pages = [
 		["OUTFIT_CHART", "Outfit Chart"],
@@ -44,16 +54,32 @@
 		dispatch("selectgame", { gameSlug: selectableGameSlugs[selectedGameIndex].nameSlug })
 	}
 
-	function previousPage() {
+	function previousGame() {
 		selectedGameIndex += selectableGameSlugs.length - 1;
 		selectedGameIndex %= selectableGameSlugs.length;
 		selectGame();
 	}
 
-	function nextPage() {
+	function nextGame() {
 		selectedGameIndex++;
 		selectedGameIndex %= selectableGameSlugs.length;
 		selectGame();
+	}
+
+	function selectMaxDisplayFactor() {
+		dispatch("selectmaxdisplayfactor", {factor: selectableMaxDisplayFactors[maxDisplayFactorIndex]})
+	}
+
+	function previousFactor() {
+		maxDisplayFactorIndex += selectableMaxDisplayFactors.length - 1;
+		maxDisplayFactorIndex %= selectableMaxDisplayFactors.length;
+		selectMaxDisplayFactor();
+	}
+
+	function nextFactor() {
+		maxDisplayFactorIndex++;
+		maxDisplayFactorIndex %= selectableMaxDisplayFactors.length;
+		selectMaxDisplayFactor();
 	}
 </script>
 
@@ -87,15 +113,33 @@
 	Only characters from:
 </text>
 
-<image x="55.6%" y="27%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousPage()}/>
-<rect x="54%" y="24%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousPage()}/>
+<image x="55.6%" y="27%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousGame()}/>
+<rect x="54%" y="24%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousGame()}/>
 
 <text x="60%" y="30%" class="button-label">
 	{selectableGameSlugs[selectedGameIndex].name}
 </text>
 
-<image x="-76.4%" y="27%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextPage()}/>
-<rect x="72%" y="24%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextPage()}/>
+<image x="-76.4%" y="27%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextGame()}/>
+<rect x="72%" y="24%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextGame()}/>
+
+
+
+<Box x={56} y={40} width={20} height={13} />
+
+<text x="56%" y="45%" class="button-label">
+	Maximum factor between smallest and biggest:
+</text>
+
+<image x="55.6%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousFactor()}/>
+<rect x="54%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousFactor()}/>
+
+<text x="60%" y="50%" class="button-label">
+	{selectableMaxDisplayFactors[maxDisplayFactorIndex]}
+</text>
+
+<image x="-76.4%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextFactor()}/>
+<rect x="72%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextFactor()}/>
 
 <style>
 	.button-label {

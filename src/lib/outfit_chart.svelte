@@ -15,8 +15,9 @@
     import Portrait from './portrait.svelte';
 
 	export let state: CompletedState;
+	export let maxDisplayFactor: number;
 
-	let viewModel: OutfitViewModel[][] = createOutfitViewModel(state);
+	let viewModel: OutfitViewModel[][] = createOutfitViewModel(state, maxDisplayFactor);
 	$: page = 0;
 	$: canGoFatter = page > 0;
 	$: canGoThinner = page < viewModel.length - 1;

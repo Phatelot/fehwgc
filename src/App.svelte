@@ -93,6 +93,14 @@
       saveStateToLocalStorage();
     }
 
+    let selectedMaxDisplayFactor: number;
+    $: selectedMaxDisplayFactor = 300;
+
+    function selectMaxDisplayFactor(factor: number) {
+      selectedMaxDisplayFactor = factor;
+      saveStateToLocalStorage();
+    }
+
     function selectOutfit(characterSlug: string, outfitSlug: string) {
       selectedCharacterSlug = characterSlug;
       selectedOutfitSlug = outfitSlug;
@@ -107,6 +115,7 @@
     function saveStateToLocalStorage() {
       localStorage.setItem("fehwgc", JSON.stringify({
         selectedGameSlug,
+        selectedMaxDisplayFactor,
         page,
         selectedCharacterSlug,
         selectedOutfitSlug,
@@ -121,6 +130,7 @@
       const parsedRetrieved = JSON.parse(retrieved);
       page = parsedRetrieved.page;
       selectedGameSlug = parsedRetrieved.selectedGameSlug || 'all';
+      selectedMaxDisplayFactor = parsedRetrieved.selectedMaxDisplayFactor || 300;
       selectedCharacterSlug = parsedRetrieved.selectedCharacterSlug;
       selectedOutfitSlug = parsedRetrieved.selectedOutfitSlug;
     }
@@ -169,15 +179,15 @@
         {/if}
 
         {#if page === 'OUTFIT_CHART'}
-          <OutfitChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <OutfitChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'CHARACTER_CHART'}
-          <CharacterChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+          <CharacterChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else if page === 'CHARACTER_LIST'}
           <CharactersList state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else if page === 'CHANGELOG'}
           <Changelog state="{viewModel}" />
         {:else if page === 'BMI_CHART'}
-          <BmiChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <BmiChart state="{filterCompletedStateByGameSlug(viewModel.completedState, selectedGameSlug)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'GLOBAL_STATS'}
           <GlobalStats state="{viewModel.completedState}" />
         {:else if page === 'UNLOCKOMETER'}
@@ -190,8 +200,10 @@
           <MenuPopup
             state="{viewModel.completedState}"
             selectedGameSlug={selectedGameSlug}
+            maxDisplayFactor={selectedMaxDisplayFactor}
             on:selectpage={(e) => {(page = e.detail.page); saveStateToLocalStorage()}}
             on:selectgame={(e) => {(selectGame(e.detail.gameSlug))}}
+            on:selectmaxdisplayfactor={(e) => {(selectMaxDisplayFactor(e.detail.factor))}}
           />
         {/if}
 

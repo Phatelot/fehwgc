@@ -10,7 +10,7 @@ export const viewPortWidth = 220;
 const maxNumberOfDisplayedCharactersPerLine = 14;
 const maxNumberOfDisplayedLines = 6;
 
-export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[][] {
+export function createOutfitViewModel(state: CompletedState, maxDisplayFactor: number) : OutfitViewModel[][] {
 
 	const outfitStates : OutfitCompletedState[] = state.games
 		.flatMap(game => game.characters)
@@ -25,7 +25,7 @@ export function createOutfitViewModel(state: CompletedState) : OutfitViewModel[]
 
 	const lowestWeight = outfitStates[0].weightInLbs;
 	const highestWeight = outfitStates[outfitStates.length - 1].weightInLbs;
-	const maxDisplayableWeight = 250 * lowestWeight;
+	const maxDisplayableWeight = maxDisplayFactor * lowestWeight;
 
 	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;
@@ -97,7 +97,7 @@ export type OutfitViewModel = {
 	mutualGainingWith?: string;
 }
 
-export function createBMIOutfitViewModel(state: CompletedState) : BMIOutfitViewModel[][] {
+export function createBMIOutfitViewModel(state: CompletedState, maxDisplayFactor: number) : BMIOutfitViewModel[][] {
 
 	const outfitStates : OutfitCompletedState[] = state.games
 		.flatMap(game => game.characters)
@@ -113,7 +113,7 @@ export function createBMIOutfitViewModel(state: CompletedState) : BMIOutfitViewM
 
 	const lowestBMI = outfitStates[0].BMI;
 	const highestBMI = outfitStates[outfitStates.length - 1].BMI;
-	const maxDisplayableBMI = 280 * lowestBMI;
+	const maxDisplayableBMI = maxDisplayFactor * lowestBMI;
 
 	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;
@@ -179,7 +179,7 @@ export type BMIOutfitViewModel = {
 	mutualGainingWith?: string;
 }
 
-export function createCharacterViewModel(state: CompletedState) : CharacterViewModel[][] {
+export function createCharacterViewModel(state: CompletedState, maxDisplayFactor: number) : CharacterViewModel[][] {
 
 	const characterStates : CharacterCompletedState[] = state.games
 		.flatMap(game => game.characters)
@@ -193,7 +193,7 @@ export function createCharacterViewModel(state: CompletedState) : CharacterViewM
 
 	const lowestWeight = (characterStates[0].stats?.totalWeightUnlockedInLbs || 150);
 	const highestWeight = characterStates[characterStates.length - 1].stats?.totalWeightUnlockedInLbs || 150;
-	const maxDisplayableWeight = 200 * lowestWeight;
+	const maxDisplayableWeight = maxDisplayFactor * lowestWeight;
 
 	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
 	const width = 4 * margin;

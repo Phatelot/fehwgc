@@ -23,7 +23,7 @@
 	let character = getCharacterCompletedState(state, characterSlug) as CharacterCompletedState;
 	let outfitsOfCharacter = createOutfitOfCharacterViewModel(character);
 
-	let showOutfits = false;
+	let showOutfits = true;
 
 	const sentences = [
 		`${character.name} is from the game ${character.gameName} (${character.groupName ? 'group: ' + character.groupName : 'not in any group'}).`,

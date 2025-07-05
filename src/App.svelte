@@ -43,6 +43,7 @@
                 "If-None-Match": "",
               },
             });
+            console.log('received gist response (no token)');
             donations = parseCsvData((JSON.parse(await response.text())
               .files['donos.csv']
               ?.content) || '');
@@ -58,6 +59,7 @@
           });
 
           const response = await octokit.request(`GET /gists/${gistId}`);
+          console.log('received gist response (with token)');
           const files = response.data.files;
           const donoFile = (files || {})['donos.csv'];
           const content = donoFile?.content || '';
@@ -69,7 +71,12 @@
           }))
         }
 
+
+        console.log("about to compute omnistate")
         const omnistate = donationsToOmnistate(donations);
+        console.log("omnistate computed")
+
+        console.log(JSON.stringify(omnistate.states.findLast(() => true)))
 
         return omnistate;
       } catch (e) {

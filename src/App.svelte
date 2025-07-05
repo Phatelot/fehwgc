@@ -22,6 +22,10 @@
     import CharactersList from './lib/characters_list.svelte';
 
     async function fetchData(): Promise<Omnistate> {
+
+      throw new Error("test")
+
+
       const now = Math.floor(Date.now() / 1000);
 
       try {

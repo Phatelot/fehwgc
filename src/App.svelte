@@ -75,13 +75,9 @@
           }))
         }
 
-        donations = donations.slice(0, 403) // FIXME: remove this
-
         console.log("about to compute omnistate")
         const omnistate = donationsToOmnistate(donations);
         console.log("omnistate computed")
-
-        console.log(JSON.stringify(omnistate.states.findLast(() => true)))
 
         return omnistate;
       } catch (e) {

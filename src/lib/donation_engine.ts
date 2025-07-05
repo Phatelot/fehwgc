@@ -10,7 +10,7 @@ export function applyDonations(state: GameState[], donations: Donation[]): GameS
 	const states: GameState[][] = [state];
 	let donationNumber = 0;
 	for (const donation of donations) {
-		console.log(`applying donation ${donationNumber} (to ${donation.character})`)
+		console.trace(`applying donation ${donationNumber} (to ${donation.character})`)
 		const newState = applyDonation(states[states.length - 1], donation, donationNumber);
 		addAdditionalCharactersAndOutfits(newState, ++donationNumber);
 		if (donationNumber === 402 || donationNumber >= 473) {

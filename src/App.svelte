@@ -23,7 +23,7 @@
 
     async function fetchData(): Promise<Omnistate> {
 
-      throw new Error("test")
+      // throw new Error("test")
 
 
       const now = Math.floor(Date.now() / 1000);

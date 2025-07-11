@@ -29,7 +29,7 @@
 	let selectedGameIndex = selectableGameSlugs.findIndex(g => g.nameSlug === selectedGameSlug);
 
 	let selectableMaxDisplayFactors = [
-		5, 10, 20, 50, 100, 200, 300,
+		5, 10, 20, 50, 100, 200, 300, 500,
 	]
 
 	let maxDisplayFactorIndex = selectableMaxDisplayFactors.findIndex(f => f == maxDisplayFactor);

@@ -23,9 +23,6 @@
 
     async function fetchData(): Promise<Omnistate> {
 
-      // throw new Error("test")
-
-
       const now = Math.floor(Date.now() / 1000);
 
       try {
@@ -102,7 +99,7 @@
     }
 
     let selectedMaxDisplayFactor: number;
-    $: selectedMaxDisplayFactor = 300;
+    $: selectedMaxDisplayFactor = 500;
 
     function selectMaxDisplayFactor(factor: number) {
       selectedMaxDisplayFactor = factor;
@@ -138,7 +135,7 @@
       const parsedRetrieved = JSON.parse(retrieved);
       page = parsedRetrieved.page;
       selectedGameSlug = parsedRetrieved.selectedGameSlug || 'all';
-      selectedMaxDisplayFactor = parsedRetrieved.selectedMaxDisplayFactor || 300;
+      selectedMaxDisplayFactor = parsedRetrieved.selectedMaxDisplayFactor || 500;
       selectedCharacterSlug = parsedRetrieved.selectedCharacterSlug;
       selectedOutfitSlug = parsedRetrieved.selectedOutfitSlug;
     }

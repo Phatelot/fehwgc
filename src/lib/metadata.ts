@@ -293,7 +293,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Summer",
                         "outfitSlug": "summer"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🍐",
+                        "outfit": "Grima",
+                        outfitSlug: "grima",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -562,7 +569,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "ninja",
                         "secondaryShape": "🍎",
                         "introducedAfterDonation": 269
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "🍐",
+                        secondaryShape: "🍐",
+                        "outfit": "Attuned",
+                        outfitSlug: "attuned",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -905,7 +920,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ninja",
                         "outfitSlug": "ninja",
                         "introducedAfterDonation": 313
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "💎",
+                        secondaryShape: "💎",
+                        "outfit": "Rearmed",
+                        outfitSlug: "rearmed",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -1790,7 +1813,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Bride",
                         "outfitSlug": "bride",
                         "secondaryShape": "🟣"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 500.0,
+                        "mainShape": "🍎",
+                        secondaryShape: "🍎",
+                        "outfit": "Summer",
+                        outfitSlug: "summer",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -2704,7 +2735,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
                         "secondaryShape": "🍎"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "🟣",
+                        "outfit": "Meliai",
+                        outfitSlug: "meliai",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -3560,7 +3598,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "new_year",
                         "secondaryShape": "🍎",
                         "introducedAfterDonation": 313
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 600.0,
+                        "mainShape": "🍎",
+                        secondaryShape: "💎",
+                        "outfit": "Summer",
+                        outfitSlug: "summer",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -3654,7 +3700,23 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍎"
                     }
                 ]
-            }
+            },
+            {
+                name: "Heimdallr",
+                nameSlug: "heimdallr",
+                build: "Regular",
+                heightInCm: 171.0,
+                group: heroesBook68Group,
+                outfits: [
+                    {
+                        "outfitWeightThresholdInLb": 600.0,
+                        "mainShape": "🟣",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        introducedAfterDonation: 602
+                    },
+                ]
+            },
         ],
     },
     {
@@ -3880,7 +3942,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Armored",
                         "outfitSlug": "armored"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 450.0,
+                        "mainShape": "🍐",
+                        secondaryShape: "⌛",
+                        "outfit": "Bride",
+                        outfitSlug: "bride",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -3942,7 +4012,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Scion",
                         "outfitSlug": "scion",
                         "secondaryShape": "🟣"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 600.0,
+                        "mainShape": "🍎",
+                        secondaryShape: "🍎",
+                        "outfit": "Bride",
+                        outfitSlug: "bride",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -3992,7 +4070,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ballroom",
                         "outfitSlug": "ballroom",
                         "secondaryShape": "🍎"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 450.0,
+                        "mainShape": "🍐",
+                        secondaryShape: "🍐",
+                        "outfit": "Bride",
+                        outfitSlug: "bride",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -4132,7 +4218,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Devoted",
                         "outfitSlug": "devoted",
                         "secondaryShape": "🍎"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "💎",
+                        secondaryShape: "🍎",
+                        "outfit": "Resplendent",
+                        outfitSlug: "resplendent",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -4968,7 +5062,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Spring",
                         "outfitSlug": "spring",
                         "secondaryShape": "🍎"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 250.0,
+                        "mainShape": "⌛",
+                        "outfit": "Summer",
+                        outfitSlug: "summer",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -5722,7 +5823,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🍐",
+                        secondaryShape: "🍐",
+                        "outfit": "Summer",
+                        outfitSlug: "summer",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {
@@ -5737,7 +5846,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "⌛",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🟣",
+                        "outfit": "Summer",
+                        outfitSlug: "summer",
+                        introducedAfterDonation: 602,
+                    },
                 ]
             },
             {

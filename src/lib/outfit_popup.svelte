@@ -7,7 +7,7 @@
     import { traitNames } from "./trait";
     import { formatMoney } from "./utils";
     import { viewPortWidth } from "./view_model";
-    import { formatBMI, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
+    import { formatBMI, formatPercentage, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
 
 	import appleLink from '/src/assets/shapes/apple.png'
 	import circleLink from '/src/assets/shapes/circle.png'
@@ -103,7 +103,7 @@
 
 		const weightTotalPercentage = (outfit.weightInLbs * 100)/state.stats.totalWeightUnlockedInLbs
 		if (weightTotalPercentage >= 0.1) {
-			sentences.push(`She accounts for ${formatBMI(weightTotalPercentage)}% of the total weight of all outfits.`)
+			sentences.push(`She accounts for ${formatPercentage(weightTotalPercentage)}% of the total weight of all outfits.`)
 		}
 
 		shapeSentenceIndex = sentences.length;

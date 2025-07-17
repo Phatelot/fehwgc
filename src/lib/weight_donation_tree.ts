@@ -9,6 +9,13 @@ export type WeightDonationNode = {
 	leafs: WeightDonationNode[];
 }
 
+function donationReceivedIfBlob(node: WeightDonationNode): number {
+	if (node.weightInLbs && node.weightInLbs > BLOB_WEIGHT_THRESHOLD_LBS) {
+		return node.donationReceived || 0;
+	}
+	return 0;
+}
+
 export function createWeightDonationTree(state: GameState[]) : WeightDonationNode {
 	return {
 		slug: 'root', // unused anyway
@@ -52,6 +59,8 @@ function fromOutfitState(state: OutfitState) : WeightDonationNode {
 	}
 }
 
+export const BLOB_WEIGHT_THRESHOLD_LBS = 3_000; // yeah that's a lot
+
 export type GroupStats = {
 	slug: string;
 	totalDonationReceived: number;
@@ -60,6 +69,10 @@ export type GroupStats = {
 	totalWeightUnlockedInLbs: number;
 	averageWeightUnlockedInLbs: number;
 	medianWeightUnlockedInLbs: number;
+	totalDonationReceivedForBlobs: number;
+	totalWeightUnlockedInLbsForBlobs: number;
+	averageWeightUnlockedInLbsForBlobs: number;
+	medianWeightUnlockedInLbsForBlobs: number;
 	isUnlocked: boolean;
 }
 
@@ -72,15 +85,20 @@ export function toGroupStats(tree: WeightDonationNode) : GroupStats {
 		weightsInLbs.push(tree.weightInLbs);
 	}
 	const sortedWeightsInLbs = weightsInLbs.filter(w => w !== 0).sort((a, b) => a - b);
+	const sortedBlobWeightsInLbs = sortedWeightsInLbs.filter(w => w >= BLOB_WEIGHT_THRESHOLD_LBS);
 
 	return {
 		slug: tree.slug,
 		totalDonationReceived: (tree.donationReceived || 0) + sum(leafGroupStats.map(stats => stats.totalDonationReceived)),
+		totalDonationReceivedForBlobs: (donationReceivedIfBlob(tree)) + sum(leafGroupStats.map(stats => stats.totalDonationReceivedForBlobs)),
 		sortedWeightsInLbs: sortedWeightsInLbs,
 		leafs: leafGroupStats,
 		totalWeightUnlockedInLbs: sum(sortedWeightsInLbs),
 		averageWeightUnlockedInLbs: average(sortedWeightsInLbs),
 		medianWeightUnlockedInLbs: median(sortedWeightsInLbs),
+		totalWeightUnlockedInLbsForBlobs: sum(sortedBlobWeightsInLbs),
+		averageWeightUnlockedInLbsForBlobs: average(sortedBlobWeightsInLbs),
+		medianWeightUnlockedInLbsForBlobs: median(sortedBlobWeightsInLbs),
 		isUnlocked: tree.isUnlocked,
 	}
 }

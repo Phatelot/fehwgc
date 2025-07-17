@@ -9,6 +9,10 @@ export function formatBMI(BMI: number) : string {
     return bmiFormatter.format(BMI).replaceAll(',','')
 }
 
+export function formatPercentage(percentage: number) : string {
+    return bmiFormatter.format(percentage).replaceAll(',','')
+}
+
 export function BMI(heightInMeters: number, weightInLbs: number) : number {
 	return weightInLbs * 0.453 / heightInMeters / heightInMeters;
 }

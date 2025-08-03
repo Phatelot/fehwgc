@@ -61,6 +61,7 @@
 
 	let traitSentenceIndex: number;
 	let shapeSentenceIndex: number;
+	let locatorSentenceIndex: number;
 
 	function createSentences(): string[] {
 		const sentences = [
@@ -75,6 +76,9 @@
 			}
 			return sentences;
 		}
+
+		locatorSentenceIndex = sentences.length;
+		sentences.push(`See her on the spread`);
 
 		if (outfit.broken && (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(characterSlug) >= 0)) {
 			sentences.push(
@@ -245,6 +249,8 @@
 			<tspan bind:this={traitTextElement} id="sentence-{i}" x="36%" dy="4%">{sentence}</tspan>
 		{:else if i == shapeSentenceIndex}
 			<tspan bind:this={shapeTextElement} id="sentence-{i}" x="36%" dy="4%">{sentence}</tspan>
+		{:else if i == locatorSentenceIndex}
+			<tspan x="36%" dy="4%"><a class="link-locator-link" href={`https://phatelot.github.io/fehwgc-locator/#/?cs=${outfit.characterSlug}_${outfit.broken ? 'broken': outfit.nameSlug}`}>{sentence}</a></tspan>
 		{:else}
 			<tspan x="36%" dy="4%">{sentence}</tspan>
 		{/if}
@@ -308,6 +314,11 @@
 	.button-label {
 		fill: white;
 		font-size: 3px;
+	}
+
+	.link-locator-link {
+		fill: blue;
+		text-decoration: underline;
 	}
 
 	.link-tree-link {

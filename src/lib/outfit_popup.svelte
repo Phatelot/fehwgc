@@ -21,6 +21,9 @@
 		selectcharacter: {
 			characterSlug: string,
 		},
+		selectshape: {
+			shape: string;
+		};
 	}>();
 
 	export let characterSlug: string;
@@ -173,6 +176,11 @@
 
 	let sentences = createSentences();
 
+	function selectShape() {
+		dispatch("selectshape", { shape: (outfit.mainShape || '') + (outfit.secondaryShape || '') })
+		close();
+	}
+
 	function close() {
 		dispatch('close', {})
 	}
@@ -267,6 +275,7 @@
 				y="{18.5 + i * 4}%"
 				height="5%"
 			/>
+			<rect x="{36 + shapeTextWidthPercent}%" y="{18.5 + i * 4}%" height="5%" width="2.2%" fill="#ae2f29" opacity='0' on:click={() => selectShape()}/>
 		{/if}
 		{#if outfit.secondaryShape}
 			<image
@@ -275,6 +284,7 @@
 				y="{18.5 + i * 4}%"
 				height="5%"
 			/>
+			<rect x="{38 + shapeTextWidthPercent}%" y="{18.5 + i * 4}%" height="5%" width="2.2%" fill="#ae2f29" opacity='0' on:click={() => selectShape()}/>
 		{/if}
 	{/if}
 

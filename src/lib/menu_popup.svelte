@@ -10,13 +10,17 @@
 		selectgame: {
 			gameSlug: string;
 		};
+		selectshape: {
+			shape: string;
+		};
 		selectmaxdisplayfactor: {
 			factor: number;
-		}
+		};
 	}>();
 
 	export let state: CompletedState;
 	export let selectedGameSlug: string;
+	export let selectedShape: string;
 	export let maxDisplayFactor: number;
 
 	let selectableGameSlugs = [
@@ -27,6 +31,20 @@
 		...state.games,
 	]
 	let selectedGameIndex = selectableGameSlugs.findIndex(g => g.nameSlug === selectedGameSlug);
+
+	const shapes = state.games
+		.flatMap(g => g.characters)
+		.flatMap(c => c.outfits)
+		.map(o => (o.mainShape || '') + (o.secondaryShape || ''))
+		.filter(s => !!s)
+		.filter((item, index, array) => array.indexOf(item) === index)
+		.sort();
+
+	let selectableShapes = [
+		'All',
+		...shapes,
+	]
+	let selectedShapeIndex = selectableShapes.indexOf(selectedShape);
 
 	let selectableMaxDisplayFactors = [
 		5, 10, 20, 50, 100, 200, 300, 500,
@@ -64,6 +82,22 @@
 		selectedGameIndex++;
 		selectedGameIndex %= selectableGameSlugs.length;
 		selectGame();
+	}
+
+	function selectShape() {
+		dispatch("selectshape", { shape: selectableShapes[selectedShapeIndex] })
+	}
+
+	function previousShape() {
+		selectedShapeIndex += selectableShapes.length - 1;
+		selectedShapeIndex %= selectableShapes.length;
+		selectShape();
+	}
+
+	function nextShape() {
+		selectedShapeIndex++;
+		selectedShapeIndex %= selectableShapes.length;
+		selectShape();
 	}
 
 	function selectMaxDisplayFactor() {
@@ -128,18 +162,35 @@
 <Box x={56} y={40} width={20} height={13} />
 
 <text x="56%" y="45%" class="button-label">
+	Only characters with shape:
+</text>
+
+<image x="55.6%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousShape()}/>
+<rect x="54%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousShape()}/>
+
+<text x="60%" y="50%" class="button-label">
+	{selectableShapes[selectedShapeIndex]}
+</text>
+
+<image x="-76.4%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextShape()}/>
+<rect x="72%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextShape()}/>
+
+
+<Box x={56} y={60} width={20} height={13} />
+
+<text x="56%" y="65%" class="button-label">
 	Maximum factor between smallest and biggest:
 </text>
 
-<image x="55.6%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousFactor()}/>
-<rect x="54%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousFactor()}/>
+<image x="55.6%" y="67%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousFactor()}/>
+<rect x="54%" y="64%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousFactor()}/>
 
-<text x="60%" y="50%" class="button-label">
+<text x="60%" y="70%" class="button-label">
 	{selectableMaxDisplayFactors[maxDisplayFactorIndex]}
 </text>
 
-<image x="-76.4%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextFactor()}/>
-<rect x="72%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextFactor()}/>
+<image x="-76.4%" y="67%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextFactor()}/>
+<rect x="72%" y="64%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextFactor()}/>
 
 <style>
 	.button-label {

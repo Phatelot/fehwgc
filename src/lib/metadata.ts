@@ -2017,7 +2017,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "ninja",
                         "secondaryShape": "🟣",
                         "introducedAfterDonation": 269
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 600,
+                        "mainShape": "🍎",
+                        "secondaryShape": "🟣",
+                        "outfit": "Maid",
+                        "outfitSlug": "maid",
+                        "introducedAfterDonation": 652,
+                    },
                 ]
             },
             {
@@ -2594,7 +2602,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ice Tribe",
                         "outfitSlug": "ice_tribe",
                         "secondaryShape": "⌛"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300,
+                        "mainShape": "🍐",
+                        "secondaryShape": "🍎",
+                        "outfit": "Resplendent",
+                        "outfitSlug": "resplendent",
+                        "introducedAfterDonation": 652,
+                    },
                 ]
             },
             {
@@ -3622,7 +3638,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Base",
                         "outfitSlug": "base",
                         "introducedAfterDonation": 269,
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 550,
+                        "mainShape": "⌛",
+                        "secondaryShape": "🟣",
+                        "outfit": "Brave",
+                        "outfitSlug": "brave",
+                        "introducedAfterDonation": 652,
+                    },
                 ]
             },
             {
@@ -3716,6 +3740,23 @@ export const baseMetadata: GameBaseMetadata[] = [
                         introducedAfterDonation: 602
                     },
                 ]
+            },
+            {
+                "name": "Vali",
+                "nameSlug": "vali",
+                "heightInCm": 155,
+                "build": "Regular",
+                group: heroesBook68Group,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 700,
+                        "mainShape": "🍐",
+                        "secondaryShape": "🟣",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        "introducedAfterDonation": 652,
+                    },
+                ],
             },
         ],
     },
@@ -4146,7 +4187,23 @@ export const baseMetadata: GameBaseMetadata[] = [
                         introducedAfterDonation: 313
                     }
                 ]
-            }
+            },
+            {
+                "name": "Lana",
+                "nameSlug": "lana",
+                "heightInCm": 152,
+                "build": "Petite",
+                group: heroesBook68Group,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 550,
+                        "mainShape": "💎",
+                        "outfit": "Bride",
+                        "outfitSlug": "bride",
+                        "introducedAfterDonation": 652,
+                    },
+                ],
+            },
         ],
     },
     {
@@ -5360,7 +5417,39 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "resplendent"
                     }
                 ]
-            }
+            },
+            {
+                "name": "Machyua",
+                "nameSlug": "machyua",
+                "heightInCm": 175,
+                "build": "Regular",
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 500,
+                        "mainShape": "🟣",
+                        "secondaryShape": "🍐",
+                        "outfit": "Rearmed",
+                        "outfitSlug": "rearmed",
+                        "introducedAfterDonation": 652,
+                    },
+                ],
+            },
+            {
+                "name": "Linoan",
+                "nameSlug": "linoan",
+                "heightInCm": 182,
+                "build": "Regular",
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 450,
+                        "mainShape": "💎",
+                        "secondaryShape": "⌛",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        "introducedAfterDonation": 652,
+                    },
+                ],
+            },
         ],
     },
     {
@@ -5918,7 +6007,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Summer",
                         "outfitSlug": "summer",
                         "secondaryShape": "🍎"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 500,
+                        "mainShape": "💎",
+                        "secondaryShape": "🍎",
+                        "outfit": "Maid",
+                        "outfitSlug": "maid",
+                        "introducedAfterDonation": 652,
+                    },
                 ]
             },
             {

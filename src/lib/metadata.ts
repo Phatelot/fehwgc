@@ -4193,7 +4193,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "lana",
                 "heightInCm": 152,
                 "build": "Petite",
-                group: heroesBook68Group,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 550,

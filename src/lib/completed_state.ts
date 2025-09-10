@@ -74,13 +74,17 @@ export type CompletedState = {
 	stats: GroupStats;
 }
 
-export function applyFilter(completedState: CompletedState, gameSlug: string, shape: string): CompletedState {
-	if (gameSlug === 'all' && shape == 'All') {
+export function applyFilter(completedState: CompletedState, gameSlug: string, shape: string, trait: string): CompletedState {
+	if (gameSlug === 'all' && shape == 'All' && trait == 'All') {
 		return completedState;
 	}
 
 	let games = structuredClone(completedState.games.filter(g => (g.nameSlug === gameSlug) || gameSlug === 'all'));
-	games.forEach(g => g.characters.forEach(c => removeOtherShapes(c, shape)))
+	games.forEach(g => g.characters.forEach(c => {
+			removeOtherShapes(c, shape);
+			removeOtherTraits(c, trait);
+		}
+	))
 
 	return {
 		...completedState,
@@ -94,6 +98,14 @@ function removeOtherShapes(character: CharacterCompletedState, shape: string) {
 	}
 
 	character.outfits = character.outfits.filter(o => ((o.mainShape || '') + (o.secondaryShape || '')) === shape)
+}
+
+function removeOtherTraits(character: CharacterCompletedState, trait: string) {
+	if (trait == 'All') {
+		return;
+	}
+
+	character.outfits = character.outfits.filter(o => (o.trait === trait))
 }
 
 export function toCompletedState(state: GameState[]): CompletedState {

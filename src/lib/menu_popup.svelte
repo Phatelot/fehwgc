@@ -13,6 +13,9 @@
 		selectshape: {
 			shape: string;
 		};
+		selecttrait: {
+			trait: string;
+		};
 		selectmaxdisplayfactor: {
 			factor: number;
 		};
@@ -21,6 +24,7 @@
 	export let state: CompletedState;
 	export let selectedGameSlug: string;
 	export let selectedShape: string;
+	export let selectedTrait: string;
 	export let maxDisplayFactor: number;
 
 	let selectableGameSlugs = [
@@ -45,6 +49,20 @@
 		...shapes,
 	]
 	let selectedShapeIndex = selectableShapes.indexOf(selectedShape);
+
+	const traits = state.games
+		.flatMap(g => g.characters)
+		.flatMap(c => c.outfits)
+		.map(o => o.trait)
+		.filter(s => !!s)
+		.filter((item, index, array) => array.indexOf(item) === index)
+		.sort();
+
+	let selectableTraits = [
+		'All',
+		...traits,
+	];
+	let selectedTraitIndex = selectableTraits.indexOf(selectedTrait);
 
 	let selectableMaxDisplayFactors = [
 		5, 10, 20, 50, 100, 200, 300, 500,
@@ -100,6 +118,22 @@
 		selectShape();
 	}
 
+	function selectTrait() {
+		dispatch("selecttrait", { trait: selectableTraits[selectedTraitIndex] })
+	}
+
+	function previousTrait() {
+		selectedTraitIndex += selectableTraits.length - 1;
+		selectedTraitIndex %= selectableTraits.length;
+		selectTrait();
+	}
+
+	function nextTrait() {
+		selectedTraitIndex++;
+		selectedTraitIndex %= selectableTraits.length;
+		selectTrait();
+	}
+
 	function selectMaxDisplayFactor() {
 		dispatch("selectmaxdisplayfactor", {factor: selectableMaxDisplayFactors[maxDisplayFactorIndex]})
 	}
@@ -141,56 +175,72 @@
 	>
 {/each}
 
-<Box x={56} y={20} width={20} height={13} />
+<Box x={56} y={15} width={20} height={13} />
 
-<text x="56%" y="25%" class="button-label">
+<text x="56%" y="20%" class="button-label">
 	Only characters from:
 </text>
 
-<image x="55.6%" y="27%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousGame()}/>
-<rect x="54%" y="24%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousGame()}/>
+<image x="55.6%" y="22%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousGame()}/>
+<rect x="54%" y="19%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousGame()}/>
 
-<text x="60%" y="30%" class="button-label">
+<text x="60%" y="25%" class="button-label">
 	{selectableGameSlugs[selectedGameIndex].name}
 </text>
 
-<image x="-76.4%" y="27%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextGame()}/>
-<rect x="72%" y="24%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextGame()}/>
+<image x="-76.4%" y="22%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextGame()}/>
+<rect x="72%" y="19%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextGame()}/>
 
 
+<Box x={56} y={31} width={20} height={13} />
 
-<Box x={56} y={40} width={20} height={13} />
-
-<text x="56%" y="45%" class="button-label">
+<text x="56%" y="36%" class="button-label">
 	Only characters with shape:
 </text>
 
-<image x="55.6%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousShape()}/>
-<rect x="54%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousShape()}/>
+<image x="55.6%" y="38%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousShape()}/>
+<rect x="54%" y="35%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousShape()}/>
 
-<text x="60%" y="50%" class="button-label">
+<text x="60%" y="41%" class="button-label">
 	{selectableShapes[selectedShapeIndex]}
 </text>
 
-<image x="-76.4%" y="47%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextShape()}/>
-<rect x="72%" y="44%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextShape()}/>
+<image x="-76.4%" y="38%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextShape()}/>
+<rect x="72%" y="35%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextShape()}/>
 
 
-<Box x={56} y={60} width={20} height={13} />
+<Box x={56} y={47} width={20} height={13} />
 
-<text x="56%" y="65%" class="button-label">
-	Maximum factor between smallest and biggest:
+<text x="56%" y="52%" class="button-label">
+	Only characters with trait:
 </text>
 
-<image x="55.6%" y="67%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousFactor()}/>
-<rect x="54%" y="64%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousFactor()}/>
+<image x="55.6%" y="54%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousTrait()}/>
+<rect x="54%" y="51%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousTrait()}/>
 
-<text x="60%" y="70%" class="button-label">
+<text x="60%" y="57%" class="button-label">
+	{selectableTraits[selectedTraitIndex]}
+</text>
+
+<image x="-76.4%" y="54%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextTrait()}/>
+<rect x="72%" y="41%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextTrait()}/>
+
+
+<Box x={56} y={77} width={20} height={13} />
+
+<text x="56%" y="82%" class="button-label">
+	Max. factor between smallest and biggest:
+</text>
+
+<image x="55.6%" y="84%" height="3%" xlink:href="{arrowSvg}" transform='scale(1, 1)' on:click={() => previousFactor()}/>
+<rect x="54%" y="81%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousFactor()}/>
+
+<text x="60%" y="87%" class="button-label">
 	{selectableMaxDisplayFactors[maxDisplayFactorIndex]}
 </text>
 
-<image x="-76.4%" y="67%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextFactor()}/>
-<rect x="72%" y="64%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextFactor()}/>
+<image x="-76.4%" y="84%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextFactor()}/>
+<rect x="72%" y="71%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextFactor()}/>
 
 <style>
 	.button-label {

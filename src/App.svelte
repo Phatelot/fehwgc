@@ -106,6 +106,14 @@
       saveStateToLocalStorage();
     }
 
+    let selectedTrait: string;
+    $: selectedTrait = 'All';
+
+    function selectTrait(trait: string) {
+      selectedTrait = trait;
+      saveStateToLocalStorage();
+    }
+
     let selectedMaxDisplayFactor: number;
     $: selectedMaxDisplayFactor = 500;
 
@@ -129,6 +137,7 @@
       localStorage.setItem("fehwgc", JSON.stringify({
         selectedGameSlug,
         selectedShape,
+        selectedTrait,
         selectedMaxDisplayFactor,
         page,
         selectedCharacterSlug,
@@ -145,6 +154,7 @@
       page = parsedRetrieved.page;
       selectedGameSlug = parsedRetrieved.selectedGameSlug || 'all';
       selectedShape = parsedRetrieved.selectedShape || 'All';
+      selectedTrait = parsedRetrieved.selectedTrait || 'All';
       selectedMaxDisplayFactor = parsedRetrieved.selectedMaxDisplayFactor || 500;
       selectedCharacterSlug = parsedRetrieved.selectedCharacterSlug;
       selectedOutfitSlug = parsedRetrieved.selectedOutfitSlug;
@@ -194,21 +204,21 @@
         {/if}
 
         {#if page === 'OUTFIT_CHART'}
-          {#key selectedGameSlug + selectedShape}
-            <OutfitChart state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          {#key selectedGameSlug + selectedShape + selectedTrait}
+            <OutfitChart state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape, selectedTrait)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
           {/key}
         {:else if page === 'CHARACTER_CHART'}
-          <CharacterChart state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+          <CharacterChart state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape, selectedTrait)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else if page === 'CHARACTER_LIST'}
-          <CharactersList state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape)}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
+          <CharactersList state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape, selectedTrait)}" on:selectcharacter={(e) => selectCharacter(e.detail.characterSlug)}/>
         {:else if page === 'CHANGELOG'}
           <Changelog state="{viewModel}" />
         {:else if page === 'BMI_CHART'}
-          <BmiChart state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <BmiChart state="{applyFilter(viewModel.completedState, selectedGameSlug, selectedShape, selectedTrait)}" maxDisplayFactor="{selectedMaxDisplayFactor}" on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'GLOBAL_STATS'}
           <GlobalStats state="{viewModel.completedState}" />
         {:else if page === 'UNLOCKOMETER'}
-          <Unlockometer state={applyFilter(viewModel.completedState, selectedGameSlug, selectedShape)} on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
+          <Unlockometer state={applyFilter(viewModel.completedState, selectedGameSlug, selectedShape, selectedTrait)} on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else if page === 'RULES'}
           <Rules />
         {:else if page === 'TRAITS'}
@@ -218,10 +228,12 @@
             state="{viewModel.completedState}"
             selectedGameSlug={selectedGameSlug}
             selectedShape={selectedShape}
+            selectedTrait={selectedTrait}
             maxDisplayFactor={selectedMaxDisplayFactor}
             on:selectpage={(e) => {(page = e.detail.page); saveStateToLocalStorage()}}
             on:selectgame={(e) => {(selectGame(e.detail.gameSlug))}}
             on:selectshape={(e) => {(selectShape(e.detail.shape))}}
+            on:selecttrait={(e) => {(selectTrait(e.detail.trait))}}
             on:selectmaxdisplayfactor={(e) => {(selectMaxDisplayFactor(e.detail.factor))}}
           />
         {/if}
@@ -233,6 +245,7 @@
             state="{viewModel.completedState}"
             on:selectcharacter={(e) => {(selectedCharacterSlug = e.detail.characterSlug); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
             on:selectshape={(e) => {(selectShape(e.detail.shape))}}
+            on:selecttrait={(e) => {(selectTrait(e.detail.trait))}}
             on:close={() => {(selectedCharacterSlug = null); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
           />
         {:else if !!selectedCharacterSlug}

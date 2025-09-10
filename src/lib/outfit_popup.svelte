@@ -24,6 +24,9 @@
 		selectshape: {
 			shape: string;
 		};
+		selecttrait: {
+			trait: string;
+		};
 	}>();
 
 	export let characterSlug: string;
@@ -181,6 +184,11 @@
 		close();
 	}
 
+	function selectTrait() {
+		dispatch("selecttrait", { trait: outfit.trait })
+		close();
+	}
+
 	function close() {
 		dispatch('close', {})
 	}
@@ -289,12 +297,13 @@
 	{/if}
 
 	{#if i == traitSentenceIndex}
-	<image
-		xlink:href="{getTraitPicLink(outfit.trait)}"
-		x="{36 + traitTextWidthPercent}%"
-		y="{18 + i *4}%"
-		height="7%"
-	/>
+		<image
+			xlink:href="{getTraitPicLink(outfit.trait)}"
+			x="{36 + traitTextWidthPercent}%"
+			y="{18 + i *4}%"
+			height="7%"
+		/>
+		<rect x="{36 + traitTextWidthPercent}%" y="{18.5 + i * 4}%" height="7%" width="3%" fill="#ae2f29" opacity='0' on:click={() => selectTrait()}/>
 	{/if}
 {/each}
 

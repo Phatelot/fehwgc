@@ -3,6 +3,7 @@
 	import Box from "./box.svelte";
 	import { createEventDispatcher } from "svelte";
 	import type { CompletedState } from "./completed_state";
+    import { traitNames } from './trait';
 	const dispatch = createEventDispatcher<{
 		selectpage: {
 			page: string;
@@ -134,6 +135,15 @@
 		selectTrait();
 	}
 
+	function resetFilters() {
+		selectedGameIndex = 0;
+		selectGame();
+		selectedShapeIndex = 0;
+		selectShape();
+		selectedTraitIndex = 0;
+		selectTrait();
+	}
+
 	function selectMaxDisplayFactor() {
 		dispatch("selectmaxdisplayfactor", {factor: selectableMaxDisplayFactors[maxDisplayFactorIndex]})
 	}
@@ -219,11 +229,33 @@
 <rect x="54%" y="51%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => previousTrait()}/>
 
 <text x="60%" y="57%" class="button-label">
-	{selectableTraits[selectedTraitIndex]}
+	{selectedTraitIndex === 0 ? 'All' : traitNames[selectableTraits[selectedTraitIndex]]}
 </text>
 
 <image x="-76.4%" y="54%" height="3%" xlink:href="{arrowSvg}" transform='scale(-1, 1)' on:click={() => nextTrait()}/>
 <rect x="72%" y="41%" height="9%" width="5.8%" fill="#ae2f29" opacity='0' on:click={() => nextTrait()}/>
+
+
+	<rect
+		x="58.5%"
+		y="62.5%"
+		height="4.6%"
+		width="15%"
+		rx="1px"
+		ry="1px"
+		stroke="#aeffff"
+		stroke-width="0.4"
+		stroke-linecap="round"
+		fill="#004858"
+		on:click={() => resetFilters()}
+	></rect>
+	<text
+		x="61.7%"
+		y="66%"
+		class="button-label"
+		on:click={() => resetFilters()}>Reset filters</text
+	>
+
 
 
 <Box x={56} y={77} width={20} height={13} />

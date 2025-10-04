@@ -348,6 +348,8 @@ export function createOutfitOfCharacterViewModel(state: CharacterCompletedState)
 					return ((previousOutfit.outgrownThresholdInLbs || 0) - previousOutfit.weightInLbs) <= 30;
 				})())
 
+			const xFactor = state.outfits.length > 3 * maxNumberOfPortraitsPerColumn ? 16 : 20;
+
 			return {
 				characterSlug: state.nameSlug,
 				outfitSlug: o.nameSlug || 'should not happen',
@@ -356,7 +358,7 @@ export function createOutfitOfCharacterViewModel(state: CharacterCompletedState)
 				bgPictureLink: getBgPictureLink(o.gameSlug),
 				pictureLink: getFacePicLink(state.nameSlug, o.broken ? getHeaviestOutfitSlug(state) : o.nameSlug || 'base', o.broken),
 				framePictureLink: getFramePictureLink(o.broken ? 'broken' : (o.nameSlug as string)),
-				x: 35 + 20 * Math.floor(i / maxNumberOfPortraitsPerColumn),
+				x: 35 + xFactor * Math.floor(i / maxNumberOfPortraitsPerColumn),
 				y: 8 + (i % maxNumberOfPortraitsPerColumn) * (pictureHeight + 4),
 				height: 4,
 				pictureHeight,

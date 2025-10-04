@@ -90,7 +90,7 @@ function initCharacterState(baseMetadata: CharacterBaseMetadata): [CharacterStat
 
 			const outfitState = {
 				slug: outfitBaseMetadata.outfitSlug,
-				weightInLbs: initialWeightInLbs,
+				weightInLbs: !!outfitBaseMetadata.overrideInitialWeight ? outfitBaseMetadata.overrideInitialWeight : initialWeightInLbs,
 				donationReceived: 0,
 				thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
 				unlocked: unlocked,
@@ -230,7 +230,7 @@ export function addAdditionalCharactersAndOutfits(state: GameState[], donationNu
 
 					const outfitState = {
 						slug: outfitBaseMetadata.outfitSlug,
-						weightInLbs: initialWeightForBuild(characterBaseMetadata.build),
+						weightInLbs: !!outfitBaseMetadata.overrideInitialWeight ? outfitBaseMetadata.overrideInitialWeight : initialWeightForBuild(characterBaseMetadata.build),
 						donationReceived: 0,
 						thresholdInLbs: outfitBaseMetadata.outfitWeightThresholdInLb,
 						unlocked: unlocked,

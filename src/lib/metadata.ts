@@ -18,6 +18,7 @@ export type OutfitBaseMetadata = {
     outfit: string;
     outfitSlug: string;
     introducedAfterDonation?: number;
+    overrideInitialWeight?: number;
 };
 
 export type CharacterGroup = {
@@ -1262,7 +1263,16 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "ascended",
                         "secondaryShape": "🍐",
                         "introducedAfterDonation": 313
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 2200.0,
+                        "mainShape": "🟣",
+                        "secondaryShape": "🍐",
+                        "outfit": "Mystic",
+                        "outfitSlug": "mystic",
+                        "introducedAfterDonation": 684,
+                        "overrideInitialWeight": 1000.0,
+                    },
                 ]
             },
             {

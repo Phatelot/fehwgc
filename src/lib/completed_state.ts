@@ -29,7 +29,7 @@ export type OutfitCompletedState = {
 	mainShape?: Shape;
 	secondaryShape?: Shape;
 	trait: string;
-	build: Build;
+	build: Build | 'Centaur';
 	isSelfFeeding: boolean;
 	selfFedBy?: string;
 	boundFeeding?: string;
@@ -213,6 +213,20 @@ export function toOutfitCompletedState(state: GameState[], characterState: Chara
 	const boundOutfitState = getBoundOutfitState(state, outfitState.boundTo);
 	const boundOutfitDisplayName = getDisplayNameFromOutfitKey(outfitState.boundTo);
 
+	const characterHeight = (() => {
+		if (characterState.slug === 'lyn' && outfitState.slug === 'mystic') {
+			return 4.40;
+		}
+		return characterMetadata.heightInCm / 100.;
+	})();
+
+	const characterBuild = (() => {
+		if (characterState.slug === 'lyn' && outfitState.slug === 'mystic') {
+			return 'Centaur';
+		}
+		return characterMetadata.build;
+	})();
+
 	return {
 		gameName: gameMetadata.name,
 		gameSlug: gameMetadata.nameSlug,
@@ -227,15 +241,15 @@ export function toOutfitCompletedState(state: GameState[], characterState: Chara
 		outgrownThresholdInLbs: outfitState.thresholdInLbs,
 		broken: false,
 		weightInLbs: outfitState.weightInLbs,
-		heightInMeters: characterMetadata.heightInCm / 100.,
-		BMI: BMI(characterMetadata.heightInCm / 100., outfitState.weightInLbs),
+		heightInMeters: characterHeight,
+		BMI: BMI(characterHeight, outfitState.weightInLbs),
 		mainShape: outfitMetadata.mainShape,
 		secondaryShape: outfitMetadata.secondaryShape,
 		donationReceived: outfitState.donationReceived,
 		frame: toFrameType(outfitState.slug),
 		bgFrame: gameMetadata.nameSlug,
 		trait: outfitState.trait || '',
-		build: characterMetadata.build,
+		build: characterBuild,
 		isSelfFeeding: outfitState.trait === 'Self_Feeder',
 		selfFedBy: (isSelfFed(characterState) && outfitState.trait !== 'Self_Feeder') ? getSelfFeedingOutfitDisplayName(characterState) : undefined,
 		boundFeeding: outfitState.trait === "Bound_Feeder" ? getDisplayNameFromOutfitKey(outfitState.boundTo) : undefined,

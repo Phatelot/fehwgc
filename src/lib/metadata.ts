@@ -4891,7 +4891,7 @@ export const baseMetadata: GameBaseMetadata[] = [
             {
                 "name": "Syrene",
                 "nameSlug": "syrene",
-                "heightInCm": 1685.0,
+                "heightInCm": 185.0,
                 "build": 'Strong',
                 "outfits": [
                     {

@@ -3467,8 +3467,8 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "group": heroesBook13Group,
                 "outfits": [
                     {
-                        "outfit": "Spring",
-                        "outfitSlug": "spring",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
                         "outfitWeightThresholdInLb": 600.0,
                         "mainShape": "🟣",
                         "secondaryShape": "🟣",

@@ -44,7 +44,7 @@
                 "If-None-Match": "",
               },
             });
-            console.log('received gist response (no token)');
+            // console.log('received gist response (no token)');
             donations = parseCsvData((JSON.parse(await response.text())
               .files['donos.csv']
               ?.content) || '');
@@ -60,7 +60,7 @@
           });
 
           const response = await octokit.request(`GET /gists/${gistId}`);
-          console.log('received gist response (with token)');
+          // console.log('received gist response (with token)');
           const files = response.data.files;
           const donoFile = (files || {})['donos.csv'];
           const content = donoFile?.content || '';

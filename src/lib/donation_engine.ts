@@ -106,11 +106,23 @@ function applyDonationToOutfit(state: GameState[], characterState: CharacterStat
 				{
 					addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
 					applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
-					const possibleTargets = getPossibleBoundTargets(state, false);
-					const targetOutfitKey = possibleTargets[stringToRandomNumber(`${outfitState.slug}${totalDonationsForCharacterState(characterState)}`, possibleTargets.length)]
+					const feedingRicochetForbidden = donationNumber < 99999;
+					const possibleTargets = getPossibleBoundTargets(state, false, feedingRicochetForbidden);
+					let chaosFeedingPower = 0; // coolest var name ever
+					let targetOutfitKey: OutfitKey | null = null;
+					while (!targetOutfitKey) {
+						chaosFeedingPower++;
+						const feedingPowerSuffix = chaosFeedingPower > 1 ? `${chaosFeedingPower}` : "";
+						targetOutfitKey = possibleTargets[stringToRandomNumber(`${outfitState.slug}${totalDonationsForCharacterState(characterState)}` + feedingPowerSuffix, possibleTargets.length)]
+						const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
+						const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
+						if (targetOutfitState.trait === "Chaos_Feeder") {
+							targetOutfitKey = null // ricochet
+						}
+					}
 					const targetCharacterState = getCharacterState(state, targetOutfitKey.characterSlug);
 					const targetOutfitState = getOutfitState(targetCharacterState, targetOutfitKey.outfitSlug) as OutfitState;
-					feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold * 3, donationNumber);
+					feed(state, targetCharacterState, targetOutfitState, effectiveDonationAfterUnlockThreshold * (3**chaosFeedingPower), donationNumber);
 
 					const secondaryTargetOutfitKey = (targetOutfitState as OutfitState)?.boundTo;
 					if (secondaryTargetOutfitKey) {
@@ -263,7 +275,7 @@ export function attributeTraitToOutfit(state: GameState[], characterState: Chara
 	}
 }
 
-export function getPossibleBoundTargets(state: GameState[], excludeBound: boolean): OutfitKey[] {
+export function getPossibleBoundTargets(state: GameState[], excludeBound: boolean, excludeChaosFeeder: boolean = true): OutfitKey[] {
 	return state
 		.flatMap(gameState => gameState.characters)
 		.flatMap(characterState => characterState.outfits
@@ -274,7 +286,7 @@ export function getPossibleBoundTargets(state: GameState[], excludeBound: boolea
 		)
 		.filter(o => o.outfitState.unlocked) // only unlocked outfits...
 		.filter(o => !excludeBound || !o.outfitState.boundTo) // ... that aren't themselves targeting another outfit, or targets of another outfit
-		.filter(o => o.outfitState.trait !== "Chaos_Feeder") // Chaos feeders are always excluded...
+		.filter(o => !excludeChaosFeeder || o.outfitState.trait !== "Chaos_Feeder") // Chaos feeders are always excluded...
 		.filter(o => o.outfitState.trait !== "Self_Feeder") // ... as are self-feeders
 		.map(o => ({
 			characterSlug: o.characterSlug,

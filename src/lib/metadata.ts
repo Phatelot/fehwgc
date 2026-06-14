@@ -686,6 +686,13 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Brave",
                         "outfitSlug": "brave"
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "🟣",
+                        "outfit": "Mythic",
+                        "outfitSlug": "mythic",
+                        introducedAfterDonation: 1198,
                     }
                 ]
             },
@@ -961,6 +968,23 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Rearmed",
                         outfitSlug: "rearmed",
                         introducedAfterDonation: 602,
+                    },
+                ]
+            },
+            {
+                "name": "Beruka",
+                "nameSlug": "beruka",
+                "heightInCm": 152.0,
+                "build": 'Petite',
+                "group": awakeningSecondaryCastGroup,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 600.0,
+                        "mainShape": "🟣",
+                        secondaryShape: "🟣",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        introducedAfterDonation: 1198,
                     },
                 ]
             },
@@ -3242,7 +3266,14 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ninja",
                         "outfitSlug": "ninja",
                         "secondaryShape": "🟣"
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🟣",
+                        "outfit": "Chosen",
+                        "outfitSlug": "chosen",
+                        "introducedAfterDonation": 1198,
+                    },
                 ]
             },
             {
@@ -3320,7 +3351,15 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "resplendent",
                         "secondaryShape": "🍐",
                         "introducedAfterDonation": 313
-                    }
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 400.0,
+                        "mainShape": "🟣",
+                        "outfit": "Chosen",
+                        "outfitSlug": "chosen",
+                        "secondaryShape": "🟣",
+                        "introducedAfterDonation": 1198,
+                    },
                 ]
             },
             {

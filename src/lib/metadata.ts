@@ -972,23 +972,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                 ]
             },
             {
-                "name": "Beruka",
-                "nameSlug": "beruka",
-                "heightInCm": 152.0,
-                "build": 'Petite',
-                "group": awakeningSecondaryCastGroup,
-                "outfits": [
-                    {
-                        "outfitWeightThresholdInLb": 600.0,
-                        "mainShape": "🟣",
-                        secondaryShape: "🟣",
-                        "outfit": "Base",
-                        "outfitSlug": "base",
-                        introducedAfterDonation: 1198,
-                    },
-                ]
-            },
-            {
                 "name": "Lissa",
                 "nameSlug": "lissa",
                 "heightInCm": 154.0,
@@ -3047,6 +3030,23 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Base",
                         "outfitSlug": "base",
                         introducedAfterDonation: 1046,
+                    },
+                ]
+            },
+            {
+                "name": "Beruka",
+                "nameSlug": "beruka",
+                "heightInCm": 152.0,
+                "build": 'Petite',
+                "group": fatesConquestGroup,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 600.0,
+                        "mainShape": "🟣",
+                        secondaryShape: "🟣",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                        introducedAfterDonation: 1198,
                     },
                 ]
             },

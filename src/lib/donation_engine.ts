@@ -106,7 +106,7 @@ function applyDonationToOutfit(state: GameState[], characterState: CharacterStat
 				{
 					addWeightToOutfit(characterState.brokenOutfit, effectiveDonationAfterUnlockThreshold);
 					applySpilloverOnGroup(state, characterState.slug, characterState.groupSlug, amount * 0.2, donationNumber);
-					const feedingRicochetForbidden = donationNumber < 99999;
+					const feedingRicochetForbidden = donationNumber < 1275;
 					const possibleTargets = getPossibleBoundTargets(state, false, feedingRicochetForbidden);
 					let chaosFeedingPower = 0; // coolest var name ever
 					let targetOutfitKey: OutfitKey | null = null;

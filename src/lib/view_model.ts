@@ -1,8 +1,9 @@
 import { getBgPictureLink, getFacePicLink, getFramePictureLink } from "./asset_utils";
 import { getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
-import type { Build, Shape } from "./metadata";
+import { getCharacterMetadata, type Build, type Shape } from "./metadata";
+import { ComputeToDrawStatus, saveToDrawOutfits, toDrawStatusToIcon, type ToDrawOutfit, type ToDrawOutfits, type ToDrawStatus } from "./todraw_status";
 import { groupConsecutive } from "./utils";
-import { formatWeight } from "./weight_utils";
+import { formatPercentage, formatWeight } from "./weight_utils";
 
 export const viewPortHeight = 100;
 export const viewPortWidth = 220;
@@ -10,9 +11,9 @@ export const viewPortWidth = 220;
 const maxNumberOfDisplayedCharactersPerLine = 14;
 const maxNumberOfDisplayedLines = 6;
 
-export function createOutfitViewModel(state: CompletedState, maxDisplayFactor: number) : OutfitViewModel[][] {
+export function createOutfitViewModel(state: CompletedState, maxDisplayFactor: number): OutfitViewModel[][] {
 
-	const outfitStates : OutfitCompletedState[] = state.games
+	const outfitStates: OutfitCompletedState[] = state.games
 		.flatMap(game => game.characters)
 		.flatMap(character => character.outfits)
 		.filter(outfit => outfit.unlocked)
@@ -36,8 +37,8 @@ export function createOutfitViewModel(state: CompletedState, maxDisplayFactor: n
 			const magic75 = 75;
 			const outgrownY =
 				!(outfitState.outgrown || outfitState.nameSlug === 'broken') ?
-				magic75 - ((outfitState.outgrownThresholdInLbs as number) / Math.min(maxDisplayableWeight, highestWeight) * 60) :
-				undefined;
+					magic75 - ((outfitState.outgrownThresholdInLbs as number) / Math.min(maxDisplayableWeight, highestWeight) * 60) :
+					undefined;
 			const y = magic75 - height;
 
 			return {
@@ -97,9 +98,9 @@ export type OutfitViewModel = {
 	mutualGainingWith?: string;
 }
 
-export function createBMIOutfitViewModel(state: CompletedState, maxDisplayFactor: number) : BMIOutfitViewModel[][] {
+export function createBMIOutfitViewModel(state: CompletedState, maxDisplayFactor: number): BMIOutfitViewModel[][] {
 
-	const outfitStates : OutfitCompletedState[] = state.games
+	const outfitStates: OutfitCompletedState[] = state.games
 		.flatMap(game => game.characters)
 		.flatMap(character => character.outfits)
 		.filter(outfit => outfit.unlocked)
@@ -179,9 +180,9 @@ export type BMIOutfitViewModel = {
 	mutualGainingWith?: string;
 }
 
-export function createCharacterViewModel(state: CompletedState, maxDisplayFactor: number) : CharacterViewModel[][] {
+export function createCharacterViewModel(state: CompletedState, maxDisplayFactor: number): CharacterViewModel[][] {
 
-	const characterStates : CharacterCompletedState[] = state.games
+	const characterStates: CharacterCompletedState[] = state.games
 		.flatMap(game => game.characters)
 		.filter(character => character.unlocked)
 		.sort((a, b) => (a.stats?.totalWeightUnlockedInLbs || 0) - (b.stats?.totalWeightUnlockedInLbs || 0));
@@ -248,8 +249,8 @@ export function createUnlockViewModel(state: CompletedState): UnlockViewModel[][
 	const maxNumberOfCharactersPerPage = (maxNumberOfDisplayedCharactersPerLine - 1) * maxNumberOfDisplayedLines;
 
 	return groupConsecutive(state.games
-		.flatMap(g => g.characters.map(c => ({game: g, character: c})))
-		.flatMap(c => c.character.outfits.map((o, i) => ({...c, outfitIndex: i, outfit: o})))
+		.flatMap(g => g.characters.map(c => ({ game: g, character: c })))
+		.flatMap(c => c.character.outfits.map((o, i) => ({ ...c, outfitIndex: i, outfit: o })))
 		.map((o, i) => {
 			i %= maxNumberOfCharactersPerPage;
 
@@ -389,4 +390,136 @@ export type OutfitOfCharacterViewModel = {
 	broken: boolean;
 	almostUnlocked: boolean;
 	outfitWeightLabel: string;
+}
+
+export function createToDrawListViewModel(state: CompletedState, savedToDrawOutfits: ToDrawOutfits): ToDrawListViewModel {
+	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
+	const width = 4 * margin;
+	const pictureHeight = width * viewPortWidth / viewPortHeight;
+
+	const comparedOutfitStates = state.games
+		.flatMap(g => g.characters.map(c => ({ game: g, character: c })))
+		.flatMap(c => c.character.outfits.map((o, i) => ({ ...c, outfitIndex: i, outfit: o })))
+		.filter(o => o.outfit.unlocked)
+		.map(o => {
+			const key = `${o.character.nameSlug}_${o.outfit.broken ? "broken" : o.outfit.nameSlug}`;
+			const saved = savedToDrawOutfits[key];
+
+
+			const enrichedFields = (!!saved) ? (() => {
+				const { status, percent, baseWeight, wasCheckedOnce } = ComputeToDrawStatus(saved, o.outfit.weightInLbs)
+				return {
+					characterAndOutfitLabel: `${o.character.name} - ${o.outfit.broken ? "Broken" : o.outfit.name}`,
+					status: status as ToDrawStatus,
+					differenceInPercent: percent,
+					baseWeight,
+					wasCheckedOnce,
+				}
+			})() : (() => {
+				savedToDrawOutfits[key] = {
+					initWeightInLb: o.outfit.weightInLbs,
+					lastDrawnWeightInLb: undefined,
+				}
+				return {
+					characterAndOutfitLabel: `${o.character.name} - ${o.outfit.broken ? "Broken" : o.outfit.name}`,
+					status: "UNKNOWN" as ToDrawStatus,
+					differenceInPercent: Number.MAX_VALUE,
+					baseWeight: o.outfit.weightInLbs,
+					wasCheckedOnce: false,
+				}
+			})();
+			return { ...o, ...enrichedFields };
+		})
+		.sort((a, b) => {
+			if (a.status != b.status) {
+				if (a.status === "OK") {
+					return 1;
+				}
+				if (b.status === "OK") {
+					return -1;
+				}
+			}
+
+			if (a.differenceInPercent != b.differenceInPercent) {
+				return b.differenceInPercent - a.differenceInPercent
+			}
+			return a.characterAndOutfitLabel.localeCompare(b.characterAndOutfitLabel)
+		})
+		.reverse();
+
+
+	const actualMaxNumberOfDisplayedCharactersPerLine = 3
+	const actualMaxNumberOfDisplayedLines = 4
+
+	const paginatedComparedOutfitStates = groupConsecutive(comparedOutfitStates, actualMaxNumberOfDisplayedCharactersPerLine * actualMaxNumberOfDisplayedLines).map(a => a.reverse());
+
+	const outfitViewModels: ToDrawListOutfitViewModel[][] = paginatedComparedOutfitStates.map(comparedOutfitStatesPage => {
+		return comparedOutfitStatesPage.map((o, i) => {
+			let weightLabel = "";
+			let baseWeightLabel = o.wasCheckedOnce ? `${formatWeight(o.baseWeight)}lbs` : "?";
+			if (o.differenceInPercent != Number.MAX_VALUE && o.differenceInPercent > 0) {
+				weightLabel = `${baseWeightLabel} <- ${formatWeight(o.outfit.weightInLbs)}lbs (${formatPercentage(o.differenceInPercent)}${o.wasCheckedOnce ? '' : '+'}%)`
+			} else if (!o.wasCheckedOnce) {
+				weightLabel = `? <- ${formatWeight(o.outfit.weightInLbs)}lbs`
+			} else {
+				weightLabel = `OK (${formatWeight(o.outfit.weightInLbs)}lbs)`
+			}
+
+			const tdlovm: ToDrawListOutfitViewModel = {
+				characterSlug: o.character.nameSlug,
+				outfitSlug: o.outfit.nameSlug || 'broken',
+				characterAndOutfitLabel: o.characterAndOutfitLabel,
+				broken: o.outfit.broken,
+				status: o.status,
+				differenceInPercent: o.differenceInPercent,
+				weightLabel: weightLabel,
+				weightInLbs: o.outfit.weightInLbs,
+				bgPictureLink: getBgPictureLink(o.outfit.gameSlug),
+				pictureLink: getFacePicLink(o.character.nameSlug, o.outfit.broken ? getHeaviestOutfitSlug(o.character) : o.outfit.nameSlug || 'base', o.outfit.broken),
+				framePictureLink: getFramePictureLink(o.outfit.broken ? 'broken' : (o.outfit.nameSlug as string)),
+				x: 4.5 + margin + 5 * margin * 4.5 * (i % (actualMaxNumberOfDisplayedCharactersPerLine)),
+				y: 18.5 + Math.floor(i / (actualMaxNumberOfDisplayedCharactersPerLine)) * (pictureHeight + 2.5),
+				height: 4,
+				pictureHeight,
+				width,
+				id: `todraw-${o.character.nameSlug}-${o.outfit.nameSlug}${o.outfit.broken ? '-broken' : ''}`,
+				statusIcon: toDrawStatusToIcon(o.status),
+			};
+			return tdlovm;
+		})
+	})
+
+	saveToDrawOutfits(savedToDrawOutfits);
+
+	return {
+		model: savedToDrawOutfits,
+		outfits: outfitViewModels,
+	}
+}
+
+export type ToDrawListViewModel = {
+	model: ToDrawOutfits;
+	outfits: ToDrawListOutfitViewModel[][];
+}
+
+
+export type ToDrawListOutfitViewModel = {
+	characterSlug: string;
+	outfitSlug: string;
+	characterAndOutfitLabel: string;
+	broken: boolean;
+	differenceInPercent: number;
+	bgPictureLink: string;
+	pictureLink: string;
+	framePictureLink: string;
+	x: number;
+	y: number;
+	height: number;
+	pictureHeight: number;
+	width: number;
+	id: string;
+	weightInLbs: number;
+	weightLabel: string;
+	status: ToDrawStatus;
+	statusIcon: string;
 }

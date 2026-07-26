@@ -83,6 +83,11 @@
 		["TRAITS", "Traits Index"],
 	];
 
+	const token = localStorage.getItem('fehwgc-admin') || '';
+	if (token) {
+		pages.push(["TODRAW_LIST", "To-draw list"])
+	}
+
 	function selectPage(page: string) {
 		dispatch("selectpage", { page });
 	}

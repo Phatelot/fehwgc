@@ -20,6 +20,8 @@
     import { donationURL } from './lib/donation_engine';
     import Traits from './lib/traits.svelte';
     import CharactersList from './lib/characters_list.svelte';
+    import TodrawList from './lib/todraw_list.svelte';
+    import { loadToDrawOutfits } from './lib/todraw_status';
 
     async function fetchData(): Promise<Omnistate> {
 
@@ -223,6 +225,8 @@
           <Rules />
         {:else if page === 'TRAITS'}
           <Traits />
+        {:else if page === 'TODRAW_LIST'}
+          <TodrawList state={applyFilter(viewModel.completedState, selectedGameSlug, selectedShape, selectedTrait)} savedToDrawOutfits={loadToDrawOutfits()} on:selectoutfit={(e) => selectOutfit(e.detail.characterSlug, e.detail.outfitSlug)}/>
         {:else}
           <MenuPopup
             state="{viewModel.completedState}"

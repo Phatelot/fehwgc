@@ -71,11 +71,21 @@
 		}
 	}
 
+	function lowestPage() {
+		page = viewModel.outfits.length - 1
+		pageViewModel = viewModel.outfits[page]; // do NOT try to one-line this
+	}
+
 	function higherPage() {
 		if (canGoHigher) {
 			page--;
 			pageViewModel = viewModel.outfits[page]; // do NOT try to one-line this
 		}
+	}
+
+	function highestPage() {
+		page = 0
+		pageViewModel = viewModel.outfits[page]; // do NOT try to one-line this
 	}
 </script>
 
@@ -149,6 +159,56 @@
 	/>
 {/if}
 
+<text
+	x="8%"
+	y="87.5%"
+	class="notes"
+>Click on portrait to open details</text>
+<text
+	x="8%"
+	y="92%"
+	class="notes"
+>Click on text to switch status</text>
+
+<rect
+	x="78.5%"
+	y="85.5%"
+	height="4.6%"
+	width="15%"
+	rx="1px"
+	ry="1px"
+	stroke="#aeffff"
+	stroke-width="0.4"
+	stroke-linecap="round"
+	fill="#004858"
+	on:click={() => lowestPage()}
+></rect>
+<text
+	x="81.7%"
+	y="89%"
+	class="button-label"
+	on:click={() => lowestPage()}>Last page</text
+>
+<rect
+	x="61.5%"
+	y="85.5%"
+	height="4.6%"
+	width="15%"
+	rx="1px"
+	ry="1px"
+	stroke="#aeffff"
+	stroke-width="0.4"
+	stroke-linecap="round"
+	fill="#004858"
+	on:click={() => highestPage()}
+></rect>
+<text
+	x="64.7%"
+	y="89%"
+	class="button-label"
+	on:click={() => highestPage()}>First page</text
+>
+
 <style>
 	.title {
 		fill: white;
@@ -156,6 +216,16 @@
 	}
 
 	.sentence {
+		fill: white;
+		font-size: 3px;
+	}
+
+	.notes {
+		fill: white;
+		font-size: 2.5px;
+	}
+
+	.button-label {
 		fill: white;
 		font-size: 3px;
 	}

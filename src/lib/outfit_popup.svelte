@@ -65,6 +65,9 @@
 	let character = getCharacterCompletedState(state, characterSlug) as CharacterCompletedState;
 	let outfit = getOutfitCompletedState(state, characterSlug, outfitSlug) as OutfitCompletedState;
 
+	const token = localStorage.getItem('fehwgc-admin') || '';
+	const displayDrawStatus = !!token;
+
 	const imperialHeight = toImperialHeight(outfit.heightInMeters);
 	const weighsAsMuchAsXSmallestCombined = weighAsMuchAsTheXSmallest(outfit, state);
 
@@ -351,9 +354,10 @@
 	<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="{donationURL}">Donate to unlock her!</a></text>
 {/if}
 
-<text x="20%" y="93%" class="button-label"  text-anchor="middle">{drawStatus?.weightLabel + " " + drawStatus?.statusIcon}</text>
-<rect x="9%" y="89%" height="7%" width="22%" fill="#ae2f29" opacity='0' on:click={() => switchStatus()}/>
-
+{#if displayDrawStatus}
+	<text x="20%" y="93%" class="button-label"  text-anchor="middle">{drawStatus?.weightLabel + " " + drawStatus?.statusIcon}</text>
+	<rect x="9%" y="89%" height="7%" width="22%" fill="#ae2f29" opacity='0' on:click={() => switchStatus()}/>
+{/if}
 
 <rect x="68.1%" y="83.5%" height="4.6%" width="12%" rx="1px" ry="1px" stroke="#aeffff" stroke-width="0.4" stroke-linecap="round" fill="#004858" on:click={() => openCharacterPopup()}></rect>
 <text x="69%" y="87%" class="button-label" on:click={() => openCharacterPopup()}>character info</text>

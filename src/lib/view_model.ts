@@ -1,5 +1,5 @@
 import { getBgPictureLink, getFacePicLink, getFramePictureLink } from "./asset_utils";
-import { getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState, type OutfitCompletedState } from "./completed_state";
+import { getHeaviestOutfitSlug, type CharacterCompletedState, type CompletedState, type GameCompletedState, type OutfitCompletedState } from "./completed_state";
 import { getCharacterMetadata, type Build, type Shape } from "./metadata";
 import { ComputeToDrawStatus, saveToDrawOutfits, toDrawStatusToIcon, type ToDrawOutfit, type ToDrawOutfits, type ToDrawStatus } from "./todraw_status";
 import { groupConsecutive } from "./utils";
@@ -392,19 +392,24 @@ export type OutfitOfCharacterViewModel = {
 	outfitWeightLabel: string;
 }
 
-export function createToDrawListViewModel(state: CompletedState, savedToDrawOutfits: ToDrawOutfits): ToDrawListViewModel {
-	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
-	const width = 4 * margin;
-	const pictureHeight = width * viewPortWidth / viewPortHeight;
-
-	const comparedOutfitStates = state.games
+export function compareOutfitStates(state: CompletedState, savedToDrawOutfits: ToDrawOutfits): {
+    characterAndOutfitLabel: string;
+    status: ToDrawStatus;
+    differenceInPercent: number;
+    baseWeight: number;
+    wasCheckedOnce: boolean;
+    outfitIndex: number;
+    outfit: OutfitCompletedState;
+    game: GameCompletedState;
+    character: CharacterCompletedState;
+}[] {
+	return state.games
 		.flatMap(g => g.characters.map(c => ({ game: g, character: c })))
 		.flatMap(c => c.character.outfits.map((o, i) => ({ ...c, outfitIndex: i, outfit: o })))
 		.filter(o => o.outfit.unlocked)
 		.map(o => {
 			const key = `${o.character.nameSlug}_${o.outfit.broken ? "broken" : o.outfit.nameSlug}`;
 			const saved = savedToDrawOutfits[key];
-
 
 			const enrichedFields = (!!saved) ? (() => {
 				const { status, percent, baseWeight, wasCheckedOnce } = ComputeToDrawStatus(saved, o.outfit.weightInLbs)
@@ -446,7 +451,25 @@ export function createToDrawListViewModel(state: CompletedState, savedToDrawOutf
 			return a.characterAndOutfitLabel.localeCompare(b.characterAndOutfitLabel)
 		})
 		.reverse();
+}
 
+export function createStatusWeightLabel(o : any): string {
+	let baseWeightLabel = o.wasCheckedOnce ? `${formatWeight(o.baseWeight)}lbs` : "?";
+	if (o.differenceInPercent != Number.MAX_VALUE && o.differenceInPercent > 0) {
+		return `${baseWeightLabel} <- ${formatWeight(o.outfit.weightInLbs)}lbs (${formatPercentage(o.differenceInPercent)}${o.wasCheckedOnce ? '' : '+'}%)`
+	} else if (!o.wasCheckedOnce) {
+		return `? <- ${formatWeight(o.outfit.weightInLbs)}lbs`
+	} else {
+		return `OK (${formatWeight(o.outfit.weightInLbs)}lbs)`
+	}
+}
+
+export function createToDrawListViewModel(state: CompletedState, savedToDrawOutfits: ToDrawOutfits): ToDrawListViewModel {
+	const comparedOutfitStates = compareOutfitStates(state, savedToDrawOutfits)
+
+	const margin = 95 / (5 * maxNumberOfDisplayedCharactersPerLine + 1);
+	const width = 4 * margin;
+	const pictureHeight = width * viewPortWidth / viewPortHeight;
 
 	const actualMaxNumberOfDisplayedCharactersPerLine = 3
 	const actualMaxNumberOfDisplayedLines = 4
@@ -455,16 +478,6 @@ export function createToDrawListViewModel(state: CompletedState, savedToDrawOutf
 
 	const outfitViewModels: ToDrawListOutfitViewModel[][] = paginatedComparedOutfitStates.map(comparedOutfitStatesPage => {
 		return comparedOutfitStatesPage.map((o, i) => {
-			let weightLabel = "";
-			let baseWeightLabel = o.wasCheckedOnce ? `${formatWeight(o.baseWeight)}lbs` : "?";
-			if (o.differenceInPercent != Number.MAX_VALUE && o.differenceInPercent > 0) {
-				weightLabel = `${baseWeightLabel} <- ${formatWeight(o.outfit.weightInLbs)}lbs (${formatPercentage(o.differenceInPercent)}${o.wasCheckedOnce ? '' : '+'}%)`
-			} else if (!o.wasCheckedOnce) {
-				weightLabel = `? <- ${formatWeight(o.outfit.weightInLbs)}lbs`
-			} else {
-				weightLabel = `OK (${formatWeight(o.outfit.weightInLbs)}lbs)`
-			}
-
 			const tdlovm: ToDrawListOutfitViewModel = {
 				characterSlug: o.character.nameSlug,
 				outfitSlug: o.outfit.nameSlug || 'broken',
@@ -472,7 +485,7 @@ export function createToDrawListViewModel(state: CompletedState, savedToDrawOutf
 				broken: o.outfit.broken,
 				status: o.status,
 				differenceInPercent: o.differenceInPercent,
-				weightLabel: weightLabel,
+				weightLabel: createStatusWeightLabel(o),
 				weightInLbs: o.outfit.weightInLbs,
 				bgPictureLink: getBgPictureLink(o.outfit.gameSlug),
 				pictureLink: getFacePicLink(o.character.nameSlug, o.outfit.broken ? getHeaviestOutfitSlug(o.character) : o.outfit.nameSlug || 'base', o.outfit.broken),

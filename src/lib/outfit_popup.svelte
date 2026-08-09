@@ -6,8 +6,9 @@
     import type { Shape } from "./metadata";
     import { traitNames } from "./trait";
     import { formatMoney } from "./utils";
-    import { viewPortWidth } from "./view_model";
+    import { createToDrawListViewModel, viewPortWidth } from "./view_model";
     import { formatBMI, formatPercentage, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
+	import { saveToDrawOutfits, type ToDrawOutfits } from "./todraw_status";
 
 	import appleLink from '/src/assets/shapes/apple.png'
 	import circleLink from '/src/assets/shapes/circle.png'
@@ -32,6 +33,7 @@
 	export let characterSlug: string;
 	export let outfitSlug: string;
 	export let state: CompletedState;
+	export let savedToDrawOutfits: ToDrawOutfits;
 
 	let traitTextElement: SVGTSpanElement;
 	let traitTextWidthPercent = 0;
@@ -49,6 +51,7 @@
 		}[shape]
 	}
 
+
 	$: if (!!traitTextElement) {
 		const traitTextWidth = traitTextElement.getBBox().width;
 		traitTextWidthPercent = (traitTextWidth / viewPortWidth) * 100;
@@ -64,6 +67,41 @@
 
 	const imperialHeight = toImperialHeight(outfit.heightInMeters);
 	const weighsAsMuchAsXSmallestCombined = weighAsMuchAsTheXSmallest(outfit, state);
+
+	function switchStatus() {
+		const key = outfit.characterSlug + "_" + (outfit.broken ? "broken" : outfitSlug)
+
+		const previous = savedToDrawOutfits[key]
+		if (!previous) {
+			savedToDrawOutfits[key] = {
+				initWeightInLb: outfit.weightInLbs,
+				lastDrawnWeightInLb: outfit.weightInLbs,
+			}
+		} else {
+			if (Math.abs(outfit.weightInLbs - (previous.lastDrawnWeightInLb || 0)) < 0.1) {
+				delete savedToDrawOutfits[key];
+				savedToDrawOutfits = savedToDrawOutfits
+			} else {
+				previous.lastDrawnWeightInLb = outfit.weightInLbs
+				savedToDrawOutfits = savedToDrawOutfits
+			}
+		}
+		saveToDrawOutfits(savedToDrawOutfits)
+		drawStatus = getStatus()
+	}
+
+
+	function getStatus() {
+		const key = outfit.characterSlug + "_" + (outfit.broken ? "broken" : outfitSlug)
+		return createToDrawListViewModel(
+			state,
+			savedToDrawOutfits,
+		).outfits.flatMap(a => a).find(vm => {
+			return vm.characterSlug === outfit.characterSlug && vm.broken === outfit.broken && vm.outfitSlug === outfitSlug
+		})
+	}
+
+	$: drawStatus = getStatus()
 
 	let traitSentenceIndex: number;
 	let shapeSentenceIndex: number;
@@ -312,6 +350,10 @@
 {:else}
 	<text x="50%" y="93%" text-anchor="middle"><a class="link-tree-link" href="{donationURL}">Donate to unlock her!</a></text>
 {/if}
+
+<text x="20%" y="93%" class="button-label"  text-anchor="middle">{drawStatus?.weightLabel + " " + drawStatus?.statusIcon}</text>
+<rect x="9%" y="89%" height="7%" width="22%" fill="#ae2f29" opacity='0' on:click={() => switchStatus()}/>
+
 
 <rect x="68.1%" y="83.5%" height="4.6%" width="12%" rx="1px" ry="1px" stroke="#aeffff" stroke-width="0.4" stroke-linecap="round" fill="#004858" on:click={() => openCharacterPopup()}></rect>
 <text x="69%" y="87%" class="button-label" on:click={() => openCharacterPopup()}>character info</text>

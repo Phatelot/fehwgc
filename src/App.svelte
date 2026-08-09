@@ -247,6 +247,7 @@
             characterSlug="{selectedCharacterSlug}"
             outfitSlug="{selectedOutfitSlug}"
             state="{viewModel.completedState}"
+            savedToDrawOutfits={loadToDrawOutfits()}
             on:selectcharacter={(e) => {(selectedCharacterSlug = e.detail.characterSlug); (selectedOutfitSlug = null); saveStateToLocalStorage()}}
             on:selectshape={(e) => {(selectShape(e.detail.shape))}}
             on:selecttrait={(e) => {(selectTrait(e.detail.trait))}}

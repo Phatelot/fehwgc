@@ -33,10 +33,13 @@
 		sentences.push(`She weighs ${formatWeight(character.stats?.totalWeightUnlockedInLbs || 0)}lbs if you count all her outfits.`);
 	}
 
-	sentences.push(
-		`She is ${toImperialHeight(character.heightInMeters)} tall.`,
-		`Her build is ${character.build}.`,
-	)
+	if (character.nameSlug != "jormungandr") {
+		sentences.push(
+			`She is ${toImperialHeight(character.heightInMeters)} tall.`,
+			`Her build is ${character.build}.`,
+		)
+	}
+
 
 	if (character.numberOfUnlockedOutfits === character.outfits.length) {
 		sentences.push(`All her ${character.outfits.length} (including the final broken one) outfits are unlocked and outgrown.`);

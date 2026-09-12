@@ -127,7 +127,12 @@
 		locatorSentenceIndex = sentences.length;
 		sentences.push(`See her on the spread`);
 
-		if (outfit.broken && (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(characterSlug) >= 0)) {
+		if (outfit.broken && characterSlug == "jormungandr") {
+			sentences.push(
+				`Her base weight is above 56,000lbs, and she's over 122' long.`,
+				`(That's as tall as 23 Edelgards).`,
+			);
+		} else if (outfit.broken && (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(characterSlug) >= 0)) {
 			sentences.push(
 				`In this outfit, she weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
 			);
@@ -138,13 +143,17 @@
 		}
 
 		const bmiCategory = toBMICategory(outfit.BMI);
-		if (bmiCategory === 'underweight') {
+		if (outfit.broken && characterSlug == "jormungandr") {
+			sentences.push(
+				`On its own, her belly weighs ${formatWeight(outfit.weightInLbs)}lbs. How is she still hungry?`,
+			);
+		} else if (bmiCategory === 'underweight') {
 			sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so the poor girl is ${bmiCategory}.`)
 		} else {
 			sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${bmiCategory}.`)
 		}
 
-		if (imperialHeight !== `5'5"`) {
+		if (imperialHeight !== `5'5"` && !(outfit.broken && !(characterSlug === 'jormungandr') )) {
 			sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);
 		}
 

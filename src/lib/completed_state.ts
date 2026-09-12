@@ -176,6 +176,10 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 		return characterMetadata.heightInCm / 100.;
 	})();
 
+	const isJormungandr = characterState.slug === 'jormungandr';
+	const mainShape = isJormungandr ? "🍎" : selectedOutfit?.mainShape;
+	const secondaryShape = isJormungandr ? "🍎" : selectedOutfit?.secondaryShape;
+
 	return {
 		gameName: gameMetadata.name,
 		gameSlug: gameMetadata.nameSlug,
@@ -191,8 +195,8 @@ export function toBrokenOutfitState(characterState: CharacterState, characterMet
 		weightInLbs: characterState.brokenOutfit.weightInLbs,
 		heightInMeters: characterHeight,
 		BMI: BMI(characterHeight, characterState.brokenOutfit.weightInLbs),
-		mainShape: selectedOutfit?.mainShape,
-		secondaryShape: selectedOutfit?.secondaryShape,
+		mainShape: mainShape,
+		secondaryShape: secondaryShape,
 		donationReceived: characterState.brokenOutfit.donationReceived,
 		frame: toFrameType(characterState.slug),
 		bgFrame: gameMetadata.nameSlug,

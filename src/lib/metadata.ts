@@ -4556,6 +4556,23 @@ export const baseMetadata: GameBaseMetadata[] = [
                     },
                 ],
             },
+            {
+                "name": "Jormungandr",
+                "nameSlug": "jormungandr",
+                "heightInCm": 287.0,
+                "build": 'Giant',
+                "group": heroesBook68Group,
+                "outfits": [
+                    {
+                        outfit: "Base",
+                        outfitSlug: "base",
+                        mainShape: "🟣",
+                        secondaryShape: "🍐",
+                        outfitWeightThresholdInLb: 900,
+                        introducedAfterDonation: 1408,
+                    },
+                ]
+            },
         ],
     },
     {

@@ -237,8 +237,8 @@ const threeHousesProfessionalsGroup = {
 const fortunesWeaveGamePrecursor = {
     name: "Fortune's Weave",
     nameSlug: "fortunes_weave",
-    darkColor: "",
-    lightColor: "",
+    darkColor: "#65081f",
+    lightColor: "#c41e3A",
 }
 const fortunesWeaveDagdanGroup = {
     name: "Dagdan",

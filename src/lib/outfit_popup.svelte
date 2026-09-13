@@ -7,7 +7,7 @@
     import { traitNames } from "./trait";
     import { formatMoney } from "./utils";
     import { createToDrawListViewModel, viewPortWidth } from "./view_model";
-    import { formatBMI, formatPercentage, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
+    import { BMI, formatBMI, formatPercentage, formatWeight, toBMICategory, toImperialHeight, weightInLbsForBMI } from "./weight_utils";
 	import { saveToDrawOutfits, type ToDrawOutfits } from "./todraw_status";
 
 	import appleLink from '/src/assets/shapes/apple.png'
@@ -132,6 +132,10 @@
 				`Her base weight is above 56,000lbs, and she's over 122' long.`,
 				`(That's as tall as 23 Edelgards).`,
 			);
+		} else if (characterSlug == "jormungandr") {
+			sentences.push(
+				`In this outfit, she weighs ${formatWeight(outfit.weightInLbs)}lbs and is 24'5 long.`,
+			);
 		} else if (outfit.broken && (['ena', 'heiorun', 'hraesvelgr', 'niohoggr'].indexOf(characterSlug) >= 0)) {
 			sentences.push(
 				`In this outfit, she weighs ${formatWeight(outfit.weightInLbs)}lbs.`,
@@ -144,8 +148,14 @@
 
 		const bmiCategory = toBMICategory(outfit.BMI);
 		if (outfit.broken && characterSlug == "jormungandr") {
+			const totalWeightInLbs = (56_000 + outfit.weightInLbs);
+			const virtualHeightInMeter = (104 * 12 + 7) * 0.0254;
+			const bmi = BMI(virtualHeightInMeter, totalWeightInLbs);
+			const bmiCategory = toBMICategory(bmi);
+
 			sentences.push(
 				`On its own, her belly weighs ${formatWeight(outfit.weightInLbs)}lbs. How is she still hungry?`,
+				`Her BMI is ${formatBMI(bmi)}, so she is ${bmiCategory}.`
 			);
 		} else if (bmiCategory === 'underweight') {
 			sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so the poor girl is ${bmiCategory}.`)
@@ -153,7 +163,7 @@
 			sentences.push(`That gives her a BMI of ${formatBMI(outfit.BMI)}, so she is ${bmiCategory}.`)
 		}
 
-		if (imperialHeight !== `5'5"` && !(outfit.broken && !(characterSlug === 'jormungandr') )) {
+		if (imperialHeight !== `5'5"` && !(outfit.broken && characterSlug === 'jormungandr')) {
 			sentences.push(`If she was 5'5", with constant BMI, she'd weigh ${formatWeight(weightInLbsForBMI(1.651, outfit.BMI))}lbs.`);
 		}
 

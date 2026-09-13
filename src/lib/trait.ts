@@ -1,6 +1,6 @@
 import { getCharacterMetadata, getOutfitMetadata, type CharacterBaseMetadata, type OutfitBaseMetadata, type Shape, type Build } from "./metadata";
 import { stringToRandomNumber } from "./rng";
-import type { CharacterState, OutfitState } from "./state";
+import { getOutfitState, type CharacterState, type OutfitState } from "./state";
 
 const baseTraits = [
 	'Active',
@@ -142,7 +142,11 @@ export function selectTraitForBroken(character: CharacterState): string {
 	const baseOutfitMetadata = getOutfitMetadata(character.slug, character.brokenOutfit.slug as string) as OutfitBaseMetadata
 	const possibleTraits = removeAlreadySelectedTraits(possibleCommonTraitsFor(baseCharacterMetadata.nameSlug, baseCharacterMetadata.build, baseOutfitMetadata.mainShape, baseOutfitMetadata.secondaryShape), character)
 
-	const seed = `${character.slug}`
+	let seed = `${character.slug}`
+
+	if (character.slug === 'jormungandr') {
+		seed += "-snake"
+	}
 	return possibleTraits.sort()[stringToRandomNumber(seed, possibleTraits.length)]
 }
 

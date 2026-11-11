@@ -6191,6 +6191,82 @@ export const snapshot: GameState[] = [
 		]
 	},
 	{
+		"slug": "mirage",
+		"characters": [
+			{
+				"slug": "tsubasa",
+				"groupSlug": "no_group",
+				"outfits": [
+					{
+						"slug": "base",
+						"weightInLbs": 2339.42,
+						"donationReceived": 220.09999999999997,
+						"thresholdInLbs": 350,
+						"unlocked": true,
+						"trait": "Thinnish_Legs"
+					},
+					{
+						"slug": "brave",
+						"weightInLbs": 134.2,
+						"donationReceived": 0,
+						"thresholdInLbs": 350,
+						"unlocked": true,
+						"trait": "Generous"
+					}
+				],
+				"brokenOutfit": {
+					"donationReceived": 0,
+					"weightInLbs": 2355.0999999999995,
+					"slug": "base",
+					"trait": "Thin_Forearms"
+				},
+				"spillover": 44.019999999999996
+			},
+			{
+				"slug": "kiria",
+				"groupSlug": "no_group",
+				"outfits": [
+					{
+						"slug": "base",
+						"weightInLbs": 450.13999999999993,
+						"donationReceived": 241.39999999999998,
+						"thresholdInLbs": 350,
+						"unlocked": true,
+						"trait": "Cellulite"
+					}
+				],
+				"brokenOutfit": {
+					"donationReceived": 0,
+					"weightInLbs": 535.3399999999999,
+					"slug": "base",
+					"trait": "Huge_Calves"
+				},
+				"spillover": 48.28
+			},
+			{
+				"slug": "eleanora",
+				"groupSlug": "no_group",
+				"outfits": [
+					{
+						"slug": "base",
+						"weightInLbs": 616.28,
+						"donationReceived": 262.7,
+						"thresholdInLbs": 350,
+						"unlocked": true,
+						"trait": "Thin_Forearms"
+					}
+				],
+				"brokenOutfit": {
+					"donationReceived": 0,
+					"weightInLbs": 701.4799999999999,
+					"slug": "base",
+					"trait": "Fat_Face"
+				},
+				"spillover": 52.54
+			}
+		]
+	},
+	{
 		"slug": "tellius",
 		"characters": [
 			{
@@ -7788,77 +7864,6 @@ export const snapshot: GameState[] = [
 					"trait": "All_Thighs"
 				},
 				"spillover": 25.56
-			},
-			{
-				"slug": "tsubasa",
-				"groupSlug": "no_group",
-				"outfits": [
-					{
-						"slug": "base",
-						"weightInLbs": 2339.42,
-						"donationReceived": 220.09999999999997,
-						"thresholdInLbs": 350,
-						"unlocked": true,
-						"trait": "Thinnish_Legs"
-					},
-					{
-						"slug": "brave",
-						"weightInLbs": 134.2,
-						"donationReceived": 0,
-						"thresholdInLbs": 350,
-						"unlocked": true,
-						"trait": "Generous"
-					}
-				],
-				"brokenOutfit": {
-					"donationReceived": 0,
-					"weightInLbs": 2355.0999999999995,
-					"slug": "base",
-					"trait": "Thin_Forearms"
-				},
-				"spillover": 44.019999999999996
-			},
-			{
-				"slug": "kiria",
-				"groupSlug": "no_group",
-				"outfits": [
-					{
-						"slug": "base",
-						"weightInLbs": 450.13999999999993,
-						"donationReceived": 241.39999999999998,
-						"thresholdInLbs": 350,
-						"unlocked": true,
-						"trait": "Cellulite"
-					}
-				],
-				"brokenOutfit": {
-					"donationReceived": 0,
-					"weightInLbs": 535.3399999999999,
-					"slug": "base",
-					"trait": "Huge_Calves"
-				},
-				"spillover": 48.28
-			},
-			{
-				"slug": "eleanora",
-				"groupSlug": "no_group",
-				"outfits": [
-					{
-						"slug": "base",
-						"weightInLbs": 616.28,
-						"donationReceived": 262.7,
-						"thresholdInLbs": 350,
-						"unlocked": true,
-						"trait": "Thin_Forearms"
-					}
-				],
-				"brokenOutfit": {
-					"donationReceived": 0,
-					"weightInLbs": 701.4799999999999,
-					"slug": "base",
-					"trait": "Fat_Face"
-				},
-				"spillover": 52.54
 			}
 		]
 	},

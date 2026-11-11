@@ -181,12 +181,6 @@ const holyWarGamePrecursor = {
     darkColor: '#9f7530',
     lightColor: '#ffea5b',
 }
-const mirageGamePrecursor = {
-    name: "Mirage",
-    nameSlug: "mirage",
-    darkColor: '#181827',
-    lightColor: '#4c3c4b',
-}
 const telliusGamePrecursor = {
     name: "Tellius",
     nameSlug: "tellius",
@@ -5063,61 +5057,6 @@ export const baseMetadata: GameBaseMetadata[] = [
         ],
     },
     {
-        ...mirageGamePrecursor,
-        characters: [
-            {
-                "name": "Tsubasa",
-                "nameSlug": "tsubasa",
-                "heightInCm": 173.0,
-                "build": 'Regular',
-                "outfits": [
-                    {
-                        "outfitWeightThresholdInLb": 350.0,
-                        "mainShape": "🍎",
-                        "outfit": "Base",
-                        "outfitSlug": "base",
-                    },
-                    {
-                        "outfitWeightThresholdInLb": 350.0,
-                        "mainShape": "🍎",
-                        secondaryShape: "🟣",
-                        "outfit": "Brave",
-                        "outfitSlug": "brave",
-                        introducedAfterDonation: 1408,
-                    },
-                ]
-            },
-            {
-                "name": "Kiria",
-                "nameSlug": "kiria",
-                "heightInCm": 176.0,
-                "build": 'Regular',
-                "outfits": [
-                    {
-                        "outfitWeightThresholdInLb": 350.0,
-                        "mainShape": "🍐",
-                        "outfit": "Base",
-                        "outfitSlug": "base",
-                    }
-                ]
-            },
-            {
-                "name": "Eleanora",
-                "nameSlug": "eleanora",
-                "heightInCm": 168.0,
-                "build": 'Regular',
-                "outfits": [
-                    {
-                        "outfitWeightThresholdInLb": 350.0,
-                        "mainShape": "💎",
-                        "outfit": "Base",
-                        "outfitSlug": "base",
-                    }
-                ]
-            }
-        ],
-    },
-    {
         ...telliusGamePrecursor,
         characters: [
             {
@@ -6346,6 +6285,56 @@ export const baseMetadata: GameBaseMetadata[] = [
                     {
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "🍐",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                    }
+                ]
+            },
+            {
+                "name": "Tsubasa",
+                "nameSlug": "tsubasa",
+                "heightInCm": 173.0,
+                "build": 'Regular',
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "🍎",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "🍎",
+                        secondaryShape: "🟣",
+                        "outfit": "Brave",
+                        "outfitSlug": "brave",
+                        introducedAfterDonation: 1408,
+                    },
+                ]
+            },
+            {
+                "name": "Kiria",
+                "nameSlug": "kiria",
+                "heightInCm": 176.0,
+                "build": 'Regular',
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "🍐",
+                        "outfit": "Base",
+                        "outfitSlug": "base",
+                    }
+                ]
+            },
+            {
+                "name": "Eleanora",
+                "nameSlug": "eleanora",
+                "heightInCm": 168.0,
+                "build": 'Regular',
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "💎",
                         "outfit": "Base",
                         "outfitSlug": "base",
                     }

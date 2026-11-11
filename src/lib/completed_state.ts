@@ -1,6 +1,7 @@
 import { applyDonations } from "./donation_engine";
 import { toFrameType } from "./frames";
 import { baseMetadata, getCharacterMetadata, type Build, type CharacterBaseMetadata, type GameBaseMetadata, type OutfitBaseMetadata, type Shape, getOutfitMetadata } from "./metadata";
+import { snapshot } from "./snapshot";
 import { isOutgrown, type GameState, type OutfitState, type CharacterState, isUnlocked, getOutfitState, totalDonationsForCharacterState, type OutfitKey, getCharacterState, type Donation, initState } from "./state";
 import { biggerThanTheXSmallestCombined } from "./stats_utils";
 import { isSelfFed } from "./trait";
@@ -323,7 +324,7 @@ export type Omnistate = {
 };
 
 export function donationsToOmnistate(donations: Donation[]): Omnistate {
-	const states = applyDonations(initState(), donations)
+	const states = applyDonations(snapshot, donations)
 	const lastState = states[states.length - 1];
 
 	return {

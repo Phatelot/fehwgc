@@ -181,9 +181,9 @@ const holyWarGamePrecursor = {
     darkColor: '#9f7530',
     lightColor: '#ffea5b',
 }
-const mirageGamePrecursor = {
-    name: "Mirage",
-    nameSlug: "mirage",
+const spinoffGamePrecursor = {
+    name: "Spinoff",
+    nameSlug: "spinoff",
     darkColor: '#181827',
     lightColor: '#4c3c4b',
 }
@@ -240,9 +240,9 @@ const fortunesWeaveGamePrecursor = {
     darkColor: "#65081f",
     lightColor: "#c41e3A",
 }
-const fortunesWeaveDagdanGroup = {
-    name: "Dagdan",
-    slug: "dagdan",
+const fortunesWeaveFlameLordCrewGroup = {
+    name: "Flame Lord Crew",
+    slug: "flame_lord_crew",
 }
 
 export const baseMetadata: GameBaseMetadata[] = [
@@ -307,18 +307,32 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "summer"
                     },
                     {
-                        "outfitWeightThresholdInLb": 300.0,
-                        "mainShape": "🍐",
-                        "outfit": "Grima",
-                        outfitSlug: "grima",
-                        introducedAfterDonation: 602,
-                    },
-                    {
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "🍎",
                         "outfit": "Hot Spring",
                         "outfitSlug": "hot_spring",
-                        introducedAfterDonation: 1408,
+                    },
+                ]
+            },
+            {
+                "name": "Grima",
+                "nameSlug": "female_robin_grima",
+                "heightInCm": 158.0,
+                "build": 'Regular',
+                "group": awakeningMainCastGroup,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 300.0,
+                        "mainShape": "🍐",
+                        "outfit": "Base",
+                        outfitSlug: "base",
+                    },
+                    {
+                        "outfitWeightThresholdInLb": 700.0,
+                        "mainShape": "🍐",
+                        secondaryShape: "🍐",
+                        "outfit": "Resplendent",
+                        outfitSlug: "resplendent",
                     },
                 ]
             },
@@ -522,7 +536,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Spring",
                         "outfitSlug": "spring",
-                        introducedAfterDonation: 473,
                     },
                 ]
             },
@@ -587,7 +600,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ninja",
                         "outfitSlug": "ninja",
                         "secondaryShape": "🍎",
-                        "introducedAfterDonation": 269
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -595,7 +607,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Attuned",
                         outfitSlug: "attuned",
-                        introducedAfterDonation: 602,
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -603,7 +614,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Exercise",
                         "outfitSlug": "exercise",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -677,7 +687,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -726,7 +735,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Mythic",
                         "outfitSlug": "mythic",
-                        introducedAfterDonation: 1198,
                     }
                 ]
             },
@@ -755,7 +763,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "⌛",
                         secondaryShape: "💎",
                         outfitWeightThresholdInLb: 300,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -857,7 +864,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ninja",
                         "outfitSlug": "ninja",
                         "secondaryShape": "🍐",
-                        "introducedAfterDonation": 269
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -865,7 +871,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Summer",
                         "outfitSlug": "summer",
                         "secondaryShape": "🍐",
-                        "introducedAfterDonation": 313
                     },
                     {
                         outfit: "Gladiator",
@@ -873,7 +878,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 863,
                     },
                     {
                         outfit: "Harmonic",
@@ -881,7 +885,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "⌛",
                         outfitWeightThresholdInLb: 300,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -889,7 +892,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Emblem",
                         "outfitSlug": "emblem",
-                        introducedAfterDonation: 1408,
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -897,7 +899,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Hot Spring",
                         "outfitSlug": "hot_spring",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -927,7 +928,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "⌛",
                         secondaryShape: "💎",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 539,
                     },
                     {
                         outfit: "Resplendent",
@@ -935,7 +935,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "💎",
                         outfitWeightThresholdInLb: 600,
-                        introducedAfterDonation: 863,
                     },
                 ]
             },
@@ -1009,7 +1008,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "💎",
                         "outfit": "Ninja",
                         "outfitSlug": "ninja",
-                        "introducedAfterDonation": 313
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1017,7 +1015,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Rearmed",
                         outfitSlug: "rearmed",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -1351,7 +1348,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Emblem",
                         "outfitSlug": "ascended",
                         "secondaryShape": "🍐",
-                        "introducedAfterDonation": 313
                     },
                     {
                         "outfitWeightThresholdInLb": 2200.0,
@@ -1359,7 +1355,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍐",
                         "outfit": "Mystic",
                         "outfitSlug": "mystic",
-                        "introducedAfterDonation": 684,
                         "overrideInitialWeight": 1000.0,
                     },
                     {
@@ -1368,7 +1363,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🟣",
                         secondaryShape: "🟣",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -1376,7 +1370,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Legendary replendent",
                         "outfitSlug": "legendary_resplendent",
-                        introducedAfterDonation: 1409
                     }
                 ]
             },
@@ -1418,7 +1411,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Rearmed",
                         "outfitSlug": "rearmed",
-                        "introducedAfterDonation": 269
                     }
                 ]
             },
@@ -1509,7 +1501,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 863,
                     },
                 ]
             },
@@ -1595,7 +1586,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        "introducedAfterDonation": 269
                     }
                 ]
             },
@@ -1610,7 +1600,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "base",
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🟣",
-                        introducedAfterDonation: 1046
                     },
                     {
                         "outfit": "Resplendent",
@@ -1618,7 +1607,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "💎",
                         "secondaryShape": "🍎",
-                        introducedAfterDonation: 1046
                     },
                     {
                         "outfit": "Bride",
@@ -1626,7 +1614,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "🍐",
                         "secondaryShape": "⌛",
-                        introducedAfterDonation: 1046
                     },
                     {
                         "outfit": "Fallen",
@@ -1634,7 +1621,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "💎",
                         "secondaryShape": "🟣",
-                        introducedAfterDonation: 1046
                     },
                     {
                         "outfit": "Legendary",
@@ -1642,21 +1628,18 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🟣",
                         "secondaryShape": "🟣",
-                        introducedAfterDonation: 1046
                     },
                     {
                         "outfit": "Halloween",
                         "outfitSlug": "halloween",
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "💎",
-                        introducedAfterDonation: 1046
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🍎",
                         "outfit": "Entwined",
                         "outfitSlug": "entwined",
-                        introducedAfterDonation: 1408,
                     },
                 ],
             },
@@ -1704,7 +1687,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 473,
                     },
                 ]
             },
@@ -1816,7 +1798,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Harvest",
                         "outfitSlug": "harvest",
-                        "introducedAfterDonation": 313
                     }
                 ]
             },
@@ -1874,7 +1855,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "💎",
                         secondaryShape: "💎",
                         outfitWeightThresholdInLb: 550,
-                        introducedAfterDonation: 539,
                     }
                 ]
             },
@@ -1890,14 +1870,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Queen",
                         "outfitSlug": "queen",
-                        introducedAfterDonation: 1408,
                     },
                     {
                         "outfitWeightThresholdInLb": 600.0,
                         "mainShape": "⌛",
                         "outfit": "Emblem",
                         "outfitSlug": "emblem",
-                        introducedAfterDonation: 1408,
                     },
                 ],
             },
@@ -1931,7 +1909,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Winter",
                         "outfitSlug": "winter",
                         "secondaryShape": "🍐",
-                        "introducedAfterDonation": 269
                     },
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -1939,7 +1916,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Summer",
                         "outfitSlug": "summer",
                         "secondaryShape": "🍐",
-                        "introducedAfterDonation": 313
                     },
                     {
                         outfit: "Past",
@@ -1947,14 +1923,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 539,
                     },
                     {
                         outfit: "Valentine",
                         outfitSlug: 'valentine',
                         mainShape: "⌛",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -1962,7 +1936,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Rearmed",
                         "outfitSlug": "rearmed",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -2042,7 +2015,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Summer",
                         outfitSlug: "summer",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -2084,7 +2056,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         outfitSlug: 'winter',
                         mainShape: "🍎",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2092,7 +2063,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Fallen",
                         "outfitSlug": "fallen",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -2179,7 +2149,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 473,
                     },
                 ]
             },
@@ -2231,7 +2200,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 473,
                     },
                     {
                         outfit: "Ninja",
@@ -2239,7 +2207,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 500.0,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2261,7 +2228,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ninja",
                         "outfitSlug": "ninja",
                         "secondaryShape": "🟣",
-                        "introducedAfterDonation": 269
                     },
                     {
                         "outfitWeightThresholdInLb": 600,
@@ -2269,7 +2235,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🟣",
                         "outfit": "Maid",
                         "outfitSlug": "maid",
-                        "introducedAfterDonation": 652,
                     },
                     {
                         outfit: "Valentine",
@@ -2277,7 +2242,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "💎",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 450,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2292,7 +2256,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 473,
                     },
                 ]
             },
@@ -2308,7 +2271,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1408,
                     },
                 ],
             },
@@ -2391,7 +2353,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🟣",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 600,
-                        introducedAfterDonation: 863,
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -2399,7 +2360,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🟣",
                         "outfit": "Exercise",
                         "outfitSlug": "exercise",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -2462,7 +2422,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 550,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2470,7 +2429,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Brave",
                         "outfitSlug": "brave",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -2616,7 +2574,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 863,
                     },
                 ]
             },
@@ -2669,7 +2626,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "base",
                         "outfitWeightThresholdInLb": 500.0,
                         "mainShape": "🍐",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "New Year",
@@ -2677,7 +2633,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🍎",
                         secondaryShape: "🍐",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2827,14 +2782,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "💎",
                         "outfit": "Persona",
                         "outfitSlug": "persona",
-                        introducedAfterDonation: 313
                     },
                     {
                         outfit: "Winter",
                         outfitSlug: 'winter',
                         mainShape: "🍐",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2851,7 +2804,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -2859,14 +2811,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "💎",
                         "outfit": "Thief",
                         "outfitSlug": "thief",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2883,7 +2833,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -2891,7 +2840,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -2899,7 +2847,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Rearmed",
                         "outfitSlug": "rearmed",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2916,14 +2863,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍐",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2939,7 +2884,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -2947,7 +2891,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -2976,7 +2919,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 313
                     }
                 ]
             },
@@ -3062,7 +3004,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍎",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        "introducedAfterDonation": 652,
                     },
                 ]
             },
@@ -3125,7 +3066,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🟣",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 300,
-                        introducedAfterDonation: 863,
                     },
                 ]
             },
@@ -3141,7 +3081,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 313
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3149,7 +3088,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 313
                     }
                 ]
             },
@@ -3165,7 +3103,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -3182,7 +3119,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1198,
                     },
                 ]
             },
@@ -3256,33 +3192,38 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍎"
                     },
                     {
-                        "outfitWeightThresholdInLb": 350.0,
-                        "mainShape": "🟣",
-                        "outfit": "Meliai",
-                        outfitSlug: "meliai",
-                        introducedAfterDonation: 602,
-                    },
-                    {
                         outfit: "Entwined",
                         outfitSlug: "entwined",
                         mainShape: "⌛",
                         secondaryShape: "⌛",
                         outfitWeightThresholdInLb: 300,
-                        introducedAfterDonation: 863,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "💎",
                         "outfit": "Bride",
                         "outfitSlug": "bride",
-                        introducedAfterDonation: 1408,
+                    },
+                ]
+            },
+            {
+                "name": "Meliai",
+                "nameSlug": "ash_meliai",
+                "heightInCm": 175.0,
+                "build": 'Regular',
+                "group": heroesBook68Group,
+                "outfits": [
+                    {
+                        "outfitWeightThresholdInLb": 350.0,
+                        "mainShape": "🟣",
+                        "outfit": "Base",
+                        outfitSlug: "base",
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "💎",
-                        "outfit": "Melial Bride",
-                        "outfitSlug": "melial_bride",
-                        introducedAfterDonation: 1408,
+                        "outfit": "Bride",
+                        "outfitSlug": "bride",
                     },
                 ]
             },
@@ -3422,7 +3363,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Chosen",
                         "outfitSlug": "chosen",
-                        "introducedAfterDonation": 1198,
                     },
                 ]
             },
@@ -3500,7 +3440,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
                         "secondaryShape": "🍐",
-                        "introducedAfterDonation": 313
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -3508,7 +3447,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Chosen",
                         "outfitSlug": "chosen",
                         "secondaryShape": "🟣",
-                        "introducedAfterDonation": 1198,
                     },
                 ]
             },
@@ -3613,7 +3551,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 250.0,
                         "mainShape": "🍐",
                         "secondaryShape": "🟣",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "New Year",
@@ -3621,14 +3558,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "💎",
                         "secondaryShape": "🍎",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Bride",
                         "outfitSlug": "bride",
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "💎",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Brave",
@@ -3636,7 +3571,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🟣",
                         "secondaryShape": "⌛",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Entwined",
@@ -3644,14 +3578,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 450.0,
                         "mainShape": "🟣",
                         "secondaryShape": "🍐",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 450.0,
                         "mainShape": "🍎",
                         "outfit": "Summer",
                         "outfitSlug": "summer",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -3668,7 +3600,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 600.0,
                         "mainShape": "🟣",
                         "secondaryShape": "🟣",
-                        introducedAfterDonation: 1046,
                     },
                 ],
             },
@@ -3685,7 +3616,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "🍐",
                         "secondaryShape": "🍐",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Princess Beset",
@@ -3693,14 +3623,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "💎",
                         "secondaryShape": "💎",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Bride",
                         "outfitSlug": "bride",
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "🍐",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Maid",
@@ -3708,7 +3636,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 450.0,
                         "mainShape": "🟣",
                         "secondaryShape": "🟣",
-                        introducedAfterDonation: 1046,
                     },
                 ],
             },
@@ -3775,7 +3702,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 863,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -3783,7 +3709,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Bride",
                         "outfitSlug": "bride",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -3889,7 +3814,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Spring",
                         "outfitSlug": "spring",
-                        introducedAfterDonation: 473,
                     },
                 ]
             },
@@ -3926,7 +3850,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         outfitSlug: "harvest",
                         mainShape: "🍎",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 863,
                     },
                 ]
             },
@@ -3950,7 +3873,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Spring",
                         "outfitSlug": "spring",
-                        introducedAfterDonation: 473,
                     },
                     {
                         outfit: "Harvest",
@@ -3958,7 +3880,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 600,
-                        introducedAfterDonation: 863,
                     },
                 ]
             },
@@ -4008,7 +3929,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍐",
                         "outfit": "Bride",
                         "outfitSlug": "bride",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -4117,7 +4037,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "⌛",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -4154,7 +4073,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Ninja",
                         "outfitSlug": "ninja",
                         "secondaryShape": "💎",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -4183,7 +4101,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🟣",
                         outfitWeightThresholdInLb: 450,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -4242,7 +4159,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "⌛",
                         outfitWeightThresholdInLb: 700,
-                        introducedAfterDonation: 863,
                     },
                 ]
             },
@@ -4266,7 +4182,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
                         "secondaryShape": "🍐",
-                        "introducedAfterDonation": 313
                     }
                 ]
             },
@@ -4288,7 +4203,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
-                        "introducedAfterDonation": 313
                     }
                 ]
             },
@@ -4311,7 +4225,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
                         "secondaryShape": "⌛",
-                        "introducedAfterDonation": 313
                     }
                 ]
             },
@@ -4335,7 +4248,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
                         "secondaryShape": "🍎",
-                        "introducedAfterDonation": 313
                     },
                     {
                         "outfitWeightThresholdInLb": 600.0,
@@ -4343,7 +4255,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Summer",
                         outfitSlug: "summer",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -4359,7 +4270,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "💎",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        "introducedAfterDonation": 269,
                     },
                     {
                         "outfitWeightThresholdInLb": 550,
@@ -4367,7 +4277,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🟣",
                         "outfit": "Brave",
                         "outfitSlug": "brave",
-                        "introducedAfterDonation": 652,
                     },
                     {
                         outfit: "New year",
@@ -4375,7 +4284,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "💎",
                         outfitWeightThresholdInLb: 300,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4383,7 +4291,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Summer",
                         "outfitSlug": "summer",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -4399,7 +4306,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍐",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        "introducedAfterDonation": 269,
                     },
                     {
                         outfit: "New Year",
@@ -4407,7 +4313,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 300,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4415,7 +4320,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Summer",
                         "outfitSlug": "summer",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -4483,7 +4387,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Spring",
                         "outfitSlug": "spring",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -4499,14 +4402,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 602
                     },
                     {
                         outfit: "New Year",
                         outfitSlug: 'new_year',
                         mainShape: "🟣",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -4523,14 +4424,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        "introducedAfterDonation": 652,
                     },
                     {
                         "outfitWeightThresholdInLb": 400,
                         "mainShape": "🍐",
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
-                        "introducedAfterDonation": 1046,
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -4538,7 +4437,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Summer",
                         "outfitSlug": "summer",
-                        introducedAfterDonation: 1408,
                     },
                 ],
             },
@@ -4554,7 +4452,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        "introducedAfterDonation": 1046,
                     },
                 ],
             },
@@ -4571,7 +4468,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1408,
                     },
                 ],
             },
@@ -4588,7 +4484,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🟣",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 900,
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -4678,7 +4573,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Legendary",
                         "outfitSlug": "legendary",
-                        introducedAfterDonation: 473,
                     },
                 ]
             },
@@ -4755,7 +4649,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Attuned",
                         "outfitSlug": "attuned",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -4832,7 +4725,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Bride",
                         outfitSlug: "bride",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -4902,7 +4794,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Bride",
                         outfitSlug: "bride",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -4960,7 +4851,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Bride",
                         outfitSlug: "bride",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -5010,7 +4900,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍐",
                         "outfit": "Awakened",
                         "outfitSlug": "awakened",
-                        introducedAfterDonation: 313
                     }
                 ]
             },
@@ -5026,7 +4915,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Base",
                         "outfitSlug": "base",
                         secondaryShape: "🟣",
-                        introducedAfterDonation: 313
                     }
                 ]
             },
@@ -5041,7 +4929,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "💎",
                         "outfit": "Bride",
                         "outfitSlug": "bride",
-                        "introducedAfterDonation": 652,
                     },
                 ],
             },
@@ -5056,14 +4943,13 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🍎",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1408,
                     },
                 ],
             }
         ],
     },
     {
-        ...mirageGamePrecursor,
+        ...spinoffGamePrecursor,
         characters: [
             {
                 "name": "Tsubasa",
@@ -5083,7 +4969,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🟣",
                         "outfit": "Brave",
                         "outfitSlug": "brave",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -5146,7 +5031,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Resplendent",
                         outfitSlug: "resplendent",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -5203,7 +5087,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         outfitSlug: 'duo',
                         mainShape: "🍐",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -5370,14 +5253,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Summer",
                         "outfitSlug": "summer",
                         "secondaryShape": "🍎",
-                        "introducedAfterDonation": 313
                     },
                     {
                         outfit: "Pegasus",
                         outfitSlug: 'pegasus',
                         mainShape: "🍐",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -5472,7 +5353,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         outfitSlug: 'duo',
                         mainShape: "🟣",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -5601,7 +5481,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "New Year",
                         "outfitSlug": "new_year",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -5681,7 +5560,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         outfitSlug: "emblem",
                         mainShape: "🍐",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 539,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -5689,7 +5567,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Easter",
                         "outfitSlug": "easter",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -5787,7 +5664,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "💎",
                         "outfit": "Desert",
                         "outfitSlug": "desert",
-                        "introducedAfterDonation": 403,
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -5795,7 +5671,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -5818,7 +5693,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍐",
                         "outfit": "Desert",
                         "outfitSlug": "desert",
-                        "introducedAfterDonation": 403,
                     }
                 ]
             },
@@ -5859,7 +5733,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         outfitSlug: 'rearmed',
                         mainShape: "⌛",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -5875,7 +5748,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🟣",
                         "outfit": "Aided",
                         "outfitSlug": "aided",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -5890,35 +5762,30 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitSlug": "base",
                         "outfitWeightThresholdInLb": 400.0,
                         "mainShape": "🟣",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "💎",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "summer",
                         "outfitSlug": "summer",
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "⌛",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Flame Tribe",
                         "outfitSlug": "flame_tribe",
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍎",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Rearmed",
                         "outfitSlug": "rearmed",
                         "outfitWeightThresholdInLb": 350.0,
                         "mainShape": "🍐",
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "New Year",
@@ -5926,7 +5793,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfitWeightThresholdInLb": 300.0,
                         "mainShape": "🍎",
                         secondaryShape: "🍎",
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -5986,7 +5852,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "🟣",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 539,
                     },
                     {
                         "outfitWeightThresholdInLb": 300.0,
@@ -5994,7 +5859,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Hot Spring",
                         "outfitSlug": "hot_spring",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -6098,7 +5962,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -6133,7 +5996,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "⌛",
                         "outfit": "Summer",
                         outfitSlug: "summer",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -6202,7 +6064,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 539
                     },
                 ]
             },
@@ -6309,7 +6170,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 350,
-                        introducedAfterDonation: 539,
                     },
                 ]
             },
@@ -6333,7 +6193,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "⌛",
                         "outfit": "Desert",
                         "outfitSlug": "desert",
-                        "introducedAfterDonation": 403,
                     }
                 ]
             },
@@ -6438,7 +6297,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍐",
                         "outfit": "Rearmed",
                         "outfitSlug": "rearmed",
-                        "introducedAfterDonation": 652,
                     },
                 ],
             },
@@ -6454,7 +6312,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "⌛",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        "introducedAfterDonation": 652,
                     },
                 ],
             },
@@ -6517,7 +6374,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "💎",
                         "outfit": "Desert",
                         "outfitSlug": "desert",
-                        "introducedAfterDonation": 403,
                     },
                     {
                         "outfitWeightThresholdInLb": 400.0,
@@ -6525,7 +6381,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "💎",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        "introducedAfterDonation": 539,
                     },
                     {
                         "outfitWeightThresholdInLb": 250.0,
@@ -6533,7 +6388,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Exercise",
                         "outfitSlug": "exercise",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -6582,14 +6436,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Valentine",
                         "outfitSlug": "valentine",
-                        introducedAfterDonation: 473,
                     },
                     {
                         "outfitWeightThresholdInLb": 500.0,
                         "mainShape": "🍐",
                         "outfit": "Legendary",
                         "outfitSlug": "legendary",
-                        introducedAfterDonation: 1409
                     }
                 ]
             },
@@ -6707,7 +6559,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Winter",
                         "outfitSlug": "winter",
                         "secondaryShape": "💎",
-                        "introducedAfterDonation": 269
                     },
                     {
                         outfit: "Ninja",
@@ -6715,7 +6566,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -6825,7 +6675,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "💎",
                         "outfit": "Valentine",
                         "outfitSlug": "valentine",
-                        introducedAfterDonation: 473,
                     },
                     {
                         "outfit": "Resplendent",
@@ -6833,14 +6682,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍎",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 539,
                     },
                     {
                         "outfit": "Brave Resplendent",
                         "outfitSlug": "brave_resplendent",
                         mainShape: "🍐",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         "outfit": "Emblem",
@@ -6848,7 +6695,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍎",
                         secondaryShape: "🟣",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -6891,7 +6737,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Spring",
                         "outfitSlug": "spring",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -6950,7 +6795,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "outfit": "Brave",
                         "outfitSlug": "brave",
                         "secondaryShape": "🍐",
-                        introducedAfterDonation: 313
                     },
                     {
                         "outfitWeightThresholdInLb": 500.0,
@@ -6958,7 +6802,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Resplendent",
                         "outfitSlug": "resplendent",
-                        introducedAfterDonation: 1408,
                     },
                 ]
             },
@@ -6981,7 +6824,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍐",
                         "outfit": "Summer",
                         outfitSlug: "summer",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -7003,7 +6845,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "mainShape": "🟣",
                         "outfit": "Summer",
                         outfitSlug: "summer",
-                        introducedAfterDonation: 602,
                     },
                 ]
             },
@@ -7047,7 +6888,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 400,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -7084,7 +6924,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         "secondaryShape": "🍎",
                         "outfit": "Maid",
                         "outfitSlug": "maid",
-                        "introducedAfterDonation": 652,
                     },
                 ]
             },
@@ -7107,14 +6946,12 @@ export const baseMetadata: GameBaseMetadata[] = [
                         mainShape: "🍐",
                         secondaryShape: "🍐",
                         outfitWeightThresholdInLb: 500,
-                        introducedAfterDonation: 1046,
                     },
                     {
                         outfit: "Resplendent",
                         outfitSlug: 'resplendent',
                         mainShape: "🟣",
                         outfitWeightThresholdInLb: 300,
-                        introducedAfterDonation: 1046,
                     },
                 ]
             },
@@ -7206,7 +7043,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "theodora",
                 "heightInCm": 177.0,
                 "build": 'Regular',
-                "group": fortunesWeaveDagdanGroup,
+                "group": fortunesWeaveFlameLordCrewGroup,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 650.0,
@@ -7214,7 +7051,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "⌛",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1409
                     }
                 ]
             },
@@ -7223,7 +7059,7 @@ export const baseMetadata: GameBaseMetadata[] = [
                 "nameSlug": "leda",
                 "heightInCm": 167.0,
                 "build": 'Regular',
-                "group": fortunesWeaveDagdanGroup,
+                "group": fortunesWeaveFlameLordCrewGroup,
                 "outfits": [
                     {
                         "outfitWeightThresholdInLb": 350.0,
@@ -7231,7 +7067,6 @@ export const baseMetadata: GameBaseMetadata[] = [
                         secondaryShape: "🍎",
                         "outfit": "Base",
                         "outfitSlug": "base",
-                        introducedAfterDonation: 1409
                     }
                 ]
             },

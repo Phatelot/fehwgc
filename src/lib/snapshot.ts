@@ -73,14 +73,6 @@ export const snapshot: GameState[] = [
 						"trait": "No_Boobs"
 					},
 					{
-						"slug": "grima",
-						"weightInLbs": 304.26,
-						"donationReceived": 0,
-						"thresholdInLbs": 300,
-						"unlocked": true,
-						"trait": "Stretch_Marks"
-					},
-					{
 						"slug": "hot_spring",
 						"weightInLbs": 120,
 						"donationReceived": 0,
@@ -96,6 +88,31 @@ export const snapshot: GameState[] = [
 					"trait": "Rolly"
 				},
 				"spillover": 2380.7720000000004
+			},
+			{
+				"slug": "female_robin_grima",
+				"groupSlug": "secondary_cast",
+				"outfits": [
+					{
+						"slug": "base",
+						"weightInLbs": 304.26,
+						"donationReceived": 0,
+						"thresholdInLbs": 300,
+						"unlocked": false
+					},
+					{
+						"slug": "resplendent",
+						"weightInLbs": 120,
+						"donationReceived": 0,
+						"thresholdInLbs": 700,
+						"unlocked": false
+					}
+				],
+				"brokenOutfit": {
+					"donationReceived": 0,
+					"weightInLbs": 1479
+				},
+				"spillover": 0
 			},
 			{
 				"slug": "emmeryn",
@@ -3872,14 +3889,6 @@ export const snapshot: GameState[] = [
 						"trait": "Fat_Forearms"
 					},
 					{
-						"slug": "meliai",
-						"weightInLbs": 520.4,
-						"donationReceived": 0,
-						"thresholdInLbs": 350,
-						"unlocked": true,
-						"trait": "Fat_Hands"
-					},
-					{
 						"slug": "entwined",
 						"weightInLbs": 300,
 						"donationReceived": 0,
@@ -3895,8 +3904,29 @@ export const snapshot: GameState[] = [
 						"unlocked": true,
 						"trait": "Cellulite"
 					},
+				],
+				"brokenOutfit": {
+					"donationReceived": 0,
+					"weightInLbs": 6450.460000000003,
+					"slug": "new_year",
+					"trait": "Extra_Plush"
+				},
+				"spillover": 113.02000000000001
+			},
+			{
+				"slug": "ash_meliai",
+				"groupSlug": "books6_8",
+				"outfits": [
 					{
-						"slug": "melial_bride",
+						"slug": "base",
+						"weightInLbs": 520.4,
+						"donationReceived": 0,
+						"thresholdInLbs": 350,
+						"unlocked": true,
+						"trait": "Fat_Hands"
+					},
+					{
+						"slug": "bride",
 						"weightInLbs": 428.47999999999996,
 						"donationReceived": 284,
 						"thresholdInLbs": 300,
@@ -3906,11 +3936,11 @@ export const snapshot: GameState[] = [
 				],
 				"brokenOutfit": {
 					"donationReceived": 0,
-					"weightInLbs": 6450.460000000003,
-					"slug": "new_year",
-					"trait": "Extra_Plush"
+					"weightInLbs": 4966,
+					"slug": "base",
+					trait: "Rolly"
 				},
-				"spillover": 113.02000000000001
+				"spillover": 0
 			},
 			{
 				"slug": "letizia",
@@ -6191,7 +6221,7 @@ export const snapshot: GameState[] = [
 		]
 	},
 	{
-		"slug": "mirage",
+		"slug": "spinoff",
 		"characters": [
 			{
 				"slug": "tsubasa",
@@ -8942,7 +8972,7 @@ export const snapshot: GameState[] = [
 		"characters": [
 			{
 				"slug": "theodora",
-				"groupSlug": "dagdan",
+				"groupSlug": "flame_lord_crew",
 				"outfits": [
 					{
 						"slug": "base",
@@ -8963,7 +8993,7 @@ export const snapshot: GameState[] = [
 			},
 			{
 				"slug": "leda",
-				"groupSlug": "dagdan",
+				"groupSlug": "flame_lord_crew",
 				"outfits": [
 					{
 						"slug": "base",

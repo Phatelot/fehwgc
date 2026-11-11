@@ -52,7 +52,7 @@
 
     $: sentences = (() => {
         if (start === end) {
-            return ['No donations yet!']
+            return ['No new donations since November 11th, 2026!']
         }
         const startState = state.states[start];
         const endState = state.states[end];

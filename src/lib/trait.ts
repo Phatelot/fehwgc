@@ -112,6 +112,9 @@ export const traitNames : {[key: string]: string} = {
 }
 
 export function selectTraitFor(character: CharacterState, outfit: OutfitState, donationNumber: number): string {
+	if (character.slug === "female_robin_grima" && outfit.slug === "base") {
+		return "Stretch_Marks"
+	}
 	const seed = `${character.slug}-${outfit.slug}`
 	const characterMetadata = getCharacterMetadata(character.slug) as CharacterBaseMetadata;
 	const outfitMetadata = getOutfitMetadata(character.slug, outfit.slug) as OutfitBaseMetadata

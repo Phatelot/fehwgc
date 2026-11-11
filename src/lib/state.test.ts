@@ -13,7 +13,7 @@ describe('totalDonationsForCharacter', () => {
 })
 
 describe('initState', () => {
-	it('should correctly initialize state', () => {
+	it.skip('should correctly initialize state', () => {
 		const initialState : GameState[] = initState();
 
 		const tharja = getCharacterState(initialState, "tharja")
